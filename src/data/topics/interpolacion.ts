@@ -449,7 +449,11 @@ export const interpolacionArticles: ContentEntry[] = [
                   eu: "$L_i$ bakoitzak beste nodoen lau faktoreak ditu. Adibidez, $x_0=1971$-erako:",
                   en: "Each $L_i$ has the four factors of the other nodes. For example, for $x_0=1971$:"
                 },
-                formula: "L_0(x)=\\frac{(x-1981)(x-1991)(x-2001)(x-2011)}{(1971-1981)(1971-1991)(1971-2001)(1971-2011)}=\\frac{(x-1981)(x-1991)(x-2001)(x-2011)}{240000}"
+                formula: "\\begin{aligned}L_0(x)&="
+                  + "\\frac{(x-1981)(x-1991)(x-2001)(x-2011)}"
+                  + "{(1971-1981)(1971-1991)(1971-2001)(1971-2011)}"
+                  + "\\\\&=\\frac{(x-1981)(x-1991)(x-2001)(x-2011)}"
+                  + "{240000}\\end{aligned}"
               },
               {
                 text: {
