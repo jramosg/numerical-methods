@@ -9,7 +9,12 @@ interface Props {
     | "trapezoid-geometry"
     | "composite-trapezoid"
     | "midpoint-simple"
-    | "composite-midpoint";
+    | "composite-midpoint"
+    | "euler-step"
+    | "euler-rectangle"
+    | "implicit-euler-rectangle"
+    | "heun-average"
+    | "rk4-stages";
   caption: Record<Lang, string>;
   lang: Lang;
 }
@@ -61,6 +66,41 @@ const labels = {
     es: "alturas f(m_i)",
     eu: "altuerak f(m_i)",
     en: "heights f(m_i)"
+  },
+  currentSlope: {
+    es: "pendiente actual",
+    eu: "uneko malda",
+    en: "current slope"
+  },
+  leftRectangle: {
+    es: "rectángulo izquierdo",
+    eu: "ezkerreko laukizuzena",
+    en: "left rectangle"
+  },
+  rightRectangle: {
+    es: "rectángulo derecho",
+    eu: "eskuineko laukizuzena",
+    en: "right rectangle"
+  },
+  predictedPoint: {
+    es: "punto predicho",
+    eu: "iragarritako puntua",
+    en: "predicted point"
+  },
+  averageSlope: {
+    es: "promedio de pendientes",
+    eu: "malden batez bestekoa",
+    en: "average slope"
+  },
+  stages: {
+    es: "etapas internas",
+    eu: "barne-etapak",
+    en: "internal stages"
+  },
+  weights: {
+    es: "pesos 1, 2, 2, 1",
+    eu: "pisuak 1, 2, 2, 1",
+    en: "weights 1, 2, 2, 1"
   }
 };
 ---
@@ -281,6 +321,159 @@ const labels = {
         <text class="diagram-label accent" x="442" y="76">mᵢ</text>
         <text class="diagram-label accent" x="332" y="56">
           {labels.midpointHeights[lang]}
+        </text>
+      </svg>
+    )
+  }
+  {
+    variant === "euler-step" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="58" y1="254" x2="590" y2="254" />
+        <line class="diagram-axis" x1="78" y1="276" x2="78" y2="42" />
+        <path
+          class="diagram-curve"
+          d="M100 230 C160 172, 210 138, 270 126 S405 108, 548 62"
+        />
+        <line class="diagram-guide" x1="136" y1="254" x2="136" y2="196" />
+        <line class="diagram-guide" x1="478" y1="254" x2="478" y2="108" />
+        <line class="diagram-line" x1="136" y1="196" x2="478" y2="108" />
+        <circle class="diagram-point" cx="136" cy="196" r="6" />
+        <circle class="diagram-point" cx="478" cy="108" r="6" />
+        <text class="diagram-label" x="118" y="282">tₖ</text>
+        <text class="diagram-label" x="448" y="282">tₖ₊₁</text>
+        <text class="diagram-label" x="86" y="192">yₖ</text>
+        <text class="diagram-label" x="488" y="112">yₖ₊₁</text>
+        <text class="diagram-label accent" x="272" y="92">
+          {labels.currentSlope[lang]}
+        </text>
+        <text class="diagram-label muted" x="420" y="64">
+          y(t)
+        </text>
+      </svg>
+    )
+  }
+  {
+    variant === "euler-rectangle" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="58" y1="254" x2="590" y2="254" />
+        <line class="diagram-axis" x1="78" y1="276" x2="78" y2="42" />
+        <path
+          class="diagram-curve"
+          d="M112 208 C176 150, 248 128, 320 154 S452 202, 548 92"
+        />
+        <rect class="diagram-fill" x="132" y="158" width="348" height="96" />
+        <line class="diagram-line" x1="132" y1="158" x2="480" y2="158" />
+        <line class="diagram-side" x1="132" y1="254" x2="132" y2="158" />
+        <line class="diagram-side" x1="480" y1="254" x2="480" y2="158" />
+        <circle class="diagram-point" cx="132" cy="158" r="6" />
+        <text class="diagram-label" x="116" y="282">tₖ</text>
+        <text class="diagram-label" x="450" y="282">tₖ₊₁</text>
+        <text class="diagram-label accent" x="184" y="222">
+          h f(tₖ, yₖ)
+        </text>
+        <text class="diagram-label accent" x="250" y="138">
+          {labels.leftRectangle[lang]}
+        </text>
+        <text class="diagram-label muted" x="380" y="86">
+          f(τ, y(τ))
+        </text>
+      </svg>
+    )
+  }
+  {
+    variant === "implicit-euler-rectangle" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="58" y1="254" x2="590" y2="254" />
+        <line class="diagram-axis" x1="78" y1="276" x2="78" y2="42" />
+        <path
+          class="diagram-curve"
+          d="M112 218 C174 190, 236 176, 308 150 S436 100, 548 80"
+        />
+        <rect class="diagram-fill" x="132" y="96" width="348" height="158" />
+        <line class="diagram-line" x1="132" y1="96" x2="480" y2="96" />
+        <line class="diagram-side" x1="132" y1="254" x2="132" y2="96" />
+        <line class="diagram-side" x1="480" y1="254" x2="480" y2="96" />
+        <circle class="diagram-point" cx="480" cy="96" r="6" />
+        <text class="diagram-label" x="116" y="282">tₖ</text>
+        <text class="diagram-label" x="450" y="282">tₖ₊₁</text>
+        <text class="diagram-label accent" x="178" y="222">
+          h f(tₖ₊₁, yₖ₊₁)
+        </text>
+        <text class="diagram-label accent" x="250" y="76">
+          {labels.rightRectangle[lang]}
+        </text>
+        <text class="diagram-label muted" x="384" y="58">
+          f(τ, y(τ))
+        </text>
+      </svg>
+    )
+  }
+  {
+    variant === "heun-average" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="58" y1="254" x2="590" y2="254" />
+        <line class="diagram-axis" x1="78" y1="276" x2="78" y2="42" />
+        <path
+          class="diagram-curve"
+          d="M102 232 C158 172, 228 132, 318 136 S460 142, 552 76"
+        />
+        <line class="diagram-guide" x1="136" y1="254" x2="136" y2="196" />
+        <line class="diagram-guide" x1="484" y1="254" x2="484" y2="90" />
+        <line class="diagram-line" x1="136" y1="196" x2="484" y2="126" />
+        <line class="diagram-thin" x1="136" y1="196" x2="484" y2="78" />
+        <line class="diagram-thin" x1="136" y1="196" x2="484" y2="148" />
+        <circle class="diagram-point" cx="136" cy="196" r="6" />
+        <circle class="diagram-point" cx="484" cy="78" r="5" />
+        <circle class="diagram-point" cx="484" cy="126" r="6" />
+        <text class="diagram-label" x="118" y="282">tₖ</text>
+        <text class="diagram-label" x="454" y="282">tₖ₊₁</text>
+        <text class="diagram-label" x="494" y="82">ỹₖ₊₁</text>
+        <text class="diagram-label accent" x="208" y="106">
+          {labels.predictedPoint[lang]}
+        </text>
+        <text class="diagram-label accent" x="238" y="168">
+          {labels.averageSlope[lang]}
+        </text>
+      </svg>
+    )
+  }
+  {
+    variant === "rk4-stages" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="58" y1="254" x2="590" y2="254" />
+        <line class="diagram-axis" x1="78" y1="276" x2="78" y2="42" />
+        <path
+          class="diagram-curve"
+          d="M96 230 C152 190, 204 156, 282 152 S410 174, 548 78"
+        />
+        <line class="diagram-guide" x1="130" y1="254" x2="130" y2="208" />
+        <line class="diagram-guide" x1="304" y1="254" x2="304" y2="148" />
+        <line class="diagram-guide" x1="478" y1="254" x2="478" y2="100" />
+        <line class="diagram-line" x1="130" y1="208" x2="478" y2="100" />
+        <line class="diagram-thin" x1="130" y1="208" x2="304" y2="154" />
+        <line class="diagram-thin" x1="130" y1="208" x2="304" y2="166" />
+        <line class="diagram-thin" x1="304" y1="160" x2="478" y2="100" />
+        <circle class="diagram-point" cx="130" cy="208" r="6" />
+        <circle class="diagram-point" cx="304" cy="154" r="5" />
+        <circle class="diagram-point" cx="304" cy="166" r="5" />
+        <circle class="diagram-point" cx="478" cy="100" r="6" />
+        <text class="diagram-label" x="112" y="282">tₖ</text>
+        <text class="diagram-label" x="282" y="282">tₖ+h/2</text>
+        <text class="diagram-label" x="448" y="282">tₖ₊₁</text>
+        <text class="diagram-label accent" x="106" y="188">k₁</text>
+        <text class="diagram-label accent" x="314" y="148">k₂</text>
+        <text class="diagram-label accent" x="314" y="188">k₃</text>
+        <text class="diagram-label accent" x="488" y="104">k₄</text>
+        <text class="diagram-label accent" x="226" y="72">
+          {labels.stages[lang]}
+        </text>
+        <text class="diagram-label muted" x="350" y="52">
+          {labels.weights[lang]}
         </text>
       </svg>
     )

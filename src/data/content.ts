@@ -69,7 +69,12 @@ export type Block =
         | "trapezoid-geometry"
         | "composite-trapezoid"
         | "midpoint-simple"
-        | "composite-midpoint";
+        | "composite-midpoint"
+        | "euler-step"
+        | "euler-rectangle"
+        | "implicit-euler-rectangle"
+        | "heun-average"
+        | "rk4-stages";
       caption: LocalizedText;
     }
   | { kind: "steps"; title?: LocalizedText; steps: Step[] }

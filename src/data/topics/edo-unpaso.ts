@@ -290,6 +290,15 @@ export const edoUnpasoArticles: ContentEntry[] = [
             }
           },
           {
+            kind: "diagram",
+            variant: "euler-step",
+            caption: {
+              es: "Euler sustituye la curva exacta por la recta tangente que sale de $(t_k,y_k)$; durante todo el paso usa una sola pendiente.",
+              eu: "Euler-ek kurba zehatza $(t_k,y_k)$ puntutik ateratzen den zuzen ukitzailearekin ordezkatzen du; pauso osoan malda bakarra erabiltzen du.",
+              en: "Euler replaces the exact curve by the tangent line leaving $(t_k,y_k)$; across the whole step it uses a single slope."
+            }
+          },
+          {
             kind: "paragraph",
             text: {
               es: "Es un método explícito: $y_{k+1}$ se calcula directamente a partir de $y_k$. Su interés no es la precisión (es el método de orden más bajo) sino que condensa las tres técnicas con las que se diseñan casi todos los métodos: desarrollos de Taylor, aproximación de la derivada y cuadraturas.",
@@ -419,6 +428,15 @@ export const edoUnpasoArticles: ContentEntry[] = [
               en: "Implicit Euler method."
             }
           },
+          {
+            kind: "diagram",
+            variant: "implicit-euler-rectangle",
+            caption: {
+              es: "Euler implícito usa el rectángulo por la derecha: la altura depende del punto nuevo, por eso hay que resolver una ecuación.",
+              eu: "Euler inplizituak eskuineko laukizuzena erabiltzen du: altuera puntu berriaren mende dago, horregatik ekuazio bat ebatzi behar da.",
+              en: "Implicit Euler uses the right-hand rectangle: the height depends on the new point, which is why an equation must be solved."
+            }
+          },
           { kind: "derivation", slug: "deduccion-euler-implicito" },
           {
             kind: "paragraph",
@@ -478,6 +496,15 @@ export const edoUnpasoArticles: ContentEntry[] = [
               es: "Método de Heun, orden 2.",
               eu: "Heun-en metodoa, 2. ordena.",
               en: "Heun's method, order 2."
+            }
+          },
+          {
+            kind: "diagram",
+            variant: "heun-average",
+            caption: {
+              es: "Heun primero predice con Euler y después corrige usando el promedio entre la pendiente inicial y la pendiente predicha al final.",
+              eu: "Heun-ek lehenik Euler-ekin iragartzen du, eta gero hasierako maldaren eta amaieran iragarritako maldaren batez bestekoarekin zuzentzen du.",
+              en: "Heun first predicts with Euler and then corrects using the average of the initial slope and the predicted final slope."
             }
           }
         ]
@@ -628,6 +655,15 @@ export const edoUnpasoArticles: ContentEntry[] = [
               es: "Runge-Kutta clásico de orden 4 (RK4).",
               eu: "4. ordenako Runge-Kutta klasikoa (RK4).",
               en: "Classical fourth-order Runge-Kutta (RK4)."
+            }
+          },
+          {
+            kind: "diagram",
+            variant: "rk4-stages",
+            caption: {
+              es: "RK4 toma una pendiente al inicio, dos estimaciones en el punto medio y una al final; la combinación ponderada imita Simpson sobre la forma integral.",
+              eu: "RK4-k hasieran malda bat, erdiko puntuan bi estimazio eta amaieran beste bat hartzen ditu; batez besteko ponderatuak Simpson imitatzen du forma integralean.",
+              en: "RK4 takes one slope at the start, two midpoint estimates and one final slope; the weighted combination imitates Simpson on the integral form."
             }
           },
           {
@@ -892,6 +928,15 @@ export const edoUnpasoDerivations: ContentEntry[] = [
         },
         blocks: [
           {
+            kind: "diagram",
+            variant: "euler-step",
+            caption: {
+              es: "La lectura geométrica de Taylor de primer orden: conservar solo el término lineal equivale a avanzar por la tangente.",
+              eu: "Lehen ordenako Taylor-en irakurketa geometrikoa: gai lineala bakarrik gordetzea ukitzailetik aurrera egitea da.",
+              en: "The geometric reading of first-order Taylor: keeping only the linear term means advancing along the tangent."
+            }
+          },
+          {
             kind: "steps",
             steps: [
               {
@@ -960,13 +1005,30 @@ export const edoUnpasoDerivations: ContentEntry[] = [
         },
         blocks: [
           {
+            kind: "diagram",
+            variant: "euler-rectangle",
+            caption: {
+              es: "En la forma integral, Euler explícito aproxima el área bajo $f(\\tau,y(\\tau))$ por un rectángulo de altura izquierda $f(t_k,y_k)$.",
+              eu: "Forma integralean, Euler esplizituak $f(\\tau,y(\\tau))$ azpiko azalera ezkerreko altuerako $f(t_k,y_k)$ laukizuzen batez hurbiltzen du.",
+              en: "In integral form, explicit Euler approximates the area under $f(\\tau,y(\\tau))$ by a rectangle with left height $f(t_k,y_k)$."
+            }
+          },
+          {
             kind: "steps",
             steps: [
               {
                 text: {
-                  es: "Por el Teorema Fundamental del Cálculo, integrar la ecuación en $[t_k,t_{k+1}]$ da una igualdad exacta:",
-                  eu: "Kalkuluaren Oinarrizko Teoremagatik, ekuazioa $[t_k,t_{k+1}]$-n integratzeak berdintza zehatza ematen du:",
-                  en: "By the Fundamental Theorem of Calculus, integrating the equation over $[t_k,t_{k+1}]$ gives an exact identity:"
+                  es: "Antes de usar el Teorema Fundamental del Cálculo, escribimos la EDO con una variable muda $\\tau$ e integramos ambos lados en $[t_k,t_{k+1}]$:",
+                  eu: "Kalkuluaren Oinarrizko Teorema erabili aurretik, EDOa $\\tau$ aldagai mutuarekin idatzi eta bi aldeak $[t_k,t_{k+1}]$ tartean integratzen ditugu:",
+                  en: "Before using the Fundamental Theorem of Calculus, write the ODE with the dummy variable $\\tau$ and integrate both sides over $[t_k,t_{k+1}]$:"
+                },
+                formula: "\\int_{t_k}^{t_{k+1}} y'(\\tau)\\,d\\tau=\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau"
+              },
+              {
+                text: {
+                  es: "Ahora el Teorema Fundamental del Cálculo convierte la integral de $y'$ en la diferencia exacta de la solución:",
+                  eu: "Orain Kalkuluaren Oinarrizko Teoremak $y'$-ren integrala soluzioaren diferentzia zehatz bihurtzen du:",
+                  en: "Now the Fundamental Theorem of Calculus turns the integral of $y'$ into the exact difference of the solution:"
                 },
                 formula: "y(t_{k+1})=y(t_k)+\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau"
               },
@@ -1055,6 +1117,15 @@ export const edoUnpasoDerivations: ContentEntry[] = [
           en: "Backward difference at the new node"
         },
         blocks: [
+          {
+            kind: "diagram",
+            variant: "implicit-euler-rectangle",
+            caption: {
+              es: "La deducción integral de Euler implícito usa el valor del extremo derecho: la altura del rectángulo contiene la incógnita $y_{k+1}$.",
+              eu: "Euler inplizituaren dedukzio integralak eskuineko muturreko balioa erabiltzen du: laukizuzenaren altuerak $y_{k+1}$ ezezaguna dauka.",
+              en: "The integral derivation of implicit Euler uses the right endpoint: the rectangle height contains the unknown $y_{k+1}$."
+            }
+          },
           {
             kind: "steps",
             steps: [
@@ -1184,13 +1255,30 @@ export const edoUnpasoDerivations: ContentEntry[] = [
         },
         blocks: [
           {
+            kind: "diagram",
+            variant: "heun-average",
+            caption: {
+              es: "Heun interpreta el paso como un trapecio en la integral de pendientes: una pendiente se conoce y la otra se obtiene con una predicción de Euler.",
+              eu: "Heun-ek pausoa malden integraleko trapezio gisa interpretatzen du: malda bat ezaguna da eta bestea Euler-en iragarpenarekin lortzen da.",
+              en: "Heun interprets the step as a trapezoid in the integral of slopes: one slope is known and the other is obtained with an Euler prediction."
+            }
+          },
+          {
             kind: "steps",
             steps: [
               {
                 text: {
-                  es: "Partimos de la forma integral del PVI en un subintervalo y aproximamos la integral con la [[deduccion-integracion-trapecio|regla del trapecio]]:",
-                  eu: "PVIaren forma integraletik abiatzen gara azpitarte batean eta integrala [[deduccion-integracion-trapecio|trapezio-erregelarekin]] hurbiltzen dugu:",
-                  en: "Start from the integral form of the IVP on one subinterval and approximate the integral with the [[deduccion-integracion-trapecio|trapezoidal rule]]:"
+                  es: "Partimos de la forma integral exacta del PVI en un subintervalo:",
+                  eu: "Azpitarte bateko PVIaren forma integral zehatzetik abiatzen gara:",
+                  en: "Start from the exact integral form of the IVP on one subinterval:"
+                },
+                formula: "y(t_{k+1})=y(t_k)+\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau"
+              },
+              {
+                text: {
+                  es: "Aproximamos esa integral con la [[deduccion-integracion-trapecio|regla del trapecio]]:",
+                  eu: "Integral hori [[deduccion-integracion-trapecio|trapezio-erregelarekin]] hurbiltzen dugu:",
+                  en: "Approximate that integral with the [[deduccion-integracion-trapecio|trapezoidal rule]]:"
                 },
                 formula: "y(t_{k+1})\\approx y_k+\\frac{h}{2}\\Bigl(f(t_k,y_k)+f\\bigl(t_{k+1},y(t_{k+1})\\bigr)\\Bigr)"
               },
@@ -1243,13 +1331,30 @@ export const edoUnpasoDerivations: ContentEntry[] = [
         },
         blocks: [
           {
+            kind: "diagram",
+            variant: "rk4-stages",
+            caption: {
+              es: "Las cuatro etapas de RK4 reemplazan las pendientes exactas de Simpson por evaluaciones internas encadenadas.",
+              eu: "RK4-ren lau etapek Simpson-en malda zehatzak kateatutako barne-ebaluazioekin ordezkatzen dituzte.",
+              en: "The four RK4 stages replace Simpson's exact slopes by chained internal evaluations."
+            }
+          },
+          {
             kind: "steps",
             steps: [
               {
                 text: {
-                  es: "Integramos la ecuación diferencial en el subintervalo $[t_k,t_{k+1}]$:",
-                  eu: "Ekuazio diferentziala $[t_k,t_{k+1}]$ azpitartean integratzen dugu:",
-                  en: "Integrate the differential equation over the subinterval $[t_k,t_{k+1}]$:"
+                  es: "Integramos primero la ecuación diferencial en el subintervalo $[t_k,t_{k+1}]$:",
+                  eu: "Lehenik ekuazio diferentziala $[t_k,t_{k+1}]$ azpitartean integratzen dugu:",
+                  en: "First integrate the differential equation over the subinterval $[t_k,t_{k+1}]$:"
+                },
+                formula: "\\int_{t_k}^{t_{k+1}} y'(\\tau)\\,d\\tau=\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau"
+              },
+              {
+                text: {
+                  es: "Aplicando el Teorema Fundamental del Cálculo al lado izquierdo queda la forma integral exacta del PVI:",
+                  eu: "Ezkerreko aldeari Kalkuluaren Oinarrizko Teorema aplikatuz, PVIaren forma integral zehatza geratzen da:",
+                  en: "Applying the Fundamental Theorem of Calculus to the left-hand side gives the exact integral form of the IVP:"
                 },
                 formula: "y(t_{k+1})=y(t_k)+\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau"
               },
@@ -1267,7 +1372,7 @@ export const edoUnpasoDerivations: ContentEntry[] = [
                   eu: "Arazoa: ez dakigu ez $y_{k+\\frac12}$ ez $y_{k+1}$. Runge-Kuttaren irtenbidea kateatutako barne-maldekin estimatzea da, bakoitza aurrekoarekin aurrera eginez eraikia:",
                   en: "Problem: we know neither $y_{k+\\frac12}$ nor $y_{k+1}$. Runge-Kutta's solution is to estimate them with chained internal slopes, each built by advancing with the previous one:"
                 },
-                formula: "\\begin{aligned} k_1&=f(t_k,\\,y_k) && \\text{(pendiente en } t_k\\text{)}\\\\ k_2&=f\\bigl(t_k+\\tfrac{h}{2},\\,y_k+\\tfrac{h}{2}k_1\\bigr) && \\text{(1.ª estimación en el punto medio)}\\\\ k_3&=f\\bigl(t_k+\\tfrac{h}{2},\\,y_k+\\tfrac{h}{2}k_2\\bigr) && \\text{(2.ª estimación, reutilizando } k_2\\text{)}\\\\ k_4&=f(t_k+h,\\,y_k+h\\,k_3) && \\text{(estimación en } t_{k+1}\\text{)} \\end{aligned}"
+                formula: "\\begin{aligned} k_1&=f(t_k,\\,y_k)\\\\ k_2&=f\\bigl(t_k+\\tfrac{h}{2},\\,y_k+\\tfrac{h}{2}k_1\\bigr)\\\\ k_3&=f\\bigl(t_k+\\tfrac{h}{2},\\,y_k+\\tfrac{h}{2}k_2\\bigr)\\\\ k_4&=f(t_k+h,\\,y_k+h\\,k_3) \\end{aligned}"
               },
               {
                 text: {
