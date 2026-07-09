@@ -498,9 +498,9 @@ export const interpolacionArticles: ContentEntry[] = [
       en: "Hermite interpolation"
     },
     description: {
-      es: "Interpolación que impone valor y derivada en cada nodo: el polinomio H_{2n+1}, su construcción a partir de las bases de Lagrange, el error, la vía práctica por diferencias divididas con nodos repetidos y un ejemplo con funciones de Bessel.",
-      eu: "Nodo bakoitzean balioa eta deribatua inposatzen dituen interpolazioa: H_{2n+1} polinomioa, Lagrangeren oinarrietatik eraikia, errorea, nodo errepikatuen bidezko bide praktikoa eta Bessel funtzioekin adibide bat.",
-      en: "Interpolation that imposes value and derivative at each node: the polynomial H_{2n+1}, its construction from the Lagrange bases, the error, the practical route via divided differences with repeated nodes and a Bessel-function example."
+      es: "Interpolación que impone valor y derivada en cada nodo: el polinomio $H_{2n+1}$, su construcción a partir de las bases de Lagrange, el error, la vía práctica por diferencias divididas con nodos repetidos y un ejemplo con funciones de Bessel.",
+      eu: "Nodo bakoitzean balioa eta deribatua inposatzen dituen interpolazioa: $H_{2n+1}$ polinomioa, Lagrangeren oinarrietatik eraikia, errorea, nodo errepikatuen bidezko bide praktikoa eta Bessel funtzioekin adibide bat.",
+      en: "Interpolation that imposes value and derivative at each node: the polynomial $H_{2n+1}$, its construction from the Lagrange bases, the error, the practical route via divided differences with repeated nodes and a Bessel-function example."
     },
     keywords: ["Hermite", "derivadas", "nodos repetidos", "interpolación"],
     prerequisites: ["interpolacion-lagrange", "interpolacion-newton"],

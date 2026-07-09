@@ -20,9 +20,9 @@ export const sistemasNoLinealesArticles: ContentEntry[] = [
       en: "Systems of nonlinear equations"
     },
     description: {
-      es: "El problema F(X)=0 en varias variables: métodos de punto fijo vectoriales, orden de convergencia con normas, ACOC multidimensional y criterios de parada.",
-      eu: "F(X)=0 problema aldagai anitzetan: puntu finkoko metodo bektorialak, konbergentzia-ordena normekin, ACOC multidimentsionala eta gelditze-irizpideak.",
-      en: "The problem F(X)=0 in several variables: vector fixed-point methods, convergence order with norms, multidimensional ACOC and stopping criteria."
+      es: "El problema $F(X)=0$ en varias variables: métodos de punto fijo vectoriales, orden de convergencia con normas, ACOC multidimensional y criterios de parada.",
+      eu: "$F(X)=0$ problema aldagai anitzetan: puntu finkoko metodo bektorialak, konbergentzia-ordena normekin, ACOC multidimentsionala eta gelditze-irizpideak.",
+      en: "The problem $F(X)=0$ in several variables: vector fixed-point methods, convergence order with norms, multidimensional ACOC and stopping criteria."
     },
     keywords: ["sistemas no lineales", "punto fijo", "orden de convergencia", "ACOC"],
     prerequisites: ["no-lineales-introduccion", "no-lineales-orden-eficiencia"],
@@ -288,9 +288,9 @@ export const sistemasNoLinealesArticles: ContentEntry[] = [
       en: "Cost and efficiency in dimension n"
     },
     description: {
-      es: "Contabilidad del coste por iteración en sistemas: n evaluaciones por F, n² por jacobiano, coste de los sistemas lineales, índices de eficiencia y la conjetura de optimalidad multidimensional.",
-      eu: "Iterazio bakoitzeko kostuaren kontabilitatea sistemetan: n ebaluazio F bakoitzeko, n² jacobiar bakoitzeko, sistema linealen kostua, eraginkortasun-indizeak eta optimalitate-aieru multidimentsionala.",
-      en: "Accounting of per-iteration cost in systems: n evaluations per F, n² per Jacobian, cost of the linear solves, efficiency indices and the multidimensional optimality conjecture."
+      es: "Contabilidad del coste por iteración en sistemas: $n$ evaluaciones por $F$, $n^2$ por jacobiano, coste de los sistemas lineales, índices de eficiencia y la conjetura de optimalidad multidimensional.",
+      eu: "Iterazio bakoitzeko kostuaren kontabilitatea sistemetan: $n$ ebaluazio $F$ bakoitzeko, $n^2$ jacobiar bakoitzeko, sistema linealen kostua, eraginkortasun-indizeak eta optimalitate-aieru multidimentsionala.",
+      en: "Accounting of per-iteration cost in systems: $n$ evaluations per $F$, $n^2$ per Jacobian, cost of the linear solves, efficiency indices and the multidimensional optimality conjecture."
     },
     keywords: ["eficiencia", "coste computacional", "jacobiano", "óptimo", "índice"],
     prerequisites: ["sistemas-no-lineales-newton", "no-lineales-orden-eficiencia"],
@@ -687,9 +687,9 @@ export const sistemasNoLinealesExercises: ContentEntry[] = [
       en: "Exercise: Newton for a system, by hand"
     },
     description: {
-      es: "Dos pasos de Newton a mano sobre el sistema x²+y²=1, x=y: montaje del jacobiano, resolución del sistema lineal 2×2 de cada paso y convergencia cuadrática visible hacia (√2/2, √2/2).",
-      eu: "Newton-en bi pauso eskuz x²+y²=1, x=y sistemaren gainean: jacobiarraren eraikuntza, pauso bakoitzeko 2×2 sistema linealaren ebazpena eta konbergentzia koadratiko ikusgarria (√2/2, √2/2)-rantz.",
-      en: "Two Newton steps by hand on the system x²+y²=1, x=y: building the Jacobian, solving each step's 2×2 linear system and visible quadratic convergence towards (√2/2, √2/2)."
+      es: "Dos pasos de Newton a mano sobre el sistema $x^2+y^2=1$, $x=y$: montaje del jacobiano, resolución del sistema lineal $2\\times2$ de cada paso y convergencia cuadrática visible hacia $(\\sqrt2/2,\\sqrt2/2)$.",
+      eu: "Newton-en bi pauso eskuz $x^2+y^2=1$, $x=y$ sistemaren gainean: jacobiarraren eraikuntza, pauso bakoitzeko $2\\times2$ sistema linealaren ebazpena eta konbergentzia koadratiko ikusgarria $(\\sqrt2/2,\\sqrt2/2)$-rantz.",
+      en: "Two Newton steps by hand on the system $x^2+y^2=1$, $x=y$: building the Jacobian, solving each step's $2\\times2$ linear system and visible quadratic convergence towards $(\\sqrt2/2,\\sqrt2/2)$."
     },
     keywords: ["ejercicio", "Newton", "sistema", "a mano", "jacobiano"],
     prerequisites: ["sistemas-no-lineales-newton"],
@@ -763,9 +763,9 @@ export const sistemasNoLinealesExercises: ContentEntry[] = [
       en: "Exercise: Newton on a 2×2 system with iteration table"
     },
     description: {
-      es: "Resolución completa de eˣe^y+x·cos y=0, x+y=1 con Newton desde [2,−1]: tabla de iterados, normas del residuo e incremento, y ACOC estabilizándose en 2.",
-      eu: "eˣe^y+x·cos y=0, x+y=1 sistemaren ebazpen osoa Newton-ekin [2,−1]-etik: iteratuen taula, hondarraren eta inkrementuaren normak, eta ACOC 2an egonkortzen.",
-      en: "Full solution of eˣe^y+x·cos y=0, x+y=1 with Newton from [2,−1]: table of iterates, residual and increment norms, and ACOC settling at 2."
+      es: "Resolución completa de $e^x e^y+x\\cos y=0$, $x+y=1$ con Newton desde $[2,-1]$: tabla de iterados, normas del residuo e incremento, y ACOC estabilizándose en 2.",
+      eu: "$e^x e^y+x\\cos y=0$, $x+y=1$ sistemaren ebazpen osoa Newton-ekin $[2,-1]$-etik: iteratuen taula, hondarraren eta inkrementuaren normak, eta ACOC 2an egonkortzen.",
+      en: "Full solution of $e^x e^y+x\\cos y=0$, $x+y=1$ with Newton from $[2,-1]$: table of iterates, residual and increment norms, and ACOC settling at 2."
     },
     keywords: ["ejercicio", "Newton", "sistema", "ACOC", "tabla"],
     prerequisites: ["sistemas-no-lineales-newton"],
