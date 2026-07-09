@@ -1,0 +1,144 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { languages, monetization, navLabels, type Lang } from "@/data/site";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+
+const copy = {
+  es: {
+    title: "Aviso legal y privacidad",
+    description:
+      "Aviso legal y política de privacidad de Métodos Numéricos: sin cookies, sin rastreadores y sin recogida de datos personales.",
+    sections: [
+      {
+        heading: "Quién publica este sitio",
+        body: [
+          "Métodos Numéricos (metodosnumericos.dev) es un proyecto editorial independiente sin ánimo comercial directo: una referencia educativa libre de métodos numéricos. Puedes contactar con la redacción en la dirección de correo indicada al final de esta página."
+        ]
+      },
+      {
+        heading: "Privacidad",
+        body: [
+          "Este sitio no usa cookies, no incluye rastreadores ni analítica y no recoge datos personales de ningún tipo. Es un sitio estático: no hay cuentas, formularios ni bases de datos con información de visitantes.",
+          "El proveedor de alojamiento puede generar registros técnicos de acceso (por ejemplo, direcciones IP) necesarios para servir la web; este proyecto no los consulta ni los conserva.",
+          "Si nos escribes por correo electrónico, tu dirección se usa únicamente para responderte y no se comparte con terceros."
+        ]
+      },
+      {
+        heading: "Enlaces externos",
+        body: [
+          "Las páginas de apoyo enlazan con plataformas externas (por ejemplo, Buy Me a Coffee). Si las visitas, se aplican sus propias condiciones y políticas de privacidad; este sitio no recibe ningún dato de esas plataformas."
+        ]
+      },
+      {
+        heading: "Contenido y responsabilidad",
+        body: [
+          "El contenido se revisa y verifica con cuidado, pero puede contener errores. Se ofrece con fines educativos, sin garantía de ningún tipo; el uso que hagas de él es responsabilidad tuya. Si detectas un error, agradecemos el aviso.",
+          "Salvo indicación en contra, el contenido de este sitio es obra de sus autores. Puedes citarlo con atribución y enlace a la página original."
+        ]
+      }
+    ],
+    contactLabel: "Contacto"
+  },
+  eu: {
+    title: "Lege oharra eta pribatutasuna",
+    description:
+      "Metodo Numerikoak gunearen lege oharra eta pribatutasun politika: cookierik gabe, arakatzailerik gabe eta datu pertsonalik bildu gabe.",
+    sections: [
+      {
+        heading: "Nork argitaratzen duen gune hau",
+        body: [
+          "Metodo Numerikoak (metodosnumericos.dev) proiektu editorial independentea da, zuzeneko asmo komertzialik gabea: metodo numerikoen hezkuntza-erreferentzia librea. Erredakzioarekin harremanetan jar zaitezke orri honen amaieran adierazitako posta helbidean."
+        ]
+      },
+      {
+        heading: "Pribatutasuna",
+        body: [
+          "Gune honek ez du cookierik erabiltzen, ez du arakatzailerik ez analitikarik eta ez du inolako datu pertsonalik biltzen. Gune estatikoa da: ez dago konturik, formulariorik ez bisitarien informazioa duen datu-baserik.",
+          "Ostatatze-hornitzaileak weba zerbitzatzeko beharrezkoak diren sarbide-erregistro teknikoak sor ditzake (adibidez, IP helbideak); proiektu honek ez ditu kontsultatzen ez gordetzen.",
+          "Posta elektronikoz idazten badiguzu, zure helbidea erantzuteko soilik erabiltzen da eta ez da hirugarrenekin partekatzen."
+        ]
+      },
+      {
+        heading: "Kanpoko estekak",
+        body: [
+          "Laguntza orriek kanpoko plataformetara estekatzen dute (adibidez, Buy Me a Coffee). Bisitatzen badituzu, haien baldintzak eta pribatutasun politikak aplikatzen dira; gune honek ez du plataforma horietatik daturik jasotzen."
+        ]
+      },
+      {
+        heading: "Edukia eta erantzukizuna",
+        body: [
+          "Edukia arretaz berrikusi eta egiaztatzen da, baina erroreak izan ditzake. Hezkuntza helburuekin eskaintzen da, inolako bermerik gabe; egiten duzun erabilera zure erantzukizuna da. Errore bat aurkitzen baduzu, eskertzen dugu abisua.",
+          "Kontrakoa adierazi ezean, gune honetako edukia bere egileen lana da. Aipatu dezakezu egiletza aitortuta eta jatorrizko orrirako estekarekin."
+        ]
+      }
+    ],
+    contactLabel: "Kontaktua"
+  },
+  en: {
+    title: "Legal notice & privacy",
+    description:
+      "Legal notice and privacy policy for Numerical Methods: no cookies, no trackers and no personal data collection.",
+    sections: [
+      {
+        heading: "Who publishes this site",
+        body: [
+          "Numerical Methods (metodosnumericos.dev) is an independent editorial project with no direct commercial purpose: a free educational reference on numerical methods. You can reach the editors at the email address at the end of this page."
+        ]
+      },
+      {
+        heading: "Privacy",
+        body: [
+          "This site uses no cookies, includes no trackers or analytics, and collects no personal data of any kind. It is a static site: there are no accounts, forms or databases holding visitor information.",
+          "The hosting provider may keep technical access logs (for example, IP addresses) needed to serve the site; this project does not consult or retain them.",
+          "If you email us, your address is used only to reply and is never shared with third parties."
+        ]
+      },
+      {
+        heading: "External links",
+        body: [
+          "Support pages link to external platforms (for example, Buy Me a Coffee). If you visit them, their own terms and privacy policies apply; this site receives no data from those platforms."
+        ]
+      },
+      {
+        heading: "Content and liability",
+        body: [
+          "The content is carefully reviewed and verified, but may contain errors. It is offered for educational purposes, without warranty of any kind; how you use it is your responsibility. If you spot an error, we appreciate the report.",
+          "Unless stated otherwise, the content of this site is the work of its authors. You may quote it with attribution and a link to the original page."
+        ]
+      }
+    ],
+    contactLabel: "Contact"
+  }
+}[lang];
+
+const labels = navLabels[lang];
+---
+
+<BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang}>
+  <main class="content-shell">
+    <article class="article-body">
+      <header class="article-header">
+        <span class="eyebrow">{labels.legal}</span>
+        <h1>{copy.title}</h1>
+      </header>
+      {copy.sections.map((section) => (
+        <section class="article-section">
+          <h2>{section.heading}</h2>
+          {section.body.map((paragraph) => <p>{paragraph}</p>)}
+        </section>
+      ))}
+      {monetization.email && (
+        <p>
+          <a class="secondary-button" href={`mailto:${monetization.email}`}>
+            {copy.contactLabel}: {monetization.email}
+          </a>
+        </p>
+      )}
+    </article>
+  </main>
+</BaseLayout>

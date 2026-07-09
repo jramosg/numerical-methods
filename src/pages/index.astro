@@ -1,3 +1,33 @@
 ---
-return Astro.redirect("/es/", 302);
+// Language-aware entry point: JS picks the visitor's language instantly;
+// the meta refresh is the no-JS fallback to the default language.
 ---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Métodos Numéricos</title>
+    <meta name="robots" content="noindex" />
+    <script is:inline>
+      var supported = ["es", "eu", "en"];
+      var preferred = (navigator.languages || [navigator.language || "es"])
+        .map(function (l) {
+          return String(l).slice(0, 2).toLowerCase();
+        })
+        .find(function (l) {
+          return supported.indexOf(l) !== -1;
+        });
+      window.location.replace("/" + (preferred || "es") + "/");
+    </script>
+    <meta http-equiv="refresh" content="0;url=/es/" />
+  </head>
+  <body>
+    <p>
+      <a href="/es/">Métodos Numéricos — español</a> ·
+      <a href="/eu/">euskara</a> ·
+      <a href="/en/">English</a>
+    </p>
+  </body>
+</html>

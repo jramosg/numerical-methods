@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import HeroFigure from "@/components/HeroFigure.astro";
 import SupportBox from "@/components/SupportBox.astro";
 import { articles, derivations, exercises } from "@/data/content";
 import { areas } from "@/data/areas";
@@ -137,12 +138,7 @@ const schema = {
         </div>
       </div>
       <figure class="hero-visual">
-        <img
-          src="/numerical-methods-hero.png"
-          alt="Numerical analysis notebook with formulas, interpolation nodes and finite difference sketches"
-          width="1536"
-          height="1024"
-        />
+        <HeroFigure lang={lang} />
       </figure>
     </section>
 

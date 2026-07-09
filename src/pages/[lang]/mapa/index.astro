@@ -1,0 +1,118 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SupportBox from "@/components/SupportBox.astro";
+import { getTopicGraph } from "@/data/wiki";
+import { languages, type Lang } from "@/data/site";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const graph = getTopicGraph(lang);
+const hubs = [...graph]
+  .sort((a, b) => b.backlinkCount - a.backlinkCount)
+  .slice(0, 12);
+
+const groups: { category: string; nodes: typeof graph }[] = [];
+for (const node of graph) {
+  let group = groups.find((item) => item.category === node.category);
+  if (!group) {
+    group = { category: node.category, nodes: [] };
+    groups.push(group);
+  }
+  group.nodes.push(node);
+}
+
+const copy = {
+  es: {
+    title: "Mapa wiki de métodos numéricos",
+    description:
+      "Grafo de temas, enlaces internos y backlinks para navegar entre métodos numéricos relacionados.",
+    intro:
+      "Cada tarjeta muestra a qué páginas apunta una guía, deducción o ejercicio. El contador indica cuántas páginas la referencian.",
+    hubs: "Páginas más referenciadas",
+    references: "referencias",
+    backlinks: "backlinks",
+    none: "Sin referencias salientes"
+  },
+  eu: {
+    title: "Metodo numerikoen wiki mapa",
+    description:
+      "Gai-grafoa, barne-estekak eta backlinkak lotutako metodo numerikoen artean nabigatzeko.",
+    intro:
+      "Txartel bakoitzak gida, dedukzio edo ariketa batek zein orritara jotzen duen erakusten du. Kontagailuak zenbat orrik aipatzen duten adierazten du.",
+    hubs: "Gehien erreferentziatutako orriak",
+    references: "erreferentzia",
+    backlinks: "backlink",
+    none: "Irteerako erreferentziarik ez"
+  },
+  en: {
+    title: "Numerical methods wiki map",
+    description:
+      "Topic graph, internal links and backlinks for navigating related numerical methods.",
+    intro:
+      "Each card shows which pages a guide, derivation or exercise points to. The counter tells how many pages reference it.",
+    hubs: "Most referenced pages",
+    references: "references",
+    backlinks: "backlinks",
+    none: "No outgoing references"
+  }
+}[lang];
+---
+
+<BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang}>
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Wiki</span>
+          <h1>{copy.title}</h1>
+        </div>
+        <p>{copy.intro}</p>
+      </div>
+
+      <div class="wiki-hub-strip" aria-label={copy.hubs}>
+        <h2>{copy.hubs}</h2>
+        <div class="wiki-chip-row">
+          {hubs.map((node) => (
+            <a class="wiki-chip" href={node.href}>
+              <span>{node.title}</span>
+              <strong>{node.backlinkCount}</strong>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {groups.map((group) => (
+      <section class="section graph-section">
+        <div class="section-header"><h2>{group.category}</h2></div>
+        <div class="graph-grid">
+          {group.nodes.map((node) => (
+            <article class="graph-card">
+              <div class="entry-meta">
+                <span>{node.kind}</span>
+                <span>{node.backlinkCount} {copy.backlinks}</span>
+              </div>
+              <h3><a href={node.href}>{node.title}</a></h3>
+              {node.references.length > 0 ? (
+                <div class="graph-links" aria-label={copy.references}>
+                  {node.references.slice(0, 10).map((target) => (
+                    <a href={target.href}>{target.title}</a>
+                  ))}
+                </div>
+              ) : (
+                <p class="graph-empty">{copy.none}</p>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <section class="section">
+      <SupportBox lang={lang} />
+    </section>
+  </main>
+</BaseLayout>

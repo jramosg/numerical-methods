@@ -1,0 +1,249 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import RichText from "@/components/RichText.astro";
+import SupportBox from "@/components/SupportBox.astro";
+import { getSearchRecords } from "@/data/wiki";
+import { languages, type Lang } from "@/data/site";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const records = getSearchRecords(lang);
+
+const copy = {
+  es: {
+    title: "Buscar en Métodos Numéricos",
+    description:
+      "Busca guías, deducciones, ejercicios, comparativas y términos del glosario en la referencia de métodos numéricos.",
+    intro:
+      "Escribe un método, una propiedad o una fórmula. La búsqueda cruza artículos, ejercicios, deducciones, comparativas y glosario.",
+    placeholder: "Newton, estabilidad, RK4, residuo...",
+    resultSingular: "resultado",
+    resultPlural: "resultados",
+    empty: "No hay resultados para esa búsqueda.",
+    hint: "Prueba con términos como orden, convergencia, Jacobi o truncamiento.",
+    filterLabel: "Filtrar por tipo",
+    filters: [
+      { key: "", label: "Todo" },
+      { key: "articulos", label: "Guía" },
+      { key: "deducciones", label: "Deducción" },
+      { key: "ejercicios", label: "Ejercicio" },
+      { key: "glossary", label: "Glosario" },
+      { key: "comparison", label: "Comparativa" }
+    ],
+    shortcuts: [
+      { label: "Mapa wiki", href: "mapa", text: "Explorar backlinks y relaciones" },
+      { label: "Comparativas", href: "comparativas", text: "Elegir entre familias de métodos" },
+      { label: "Glosario", href: "glosario", text: "Aclarar términos compartidos" }
+    ]
+  },
+  eu: {
+    title: "Bilatu Metodo Numerikoetan",
+    description:
+      "Bilatu metodo numerikoen erreferentziako gidak, dedukzioak, ariketak, konparatibak eta glosarioko terminoak.",
+    intro:
+      "Idatzi metodo bat, propietate bat edo formula bat. Bilaketak artikuluak, ariketak, dedukzioak, konparatibak eta glosarioa zeharkatzen ditu.",
+    placeholder: "Newton, egonkortasuna, RK4, hondarra...",
+    resultSingular: "emaitza",
+    resultPlural: "emaitza",
+    empty: "Ez dago emaitzarik bilaketa horretarako.",
+    hint: "Saiatu ordena, konbergentzia, Jacobi edo trunkatzea bezalako terminoekin.",
+    filterLabel: "Motaren arabera iragazi",
+    filters: [
+      { key: "", label: "Dena" },
+      { key: "articulos", label: "Gida" },
+      { key: "deducciones", label: "Frogapena" },
+      { key: "ejercicios", label: "Ariketa" },
+      { key: "glossary", label: "Glosarioa" },
+      { key: "comparison", label: "Konparatiba" }
+    ],
+    shortcuts: [
+      { label: "Wiki mapa", href: "mapa", text: "Backlinkak eta loturak arakatu" },
+      { label: "Konparatibak", href: "comparativas", text: "Metodo-familien artean aukeratu" },
+      { label: "Glosarioa", href: "glosario", text: "Termino partekatuak argitu" }
+    ]
+  },
+  en: {
+    title: "Search Numerical Methods",
+    description:
+      "Search guides, derivations, exercises, comparison tables and glossary terms in the numerical methods reference.",
+    intro:
+      "Type a method, property or formula. Search spans articles, exercises, derivations, comparisons and glossary terms.",
+    placeholder: "Newton, stability, RK4, residual...",
+    resultSingular: "result",
+    resultPlural: "results",
+    empty: "No results for that search.",
+    hint: "Try terms such as order, convergence, Jacobi or truncation.",
+    filterLabel: "Filter by type",
+    filters: [
+      { key: "", label: "All" },
+      { key: "articulos", label: "Guide" },
+      { key: "deducciones", label: "Derivation" },
+      { key: "ejercicios", label: "Exercise" },
+      { key: "glossary", label: "Glossary" },
+      { key: "comparison", label: "Comparison" }
+    ],
+    shortcuts: [
+      { label: "Wiki map", href: "mapa", text: "Explore backlinks and relations" },
+      { label: "Comparisons", href: "comparativas", text: "Choose between method families" },
+      { label: "Glossary", href: "glosario", text: "Clarify shared terms" }
+    ]
+  }
+}[lang];
+
+---
+
+<BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang}>
+  <main>
+    <section class="section search-shell">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Wiki</span>
+          <h1>{copy.title}</h1>
+        </div>
+        <p>{copy.intro}</p>
+      </div>
+
+      <div class="search-workspace">
+        <form class="search-panel" action={`/${lang}/buscar/`} method="get">
+          <label class="search-label" for="site-search">{copy.title}</label>
+          <div class="search-input-wrap">
+            <span aria-hidden="true">⌕</span>
+            <input
+              id="site-search"
+              class="search-input"
+              type="search"
+              name="q"
+              placeholder={copy.placeholder}
+              autocomplete="off"
+              autofocus
+            />
+          </div>
+          <div class="search-toolbar" aria-label={copy.filterLabel}>
+            {copy.filters.map((filter, index) => (
+              <button
+                class:list={{ "search-filter": true, active: index === 0 }}
+                type="button"
+                data-search-filter={filter.key}
+                aria-pressed={index === 0 ? "true" : "false"}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </div>
+        </form>
+
+        <aside class="search-shortcuts">
+          {copy.shortcuts.map((shortcut) => (
+            <a href={`/${lang}/${shortcut.href}/`}>
+              <span>{shortcut.label}</span>
+              <strong>{shortcut.text}</strong>
+            </a>
+          ))}
+        </aside>
+      </div>
+
+      <p
+        class="search-count"
+        data-search-count
+        data-search-singular={copy.resultSingular}
+        data-search-plural={copy.resultPlural}
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {records.length} {copy.resultPlural}
+      </p>
+      <div class="search-results" data-search-results>
+        {records.map((record) => (
+          <article
+            class="search-result-card"
+            data-search-item
+            data-search-kind={record.kindKey}
+            data-search-text={record.searchText}
+          >
+            <div class="entry-meta">
+              <span>{record.kind}</span>
+              <span>{record.category}</span>
+            </div>
+            <h3><a href={record.href}>{record.title}</a></h3>
+            <p><RichText text={record.richDescription} lang={lang} /></p>
+          </article>
+        ))}
+      </div>
+      <p class="search-empty" data-search-empty hidden>
+        {copy.empty} {copy.hint}
+      </p>
+    </section>
+
+    <section class="section">
+      <SupportBox lang={lang} />
+    </section>
+  </main>
+
+  <script is:inline>
+    const input = document.querySelector("#site-search");
+    const items = Array.from(document.querySelectorAll("[data-search-item]"));
+    const filters = Array.from(document.querySelectorAll("[data-search-filter]"));
+    const empty = document.querySelector("[data-search-empty]");
+    const count = document.querySelector("[data-search-count]");
+    const singularLabel = count.dataset.searchSingular || "";
+    const pluralLabel = count.dataset.searchPlural || "";
+    let activeFilter = "";
+
+    const normalize = (value) =>
+      value
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+    const render = () => {
+      const query = normalize(input.value.trim());
+      const terms = query.split(/\s+/).filter(Boolean);
+      let visible = 0;
+      for (const item of items) {
+        const haystack = normalize(item.dataset.searchText || "");
+        const matchesKind = !activeFilter || item.dataset.searchKind === activeFilter;
+        const matches = matchesKind && terms.every((term) => haystack.includes(term));
+        item.hidden = !matches;
+        if (matches) visible += 1;
+      }
+
+      empty.hidden = visible > 0;
+      count.textContent = `${visible} ${visible === 1 ? singularLabel : pluralLabel}`;
+    };
+
+    const restoreSearch = () => {
+      const params = new URLSearchParams(window.location.search);
+      input.value = params.get("q") || "";
+      render();
+    };
+
+    const syncSearchUrl = () => {
+      const url = new URL(window.location.href);
+      const query = input.value.trim();
+      if (query) url.searchParams.set("q", query);
+      else url.searchParams.delete("q");
+      window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+    };
+
+    input.addEventListener("input", () => {
+      render();
+      syncSearchUrl();
+    });
+    for (const filter of filters) {
+      filter.addEventListener("click", () => {
+        activeFilter = filter.dataset.searchFilter || "";
+        for (const item of filters) {
+          const active = item === filter;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-pressed", String(active));
+        }
+        render();
+      });
+    }
+    window.addEventListener("popstate", restoreSearch);
+    restoreSearch();
+  </script>
+</BaseLayout>

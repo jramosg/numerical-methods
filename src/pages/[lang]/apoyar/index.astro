@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import RichText from "@/components/RichText.astro";
 import SupportBox from "@/components/SupportBox.astro";
-import AdSlot from "@/components/AdSlot.astro";
-import { languages, monetization, type Lang } from "@/data/site";
+import { languages, monetization, navLabels, type Lang } from "@/data/site";
 
 export function getStaticPaths() {
   return languages.map((lang) => ({ params: { lang } }));
@@ -12,91 +12,231 @@ const lang = Astro.params.lang as Lang;
 
 const copy = {
   es: {
-    title: "Apoyar y monetizar Métodos Numéricos",
+    title: "Apoya Métodos Numéricos",
     description:
-      "Página de apoyo y estrategia de monetización: donaciones, afiliación, patrocinios, productos digitales y anuncios.",
+      "Métodos Numéricos es una referencia libre, trilingüe y sin anuncios. Si te resulta útil, puedes apoyar el proyecto para que siga creciendo.",
     intro:
-      "El objetivo principal es convertir contenido educativo evergreen en un activo que pueda monetizar sin destruir la confianza. La prioridad es audiencia cualificada primero; ingresos después.",
-    direct: "Apoyo directo",
-    strategy: "Estrategia de monetización",
-    notes: [
-      "Fase 1: Buy Me a Coffee o Ko-fi en páginas con alta intención de estudio.",
-      "Fase 2: afiliación ética a calculadoras, libros, tabletas gráficas, cursos o herramientas alineadas con el contenido.",
-      "Fase 3: producto propio: formulario PDF premium, banco de ejercicios, colecciones de práctica y soluciones paso a paso.",
-      "Fase 4: AdSense o una red publicitaria solo cuando haya tráfico suficiente; antes puede empeorar UX sin aportar gran ingreso.",
-      "Fase 5: patrocinios de academias, software matemático o edtech en bloques claramente señalados."
+      "Esta wiki es gratuita, no tiene anuncios y no los tendrá mientras sea posible. Todo el contenido —teoría, deducciones completas y ejercicios verificados— está abierto para cualquiera que lo necesite.",
+    whyTitle: "A qué se dedica tu apoyo",
+    why: [
+      "Escribir nuevas guías, deducciones y ejercicios resueltos, con cada número verificado.",
+      "Mantener las tres lenguas al mismo nivel: cada página se escribe en español, euskera e inglés.",
+      "Cubrir los costes de dominio y publicación para que el sitio siga siendo libre y sin anuncios."
     ],
-    setup:
-      "Para activar Buy Me a Coffee crea una cuenta, copia tu usuario y añade PUBLIC_BMC_USERNAME=tu_usuario en .env."
+    roadmapTitle: "Qué desbloquea tu apoyo",
+    roadmapIntro:
+      "El apoyo no solo mantiene lo que ya existe: decide qué se construye antes. Estas son las próximas mejoras en la lista; si apoyas el proyecto, dinos cuál te haría la vida más fácil.",
+    roadmap: [
+      {
+        name: "Formulario en PDF imprimible",
+        text: "Cada tema como hoja de fórmulas lista para imprimir y llevar: fórmulas, errores y condiciones de uso en una o dos páginas."
+      },
+      {
+        name: "Versión imprimible de cada artículo",
+        text: "Estilos de impresión cuidados para que guías, deducciones y ejercicios queden perfectos en papel o en PDF desde el navegador."
+      },
+      {
+        name: "Colecciones de ejercicios descargables",
+        text: "Paquetes de ejercicios por tema, con enunciados primero y soluciones detalladas después, para practicar sin mirar la respuesta."
+      },
+      {
+        name: "Gráficas interactivas",
+        text: "Mover el paso $h$ y ver cómo cambia el error, dibujar regiones de estabilidad o el fenómeno de Runge en directo, sobre las mismas figuras de los artículos."
+      },
+      {
+        name: "Calculadoras paso a paso",
+        text: "Introducir tus datos y ver la tabla de diferencias divididas, las iteraciones de Newton o un paso de RK4 construidos igual que en los ejercicios resueltos."
+      },
+      {
+        name: "Nuevos temas",
+        text: "Ampliar la biblia más allá del temario actual: mínimos cuadrados, autovalores, optimización y ecuaciones en derivadas parciales."
+      }
+    ],
+    otherTitle: "Otras formas de ayudar",
+    other: [
+      "Comparte la página con quien esté estudiando métodos numéricos.",
+      "Si encuentras una errata o un número que no cuadra, escríbenos: cada corrección mejora la referencia.",
+      "Sugiere temas o ejercicios que te gustaría ver resueltos."
+    ],
+    contactLabel: "Escríbenos"
   },
   eu: {
-    title: "Lagundu eta monetizatu Metodo Numerikoak",
+    title: "Lagundu Metodo Numerikoak",
     description:
-      "Laguntza eta monetizazio estrategia: dohaintzak, afiliazioa, babesletzak, produktu digitalak eta iragarkiak.",
+      "Metodo Numerikoak erreferentzia librea, hirueleduna eta iragarkirik gabea da. Erabilgarria bazaizu, proiektua lagun dezakezu hazten jarrai dezan.",
     intro:
-      "Helburua eduki evergreen hezitzailea monetizagarria den aktibo bihurtzea da, konfiantza galdu gabe.",
-    direct: "Laguntza zuzena",
-    strategy: "Monetizazio estrategia",
-    notes: [
-      "1. fasea: Buy Me a Coffee edo Ko-fi ikasketa intentzio handiko orrietan.",
-      "2. fasea: afiliazio etikoa liburu, tresna edo ikastaro egokiekin.",
-      "3. fasea: produktu propioak: PDF formularioak, ariketa bankua eta simulakroak.",
-      "4. fasea: AdSense trafikoa dagoenean bakarrik.",
-      "5. fasea: babesletzak argi markatutako blokeetan."
+      "Wiki hau doakoa da, ez du iragarkirik eta ez du izango ahal den bitartean. Eduki guztia —teoria, dedukzio osoak eta ariketa egiaztatuak— irekita dago behar duen edonorentzat.",
+    whyTitle: "Zertarako den zure laguntza",
+    why: [
+      "Gida, dedukzio eta ariketa ebatzi berriak idazteko, zenbaki bakoitza egiaztatuta.",
+      "Hiru hizkuntzak maila berean mantentzeko: orri bakoitza gaztelaniaz, euskaraz eta ingelesez idazten da.",
+      "Domeinu eta argitalpen kostuak ordaintzeko, gunea libre eta iragarkirik gabe manten dadin."
     ],
-    setup:
-      "Buy Me a Coffee aktibatzeko sortu kontua eta gehitu PUBLIC_BMC_USERNAME=zure_erabiltzailea .env fitxategian."
+    roadmapTitle: "Zer desblokeatzen duen zure laguntzak",
+    roadmapIntro:
+      "Laguntzak ez du soilik dagoena mantentzen: zer eraikitzen den lehenago erabakitzen du. Hauek dira zerrendako hurrengo hobekuntzak; proiektua laguntzen baduzu, esaguzu zeinek erraztuko lizukeen bizitza.",
+    roadmap: [
+      {
+        name: "Formulario inprimagarria PDFn",
+        text: "Gai bakoitza inprimatzeko eta eramateko prest dagoen formula-orri gisa: formulak, erroreak eta erabilera-baldintzak orri batean edo bitan."
+      },
+      {
+        name: "Artikulu bakoitzaren bertsio inprimagarria",
+        text: "Inprimatze-estilo zainduak, gidak, dedukzioak eta ariketak paperean edo nabigatzailetik PDFn ezin hobeto gera daitezen."
+      },
+      {
+        name: "Ariketa-bilduma deskargagarriak",
+        text: "Ariketa-paketeak gaika, lehenengo enuntziatuekin eta gero soluzio xehatuekin, erantzunari begiratu gabe praktikatzeko."
+      },
+      {
+        name: "Grafika interaktiboak",
+        text: "$h$ pausoa mugitu eta errorea nola aldatzen den ikusi, egonkortasun-eremuak edo Runge fenomenoa zuzenean marraztu, artikuluetako irudi berberen gainean."
+      },
+      {
+        name: "Pausoz pausoko kalkulagailuak",
+        text: "Zure datuak sartu eta diferentzia zatituen taula, Newton iterazioak edo RK4 pauso bat ikusi, ariketa ebatzietan bezalaxe eraikita."
+      },
+      {
+        name: "Gai berriak",
+        text: "Biblia egungo gaietatik harago zabaltzea: karratu txikienak, autobalioak, optimizazioa eta deribatu partzialetako ekuazioak."
+      }
+    ],
+    otherTitle: "Laguntzeko beste bide batzuk",
+    other: [
+      "Partekatu orria metodo numerikoak ikasten ari den edonorekin.",
+      "Errata bat edo bat ez datorren zenbaki bat aurkitzen baduzu, idatzi: zuzenketa bakoitzak erreferentzia hobetzen du.",
+      "Proposatu ikusi nahiko zenituzkeen gaiak edo ariketak."
+    ],
+    contactLabel: "Idatzi"
   },
   en: {
-    title: "Support and monetize Numerical Methods",
+    title: "Support Numerical Methods",
     description:
-      "Support page and monetization strategy: donations, affiliate revenue, sponsorships, digital products and ads.",
+      "Numerical Methods is a free, trilingual, ad-free reference. If it's useful to you, you can support the project so it keeps growing.",
     intro:
-      "The main goal is to turn evergreen educational content into a monetizable asset without harming trust.",
-    direct: "Direct support",
-    strategy: "Monetization strategy",
-    notes: [
-      "Phase 1: Buy Me a Coffee or Ko-fi on high-intent study pages.",
-      "Phase 2: ethical affiliate links to books, calculators, tablets, courses or tools aligned with the content.",
-      "Phase 3: owned products: premium PDF formula sheet, exercise bank, practice collections and step-by-step solutions.",
-      "Phase 4: AdSense or display ads only after meaningful traffic.",
-      "Phase 5: sponsorships from education, math software or edtech brands in clearly labeled slots."
+      "This wiki is free, has no ads, and will stay that way for as long as possible. All the content — theory, complete derivations and verified exercises — is open to anyone who needs it.",
+    whyTitle: "What your support goes to",
+    why: [
+      "Writing new guides, derivations and solved exercises, with every number verified.",
+      "Keeping the three languages at the same depth: every page is written in Spanish, Basque and English.",
+      "Covering domain and publishing costs so the site stays free and ad-free."
     ],
-    setup:
-      "To enable Buy Me a Coffee, create an account, copy your username and add PUBLIC_BMC_USERNAME=your_user to .env."
+    roadmapTitle: "What your support unlocks",
+    roadmapIntro:
+      "Support doesn't just maintain what exists: it decides what gets built first. These are the next improvements on the list; if you support the project, tell us which one would make your life easier.",
+    roadmap: [
+      {
+        name: "Printable PDF formula sheet",
+        text: "Each topic as a print-ready formula sheet you can carry: formulas, errors and conditions of use on one or two pages."
+      },
+      {
+        name: "Print-friendly version of every article",
+        text: "Careful print styles so guides, derivations and exercises come out perfectly on paper or as a browser-generated PDF."
+      },
+      {
+        name: "Downloadable exercise packs",
+        text: "Exercise bundles by topic, statements first and detailed solutions after, so you can practise without peeking at the answer."
+      },
+      {
+        name: "Interactive figures",
+        text: "Drag the step $h$ and watch the error change, draw stability regions or the Runge phenomenon live, on the same figures the articles use."
+      },
+      {
+        name: "Step-by-step calculators",
+        text: "Enter your data and see the divided-difference table, Newton iterations or one RK4 step built exactly like in the solved exercises."
+      },
+      {
+        name: "New topics",
+        text: "Growing the bible beyond the current syllabus: least squares, eigenvalues, optimization and partial differential equations."
+      }
+    ],
+    otherTitle: "Other ways to help",
+    other: [
+      "Share the site with anyone studying numerical methods.",
+      "If you find a typo or a number that doesn't check out, write to us — every correction improves the reference.",
+      "Suggest topics or exercises you'd like to see solved."
+    ],
+    contactLabel: "Write to us"
   }
 }[lang];
+
+const labels = navLabels[lang];
 ---
 
 <BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang}>
   <main class="content-shell">
     <article class="article-body">
       <header class="article-header">
-        <span class="eyebrow">Revenue</span>
+        <span class="eyebrow">{labels.support}</span>
         <h1>{copy.title}</h1>
         <p>{copy.intro}</p>
       </header>
 
       <section class="article-section">
-        <h2>{copy.direct}</h2>
-        <p>{copy.setup}</p>
+        <h2>{copy.whyTitle}</h2>
+        <ul class="content-list">
+          {copy.why.map((item) => <li>{item}</li>)}
+        </ul>
         <SupportBox lang={lang} />
-        {monetization.koFiUrl && <p><a class="secondary-button" href={monetization.koFiUrl}>Ko-fi</a></p>}
+        {monetization.koFiUrl && (
+          <p>
+            <a class="secondary-button" href={monetization.koFiUrl} rel="noopener" target="_blank">
+              Ko-fi
+            </a>
+          </p>
+        )}
       </section>
 
       <section class="article-section">
-        <h2>{copy.strategy}</h2>
-        <ul>
-          {copy.notes.map((note) => <li>{note}</li>)}
+        <h2>{copy.roadmapTitle}</h2>
+        <p>{copy.roadmapIntro}</p>
+        <div class="roadmap-grid">
+          {copy.roadmap.map((item) => (
+            <article class="entry-card">
+              <h3>{item.name}</h3>
+              <p><RichText text={item.text} lang={lang} /></p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="article-section">
+        <h2>{copy.otherTitle}</h2>
+        <ul class="content-list">
+          {copy.other.map((item) => <li>{item}</li>)}
         </ul>
+        {monetization.email && (
+          <p>
+            <a class="secondary-button" href={`mailto:${monetization.email}`}>
+              {copy.contactLabel}: {monetization.email}
+            </a>
+          </p>
+        )}
       </section>
     </article>
-    <aside class="content-sidebar">
-      <AdSlot lang={lang} label="Sponsor placement" />
-      <div class="sidebar-panel">
-        <strong>Next revenue assets</strong>
-        <p>Premium PDF, printable exercises, newsletter capture and affiliate disclosure.</p>
-      </div>
-    </aside>
   </main>
 </BaseLayout>
+
+<style>
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .roadmap-grid .entry-card {
+    min-height: 0;
+    gap: 0.5rem;
+  }
+
+  .roadmap-grid h3 {
+    font-size: 1.05rem;
+  }
+
+  .roadmap-grid p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+</style>

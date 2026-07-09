@@ -1,0 +1,99 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import RichText from "@/components/RichText.astro";
+import SupportBox from "@/components/SupportBox.astro";
+import { comparisonTables } from "@/data/comparisons";
+import { languages, type Lang } from "@/data/site";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+
+const copy = {
+  es: {
+    title: "Comparativas de métodos numéricos",
+    description:
+      "Tablas de decisión para comparar bisección, Newton y secante; Euler, Heun y RK4; Jacobi, Gauss-Seidel y SOR.",
+    intro:
+      "Estas tablas no sustituyen a las guías: son una vista rápida para elegir método según hipótesis, coste y comportamiento esperado.",
+    related: "Métodos relacionados"
+  },
+  eu: {
+    title: "Metodo numerikoen konparatibak",
+    description:
+      "Erabaki-taulak bisekzioa, Newton eta sekantea; Euler, Heun eta RK4; Jacobi, Gauss-Seidel eta SOR alderatzeko.",
+    intro:
+      "Taula hauek ez dituzte gidak ordezkatzen: metodoa hipotesien, kostuaren eta espero den portaeraren arabera aukeratzeko ikuspegi azkarra dira.",
+    related: "Lotutako metodoak"
+  },
+  en: {
+    title: "Numerical method comparisons",
+    description:
+      "Decision tables comparing bisection, Newton and secant; Euler, Heun and RK4; Jacobi, Gauss-Seidel and SOR.",
+    intro:
+      "These tables do not replace the guides: they are a quick view for choosing a method by assumptions, cost and expected behaviour.",
+    related: "Related methods"
+  }
+}[lang];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: copy.title,
+  description: copy.description,
+  inLanguage: lang
+};
+---
+
+<BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang} schema={schema}>
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Wiki</span>
+          <h1>{copy.title}</h1>
+        </div>
+        <p>{copy.intro}</p>
+      </div>
+    </section>
+
+    <section class="section comparison-list">
+      {comparisonTables.map((table) => (
+        <article class="comparison-panel" id={table.slug}>
+          <div class="comparison-head">
+            <h2>{table.title[lang]}</h2>
+            <p><RichText text={table.description[lang]} lang={lang} /></p>
+          </div>
+          <figure class="table-figure">
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    {table.head[lang].map((cell) => (
+                      <th><RichText text={cell} lang={lang} /></th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {table.rows[lang].map((row) => (
+                    <tr>
+                      {row.map((cell) => (
+                        <td><RichText text={cell} lang={lang} /></td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </figure>
+        </article>
+      ))}
+    </section>
+
+    <section class="section">
+      <SupportBox lang={lang} />
+    </section>
+  </main>
+</BaseLayout>

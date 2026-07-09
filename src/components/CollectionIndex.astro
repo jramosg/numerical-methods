@@ -3,7 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import EntryCard from "@/components/EntryCard.astro";
 import SupportBox from "@/components/SupportBox.astro";
 import { getCollection } from "@/data/content";
-import type { Lang } from "@/data/site";
+import { categoryLabel, type Lang } from "@/data/site";
 
 type EntryType = "articulos" | "deducciones" | "ejercicios";
 
@@ -57,7 +57,7 @@ const { title, intro } = copy[type][lang];
       </div>
       {groups.map((group) => (
         <div class="collection-group">
-          <h2>{group.category}</h2>
+          <h2>{categoryLabel(group.category, lang)}</h2>
           <div class="entry-grid">
             {group.items.map((entry) => (
               <EntryCard entry={entry} type={type} lang={lang} />

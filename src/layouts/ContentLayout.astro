@@ -1,13 +1,13 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import AdSlot from "@/components/AdSlot.astro";
 import FormulaBlock from "@/components/FormulaBlock.astro";
 import ContentBlock from "@/components/ContentBlock.astro";
 import RichText from "@/components/RichText.astro";
 import SupportBox from "@/components/SupportBox.astro";
 import { allContent, type ContentEntry, type Section } from "@/data/content";
 import { plainText } from "@/data/richtext";
-import type { Lang } from "@/data/site";
+import { categoryLabel, levelLabel, type Lang } from "@/data/site";
+import { getBacklinks } from "@/data/wiki";
 
 type EntryType = "articulos" | "deducciones" | "ejercicios";
 
@@ -28,7 +28,12 @@ const typeLabels = {
 const uiLabels = {
   onThisPage: { es: "En esta página", eu: "Orri honetan", en: "On this page" },
   prerequisites: { es: "Antes de esto", eu: "Aurretik", en: "Before this" },
-  related: { es: "Relacionado", eu: "Lotutakoa", en: "Related" }
+  related: { es: "Relacionado", eu: "Lotutakoa", en: "Related" },
+  backlinks: {
+    es: "Páginas que referencian esto",
+    eu: "Hau erreferentziatzen duten orriak",
+    en: "Pages that reference this"
+  }
 };
 
 const slugify = (text: string) =>
@@ -57,17 +62,58 @@ const resolveLinks = (slugs?: string[]) =>
 
 const prerequisites = resolveLinks(entry.prerequisites);
 const related = resolveLinks(entry.related);
+const backlinks = getBacklinks(entry.slug, lang);
 
 const plainDescription = plainText(entry.description[lang], lang);
 
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") || "https://metodosnumericos.dev";
+const pageUrl = `${siteUrl}/${lang}/${type}/${entry.slug}/`;
+
+const publisher = {
+  "@type": "Organization",
+  name: "Métodos Numéricos",
+  url: `${siteUrl}/${lang}/`,
+  logo: { "@type": "ImageObject", url: `${siteUrl}/apple-touch-icon.png` }
+};
+
 const schema = {
   "@context": "https://schema.org",
-  "@type": type === "ejercicios" ? "LearningResource" : "Article",
-  headline: entry.title[lang as Lang],
-  description: plainDescription,
-  educationalLevel: entry.level,
-  inLanguage: lang,
-  keywords: entry.keywords.join(", ")
+  "@graph": [
+    {
+      "@type": type === "ejercicios" ? "LearningResource" : "Article",
+      headline: entry.title[lang as Lang],
+      description: plainDescription,
+      educationalLevel: levelLabel(entry.level, lang),
+      inLanguage: lang,
+      keywords: entry.keywords.join(", "),
+      mainEntityOfPage: pageUrl,
+      author: publisher,
+      publisher
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Métodos Numéricos",
+          item: `${siteUrl}/${lang}/`
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: typeLabels[type][lang],
+          item: `${siteUrl}/${lang}/${type}/`
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: entry.title[lang],
+          item: pageUrl
+        }
+      ]
+    }
+  ]
 };
 ---
 
@@ -82,14 +128,14 @@ const schema = {
       <header class="article-header">
         <div class="entry-meta">
           <span>{typeLabels[type][lang]}</span>
-          <span>{entry.category}</span>
-          <span>{entry.level}</span>
+          <span>{categoryLabel(entry.category, lang)}</span>
+          <span>{levelLabel(entry.level, lang)}</span>
         </div>
         <h1>{entry.title[lang]}</h1>
         <p><RichText text={entry.description[lang]} lang={lang} /></p>
       </header>
 
-      {entry.sections.map((section: Section, index: number) => (
+      {entry.sections.map((section: Section) => (
         <section class="article-section" id={slugify(section.heading[lang])}>
           <h2>{section.heading[lang]}</h2>
 
@@ -107,7 +153,6 @@ const schema = {
               </>
             )}
 
-          {index === 0 && entry.sections.length > 2 && <AdSlot lang={lang} />}
         </section>
       ))}
 
@@ -142,6 +187,17 @@ const schema = {
           <strong>{uiLabels.related[lang]}</strong>
           <ul class="link-list">
             {related.map((item) => (
+              <li><a href={item.href}>{item.title}</a></li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      {backlinks.length > 0 && (
+        <nav class="sidebar-panel" aria-label={uiLabels.backlinks[lang]}>
+          <strong>{uiLabels.backlinks[lang]}</strong>
+          <ul class="link-list">
+            {backlinks.map((item) => (
               <li><a href={item.href}>{item.title}</a></li>
             ))}
           </ul>

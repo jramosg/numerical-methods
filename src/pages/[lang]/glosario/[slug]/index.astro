@@ -1,0 +1,101 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import RichText from "@/components/RichText.astro";
+import SupportBox from "@/components/SupportBox.astro";
+import { glossaryTerms } from "@/data/glossary";
+import { languages, type Lang } from "@/data/site";
+import { findContent, linkItem } from "@/data/wiki";
+
+export function getStaticPaths() {
+  return languages.flatMap((lang) =>
+    glossaryTerms.map((term) => ({
+      params: { lang, slug: term.slug },
+      props: { term }
+    }))
+  );
+}
+
+const { term } = Astro.props;
+const lang = Astro.params.lang as Lang;
+
+const related = term.related
+  .map((slug: string) => findContent(slug))
+  .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry))
+  .map((entry) => linkItem(lang, entry));
+
+const copy = {
+  es: {
+    glossary: "Glosario",
+    definition: "Definición",
+    use: "Cómo se usa",
+    related: "Dónde aparece",
+    all: "Volver al glosario"
+  },
+  eu: {
+    glossary: "Glosarioa",
+    definition: "Definizioa",
+    use: "Nola erabiltzen da",
+    related: "Non agertzen da",
+    all: "Itzuli glosariora"
+  },
+  en: {
+    glossary: "Glossary",
+    definition: "Definition",
+    use: "How it is used",
+    related: "Where it appears",
+    all: "Back to glossary"
+  }
+}[lang];
+---
+
+<BaseLayout
+  title={`${term.term[lang]} | Métodos Numéricos`}
+  description={term.shortDefinition[lang]}
+  lang={lang}
+>
+  <main class="content-shell">
+    <article class="article-body">
+      <header class="article-header">
+        <div class="entry-meta">
+          <span>{copy.glossary}</span>
+        </div>
+        <h1>{term.term[lang]}</h1>
+        <p><RichText text={term.shortDefinition[lang]} lang={lang} /></p>
+      </header>
+
+      <section class="article-section">
+        <h2>{copy.definition}</h2>
+        <p><RichText text={term.definition[lang]} lang={lang} /></p>
+      </section>
+
+      <section class="article-section">
+        <h2>{copy.use}</h2>
+        <p><RichText text={term.usage[lang]} lang={lang} /></p>
+      </section>
+
+      <SupportBox lang={lang} compact />
+    </article>
+
+    <aside class="content-sidebar">
+      <nav class="sidebar-panel" aria-label={copy.glossary}>
+        <strong>{copy.glossary}</strong>
+        <ul class="link-list">
+          <li><a href={`/${lang}/glosario/`}>{copy.all}</a></li>
+        </ul>
+      </nav>
+
+      {related.length > 0 && (
+        <nav class="sidebar-panel" aria-label={copy.related}>
+          <strong>{copy.related}</strong>
+          <ul class="link-list">
+            {related.map((item) => (
+              <li><a href={item.href}>{item.title}</a></li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      <SupportBox lang={lang} />
+    </aside>
+  </main>
+</BaseLayout>

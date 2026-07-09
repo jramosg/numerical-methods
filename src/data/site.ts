@@ -15,32 +15,120 @@ export const siteName = "Métodos Numéricos";
 export const navLabels: Record<Lang, Record<string, string>> = {
   es: {
     home: "Inicio",
+    search: "Buscar",
     syllabus: "Temario",
     articles: "Guía",
     derivations: "Deducciones",
     exercises: "Ejercicios",
+    map: "Mapa",
+    comparisons: "Comparativas",
+    glossary: "Glosario",
     formulas: "Formulario",
-    support: "Apoyar"
+    support: "Apoyar",
+    about: "Sobre el proyecto",
+    legal: "Aviso legal y privacidad",
+    contact: "Contacto"
   },
   eu: {
     home: "Hasiera",
+    search: "Bilatu",
     syllabus: "Gaiak",
     articles: "Gida",
     derivations: "Frogapenak",
     exercises: "Ariketak",
+    map: "Mapa",
+    comparisons: "Konparatibak",
+    glossary: "Glosarioa",
     formulas: "Formularioa",
-    support: "Lagundu"
+    support: "Lagundu",
+    about: "Proiektuari buruz",
+    legal: "Lege oharra eta pribatutasuna",
+    contact: "Kontaktua"
   },
   en: {
     home: "Home",
+    search: "Search",
     syllabus: "Syllabus",
     articles: "Guide",
     derivations: "Derivations",
     exercises: "Exercises",
+    map: "Map",
+    comparisons: "Comparisons",
+    glossary: "Glossary",
     formulas: "Formula sheet",
-    support: "Support"
+    support: "Support",
+    about: "About the project",
+    legal: "Legal & privacy",
+    contact: "Contact"
   }
 };
+
+export const uiStrings: Record<
+  Lang,
+  { skip: string; mainNav: string; langSelector: string; footerNav: string }
+> = {
+  es: {
+    skip: "Saltar al contenido",
+    mainNav: "Navegación principal",
+    langSelector: "Idioma",
+    footerNav: "Navegación del pie de página"
+  },
+  eu: {
+    skip: "Joan edukira",
+    mainNav: "Nabigazio nagusia",
+    langSelector: "Hizkuntza",
+    footerNav: "Oineko nabigazioa"
+  },
+  en: {
+    skip: "Skip to content",
+    mainNav: "Main navigation",
+    langSelector: "Language",
+    footerNav: "Footer navigation"
+  }
+};
+
+export const ogLocales: Record<Lang, string> = {
+  es: "es_ES",
+  eu: "eu_ES",
+  en: "en_US"
+};
+
+const categoryLabels: Record<string, Record<Lang, string>> = {
+  Fundamentos: { es: "Fundamentos", eu: "Oinarriak", en: "Foundations" },
+  Interpolación: { es: "Interpolación", eu: "Interpolazioa", en: "Interpolation" },
+  Diferenciación: { es: "Diferenciación", eu: "Deribazioa", en: "Differentiation" },
+  Integración: { es: "Integración", eu: "Integrazioa", en: "Integration" },
+  EDO: { es: "EDO", eu: "EDA", en: "ODEs" },
+  "Sistemas lineales": {
+    es: "Sistemas lineales",
+    eu: "Sistema linealak",
+    en: "Linear systems"
+  },
+  "Ecuaciones no lineales": {
+    es: "Ecuaciones no lineales",
+    eu: "Ekuazio ez-linealak",
+    en: "Nonlinear equations"
+  },
+  "Sistemas no lineales": {
+    es: "Sistemas no lineales",
+    eu: "Sistema ez-linealak",
+    en: "Nonlinear systems"
+  }
+};
+
+export function categoryLabel(category: string, lang: Lang): string {
+  return categoryLabels[category]?.[lang] ?? category;
+}
+
+const levelLabels: Record<string, Record<Lang, string>> = {
+  base: { es: "base", eu: "oinarrizkoa", en: "basic" },
+  medio: { es: "medio", eu: "ertaina", en: "intermediate" },
+  avanzado: { es: "avanzado", eu: "aurreratua", en: "advanced" }
+};
+
+export function levelLabel(level: string, lang: Lang): string {
+  return levelLabels[level]?.[lang] ?? level;
+}
 
 const bmcUser = import.meta.env.PUBLIC_BMC_USERNAME || "";
 const koFiUser = import.meta.env.PUBLIC_KOFI_USERNAME || "";

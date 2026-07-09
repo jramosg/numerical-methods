@@ -1,7 +1,7 @@
 ---
 import RichText from "./RichText.astro";
 import type { ContentEntry } from "@/data/content";
-import type { Lang } from "@/data/site";
+import { categoryLabel, levelLabel, type Lang } from "@/data/site";
 
 type EntryType = "articulos" | "deducciones" | "ejercicios";
 
@@ -23,8 +23,8 @@ const typeLabels = {
 <article class="entry-card">
   <div class="entry-meta">
     <span>{typeLabels[type][lang]}</span>
-    <span>{entry.category}</span>
-    <span>{entry.level}</span>
+    <span>{categoryLabel(entry.category, lang)}</span>
+    <span>{levelLabel(entry.level, lang)}</span>
   </div>
   <h3>
     <a href={`/${lang}/${type}/${entry.slug}/`}>{entry.title[lang]}</a>

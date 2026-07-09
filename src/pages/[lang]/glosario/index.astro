@@ -1,0 +1,65 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import RichText from "@/components/RichText.astro";
+import SupportBox from "@/components/SupportBox.astro";
+import { glossaryTerms } from "@/data/glossary";
+import { languages, type Lang } from "@/data/site";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+
+const copy = {
+  es: {
+    title: "Glosario de métodos numéricos",
+    description:
+      "Definiciones breves y conectadas de consistencia, estabilidad, convergencia, orden, condicionamiento, residuo y error de truncamiento.",
+    intro:
+      "Términos que aparecen en varios temas. Cada entrada enlaza con los métodos donde el concepto se usa de forma concreta."
+  },
+  eu: {
+    title: "Metodo numerikoen glosarioa",
+    description:
+      "Konsistentzia, egonkortasuna, konbergentzia, ordena, baldintzapena, hondarra eta trunkatze-errorea modu labur eta konektatuan definituta.",
+    intro:
+      "Gai askotan agertzen diren terminoak. Sarrera bakoitzak kontzeptua modu zehatzean erabiltzen duten metodoekin lotzen du."
+  },
+  en: {
+    title: "Numerical methods glossary",
+    description:
+      "Short, connected definitions of consistency, stability, convergence, order, conditioning, residual and truncation error.",
+    intro:
+      "Terms that appear across several topics. Each entry links to the methods where the concept is used concretely."
+  }
+}[lang];
+---
+
+<BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang}>
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Wiki</span>
+          <h1>{copy.title}</h1>
+        </div>
+        <p>{copy.intro}</p>
+      </div>
+
+      <div class="entry-grid glossary-grid">
+        {glossaryTerms.map((term) => (
+          <article class="entry-card glossary-card">
+            <div class="entry-meta"><span>{copy.title}</span></div>
+            <h3><a href={`/${lang}/glosario/${term.slug}/`}>{term.term[lang]}</a></h3>
+            <p><RichText text={term.shortDefinition[lang]} lang={lang} /></p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <SupportBox lang={lang} />
+    </section>
+  </main>
+</BaseLayout>
