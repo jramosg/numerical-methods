@@ -563,12 +563,14 @@ h3 {
 
 .diagram-line,
 .diagram-side {
+  fill: none;
   stroke: var(--ink);
   stroke-width: 4;
   stroke-linecap: round;
 }
 
 .diagram-thin {
+  fill: none;
   stroke: var(--ink);
   stroke-width: 2;
 }
