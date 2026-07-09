@@ -350,6 +350,40 @@ export const interpolacionArticles: ContentEntry[] = [
           {
             kind: "formula",
             tex: "p_n(x)=\\sum_{i=0}^{n} L_{i}(x)\\,f(x_i)"
+          },
+          {
+            kind: "steps",
+            title: {
+              es: "Por qué el polinomio pasa por cada nodo",
+              eu: "Zergatik igarotzen den polinomioa nodo bakoitzetik",
+              en: "Why the polynomial passes through every node"
+            },
+            steps: [
+              {
+                text: {
+                  es: "Para comprobarlo en un nodo concreto $x_k$, evaluamos el polinomio ahí:",
+                  eu: "Nodo zehatz batean, $x_k$-n, egiaztatzeko, polinomioa han ebaluatzen dugu:",
+                  en: "To check this at a specific node $x_k$, evaluate the polynomial there:"
+                },
+                formula: "p_n(x_k)=\\sum_{i=0}^{n} L_i(x_k)\\,f(x_i)"
+              },
+              {
+                text: {
+                  es: "La propiedad cardinal anula todas las bases salvo la que corresponde al propio nodo $x_k$:",
+                  eu: "Propietate kardinalak oinarri guztiak anulatzen ditu, $x_k$ nodoari dagokiona izan ezik:",
+                  en: "The cardinal property kills every basis function except the one attached to the node $x_k$ itself:"
+                },
+                formula: "L_i(x_k)=\\begin{cases}0,& i\\ne k\\\\[2pt]1,& i=k\\end{cases}"
+              },
+              {
+                text: {
+                  es: "Así solo sobrevive el término $i=k$, y el interpolante reproduce exactamente el dato de ese nodo:",
+                  eu: "Horrela $i=k$ terminoa bakarrik geratzen da, eta interpolatzaileak nodo horretako datua zehazki berreskuratzen du:",
+                  en: "Thus only the term $i=k$ survives, and the interpolant exactly reproduces the datum at that node:"
+                },
+                formula: "p_n(x_k)=L_k(x_k)\\,f(x_k)=f(x_k)"
+              }
+            ]
           }
         ]
       },
