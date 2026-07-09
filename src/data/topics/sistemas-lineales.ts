@@ -36,9 +36,9 @@ export const sistemasLinealesArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Resolver Ax=b se puede hacer con métodos directos (Cramer, Gauss-Jordan), que llegan a la solución en un número finito de operaciones, o con métodos iterativos, que generan aproximaciones cada vez mejores. Para matrices grandes, dispersas o mal condicionadas, los iterativos suelen ser más eficientes y permiten parar al alcanzar la precisión deseada.",
-              eu: "Ax=b ebazteko metodo zuzenak (Cramer, Gauss-Jordan) erabil daitezke, eragiketa kopuru finituan soluziora iristen direnak, edo metodo iteratiboak, gero eta hurbilketa hobeak sortzen dituztenak. Matrize handi, sakabanatu edo gaizki baldintzatuentzat, iteratiboak eraginkorragoak izan ohi dira.",
-              en: "You can solve Ax=b with direct methods (Cramer, Gauss-Jordan), which reach the solution in finitely many operations, or with iterative methods, which produce better approximations step by step. For large, sparse or ill-conditioned matrices, iterative methods often cost less and let you stop once the desired precision is reached."
+              es: "Resolver $Ax=b$ se puede hacer con métodos directos (Cramer, Gauss-Jordan), que llegan a la solución en un número finito de operaciones, o con métodos iterativos, que generan aproximaciones cada vez mejores. Para matrices grandes, dispersas o mal condicionadas, los iterativos suelen ser más eficientes y permiten parar al alcanzar la precisión deseada.",
+              eu: "$Ax=b$ ebazteko metodo zuzenak (Cramer, Gauss-Jordan) erabil daitezke, eragiketa kopuru finituan soluziora iristen direnak, edo metodo iteratiboak, gero eta hurbilketa hobeak sortzen dituztenak. Matrize handi, sakabanatu edo gaizki baldintzatuentzat, iteratiboak eraginkorragoak izan ohi dira.",
+              en: "You can solve $Ax=b$ with direct methods (Cramer, Gauss-Jordan), which reach the solution in finitely many operations, or with iterative methods, which produce better approximations step by step. For large, sparse or ill-conditioned matrices, iterative methods often cost less and let you stop once the desired precision is reached."
             }
           }
         ]
@@ -104,9 +104,9 @@ export const sistemasLinealesArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Los métodos iterativos parten de una partición A=M−N con M fácil de invertir (diagonal, triangular…). Se transforma Ax=b en un punto fijo equivalente:",
-              eu: "Metodo iteratiboak A=M−N partiziotik abiatzen dira, M erraz inbertitzekoa (diagonala, triangeluarra…). Ax=b puntu finko baliokide batean bihurtzen da:",
-              en: "Iterative methods start from a splitting A=M−N with M easy to invert (diagonal, triangular…). Ax=b is turned into an equivalent fixed point:"
+              es: "Los métodos iterativos parten de una partición $A=M-N$ con $M$ fácil de invertir (diagonal, triangular…). Se transforma $Ax=b$ en un [[no-lineales-punto-fijo|punto fijo]] equivalente:",
+              eu: "Metodo iteratiboak $A=M-N$ partiziotik abiatzen dira, $M$ erraz inbertitzekoa (diagonala, triangeluarra…). $Ax=b$ [[no-lineales-punto-fijo|puntu finko]] baliokide batean bihurtzen da:",
+              en: "Iterative methods start from a splitting $A=M-N$ with $M$ easy to invert (diagonal, triangular…). $Ax=b$ is turned into an equivalent [[no-lineales-punto-fijo|fixed point]]:"
             }
           },
           {
@@ -154,9 +154,9 @@ export const sistemasLinealesArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Se parte A en su parte estrictamente inferior L, su diagonal D y su parte estrictamente superior U. Jacobi elige el precondicionador más simple, M=D, con N=−(L+U):",
-              eu: "A zatitzen da bere behealde hertsi L, bere diagonal D eta bere goialde hertsi U-tan. Jacobik prekondizionatzaile sinpleena aukeratzen du, M=D, N=−(L+U)-rekin:",
-              en: "A is split into its strictly lower part L, its diagonal D and its strictly upper part U. Jacobi picks the simplest preconditioner, M=D, with N=−(L+U):"
+              es: "Se parte $A$ en su parte estrictamente inferior $L$, su diagonal $D$ y su parte estrictamente superior $U$. Jacobi elige el precondicionador más simple, $M=D$, con $N=-(L+U)$:",
+              eu: "$A$ zatitzen da bere behealde hertsi $L$, bere diagonal $D$ eta bere goialde hertsi $U$-tan. Jacobik prekondizionatzaile sinpleena aukeratzen du, $M=D$, $N=-(L+U)$-rekin:",
+              en: "$A$ is split into its strictly lower part $L$, its diagonal $D$ and its strictly upper part $U$. Jacobi picks the simplest preconditioner, $M=D$, with $N=-(L+U)$:"
             }
           },
           {
@@ -218,9 +218,9 @@ export const sistemasLinealesArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Gauss-Seidel toma M=D+L y N=−U. En cuanto calcula x_1^{(k+1)}, lo usa para calcular x_2^{(k+1)}, y así sucesivamente dentro de la misma iteración.",
-              eu: "Gauss-Seidel-ek M=D+L eta N=−U hartzen ditu. x_1^{(k+1)} kalkulatu bezain laster, x_2^{(k+1)} kalkulatzeko erabiltzen du, eta horrela iterazio berean.",
-              en: "Gauss-Seidel takes M=D+L and N=−U. As soon as it computes x_1^{(k+1)}, it uses it to compute x_2^{(k+1)}, and so on within the same iteration."
+              es: "Gauss-Seidel toma $M=D+L$ y $N=-U$. En cuanto calcula $x_1^{(k+1)}$, lo usa para calcular $x_2^{(k+1)}$, y así sucesivamente dentro de la misma iteración.",
+              eu: "Gauss-Seidel-ek $M=D+L$ eta $N=-U$ hartzen ditu. $x_1^{(k+1)}$ kalkulatu bezain laster, $x_2^{(k+1)}$ kalkulatzeko erabiltzen du, eta horrela iterazio berean.",
+              en: "Gauss-Seidel takes $M=D+L$ and $N=-U$. As soon as it computes $x_1^{(k+1)}$, it uses it to compute $x_2^{(k+1)}$, and so on within the same iteration."
             }
           },
           {
@@ -256,9 +256,9 @@ export const sistemasLinealesArticles: ContentEntry[] = [
       en: "Convergence and spectral radius"
     },
     description: {
-      es: "La condición ρ(H)<1 que decide la convergencia, el criterio suficiente de diagonal estrictamente dominante y el radio de convergencia que mide la velocidad.",
-      eu: "Konbergentzia erabakitzen duen ρ(H)<1 baldintza, diagonal hertsiki nagusiaren irizpide nahikoa eta abiadura neurtzen duen konbergentzia-erradioa.",
-      en: "The condition ρ(H)<1 that decides convergence, the sufficient strictly-diagonally-dominant criterion, and the convergence radius that measures speed."
+      es: "La condición $\\rho(H)<1$ que decide la convergencia, el criterio suficiente de diagonal estrictamente dominante y el radio de convergencia que mide la velocidad.",
+      eu: "Konbergentzia erabakitzen duen $\\rho(H)<1$ baldintza, diagonal hertsiki nagusiaren irizpide nahikoa eta abiadura neurtzen duen konbergentzia-erradioa.",
+      en: "The condition $\\rho(H)<1$ that decides convergence, the sufficient strictly-diagonally-dominant criterion, and the convergence radius that measures speed."
     },
     keywords: ["radio espectral", "convergencia", "diagonal dominante", "iteración"],
     prerequisites: ["sistemas-lineales-jacobi", "sistemas-lineales-gauss-seidel"],
@@ -287,9 +287,9 @@ export const sistemasLinealesArticles: ContentEntry[] = [
             variant: "theorem",
             title: { es: "Teorema de convergencia", eu: "Konbergentzia-teorema", en: "Convergence theorem" },
             text: {
-              es: "Un método iterativo estacionario x^{(k+1)}=Hx^{(k)}+q converge a la solución para cualquier aproximación inicial si, y solo si, el radio espectral de la matriz de iteración es menor que 1.",
-              eu: "x^{(k+1)}=Hx^{(k)}+q metodo iteratibo estazionarioa soluziora konbergitzen da edozein hasierako hurbilketarentzat baldin eta soilik iterazio-matrizearen erradio espektrala 1 baino txikiagoa bada.",
-              en: "A stationary iterative method x^{(k+1)}=Hx^{(k)}+q converges to the solution for any initial approximation if and only if the spectral radius of the iteration matrix is less than 1."
+              es: "Un método iterativo estacionario $x^{(k+1)}=Hx^{(k)}+q$ converge a la solución para cualquier aproximación inicial si, y solo si, el radio espectral de la matriz de iteración es menor que 1: $\\rho(H)<1$.",
+              eu: "$x^{(k+1)}=Hx^{(k)}+q$ metodo iteratibo estazionarioa soluziora konbergitzen da edozein hasierako hurbilketarentzat baldin eta soilik iterazio-matrizearen erradio espektrala 1 baino txikiagoa bada: $\\rho(H)<1$.",
+              en: "A stationary iterative method $x^{(k+1)}=Hx^{(k)}+q$ converges to the solution for any initial approximation if and only if the spectral radius of the iteration matrix is less than 1: $\\rho(H)<1$."
             },
             formula: "\\rho(H)<1"
           },
@@ -309,9 +309,9 @@ export const sistemasLinealesArticles: ContentEntry[] = [
             variant: "definition",
             title: { es: "Radio de convergencia", eu: "Konbergentzia-erradioa", en: "Convergence radius" },
             text: {
-              es: "Mide la velocidad: cuanto menor es ρ(H), mayor es el radio y más rápido converge el método.",
-              eu: "Abiadura neurtzen du: ρ(H) zenbat eta txikiagoa izan, orduan eta erradio handiagoa eta metodoa azkarrago konbergitzen da.",
-              en: "It measures speed: the smaller ρ(H), the larger the radius and the faster the method converges."
+              es: "Mide la velocidad: cuanto menor es $\\rho(H)$, mayor es el radio y más rápido converge el método.",
+              eu: "Abiadura neurtzen du: $\\rho(H)$ zenbat eta txikiagoa izan, orduan eta erradio handiagoa eta metodoa azkarrago konbergitzen da.",
+              en: "It measures speed: the smaller $\\rho(H)$, the larger the radius and the faster the method converges."
             },
             formula: "R=-\\log_{10}\\bigl(\\rho(H)\\bigr)"
           }
@@ -348,9 +348,9 @@ export const sistemasLinealesArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Los métodos de sobre-relajación introducen un parámetro ω que pondera entre el valor antiguo y el nuevo. El Jacobi relajado (JSOR) mezcla la iteración de Jacobi con el punto anterior:",
-              eu: "Gain-erlaxazio metodoek ω parametro bat sartzen dute, balio zaharraren eta berriaren artean haztatzen duena. Jacobi erlaxatuak (JSOR) Jacobiren iterazioa aurreko puntuarekin nahasten du:",
-              en: "Over-relaxation methods introduce a parameter ω that weights between the old and new value. Relaxed Jacobi (JSOR) mixes the Jacobi iteration with the previous point:"
+              es: "Los métodos de sobre-relajación introducen un parámetro $\\omega$ que pondera entre el valor antiguo y el nuevo. El Jacobi relajado (JSOR) mezcla la iteración de Jacobi con el punto anterior:",
+              eu: "Gain-erlaxazio metodoek $\\omega$ parametro bat sartzen dute, balio zaharraren eta berriaren artean haztatzen duena. Jacobi erlaxatuak (JSOR) Jacobiren iterazioa aurreko puntuarekin nahasten du:",
+              en: "Over-relaxation methods introduce a parameter $\\omega$ that weights between the old and new value. Relaxed Jacobi (JSOR) mixes the Jacobi iteration with the previous point:"
             }
           },
           {
@@ -374,9 +374,9 @@ export const sistemasLinealesArticles: ContentEntry[] = [
             variant: "note",
             title: { es: "ω = 1 es Gauss-Seidel", eu: "ω = 1 Gauss-Seidel da", en: "ω = 1 is Gauss-Seidel" },
             text: {
-              es: "Con ω=1 se recupera Gauss-Seidel. Un ω bien elegido (sobre-relajación, ω>1) puede reducir mucho el número de iteraciones; por ejemplo, un sistema que Gauss-Seidel resuelve en 23 iteraciones puede necesitar bastantes menos con ω=1.3.",
-              eu: "ω=1-rekin Gauss-Seidel berreskuratzen da. Ondo aukeratutako ω batek (gain-erlaxazioa, ω>1) iterazio kopurua asko murritz dezake; adibidez, Gauss-Seidel-ek 23 iteraziotan ebazten duen sistema batek nabarmen gutxiago behar ditzake ω=1.3-rekin.",
-              en: "With ω=1 you recover Gauss-Seidel. A well-chosen ω (over-relaxation, ω>1) can cut the number of iterations a lot; for instance, a system that Gauss-Seidel solves in 23 iterations may need noticeably fewer with ω=1.3."
+              es: "Con $\\omega=1$ se recupera Gauss-Seidel. Un $\\omega$ bien elegido (sobre-relajación, $\\omega>1$) puede reducir mucho el número de iteraciones; por ejemplo, un sistema que Gauss-Seidel resuelve en 23 iteraciones puede necesitar bastantes menos con $\\omega=1.3$.",
+              eu: "$\\omega=1$-ekin Gauss-Seidel berreskuratzen da. Ondo aukeratutako $\\omega$ batek (gain-erlaxazioa, $\\omega>1$) iterazio kopurua asko murritz dezake; adibidez, Gauss-Seidel-ek 23 iteraziotan ebazten duen sistema batek nabarmen gutxiago behar ditzake $\\omega=1.3$-rekin.",
+              en: "With $\\omega=1$ you recover Gauss-Seidel. A well-chosen $\\omega$ (over-relaxation, $\\omega>1$) can cut the number of iterations a lot; for instance, a system that Gauss-Seidel solves in 23 iterations may need noticeably fewer with $\\omega=1.3$."
             }
           }
         ]
@@ -413,9 +413,9 @@ export const sistemasLinealesDerivations: ContentEntry[] = [
             steps: [
               {
                 text: {
-                  es: "En cada ecuación i despejamos x_i (posible porque a_ii≠0):",
-                  eu: "i ekuazio bakoitzean x_i askatzen dugu (posible a_ii≠0 delako):",
-                  en: "In each equation i we solve for x_i (possible because a_ii≠0):"
+                  es: "En cada ecuación $i$ despejamos $x_i$ (posible porque $a_{ii}\\ne 0$):",
+                  eu: "$i$ ekuazio bakoitzean $x_i$ askatzen dugu (posible $a_{ii}\\ne 0$ delako):",
+                  en: "In each equation $i$ we solve for $x_i$ (possible because $a_{ii}\\ne 0$):"
                 },
                 formula: "x_i=\\frac{1}{a_{ii}}\\left(b_i-\\sum_{j\\ne i}a_{ij}x_j\\right)"
               },
@@ -497,9 +497,9 @@ export const sistemasLinealesExercises: ContentEntry[] = [
             variant: "note",
             title: { es: "Gauss-Seidel es más rápido", eu: "Gauss-Seidel azkarragoa da", en: "Gauss-Seidel is faster" },
             text: {
-              es: "Con la misma tolerancia, Jacobi llega a un error ≈6.19·10⁻⁴ en 10 iteraciones, mientras que Gauss-Seidel alcanza ≈9.13·10⁻⁵ ya en 5 iteraciones.",
-              eu: "Tolerantzia berarekin, Jacobik ≈6.19·10⁻⁴ errorera iristen da 10 iteraziotan, Gauss-Seidel-ek ≈9.13·10⁻⁵ lortzen duen bitartean 5 iteraziotan.",
-              en: "With the same tolerance, Jacobi reaches error ≈6.19·10⁻⁴ in 10 iterations, while Gauss-Seidel reaches ≈9.13·10⁻⁵ in 5 iterations."
+              es: "Con la misma tolerancia, Jacobi llega a un error $\\approx 6.19\\cdot 10^{-4}$ en 10 iteraciones, mientras que Gauss-Seidel alcanza $\\approx 9.13\\cdot 10^{-5}$ ya en 5 iteraciones.",
+              eu: "Tolerantzia berarekin, Jacobik $\\approx 6.19\\cdot 10^{-4}$ errorera iristen da 10 iteraziotan, Gauss-Seidel-ek $\\approx 9.13\\cdot 10^{-5}$ lortzen duen bitartean 5 iteraziotan.",
+              en: "With the same tolerance, Jacobi reaches error $\\approx 6.19\\cdot 10^{-4}$ in 10 iterations, while Gauss-Seidel reaches $\\approx 9.13\\cdot 10^{-5}$ in 5 iterations."
             }
           }
         ]

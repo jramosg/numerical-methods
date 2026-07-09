@@ -310,9 +310,9 @@ export const diferenciacionDerivations: ContentEntry[] = [
             steps: [
               {
                 text: {
-                  es: "Desarrollamos Taylor en x_{i+1} y x_{i+2} alrededor de x_i:",
-                  eu: "Taylor garatzen dugu x_{i+1} eta x_{i+2}-n x_i-ren inguruan:",
-                  en: "Expand Taylor at x_{i+1} and x_{i+2} around x_i:"
+                  es: "Desarrollamos Taylor en $x_{i+1}$ y $x_{i+2}$ alrededor de $x_i$:",
+                  eu: "Taylor garatzen dugu $x_{i+1}$ eta $x_{i+2}$-n $x_i$-ren inguruan:",
+                  en: "Expand Taylor at $x_{i+1}$ and $x_{i+2}$ around $x_i$:"
                 },
                 formula: "\\begin{aligned} f(x_{i+1})&=f(x_i)+hf'(x_i)+\\tfrac{h^2}{2}f''(x_i)+R_2\\\\ f(x_{i+2})&=f(x_i)+2hf'(x_i)+2h^2 f''(x_i)+R_2 \\end{aligned}"
                 },

@@ -914,12 +914,12 @@ export const interpolacionExercises: ContentEntry[] = [
                 formula: "\\begin{aligned} \\hat H_0&=4x^5-12x^4+13x^3-6x^2+x\\\\ \\hat H_1&=16x^5-40x^4+32x^3-8x^2\\\\ \\hat H_2&=4x^5-8x^4+5x^3-x^2 \\end{aligned}"
               },
               {
-                text: { es: "Sumando f(x_i)H_i + f'(x_i)Ĥ_i se obtiene:", eu: "f(x_i)H_i + f'(x_i)Ĥ_i batuz lortzen da:", en: "Summing f(x_i)H_i + f'(x_i)Ĥ_i gives:" },
+                text: { es: "Sumando $f(x_i)H_i+f'(x_i)\\hat H_i$ se obtiene:", eu: "$f(x_i)H_i+f'(x_i)\\hat H_i$ batuz lortzen da:", en: "Summing $f(x_i)H_i+f'(x_i)\\hat H_i$ gives:" },
                 formula: "H_5(x)=-0.002x^5+0.0192x^4-0.0029x^3-0.2491x^2+1"
               }
             ],
             result: {
-              text: { es: "Evaluando en 0.75 aproximamos J_0(0.75):", eu: "0.75-ean ebaluatuz J_0(0.75) hurbiltzen dugu:", en: "Evaluating at 0.75 approximates J_0(0.75):" },
+              text: { es: "Evaluando en $0.75$ aproximamos $J_0(0.75)$:", eu: "$0.75$-ean ebaluatuz $J_0(0.75)$ hurbiltzen dugu:", en: "Evaluating at $0.75$ approximates $J_0(0.75)$:" },
               formula: "J_0(0.75)\\approx H_5(0.75)=0.86426"
             }
           }
@@ -1011,9 +1011,9 @@ export const interpolacionExercises: ContentEntry[] = [
           {
             kind: "example",
             statement: {
-              es: "Con los datos del censo, forma L_0 y L_4 y estima 2005.",
-              eu: "Erroldako datuekin, osatu L_0 eta L_4 eta estimatu 2005.",
-              en: "With the census data, form L_0 and L_4 and estimate 2005."
+              es: "Con los datos del censo, forma $L_0$ y $L_4$ y estima 2005.",
+              eu: "Erroldako datuekin, osatu $L_0$ eta $L_4$ eta estimatu 2005.",
+              en: "With the census data, form $L_0$ and $L_4$ and estimate 2005."
             },
             steps: [
               {

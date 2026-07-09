@@ -65,9 +65,9 @@ export const integracionArticles: ContentEntry[] = [
               en: "Nodes and weights"
             },
             text: {
-              es: "Los nodos x_i son los puntos donde se evalúa la función. Los pesos a_i indican cuánta área aporta cada evaluación.",
-              eu: "x_i nodoak funtzioa ebaluatzen den puntuak dira. a_i pisuek ebaluazio bakoitzak zenbat azalera ematen duen adierazten dute.",
-              en: "The nodes x_i are the points where the function is evaluated. The weights a_i indicate how much area each evaluation contributes."
+              es: "Los nodos $x_i$ son los puntos donde se evalúa la función. Los pesos $a_i$ indican cuánta área aporta cada evaluación.",
+              eu: "$x_i$ nodoak funtzioa ebaluatzen den puntuak dira. $a_i$ pisuek ebaluazio bakoitzak zenbat azalera ematen duen adierazten dute.",
+              en: "The nodes $x_i$ are the points where the function is evaluated. The weights $a_i$ indicate how much area each evaluation contributes."
             }
           }
         ]
@@ -82,9 +82,9 @@ export const integracionArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Si interpolamos f con el polinomio de Lagrange p_n y luego integramos, la integral de f queda separada en una suma de valores f(x_i) multiplicados por integrales de las bases L_i.",
-              eu: "f Lagrangeren p_n polinomioarekin interpolatu eta gero integratzen badugu, f-ren integrala f(x_i) balioen eta L_i oinarrien integralen batura gisa banatzen da.",
-              en: "If we interpolate f with the Lagrange polynomial p_n and then integrate, the integral of f separates into a sum of values f(x_i) multiplied by integrals of the bases L_i."
+              es: "Si interpolamos $f$ con el [[interpolacion-lagrange|polinomio de Lagrange]] $p_n$ y luego integramos, la integral de $f$ queda separada en una suma de valores $f(x_i)$ multiplicados por integrales de las bases $L_i$.",
+              eu: "$f$ [[interpolacion-lagrange|Lagrangeren polinomioarekin]] ($p_n$) interpolatu eta gero integratzen badugu, $f$-ren integrala $f(x_i)$ balioen eta $L_i$ oinarrien integralen batura gisa banatzen da.",
+              en: "If we interpolate $f$ with the [[interpolacion-lagrange|Lagrange polynomial]] $p_n$ and then integrate, the integral of $f$ separates into a sum of values $f(x_i)$ multiplied by integrals of the bases $L_i$."
             }
           },
           {
@@ -226,9 +226,9 @@ export const integracionArticles: ContentEntry[] = [
               en: "Closed-rule error pattern"
             },
             text: {
-              es: "En Newton-Cotes cerrado, el término de error depende de la paridad del grado usado: para n par aparece una derivada de orden n+2; para n impar, una derivada de orden n+1.",
-              eu: "Newton-Cotes itxian, errore-terminoa erabilitako graduaren paritatearen araberakoa da: n bikoitia bada n+2 ordenako deribatua agertzen da; n bakoitia bada n+1 ordenakoa.",
-              en: "In closed Newton-Cotes, the error term depends on the parity of the degree used: for even n a derivative of order n+2 appears; for odd n a derivative of order n+1 appears."
+              es: "En Newton-Cotes cerrado, el término de error depende de la paridad del grado usado: para $n$ par aparece una derivada de orden $n+2$; para $n$ impar, una derivada de orden $n+1$.",
+              eu: "Newton-Cotes itxian, errore-terminoa erabilitako graduaren paritatearen araberakoa da: $n$ bikoitia bada $n+2$ ordenako deribatua agertzen da; $n$ bakoitia bada $n+1$ ordenakoa.",
+              en: "In closed Newton-Cotes, the error term depends on the parity of the degree used: for even $n$ a derivative of order $n+2$ appears; for odd $n$ a derivative of order $n+1$ appears."
             }
           }
         ]
@@ -640,9 +640,9 @@ export const integracionArticles: ContentEntry[] = [
               en: "Nodes by orthogonality"
             },
             text: {
-              es: "Si p_n es el polinomio ortogonal de grado n asociado al peso w, los nodos de la cuadratura son las raíces de p_n.",
-              eu: "p_n w pisuari lotutako n graduko polinomio ortogonala bada, koadraturaren nodoak p_n-ren erroak dira.",
-              en: "If p_n is the degree-n orthogonal polynomial associated with the weight w, the quadrature nodes are the roots of p_n."
+              es: "Si $p_n$ es el polinomio ortogonal de grado $n$ asociado al peso $w$, los nodos de la cuadratura son las raíces de $p_n$.",
+              eu: "$p_n$ $w$ pisuari lotutako $n$ graduko polinomio ortogonala bada, koadraturaren nodoak $p_n$-ren erroak dira.",
+              en: "If $p_n$ is the degree-$n$ orthogonal polynomial associated with the weight $w$, the quadrature nodes are the roots of $p_n$."
             }
           },
           {
@@ -661,9 +661,9 @@ export const integracionArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Gauss-Legendre usa w(x)=1 en [-1,1]. Para aplicar la regla en [a,b] se transforma el intervalo de integración y se multiplica por el jacobiano.",
-              eu: "Gauss-Legendrek w(x)=1 erabiltzen du [-1,1] tartean. Erregela [a,b]-n aplikatzeko, integrazio-tartea eraldatzen da eta jakobiarrarekin biderkatzen da.",
-              en: "Gauss-Legendre uses w(x)=1 on [-1,1]. To apply the rule on [a,b], the integration interval is transformed and multiplied by the Jacobian."
+              es: "Gauss-Legendre usa $w(x)=1$ en $[-1,1]$. Para aplicar la regla en $[a,b]$ se transforma el intervalo de integración y se multiplica por el jacobiano.",
+              eu: "Gauss-Legendrek $w(x)=1$ erabiltzen du $[-1,1]$ tartean. Erregela $[a,b]$-n aplikatzeko, integrazio-tartea eraldatzen da eta jakobiarrarekin biderkatzen da.",
+              en: "Gauss-Legendre uses $w(x)=1$ on $[-1,1]$. To apply the rule on $[a,b]$, the integration interval is transformed and multiplied by the Jacobian."
             }
           },
           {
@@ -1370,9 +1370,9 @@ export const integracionDerivations: ContentEntry[] = [
             steps: [
               {
                 text: {
-                  es: "Tomamos x_0=a, x_1=(a+b)/2 y x_2=b. Escribimos h=(b-a)/2 y usamos t=(x-a)/h, de modo que t recorre [0,2].",
-                  eu: "x_0=a, x_1=(a+b)/2 eta x_2=b hartzen ditugu. h=(b-a)/2 idazten dugu eta t=(x-a)/h erabiltzen dugu; beraz, t-k [0,2] zeharkatzen du.",
-                  en: "Take x_0=a, x_1=(a+b)/2 and x_2=b. Write h=(b-a)/2 and use t=(x-a)/h, so t runs over [0,2]."
+                  es: "Tomamos $x_0=a$, $x_1=\\frac{a+b}{2}$ y $x_2=b$. Escribimos $h=\\frac{b-a}{2}$ y usamos $t=\\frac{x-a}{h}$, de modo que $t$ recorre $[0,2]$.",
+                  eu: "$x_0=a$, $x_1=\\frac{a+b}{2}$ eta $x_2=b$ hartzen ditugu. $h=\\frac{b-a}{2}$ idazten dugu eta $t=\\frac{x-a}{h}$ erabiltzen dugu; beraz, $t$-k $[0,2]$ zeharkatzen du.",
+                  en: "Take $x_0=a$, $x_1=\\frac{a+b}{2}$ and $x_2=b$. Write $h=\\frac{b-a}{2}$ and use $t=\\frac{x-a}{h}$, so $t$ runs over $[0,2]$."
                 },
                 formula: "dx=h\\,dt"
               },
@@ -1417,9 +1417,9 @@ export const integracionDerivations: ContentEntry[] = [
       en: "Derivation: two-point Gauss-Legendre"
     },
     description: {
-      es: "Cómo imponer exactitud hasta grado 3 para obtener los nodos ±1/√3 y pesos 1 en [-1,1].",
-      eu: "Nola ezarri 3. gradurainoko zehaztasuna [-1,1] tartean ±1/√3 nodoak eta 1 pisuak lortzeko.",
-      en: "How imposing exactness up to degree 3 gives the nodes ±1/√3 and weights 1 on [-1,1]."
+      es: "Cómo imponer exactitud hasta grado 3 para obtener los nodos $\\pm 1/\\sqrt3$ y pesos 1 en $[-1,1]$.",
+      eu: "Nola ezarri 3. gradurainoko zehaztasuna $[-1,1]$ tartean $\\pm 1/\\sqrt3$ nodoak eta 1 pisuak lortzeko.",
+      en: "How imposing exactness up to degree 3 gives the nodes $\\pm 1/\\sqrt3$ and weights 1 on $[-1,1]$."
     },
     keywords: ["Gauss-Legendre", "dos puntos", "deducción"],
     prerequisites: ["integracion-gauss"],
@@ -1437,25 +1437,25 @@ export const integracionDerivations: ContentEntry[] = [
             steps: [
               {
                 text: {
-                  es: "Buscamos una regla simétrica en [-1,1] con nodos -r y r y pesos iguales c, porque el intervalo y el peso w(x)=1 son simétricos.",
-                  eu: "[-1,1] tartean -r eta r nodoak eta c pisu berdinak dituen erregela simetrikoa bilatzen dugu, tartea eta w(x)=1 pisua simetrikoak direlako.",
-                  en: "Seek a symmetric rule on [-1,1] with nodes -r and r and equal weights c, because the interval and the weight w(x)=1 are symmetric."
+                  es: "Buscamos una regla simétrica en $[-1,1]$ con nodos $-r$ y $r$ y pesos iguales $c$, porque el intervalo y el peso $w(x)=1$ son simétricos.",
+                  eu: "$[-1,1]$ tartean $-r$ eta $r$ nodoak eta $c$ pisu berdinak dituen erregela simetrikoa bilatzen dugu, tartea eta $w(x)=1$ pisua simetrikoak direlako.",
+                  en: "Seek a symmetric rule on $[-1,1]$ with nodes $-r$ and $r$ and equal weights $c$, because the interval and the weight $w(x)=1$ are symmetric."
                 },
                 formula: "\\int_{-1}^{1}f(x)dx\\approx c f(-r)+c f(r)"
               },
               {
                 text: {
-                  es: "Exigimos exactitud para f(x)=1:",
-                  eu: "f(x)=1-rako zehaztasuna eskatzen dugu:",
-                  en: "Impose exactness for f(x)=1:"
+                  es: "Exigimos exactitud para $f(x)=1$:",
+                  eu: "$f(x)=1$-erako zehaztasuna eskatzen dugu:",
+                  en: "Impose exactness for $f(x)=1$:"
                 },
                 formula: "2=2c\\quad\\Longrightarrow\\quad c=1"
               },
               {
                 text: {
-                  es: "Las funciones impares x y x³ se satisfacen automáticamente por simetría. Exigimos exactitud para f(x)=x²:",
-                  eu: "x eta x³ funtzio bakoitiak automatikoki betetzen dira simetriagatik. f(x)=x²-rako zehaztasuna eskatzen dugu:",
-                  en: "The odd functions x and x³ are automatically exact by symmetry. Impose exactness for f(x)=x²:"
+                  es: "Las funciones impares $x$ y $x^3$ se satisfacen automáticamente por simetría. Exigimos exactitud para $f(x)=x^2$:",
+                  eu: "$x$ eta $x^3$ funtzio bakoitiak automatikoki betetzen dira simetriagatik. $f(x)=x^2$-rako zehaztasuna eskatzen dugu:",
+                  en: "The odd functions $x$ and $x^3$ are automatically exact by symmetry. Impose exactness for $f(x)=x^2$:"
                 },
                 formula: "\\int_{-1}^{1}x^2dx=\\frac{2}{3}=r^2+r^2=2r^2"
               },
@@ -1828,9 +1828,9 @@ export const integracionExercises: ContentEntry[] = [
               en: "Integral of e^{-x²}"
             },
             statement: {
-              es: "Calcula I=∫_1^{1.5} e^{-x²} dx con Gauss-Legendre usando n=2 y n=3.",
-              eu: "Kalkulatu I=∫_1^{1.5} e^{-x²} dx Gauss-Legendre erabiliz, n=2 eta n=3-rekin.",
-              en: "Compute I=∫_1^{1.5} e^{-x²} dx with Gauss-Legendre using n=2 and n=3."
+              es: "Calcula $I=\\int_1^{1.5} e^{-x^2}\\,dx$ con Gauss-Legendre usando $n=2$ y $n=3$.",
+              eu: "Kalkulatu $I=\\int_1^{1.5} e^{-x^2}\\,dx$ Gauss-Legendre erabiliz, $n=2$ eta $n=3$-rekin.",
+              en: "Compute $I=\\int_1^{1.5} e^{-x^2}\\,dx$ with Gauss-Legendre using $n=2$ and $n=3$."
             },
             steps: [
               {
@@ -1912,9 +1912,9 @@ export const integracionExercises: ContentEntry[] = [
               en: "Integral with Chebyshev weight"
             },
             statement: {
-              es: "Calcula ∫_{-1}^{1} e^x/sqrt(1-x²) dx con seis decimales garantizados usando la cota del error.",
-              eu: "Kalkulatu ∫_{-1}^{1} e^x/sqrt(1-x²) dx sei dezimal bermatuz, errore-bornaren bidez.",
-              en: "Compute ∫_{-1}^{1} e^x/sqrt(1-x²) dx with six guaranteed decimals using the error bound."
+              es: "Calcula $\\int_{-1}^{1}\\frac{e^x}{\\sqrt{1-x^2}}\\,dx$ con seis decimales garantizados usando la cota del error.",
+              eu: "Kalkulatu $\\int_{-1}^{1}\\frac{e^x}{\\sqrt{1-x^2}}\\,dx$ sei dezimal bermatuz, errore-bornaren bidez.",
+              en: "Compute $\\int_{-1}^{1}\\frac{e^x}{\\sqrt{1-x^2}}\\,dx$ with six guaranteed decimals using the error bound."
             },
             steps: [
               {
@@ -1935,9 +1935,9 @@ export const integracionExercises: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "El primer n que garantiza error menor que 10^{-6} es n=5.",
-                  eu: "10^{-6} baino errore txikiagoa bermatzen duen lehen n balioa n=5 da.",
-                  en: "The first n that guarantees error below 10^{-6} is n=5."
+                  es: "El primer $n$ que garantiza error menor que $10^{-6}$ es $n=5$.",
+                  eu: "$10^{-6}$ baino errore txikiagoa bermatzen duen lehen $n$ balioa $n=5$ da.",
+                  en: "The first $n$ that guarantees error below $10^{-6}$ is $n=5$."
                 },
                 formula: "n=5"
               },
@@ -2011,9 +2011,9 @@ export const integracionExercises: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "El producto de jacobianos es 0.3·0.25=0.075:",
-                  eu: "Jakobiarren produktua 0.3·0.25=0.075 da:",
-                  en: "The product of Jacobians is 0.3·0.25=0.075:"
+                  es: "El producto de jacobianos es $0.3\\cdot 0.25=0.075$:",
+                  eu: "Jakobiarren produktua $0.3\\cdot 0.25=0.075$ da:",
+                  en: "The product of Jacobians is $0.3\\cdot 0.25=0.075$:"
                 },
                 formula: "I=0.075\\int_{-1}^{1}\\int_{-1}^{1}\\ln(0.3u+0.5v+4.2)\\,dv\\,du"
               },
@@ -2050,9 +2050,9 @@ export const integracionExercises: ContentEntry[] = [
       en: "Exercise: double integral of a surface"
     },
     description: {
-      es: "Comparación entre Simpson doble y Gauss-Legendre para una integral derivada de la semiesfera x²+y²+f²=9.",
-      eu: "Simpson bikoitzaren eta Gauss-Legendreren arteko konparazioa x²+y²+f²=9 esfera-erdiari lotutako integral batean.",
-      en: "Comparison between double Simpson and Gauss-Legendre for an integral derived from the hemisphere x²+y²+f²=9."
+      es: "Comparación entre Simpson doble y Gauss-Legendre para una integral derivada de la semiesfera $x^2+y^2+f^2=9$.",
+      eu: "Simpson bikoitzaren eta Gauss-Legendreren arteko konparazioa $x^2+y^2+f^2=9$ esfera-erdiari lotutako integral batean.",
+      en: "Comparison between double Simpson and Gauss-Legendre for an integral derived from the hemisphere $x^2+y^2+f^2=9$."
     },
     keywords: ["Simpson doble", "Gauss-Legendre", "superficie", "semiesfera"],
     prerequisites: ["integracion-multiple", "integracion-newton-cotes-cerradas"],
@@ -2073,9 +2073,9 @@ export const integracionExercises: ContentEntry[] = [
               en: "Hemisphere on the unit square"
             },
             statement: {
-              es: "Sea f(x,y)=sqrt(9-x²-y²) y R=[0,1]×[0,1]. Calcula la integral de sqrt((∂f/∂x)²+(∂f/∂y)²) con Simpson n=m=8 y Gauss-Legendre n=4.",
-              eu: "Izan bedi f(x,y)=sqrt(9-x²-y²) eta R=[0,1]×[0,1]. Kalkulatu sqrt((∂f/∂x)²+(∂f/∂y)²)-ren integrala Simpson n=m=8 eta Gauss-Legendre n=4 erabiliz.",
-              en: "Let f(x,y)=sqrt(9-x²-y²) and R=[0,1]×[0,1]. Compute the integral of sqrt((∂f/∂x)²+(∂f/∂y)²) with Simpson n=m=8 and Gauss-Legendre n=4."
+              es: "Sea $f(x,y)=\\sqrt{9-x^2-y^2}$ y $R=[0,1]\\times[0,1]$. Calcula la integral de $\\sqrt{f_x^2+f_y^2}$ con Simpson $n=m=8$ y Gauss-Legendre $n=4$.",
+              eu: "Izan bedi $f(x,y)=\\sqrt{9-x^2-y^2}$ eta $R=[0,1]\\times[0,1]$. Kalkulatu $\\sqrt{f_x^2+f_y^2}$-ren integrala Simpson $n=m=8$ eta Gauss-Legendre $n=4$ erabiliz.",
+              en: "Let $f(x,y)=\\sqrt{9-x^2-y^2}$ and $R=[0,1]\\times[0,1]$. Compute the integral of $\\sqrt{f_x^2+f_y^2}$ with Simpson $n=m=8$ and Gauss-Legendre $n=4$."
             },
             steps: [
               {
@@ -2104,9 +2104,9 @@ export const integracionExercises: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "Con Gauss-Legendre n=4, tras transformar x=(u+1)/2, y=(v+1)/2, se obtiene:",
-                  eu: "Gauss-Legendre n=4-rekin, x=(u+1)/2 eta y=(v+1)/2 eraldatu ondoren, hau lortzen da:",
-                  en: "With Gauss-Legendre n=4, after transforming x=(u+1)/2 and y=(v+1)/2, one obtains:"
+                  es: "Con Gauss-Legendre $n=4$, tras transformar $x=\\frac{u+1}{2}$, $y=\\frac{v+1}{2}$, se obtiene:",
+                  eu: "Gauss-Legendre $n=4$-rekin, $x=\\frac{u+1}{2}$ eta $y=\\frac{v+1}{2}$ eraldatu ondoren, hau lortzen da:",
+                  en: "With Gauss-Legendre $n=4$, after transforming $x=\\frac{u+1}{2}$ and $y=\\frac{v+1}{2}$, one obtains:"
                 },
                 formula: "I_G=0.267770529696778"
               }
