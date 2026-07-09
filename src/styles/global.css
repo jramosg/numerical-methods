@@ -20,6 +20,10 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   color: var(--ink);
@@ -29,6 +33,7 @@ body {
     var(--paper);
   background-size: 44px 44px;
   line-height: 1.65;
+  overflow-x: hidden;
 }
 
 a {
@@ -515,15 +520,90 @@ h3 {
 }
 
 .formula-figure,
-.table-figure {
+.table-figure,
+.diagram-figure {
+  max-width: 100%;
   margin: 1.2rem 0;
 }
 
 .formula-figure figcaption,
-.table-figure figcaption {
+.table-figure figcaption,
+.diagram-figure figcaption {
   margin-top: 0.4rem;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.diagram-figure {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  padding: 0.75rem;
+}
+
+.diagram-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.diagram-bg {
+  fill: #fffaf0;
+}
+
+.diagram-axis,
+.diagram-guide {
+  stroke: rgba(74, 68, 58, 0.55);
+  stroke-width: 2;
+}
+
+.diagram-guide {
+  stroke-dasharray: 6 6;
+}
+
+.diagram-line,
+.diagram-side {
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.diagram-thin {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.diagram-curve {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.diagram-fill {
+  fill: rgba(18, 132, 125, 0.16);
+  stroke: rgba(18, 132, 125, 0.35);
+  stroke-width: 2;
+}
+
+.diagram-point {
+  fill: var(--accent);
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.diagram-label {
+  fill: var(--ink);
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.diagram-label.accent {
+  fill: var(--accent-strong);
+}
+
+.diagram-label.muted {
+  fill: var(--muted);
 }
 
 .callout {
@@ -686,6 +766,9 @@ h3 {
 }
 
 .table-scroll {
+  display: block;
+  width: 100%;
+  max-width: 100%;
   overflow-x: auto;
 }
 
