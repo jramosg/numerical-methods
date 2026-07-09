@@ -191,8 +191,8 @@ export const sistemasNoLinealesArticles: ContentEntry[] = [
       {
         heading: {
           es: "Nunca se invierte el jacobiano",
-          eu: "Jacobiarra ez da inoiz alderantzikatzen",
-          en: "The Jacobian is never inverted"
+          eu: "Ez alderantzikatu jacobiarra",
+          en: "Do not invert the Jacobian"
         },
         blocks: [
           {
@@ -308,7 +308,7 @@ export const sistemasNoLinealesArticles: ContentEntry[] = [
             text: {
               es: "En dimensión $n$, cada evaluación de la función vectorial $F$ son $n$ evaluaciones escalares, y cada jacobiano $F'$ son $n^2$. Además, cada sistema lineal resuelto de forma directa cuesta $\\frac{n^3}{3}+n^2-\\frac{n}{3}$ productos/cocientes, y resolver $q$ sistemas con la misma matriz de coeficientes (factorizando una sola vez) cuesta $\\frac{n^3}{3}+qn^2-\\frac{n}{3}$: por eso los métodos que congelan el jacobiano son tan atractivos.",
               eu: "$n$ dimentsioan, $F$ funtzio bektorialaren ebaluazio bakoitza $n$ ebaluazio eskalar dira, eta $F'$ jacobiar bakoitza $n^2$. Gainera, zuzenean ebatzitako sistema lineal bakoitzak $\\frac{n^3}{3}+n^2-\\frac{n}{3}$ biderketa/zatiketa kostatzen du, eta koefiziente-matrize bereko $q$ sistema ebazteak (behin bakarrik faktorizatuz) $\\frac{n^3}{3}+qn^2-\\frac{n}{3}$: horregatik dira hain erakargarriak jacobiarra izozten duten metodoak.",
-              en: "In dimension $n$, each evaluation of the vector function $F$ is $n$ scalar evaluations, and each Jacobian $F'$ is $n^2$. Moreover, each directly solved linear system costs $\\frac{n^3}{3}+n^2-\\frac{n}{3}$ products/quotients, and solving $q$ systems with the same coefficient matrix (factorizing only once) costs $\\frac{n^3}{3}+qn^2-\\frac{n}{3}$: that is why frozen-Jacobian methods are so attractive."
+              en: "In dimension $n$, each evaluation of the vector function $F$ is $n$ scalar evaluations, and each Jacobian $F'$ is $n^2$. Moreover, each directly solved linear system costs $\\frac{n^3}{3}+n^2-\\frac{n}{3}$ products/quotients, and solving $q$ systems with the same coefficient matrix (factorizing only once) costs $\\frac{n^3}{3}+qn^2-\\frac{n}{3}$. This cost makes frozen-Jacobian methods attractive."
             }
           },
           {
@@ -782,8 +782,8 @@ export const sistemasNoLinealesExercises: ContentEntry[] = [
             kind: "paragraph",
             text: {
               es: "Se resuelve el sistema $e^xe^y+x\\cos y=0$, $x+y=1$, cuyo montaje ($F$ y jacobiano) se hizo en la [[deduccion-newton-sistemas|deducción]], con estimación inicial $x^{(0)}=[2,-1]^T$, tolerancia $10^{-20}$ (aritmética de precisión extendida) y máximo de 40 iteraciones.",
-              eu: "$e^xe^y+x\\cos y=0$, $x+y=1$ sistema ebazten da — bere eraikuntza ($F$ eta jacobiarra) [[deduccion-newton-sistemas|dedukzioan]] egin zen —, hasierako estimazioa $x^{(0)}=[2,-1]^T$, tolerantzia $10^{-20}$ (doitasun hedatuko aritmetika) eta gehienez 40 iterazio izanik.",
-              en: "Solve the system $e^xe^y+x\\cos y=0$, $x+y=1$ — its setup ($F$ and Jacobian) was done in the [[deduccion-newton-sistemas|derivation]] — with initial estimate $x^{(0)}=[2,-1]^T$, tolerance $10^{-20}$ (extended-precision arithmetic) and at most 40 iterations."
+              eu: "$e^xe^y+x\\cos y=0$, $x+y=1$ sistema ebazten da. Bere eraikuntza ($F$ eta jacobiarra) [[deduccion-newton-sistemas|dedukzioan]] egin zen. Hasierako estimazioa $x^{(0)}=[2,-1]^T$ da, tolerantzia $10^{-20}$ (doitasun hedatuko aritmetika) eta gehienez 40 iterazio izanik.",
+              en: "Solve the system $e^xe^y+x\\cos y=0$, $x+y=1$. The [[deduccion-newton-sistemas|derivation]] builds $F$ and the Jacobian. Use initial estimate $x^{(0)}=[2,-1]^T$, tolerance $10^{-20}$ (extended-precision arithmetic) and at most 40 iterations."
             }
           }
         ]
@@ -803,8 +803,8 @@ export const sistemasNoLinealesExercises: ContentEntry[] = [
               en: ["iter", "$x^{(k)}$", "$\\|F(x^{(k+1)})\\|$", "$\\|x^{(k+1)}-x^{(k)}\\|$", "ACOC"]
             },
             rows: [
-              ["1", "[5.3247, −4.3247]", "0.7051", "4.7018", "—"],
-              ["2", "[5.1697, −4.1697]", "0.0486", "0.2191", "—"],
+              ["1", "[5.3247, −4.3247]", "0.7051", "4.7018", "n/a"],
+              ["2", "[5.1697, −4.1697]", "0.0486", "0.2191", "n/a"],
               ["3", "[5.1573, −4.1573]", "0.0003", "0.0176", "0.8229"],
               ["4", "[5.1572, −4.1572]", "1.7091·10⁻⁸", "0.0001", "1.9620"],
               ["5", "[5.1572, −4.1572]", "4.3406·10⁻¹⁷", "6.2690·10⁻⁹", "1.9989"],

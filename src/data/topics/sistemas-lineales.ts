@@ -38,7 +38,7 @@ export const sistemasLinealesArticles: ContentEntry[] = [
             text: {
               es: "Resolver Ax=b se puede hacer con métodos directos (Cramer, Gauss-Jordan), que llegan a la solución en un número finito de operaciones, o con métodos iterativos, que generan aproximaciones cada vez mejores. Para matrices grandes, dispersas o mal condicionadas, los iterativos suelen ser más eficientes y permiten parar al alcanzar la precisión deseada.",
               eu: "Ax=b ebazteko metodo zuzenak (Cramer, Gauss-Jordan) erabil daitezke, eragiketa kopuru finituan soluziora iristen direnak, edo metodo iteratiboak, gero eta hurbilketa hobeak sortzen dituztenak. Matrize handi, sakabanatu edo gaizki baldintzatuentzat, iteratiboak eraginkorragoak izan ohi dira.",
-              en: "Solving Ax=b can be done with direct methods (Cramer, Gauss-Jordan), which reach the solution in finitely many operations, or with iterative methods, which produce ever-better approximations. For large, sparse or ill-conditioned matrices, iterative methods are usually more efficient and let you stop once the desired precision is reached."
+              en: "You can solve Ax=b with direct methods (Cramer, Gauss-Jordan), which reach the solution in finitely many operations, or with iterative methods, which produce better approximations step by step. For large, sparse or ill-conditioned matrices, iterative methods often cost less and let you stop once the desired precision is reached."
             }
           }
         ]
@@ -202,7 +202,7 @@ export const sistemasLinealesArticles: ContentEntry[] = [
     description: {
       es: "La elección M=D+L, que reutiliza cada componente recién calculada dentro de la misma iteración, y por qué suele converger más rápido que Jacobi.",
       eu: "M=D+L aukera, iterazio berean kalkulatu berri den osagai bakoitza berrerabiltzen duena, eta zergatik Jacobi baino azkarrago konbergitu ohi duen.",
-      en: "The choice M=D+L, which reuses each freshly computed component within the same iteration, and why it usually converges faster than Jacobi."
+      en: "The choice M=D+L, which reuses each freshly computed component within the same iteration, and why it often converges faster than Jacobi."
     },
     keywords: ["Gauss-Seidel", "iterativo", "D+L", "convergencia"],
     prerequisites: ["sistemas-lineales-jacobi"],
@@ -218,9 +218,9 @@ export const sistemasLinealesArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Gauss-Seidel toma M=D+L y N=−U. La diferencia clave con Jacobi es que, en cuanto calcula x_1^{(k+1)}, lo usa para calcular x_2^{(k+1)}, y así sucesivamente dentro de la misma iteración.",
-              eu: "Gauss-Seidel-ek M=D+L eta N=−U hartzen ditu. Jacobirekiko funtsezko aldea da x_1^{(k+1)} kalkulatu bezain laster, x_2^{(k+1)} kalkulatzeko erabiltzen duela, eta horrela iterazio berean.",
-              en: "Gauss-Seidel takes M=D+L and N=−U. The key difference from Jacobi is that as soon as it computes x_1^{(k+1)}, it uses it to compute x_2^{(k+1)}, and so on within the same iteration."
+              es: "Gauss-Seidel toma M=D+L y N=−U. En cuanto calcula x_1^{(k+1)}, lo usa para calcular x_2^{(k+1)}, y así sucesivamente dentro de la misma iteración.",
+              eu: "Gauss-Seidel-ek M=D+L eta N=−U hartzen ditu. x_1^{(k+1)} kalkulatu bezain laster, x_2^{(k+1)} kalkulatzeko erabiltzen du, eta horrela iterazio berean.",
+              en: "Gauss-Seidel takes M=D+L and N=−U. As soon as it computes x_1^{(k+1)}, it uses it to compute x_2^{(k+1)}, and so on within the same iteration."
             }
           },
           {
@@ -429,9 +429,9 @@ export const sistemasLinealesDerivations: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "Convertido en iteración, es exactamente el esquema de Jacobi con matriz de iteración H_J=−D⁻¹(L+U):",
+                  es: "Como iteración, es el esquema de Jacobi con matriz de iteración H_J=−D⁻¹(L+U):",
                   eu: "Iterazio bihurtuta, Jacobiren eskema da hain zuzen, H_J=−D⁻¹(L+U) iterazio-matrizearekin:",
-                  en: "Turned into an iteration, it is exactly the Jacobi scheme with iteration matrix H_J=−D⁻¹(L+U):"
+                  en: "As an iteration, it is the Jacobi scheme with iteration matrix H_J=−D⁻¹(L+U):"
                 },
                 formula: "x^{(k+1)}=-D^{-1}(L+U)x^{(k)}+D^{-1}b"
               }
@@ -499,7 +499,7 @@ export const sistemasLinealesExercises: ContentEntry[] = [
             text: {
               es: "Con la misma tolerancia, Jacobi llega a un error ≈6.19·10⁻⁴ en 10 iteraciones, mientras que Gauss-Seidel alcanza ≈9.13·10⁻⁵ ya en 5 iteraciones.",
               eu: "Tolerantzia berarekin, Jacobik ≈6.19·10⁻⁴ errorera iristen da 10 iteraziotan, Gauss-Seidel-ek ≈9.13·10⁻⁵ lortzen duen bitartean 5 iteraziotan.",
-              en: "With the same tolerance, Jacobi reaches an error ≈6.19·10⁻⁴ in 10 iterations, while Gauss-Seidel reaches ≈9.13·10⁻⁵ in just 5 iterations."
+              en: "With the same tolerance, Jacobi reaches error ≈6.19·10⁻⁴ in 10 iterations, while Gauss-Seidel reaches ≈9.13·10⁻⁵ in 5 iterations."
             }
           }
         ]

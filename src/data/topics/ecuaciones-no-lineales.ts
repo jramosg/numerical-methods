@@ -230,9 +230,9 @@ export const noLinealesArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Cada iteración gana exactamente un bit de precisión (reduce el error a la mitad), lo que equivale a una cifra decimal cada $\\log_2 10\\approx 3.3$ iteraciones. Es lento comparado con [[no-lineales-newton-raphson|Newton]], pero no exige derivadas, solo continuidad y un cambio de signo, y nunca diverge. Por eso se usa a menudo para localizar la raíz y dar una estimación inicial fiable a un método rápido.",
-              eu: "Iterazio bakoitzak zehazki bit bat irabazten du doitasunean (errorea erdira murrizten du); horrek zifra hamartar bat esan nahi du $\\log_2 10\\approx 3.3$ iteraziotik behin. Motela da [[no-lineales-newton-raphson|Newton]]-en aldean, baina ez du deribaturik eskatzen, jarraitutasuna eta zeinu-aldaketa bat baino ez, eta ez du inoiz dibergitzen. Horregatik sarritan erabiltzen da erroa lokalizatzeko eta metodo azkar bati hasierako estimazio fidagarria emateko.",
-              en: "Each iteration gains exactly one bit of precision (halves the error), which amounts to one decimal digit every $\\log_2 10\\approx 3.3$ iterations. It is slow compared with [[no-lineales-newton-raphson|Newton]], but it requires no derivatives, only continuity and a sign change, and it never diverges. That is why it is often used to locate the root and hand a reliable initial estimate to a fast method."
+              es: "Cada iteración gana un bit de precisión (reduce el error a la mitad), lo que equivale a una cifra decimal cada $\\log_2 10\\approx 3.3$ iteraciones. Es lento comparado con [[no-lineales-newton-raphson|Newton]], pero no exige derivadas, solo continuidad y un cambio de signo, y no diverge. Se usa a menudo para localizar la raíz y dar una estimación inicial fiable a un método rápido.",
+              eu: "Iterazio bakoitzak bit bat irabazten du doitasunean (errorea erdira murrizten du); horrek zifra hamartar bat esan nahi du $\\log_2 10\\approx 3.3$ iteraziotik behin. Motela da [[no-lineales-newton-raphson|Newton]]-en aldean, baina ez du deribaturik eskatzen, jarraitutasuna eta zeinu-aldaketa bat baino ez, eta ez du dibergitzen. Erroa lokalizatzeko eta metodo azkar bati hasierako estimazio fidagarria emateko erabiltzen da maiz.",
+              en: "Each iteration gains one bit of precision (halves the error), which amounts to one decimal digit every $\\log_2 10\\approx 3.3$ iterations. It is slow compared with [[no-lineales-newton-raphson|Newton]], but it requires no derivatives, only continuity and a sign change, and it does not diverge. Use it to locate the root and hand a reliable initial estimate to a fast method."
             }
           }
         ]
@@ -363,9 +363,9 @@ export const noLinealesArticles: ContentEntry[] = [
             ],
             result: {
               text: {
-                es: "Converge (el signo negativo explica la oscilación), pero con factor $0.959$: hacen falta 455 iteraciones para alcanzar un error de $10^{-9}$. [[no-lineales-newton-raphson|Newton]] resuelve la misma ecuación en 5 iteraciones — esa es la diferencia entre orden 1 y orden 2.",
-                eu: "Konbergitzen du (zeinu negatiboak oszilazioa azaltzen du), baina $0.959$ faktorearekin: 455 iterazio behar dira $10^{-9}$-ko errorea lortzeko. [[no-lineales-newton-raphson|Newton]]-ek ekuazio bera 5 iteraziotan ebazten du — horixe da 1. eta 2. ordenaren arteko aldea.",
-                en: "It converges (the negative sign explains the oscillation), but with factor $0.959$: 455 iterations are needed to reach an error of $10^{-9}$. [[no-lineales-newton-raphson|Newton]] solves the same equation in 5 iterations — that is the difference between order 1 and order 2."
+                es: "Converge (el signo negativo explica la oscilación), pero con factor $0.959$: hacen falta 455 iteraciones para alcanzar un error de $10^{-9}$. [[no-lineales-newton-raphson|Newton]] resuelve la misma ecuación en 5 iteraciones; ahí se ve la diferencia entre orden 1 y orden 2.",
+                eu: "Konbergitzen du (zeinu negatiboak oszilazioa azaltzen du), baina $0.959$ faktorearekin: 455 iterazio behar dira $10^{-9}$-ko errorea lortzeko. [[no-lineales-newton-raphson|Newton]]-ek ekuazio bera 5 iteraziotan ebazten du; hor ikusten da 1. eta 2. ordenaren arteko aldea.",
+                en: "It converges (the negative sign explains the oscillation), but with factor $0.959$: 455 iterations are needed to reach an error of $10^{-9}$. [[no-lineales-newton-raphson|Newton]] solves the same equation in 5 iterations; this shows the difference between order 1 and order 2."
               }
             }
           }
@@ -800,9 +800,9 @@ export const noLinealesArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Componer Newton consigo mismo (Newton doble) da orden $4$, pero exige 4 evaluaciones por iteración ($f$ y $f'$ en dos puntos): no es [[no-lineales-orden-eficiencia|óptimo]]. El truco clave es congelar la derivada — reutilizar $f'(x_k)$ en el segundo paso — perdiendo un poco de orden a cambio de una evaluación menos. El resultado es el método de Traub (o Potra-Pták), de orden 3 con 3 evaluaciones:",
-              eu: "Newton bere buruarekin konposatzeak (Newton bikoitza) $4$. ordena ematen du, baina iterazio bakoitzeko 4 ebaluazio eskatzen ditu ($f$ eta $f'$ bi puntutan): ez da [[no-lineales-orden-eficiencia|optimoa]]. Gakoa deribatua izoztea da — $f'(x_k)$ berrerabili bigarren pausoan — ordena pixka bat galduz ebaluazio bat gutxiagoren truke. Emaitza Traub-en metodoa da (edo Potra-Pták), 3. ordenakoa 3 ebaluaziorekin:",
-              en: "Composing Newton with itself (double Newton) gives order $4$, but requires 4 evaluations per iteration ($f$ and $f'$ at two points): it is not [[no-lineales-orden-eficiencia|optimal]]. The key trick is to freeze the derivative — reuse $f'(x_k)$ in the second step — trading a bit of order for one fewer evaluation. The result is Traub's method (or Potra-Pták), of order 3 with 3 evaluations:"
+              es: "Componer Newton consigo mismo (Newton doble) da orden $4$, pero exige 4 evaluaciones por iteración ($f$ y $f'$ en dos puntos): no es [[no-lineales-orden-eficiencia|óptimo]]. Congelar la derivada permite reutilizar $f'(x_k)$ en el segundo paso y gastar una evaluación menos, aunque se pierde algo de orden. El resultado es el método de Traub (o Potra-Pták), de orden 3 con 3 evaluaciones:",
+              eu: "Newton bere buruarekin konposatzeak (Newton bikoitza) $4$. ordena ematen du, baina iterazio bakoitzeko 4 ebaluazio eskatzen ditu ($f$ eta $f'$ bi puntutan): ez da [[no-lineales-orden-eficiencia|optimoa]]. Deribatua izozteak bigarren pausoan $f'(x_k)$ berrerabiltzea uzten du eta ebaluazio bat aurrezten du, ordena pixka bat galdu arren. Emaitza Traub-en metodoa da (edo Potra-Pták), 3. ordenakoa 3 ebaluaziorekin:",
+              en: "Composing Newton with itself (double Newton) gives order $4$, but requires 4 evaluations per iteration ($f$ and $f'$ at two points): it is not [[no-lineales-orden-eficiencia|optimal]]. Freezing the derivative reuses $f'(x_k)$ in the second step and saves one evaluation, at the cost of some order. The result is Traub's method (or Potra-Pták), of order 3 with 3 evaluations:"
             }
           },
           {
@@ -1105,9 +1105,9 @@ export const noLinealesDerivations: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "Restamos $\\alpha$ en la fórmula de Newton y sustituimos: los términos lineales en $e_k$ se cancelan exactamente y queda la ecuación del error cuadrática. El método de Newton tiene orden $p=2$.",
-                  eu: "Newton-en formulan $\\alpha$ kentzen dugu eta ordezkatzen dugu: $e_k$-ren gai linealak zehazki ezabatzen dira eta errore-ekuazio koadratikoa geratzen da. Newton-en metodoak $p=2$ ordena du.",
-                  en: "Subtract $\\alpha$ in Newton's formula and substitute: the linear terms in $e_k$ cancel exactly and the quadratic error equation remains. Newton's method has order $p=2$."
+                  es: "Restamos $\\alpha$ en la fórmula de Newton y sustituimos: los términos lineales en $e_k$ se cancelan y queda la ecuación del error cuadrática. El método de Newton tiene orden $p=2$.",
+                  eu: "Newton-en formulan $\\alpha$ kentzen dugu eta ordezkatzen dugu: $e_k$-ren gai linealak ezabatzen dira eta errore-ekuazio koadratikoa geratzen da. Newton-en metodoak $p=2$ ordena du.",
+                  en: "Subtract $\\alpha$ in Newton's formula and substitute: the linear terms in $e_k$ cancel and the quadratic error equation remains. Newton's method has order $p=2$."
                 },
                 formula: "e_{k+1}=x_{k+1}-\\alpha=e_k-\\frac{f(x_k)}{f'(x_k)}=c_2e_k^2+\\mathcal{O}(e_k^3)"
               }
@@ -1166,7 +1166,7 @@ export const noLinealesDerivations: ContentEntry[] = [
                 text: {
                   es: "Para garantizar $|m_k-\\alpha|<\\varepsilon$ basta despejar $k$ de $\\frac{b-a}{2^{k+1}}<\\varepsilon$: el número de iteraciones se conoce antes de empezar, cosa que ningún otro método de esta área ofrece.",
                   eu: "$|m_k-\\alpha|<\\varepsilon$ bermatzeko, nahikoa da $k$ askatzea $\\frac{b-a}{2^{k+1}}<\\varepsilon$ desberdintzatik: iterazio kopurua hasi aurretik ezagutzen da, arlo honetako beste inongo metodok eskaintzen ez duena.",
-                  en: "To guarantee $|m_k-\\alpha|<\\varepsilon$ just solve for $k$ in $\\frac{b-a}{2^{k+1}}<\\varepsilon$: the number of iterations is known before starting, something no other method in this area offers."
+                  en: "To guarantee $|m_k-\\alpha|<\\varepsilon$, solve for $k$ in $\\frac{b-a}{2^{k+1}}<\\varepsilon$: the number of iterations is known before starting, something no other method in this area offers."
                 },
                 formula: "k>\\log_2\\!\\left(\\frac{b-a}{\\varepsilon}\\right)-1"
               }
@@ -1230,9 +1230,9 @@ export const noLinealesDerivations: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "Si además $\\phi'(\\alpha)=\\phi''(\\alpha)=\\dots=\\phi^{(p-1)}(\\alpha)=0$ y $\\phi^{(p)}(\\alpha)\\ne 0$, todos los términos anteriores desaparecen y el primero superviviente fija el orden: es exactamente el teorema del orden de un método de punto fijo.",
+                  es: "Si además $\\phi'(\\alpha)=\\phi''(\\alpha)=\\dots=\\phi^{(p-1)}(\\alpha)=0$ y $\\phi^{(p)}(\\alpha)\\ne 0$, todos los términos anteriores desaparecen y el primero superviviente fija el orden: es el teorema del orden de un método de punto fijo.",
                   eu: "Gainera $\\phi'(\\alpha)=\\phi''(\\alpha)=\\dots=\\phi^{(p-1)}(\\alpha)=0$ eta $\\phi^{(p)}(\\alpha)\\ne 0$ badira, aurreko gai guztiak desagertzen dira eta bizirik dirauen lehenak ordena finkatzen du: puntu finkoko metodo baten ordenaren teorema da, hain zuzen.",
-                  en: "If moreover $\\phi'(\\alpha)=\\phi''(\\alpha)=\\dots=\\phi^{(p-1)}(\\alpha)=0$ and $\\phi^{(p)}(\\alpha)\\ne 0$, all earlier terms vanish and the first surviving one fixes the order: this is exactly the order theorem for a fixed-point method."
+                  en: "If moreover $\\phi'(\\alpha)=\\phi''(\\alpha)=\\dots=\\phi^{(p-1)}(\\alpha)=0$ and $\\phi^{(p)}(\\alpha)\\ne 0$, all earlier terms vanish and the first surviving one fixes the order: this is the order theorem for a fixed-point method."
                 },
                 formula: "e_{k+1}=\\frac{\\phi^{(p)}(\\alpha)}{p!}\\,e_k^p+\\mathcal{O}\\bigl(e_k^{p+1}\\bigr)"
               },
@@ -1401,8 +1401,8 @@ export const noLinealesExercises: ContentEntry[] = [
               en: ["iter", "$x_k$", "$|f(x_k)|$", "$|x_k-x_{k-1}|$", "ACOC"]
             },
             rows: [
-              ["1", "0.691570", "0.098293", "0.39157", "—"],
-              ["2", "0.641989", "5.3803·10⁻⁴", "0.049581", "—"],
+              ["1", "0.691570", "0.098293", "0.39157", "n/a"],
+              ["2", "0.641989", "5.3803·10⁻⁴", "0.049581", "n/a"],
               ["3", "0.641714", "2.1349·10⁻⁸", "2.7463·10⁻⁴", "2.5143"],
               ["4", "0.641714", "3.3663·10⁻¹⁷", "1.0898·10⁻⁸", "1.9505"],
               ["5", "0.641714", "8.3691·10⁻³⁵", "1.7184·10⁻¹⁷", "1.9999"]
@@ -1424,7 +1424,7 @@ export const noLinealesExercises: ContentEntry[] = [
             text: {
               es: "La solución es $\\alpha=0.641714$. Obsérvese la firma de la convergencia cuadrática: el exponente del residuo se duplica en cada fila ($10^{-4}\\to 10^{-8}\\to 10^{-17}\\to 10^{-35}$) y el [[no-lineales-orden-eficiencia|ACOC]] tiende a 2. La iteración directa de punto fijo $x_{k+1}=\\cos^2 x_k$ necesita 455 iteraciones para lo que Newton hace en 5.",
               eu: "Soluzioa $\\alpha=0.641714$ da. Erreparatu konbergentzia koadratikoaren sinadurari: hondarraren berretzailea bikoiztu egiten da errenkada bakoitzean ($10^{-4}\\to 10^{-8}\\to 10^{-17}\\to 10^{-35}$) eta [[no-lineales-orden-eficiencia|ACOC]] 2rantz doa. Puntu finkoko iterazio zuzenak, $x_{k+1}=\\cos^2 x_k$, 455 iterazio behar ditu Newton-ek 5ean egiten duenerako.",
-              en: "The solution is $\\alpha=0.641714$. Note the signature of quadratic convergence: the residual's exponent doubles at each row ($10^{-4}\\to 10^{-8}\\to 10^{-17}\\to 10^{-35}$) and the [[no-lineales-orden-eficiencia|ACOC]] tends to 2. The direct fixed-point iteration $x_{k+1}=\\cos^2 x_k$ needs 455 iterations for what Newton does in 5."
+              en: "The solution is $\\alpha=0.641714$. Quadratic convergence shows in the residual's exponent, which doubles at each row ($10^{-4}\\to 10^{-8}\\to 10^{-17}\\to 10^{-35}$), and in the [[no-lineales-orden-eficiencia|ACOC]], which tends to 2. The direct fixed-point iteration $x_{k+1}=\\cos^2 x_k$ needs 455 iterations for what Newton does in 5."
             }
           }
         ]

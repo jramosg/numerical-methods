@@ -92,7 +92,7 @@ export const diferenciacionArticles: ContentEntry[] = [
           {
             kind: "callout",
             variant: "warning",
-            title: { es: "Mayor orden no es siempre menor error", eu: "Ordena handiagoa ez da beti errore txikiagoa", en: "Higher order is not always smaller error" },
+            title: { es: "Mayor orden no garantiza menor error", eu: "Ordena handiagoak ez du errore txikiagoa bermatzen", en: "Higher order does not guarantee smaller error" },
             text: {
               es: "El orden describe cómo decrece el error cuando $h\\to 0$, no garantiza el menor error para un $h$ concreto. Cerca de los extremos o con $h$ no pequeño, una fórmula de mayor orden puede dar más error, como se ve en el [[ejercicio-derivada-comparativa|ejercicio comparativo]].",
               eu: "Ordenak errorea $h\\to 0$ denean nola txikitzen den deskribatzen du, ez du $h$ zehatz baterako errore txikiena bermatzen. Muturretatik hurbil edo $h$ txikia ez denean, ordena handiagoko formula batek errore handiagoa eman dezake, [[ejercicio-derivada-comparativa|ariketa konparatiboan]] ikusten den bezala.",

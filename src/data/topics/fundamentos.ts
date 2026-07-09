@@ -44,9 +44,9 @@ export const fundamentosArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Cuando no hay fórmula, se recurre a métodos numéricos, que dan una solución aproximada —tan buena como queramos, a cambio de más cálculo—. Al aproximar siempre cometemos un error, y conviene clasificarlo.",
-              eu: "Formularik ez dagoenean, metodo numerikoetara jotzen da, soluzio hurbildu bat ematen dutenak —nahi bezain ona, kalkulu gehiagoren truke—. Hurbiltzean beti errore bat egiten dugu, eta komeni da sailkatzea.",
-              en: "When there is no formula, we use numerical methods, which give an approximate solution —as good as we like, at the cost of more computation—. Approximating always incurs an error, and it helps to classify it."
+              es: "Cuando no hay fórmula, se recurre a métodos numéricos, que dan una solución aproximada tan buena como permita el cálculo disponible. Al aproximar cometemos un error, y conviene clasificarlo.",
+              eu: "Formularik ez dagoenean, metodo numerikoetara jotzen da, eskura dagoen kalkuluak uzten duen bezain soluzio hurbildua emateko. Hurbiltzean errore bat egiten dugu, eta komeni da sailkatzea.",
+              en: "When there is no formula, we use numerical methods, which give an approximate solution as good as the available computation allows. Approximation incurs error, and it helps to classify it."
             }
           },
           {
@@ -117,9 +117,9 @@ export const fundamentosArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Cuando no conocemos la solución verdadera y —lo habitual en métodos iterativos— no podemos usar las definiciones anteriores. En su lugar medimos cuánto cambia la solución entre dos iteraciones consecutivas.",
-              eu: "Benetako soluzioa y ez dakigunean —metodo iteratiboetan ohikoa— ezin ditugu aurreko definizioak erabili. Horren ordez, bi iterazio jarraituren arteko aldaketa neurtzen dugu.",
-              en: "When we do not know the true solution y —usual in iterative methods— we cannot use the previous definitions. Instead we measure how much the solution changes between two consecutive iterations."
+              es: "En métodos iterativos suele faltar la solución verdadera, así que no podemos usar las definiciones anteriores. En su lugar medimos cuánto cambia la solución entre dos iteraciones consecutivas.",
+              eu: "Metodo iteratiboetan askotan ez dugu benetako soluzioa ezagutzen; beraz, ezin ditugu aurreko definizioak erabili. Horren ordez, bi iterazio jarraituren arteko aldaketa neurtzen dugu.",
+              en: "In iterative methods we often lack the true solution, so we cannot use the previous definitions. Instead we measure how much the solution changes between two consecutive iterations."
             }
           },
           {
@@ -236,9 +236,9 @@ export const fundamentosArticles: ContentEntry[] = [
             variant: "note",
             title: { es: "En la práctica", eu: "Praktikan", en: "In practice" },
             text: {
-              es: "La aritmética de doble precisión (IEEE 754) almacena unas 16 cifras significativas fiables. Cambiar cuántas cifras se muestran en pantalla no cambia las que realmente se guardan; para trabajar con más precisión hace falta aritmética de precisión extendida o simbólica.",
+              es: "La aritmética de doble precisión (IEEE 754) almacena unas 16 cifras significativas fiables. Cambiar cuántas cifras se muestran en pantalla no cambia el valor guardado; para trabajar con más precisión hace falta aritmética de precisión extendida o simbólica.",
               eu: "Doitasun bikoitzeko aritmetikak (IEEE 754) fidagarriak diren 16 zifra esangarri inguru gordetzen ditu. Pantailan zenbat zifra erakusten diren aldatzeak ez ditu benetan gordetzen direnak aldatzen; doitasun handiagoarekin lan egiteko doitasun hedatuko edo aritmetika sinbolikoa behar da.",
-              en: "Double-precision arithmetic (IEEE 754) stores about 16 reliable significant figures. Changing how many figures are displayed does not change those actually stored; working with more precision requires extended-precision or symbolic arithmetic."
+              en: "Double-precision arithmetic (IEEE 754) stores about 16 reliable significant figures. Changing how many figures are displayed does not change the stored value; working with more precision requires extended-precision or symbolic arithmetic."
             }
           }
         ]
@@ -258,7 +258,7 @@ export const fundamentosArticles: ContentEntry[] = [
     description: {
       es: "El teorema de Taylor y su residuo, por qué el residuo es el error de truncamiento, y cómo de aquí nacen las diferencias finitas que usará toda la asignatura.",
       eu: "Taylor-en teorema eta bere hondarra, zergatik den hondarra trunkatze-errorea, eta nola sortzen diren hemendik ikasgai osoak erabiliko dituen diferentzia finituak.",
-      en: "Taylor's theorem and its remainder, why the remainder is the truncation error, and how finite differences —used throughout the course— arise from it."
+      en: "Taylor's theorem and its remainder, why the remainder is the truncation error, and how finite differences arise from it."
     },
     keywords: ["Taylor", "residuo", "truncamiento", "orden", "diferencias finitas"],
     prerequisites: ["fundamentos-errores"],
@@ -274,9 +274,9 @@ export const fundamentosArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "La serie de Taylor desarrolla una función alrededor de un punto a como un polinomio. Al tomar solo los primeros n términos cometemos un error de truncamiento, que el teorema cuantifica exactamente con un término de residuo.",
-              eu: "Taylor-en serieak funtzio bat a puntu baten inguruan garatzen du polinomio gisa. Lehen n terminoak soilik hartuz trunkatze-errore bat egiten dugu, teoremak hondar-termino batekin zehazki kuantifikatzen duena.",
-              en: "The Taylor series expands a function around a point a as a polynomial. Taking only the first n terms incurs a truncation error, which the theorem quantifies exactly with a remainder term."
+              es: "La serie de Taylor desarrolla una función alrededor de un punto a como un polinomio. Al tomar solo los primeros n términos cometemos un error de truncamiento, que el teorema cuantifica con un término de residuo.",
+              eu: "Taylor-en serieak funtzio bat a puntu baten inguruan garatzen du polinomio gisa. Lehen n terminoak soilik hartuz trunkatze-errore bat egiten dugu, teoremak hondar-termino batekin kuantifikatzen duena.",
+              en: "The Taylor series expands a function around a point a as a polynomial. Taking only the first n terms incurs a truncation error, which the theorem quantifies with a remainder term."
             }
           },
           {
@@ -295,9 +295,9 @@ export const fundamentosArticles: ContentEntry[] = [
             variant: "definition",
             title: { es: "Residuo = error de truncamiento", eu: "Hondarra = trunkatze-errorea", en: "Remainder = truncation error" },
             text: {
-              es: "El residuo $R_n$ es exactamente el error que cometemos al quedarnos con el polinomio de grado $n$. Para algún $\\xi$ entre $a$ y $x$:",
+              es: "El residuo $R_n$ es el error que cometemos al quedarnos con el polinomio de grado $n$. Para algún $\\xi$ entre $a$ y $x$:",
               eu: "$R_n$ hondarra da, hain zuzen, $n$ graduko polinomioarekin geratzean egiten dugun errorea. $a$ eta $x$ arteko $\\xi$ baterako:",
-              en: "The remainder $R_n$ is exactly the error from keeping the degree-$n$ polynomial. For some $\\xi$ between $a$ and $x$:"
+              en: "The remainder $R_n$ is the error from keeping the degree-$n$ polynomial. For some $\\xi$ between $a$ and $x$:"
             },
             formula: "R_n=\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-a)^{n+1},\\qquad \\xi\\in(a,x)"
           },
@@ -486,7 +486,7 @@ export const fundamentosExercises: ContentEntry[] = [
               en: ["k", "Approximation of e^{0.5}", "Iterative error ε_{k,r}"]
             },
             rows: [
-              ["0", "1", "—"],
+              ["0", "1", "n/a"],
               ["1", "1.5", "33.33 %"],
               ["2", "1.625", "7.6923 %"],
               ["3", "1.6458", "1.2658 %"],

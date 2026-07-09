@@ -1,7 +1,7 @@
 # Numerical Methods
 
 Astro static site for a multilingual numerical methods reference: theory,
-derivations, solved exercises, formula sheets and exam-focused pages.
+derivations, solved exercises, formula sheets and topic guides.
 
 ## Development
 
@@ -38,7 +38,7 @@ PUBLIC_KOFI_USERNAME=your-kofi-username
 Recommended revenue order:
 
 1. Direct support: Buy Me a Coffee or Ko-fi on derivations and solved exercises.
-2. Owned products: premium PDF formula sheet, exam packs and solved exercise bank.
+2. Owned products: premium PDF formula sheet, practice packs and solved exercise bank.
 3. Ethical affiliates: calculators, books, tablets, math software or courses.
 4. Sponsorships: clearly labeled placements for education or software brands.
 5. Display ads: only after the site has enough traffic to justify the UX cost.

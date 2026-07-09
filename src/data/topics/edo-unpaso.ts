@@ -72,9 +72,9 @@ export const edoUnpasoArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Antes de aproximar una solución conviene saber que existe y que es única. La condición clave es que $f$ no cambie demasiado deprisa respecto de $y$:",
+              es: "Antes de aproximar una solución conviene saber que existe y que es única. La condición controla cuánto cambia $f$ respecto de $y$:",
               eu: "Soluzio bat hurbildu aurretik, komeni da jakitea existitzen dela eta bakarra dela. Funtsezko baldintza da $f$ ez aldatzea azkarregi $y$-rekiko:",
-              en: "Before approximating a solution it helps to know that one exists and is unique. The key condition is that $f$ does not change too quickly with respect to $y$:"
+              en: "Before approximating a solution it helps to know that one exists and is unique. The condition controls how fast $f$ changes with respect to $y$:"
             }
           },
           {
@@ -137,9 +137,9 @@ export const edoUnpasoArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Cuando varias magnitudes evolucionan acopladas (por ejemplo, poblaciones que interactúan), el PVI se formula con $m$ funciones incógnita $y_1,\\dots,y_m$ y una ecuación por cada una. Con notación vectorial $Y(t)=[y_1(t),\\dots,y_m(t)]^T$ el sistema se escribe exactamente igual que el caso escalar:",
+              es: "Cuando varias magnitudes evolucionan acopladas (por ejemplo, poblaciones que interactúan), el PVI se formula con $m$ funciones incógnita $y_1,\\dots,y_m$ y una ecuación por cada una. Con notación vectorial $Y(t)=[y_1(t),\\dots,y_m(t)]^T$ el sistema refleja el caso escalar:",
               eu: "Hainbat magnitude elkarrekin lotuta eboluzionatzen dutenean (adibidez, elkarreragiten duten populazioak), PVIa $m$ funtzio ezezagunekin ($y_1,\\dots,y_m$) eta bakoitzeko ekuazio banarekin formulatzen da. $Y(t)=[y_1(t),\\dots,y_m(t)]^T$ bektore-notazioarekin sistema kasu eskalarraren berdin-berdin idazten da:",
-              en: "When several quantities evolve together (for instance interacting populations), the IVP is stated with $m$ unknown functions $y_1,\\dots,y_m$ and one equation for each. With vector notation $Y(t)=[y_1(t),\\dots,y_m(t)]^T$ the system reads exactly like the scalar case:"
+              en: "When several quantities evolve together (for instance interacting populations), the IVP is stated with $m$ unknown functions $y_1,\\dots,y_m$ and one equation for each. With vector notation $Y(t)=[y_1(t),\\dots,y_m(t)]^T$ the system mirrors the scalar case:"
             }
           },
           {
@@ -151,7 +151,7 @@ export const edoUnpasoArticles: ContentEntry[] = [
             text: {
               es: "Esta notación no es solo estética: los métodos de un paso se aplican al sistema componente a componente sin ningún cambio conceptual, como muestra el [[ejercicio-sir-sistema|ejercicio del modelo epidémico SIR]].",
               eu: "Notazio hori ez da estetika hutsa: urrats bakarreko metodoak sistemari osagaiz osagai aplikatzen zaizkio inolako aldaketa kontzeptualik gabe, [[ejercicio-sir-sistema|SIR eredu epidemikoaren ariketak]] erakusten duen bezala.",
-              en: "This notation is not just cosmetic: one-step methods apply to the system component by component with no conceptual change, as the [[ejercicio-sir-sistema|SIR epidemic model exercise]] shows."
+              en: "This notation carries over to computation: one-step methods apply to the system component by component with no conceptual change, as the [[ejercicio-sir-sistema|SIR epidemic model exercise]] shows."
             }
           }
         ]
@@ -341,9 +341,9 @@ export const edoUnpasoArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "El error global siempre pierde una unidad respecto al local: se cometen $N=\\frac{b-a}{h}$ errores locales, y su acumulación multiplica por un factor proporcional a $1/h$. La definición precisa de ambos errores y la estimación numérica del orden se tratan en [[edo-convergencia-orden]].",
-              eu: "Errore globalak beti unitate bat galtzen du lokalaren aldean: $N=\\frac{b-a}{h}$ errore lokal egiten dira, eta haien metaketak $1/h$-ren proportzionala den faktore batez biderkatzen du. Bi erroreen definizio zehatza eta ordenaren estimazio numerikoa [[edo-convergencia-orden]] orrian lantzen dira.",
-              en: "The global error always loses one unit with respect to the local one: $N=\\frac{b-a}{h}$ local errors are committed, and their accumulation multiplies by a factor proportional to $1/h$. The precise definition of both errors and the numerical estimation of the order are covered in [[edo-convergencia-orden]]."
+              es: "El error global pierde una unidad respecto al local: se cometen $N=\\frac{b-a}{h}$ errores locales, y su acumulación multiplica por un factor proporcional a $1/h$. La definición precisa de ambos errores y la estimación numérica del orden se tratan en [[edo-convergencia-orden]].",
+              eu: "Errore globalak unitate bat galtzen du lokalaren aldean: $N=\\frac{b-a}{h}$ errore lokal egiten dira, eta haien metaketak $1/h$-ren proportzionala den faktore batez biderkatzen du. Bi erroreen definizio zehatza eta ordenaren estimazio numerikoa [[edo-convergencia-orden]] orrian lantzen dira.",
+              en: "The global error loses one unit with respect to the local one: $N=\\frac{b-a}{h}$ local errors are committed, and their accumulation multiplies by a factor proportional to $1/h$. The precise definition of both errors and the numerical estimation of the order are covered in [[edo-convergencia-orden]]."
             }
           }
         ]
@@ -387,9 +387,9 @@ export const edoUnpasoArticles: ContentEntry[] = [
             ],
             result: {
               text: {
-                es: "Comparando con la solución exacta, $y(1)=27.2833$ e $y(2)=29.8517$, el error máximo es $|27.2833-30|=2.7167$: exactamente la primera fila de la tabla del [[ejercicio-orden-numerico-un-paso|ejercicio de estimación del orden]].",
+                es: "Comparando con la solución exacta, $y(1)=27.2833$ e $y(2)=29.8517$, el error máximo es $|27.2833-30|=2.7167$: la primera fila de la tabla del [[ejercicio-orden-numerico-un-paso|ejercicio de estimación del orden]].",
                 eu: "Soluzio zehatzarekin alderatuta, $y(1)=27.2833$ eta $y(2)=29.8517$, errore maximoa $|27.2833-30|=2.7167$ da: [[ejercicio-orden-numerico-un-paso|ordena estimatzeko ariketako]] taularen lehen errenkada, hain zuzen.",
-                en: "Comparing with the exact solution, $y(1)=27.2833$ and $y(2)=29.8517$, the maximum error is $|27.2833-30|=2.7167$: exactly the first row of the table in the [[ejercicio-orden-numerico-un-paso|order estimation exercise]]."
+                en: "Comparing with the exact solution, $y(1)=27.2833$ and $y(2)=29.8517$, the maximum error is $|27.2833-30|=2.7167$: the first row of the table in the [[ejercicio-orden-numerico-un-paso|order estimation exercise]]."
               }
             }
           }
@@ -423,9 +423,9 @@ export const edoUnpasoArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Como $y_{k+1}$ aparece en ambos lados, cada paso exige resolver la ecuación $g(y_{k+1})=y_{k+1}-y_k-h\\,f(t_{k+1},y_{k+1})=0$, normalmente con el [[no-lineales-newton-raphson|método de Newton-Raphson]]. A cambio, el método es mucho más estable: funciona con pasos grandes donde el explícito estalla, como muestra el [[ejercicio-euler-implicito-estabilidad|ejercicio de estabilidad]] y se estudia en general en [[edo-problemas-rigidos]].",
-              eu: "$y_{k+1}$ bi aldeetan agertzen denez, pauso bakoitzak $g(y_{k+1})=y_{k+1}-y_k-h\\,f(t_{k+1},y_{k+1})=0$ ekuazioa ebaztea eskatzen du, normalean [[no-lineales-newton-raphson|Newton-Raphson metodoarekin]]. Trukean, metodoa askoz egonkorragoa da: pauso handiekin funtzionatzen du esplizitua lehertzen den lekuan, [[ejercicio-euler-implicito-estabilidad|egonkortasun-ariketak]] erakusten duen bezala eta [[edo-problemas-rigidos]] orrian orokorrean aztertzen den bezala.",
-              en: "Since $y_{k+1}$ appears on both sides, each step requires solving the equation $g(y_{k+1})=y_{k+1}-y_k-h\\,f(t_{k+1},y_{k+1})=0$, usually with the [[no-lineales-newton-raphson|Newton-Raphson method]]. In exchange, the method is far more stable: it works with large steps where the explicit one blows up, as the [[ejercicio-euler-implicito-estabilidad|stability exercise]] shows and as studied in general in [[edo-problemas-rigidos]]."
+              es: "Como $y_{k+1}$ aparece en ambos lados, cada paso exige resolver la ecuación $g(y_{k+1})=y_{k+1}-y_k-h\\,f(t_{k+1},y_{k+1})=0$, a menudo con el [[no-lineales-newton-raphson|método de Newton-Raphson]]. El método tiene una región de estabilidad mayor: funciona con pasos grandes donde el explícito estalla, como muestra el [[ejercicio-euler-implicito-estabilidad|ejercicio de estabilidad]] y se estudia en general en [[edo-problemas-rigidos]].",
+              eu: "$y_{k+1}$ bi aldeetan agertzen denez, pauso bakoitzak $g(y_{k+1})=y_{k+1}-y_k-h\\,f(t_{k+1},y_{k+1})=0$ ekuazioa ebaztea eskatzen du, askotan [[no-lineales-newton-raphson|Newton-Raphson metodoarekin]]. Metodoak egonkortasun-eremu handiagoa du: pauso handiekin funtzionatzen du esplizitua lehertzen den lekuan, [[ejercicio-euler-implicito-estabilidad|egonkortasun-ariketak]] erakusten duen bezala eta [[edo-problemas-rigidos]] orrian orokorrean aztertzen den bezala.",
+              en: "Since $y_{k+1}$ appears on both sides, each step requires solving the equation $g(y_{k+1})=y_{k+1}-y_k-h\\,f(t_{k+1},y_{k+1})=0$, often with the [[no-lineales-newton-raphson|Newton-Raphson method]]. The method has a larger stability region: it works with large steps where the explicit one blows up, as the [[ejercicio-euler-implicito-estabilidad|stability exercise]] shows and as studied in general in [[edo-problemas-rigidos]]."
             }
           }
         ]
@@ -641,7 +641,7 @@ export const edoUnpasoArticles: ContentEntry[] = [
             text: {
               es: "Aquí las $k_i$ son pendientes (valores de $f$); en [[edo-metodo-heun]] se definieron como incrementos ($h$ por la pendiente). Ambos convenios aparecen en la literatura: basta comprobar si la fórmula final multiplica por $h$ o no.",
               eu: "Hemen $k_i$-ak maldak dira ($f$-ren balioak); [[edo-metodo-heun]] orrian inkrementu gisa definitu ziren ($h$ bider malda). Bi hitzarmenak agertzen dira literaturan: nahikoa da egiaztatzea azken formulak $h$-z biderkatzen duen ala ez.",
-              en: "Here the $k_i$ are slopes (values of $f$); in [[edo-metodo-heun]] they were defined as increments ($h$ times the slope). Both conventions appear in the literature: just check whether the final formula multiplies by $h$ or not."
+              en: "Here the $k_i$ are slopes (values of $f$); in [[edo-metodo-heun]] they were defined as increments ($h$ times the slope). Both conventions appear in the literature: check whether the final formula multiplies by $h$."
             }
           }
         ]
@@ -656,9 +656,9 @@ export const edoUnpasoArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "La estructura $1,2,2,1$ con denominador $6$ no es casual: son exactamente los pesos de la [[deduccion-integracion-simpson|regla de Simpson]] aplicada a la forma integral del PVI.",
+              es: "La estructura $1,2,2,1$ con denominador $6$ viene de los pesos de la [[deduccion-integracion-simpson|regla de Simpson]] aplicada a la forma integral del PVI.",
               eu: "$1,2,2,1$ egitura $6$ izendatzailearekin ez da kasualitatea: [[deduccion-integracion-simpson|Simpson-en erregelaren]] pisuak dira, hain zuzen, PVIaren forma integralari aplikatuta.",
-              en: "The $1,2,2,1$ structure with denominator $6$ is no accident: they are exactly the weights of [[deduccion-integracion-simpson|Simpson's rule]] applied to the integral form of the IVP."
+              en: "The $1,2,2,1$ structure with denominator $6$ comes from the weights of [[deduccion-integracion-simpson|Simpson's rule]] applied to the integral form of the IVP."
             }
           },
           { kind: "derivation", slug: "deduccion-runge-kutta" }
@@ -689,8 +689,8 @@ export const edoUnpasoArticles: ContentEntry[] = [
             kind: "paragraph",
             text: {
               es: "El precio del orden 4 son cuatro evaluaciones de $f$ por paso, frente a una de Euler. Cuando evaluar $f$ es caro, los métodos multipaso como [[edo-adams-bashforth|Adams-Bashforth]] reutilizan pendientes ya calculadas y logran orden alto con una única evaluación nueva por paso; a cambio necesitan que un método de un paso (habitualmente RK4) les proporcione los valores de arranque.",
-              eu: "4. ordenaren prezioa $f$-ren lau ebaluazio dira pauso bakoitzeko, Euler-en bakarraren aldean. $f$ ebaluatzea garestia denean, [[edo-adams-bashforth|Adams-Bashforth]] bezalako urrats anitzeko metodoek dagoeneko kalkulatutako maldak berrerabiltzen dituzte eta ordena altua lortzen dute pauso bakoitzeko ebaluazio berri bakarrarekin; trukean, urrats bakarreko metodo batek (normalean RK4-k) abio-balioak eman behar dizkie.",
-              en: "The price of order 4 is four evaluations of $f$ per step, versus one for Euler. When evaluating $f$ is expensive, multistep methods like [[edo-adams-bashforth|Adams-Bashforth]] reuse already-computed slopes and reach high order with a single new evaluation per step; in exchange they need a one-step method (usually RK4) to provide their starting values."
+              eu: "4. ordenaren prezioa $f$-ren lau ebaluazio dira pauso bakoitzeko, Euler-en bakarraren aldean. $f$ ebaluatzea garestia denean, [[edo-adams-bashforth|Adams-Bashforth]] bezalako urrats anitzeko metodoek dagoeneko kalkulatutako maldak berrerabiltzen dituzte eta ordena altua lortzen dute pauso bakoitzeko ebaluazio berri bakarrarekin; trukean, RK4 bezalako urrats bakarreko metodo batek abio-balioak eman behar dizkie.",
+              en: "The price of order 4 is four evaluations of $f$ per step, versus one for Euler. When evaluating $f$ is expensive, multistep methods like [[edo-adams-bashforth|Adams-Bashforth]] reuse already-computed slopes and reach high order with a single new evaluation per step; in exchange they need a one-step method such as RK4 to provide their starting values."
             }
           }
         ]
@@ -934,9 +934,9 @@ export const edoUnpasoDerivations: ContentEntry[] = [
             steps: [
               {
                 text: {
-                  es: "La derivada es el límite del cociente incremental; para $h$ pequeño, ese cociente la aproxima. Es exactamente la [[diferenciacion-primera-derivada|diferencia progresiva]] de primer orden:",
+                  es: "La derivada es el límite del cociente incremental; para $h$ pequeño, ese cociente la aproxima. Así aparece la [[diferenciacion-primera-derivada|diferencia progresiva]] de primer orden:",
                   eu: "Deribatua zatidura inkrementalaren limitea da; $h$ txikirako, zatidura horrek hurbiltzen du. Lehen ordenako [[diferenciacion-primera-derivada|aurreranzko diferentzia]] da, hain zuzen:",
-                  en: "The derivative is the limit of the incremental quotient; for small $h$, that quotient approximates it. This is exactly the first-order [[diferenciacion-primera-derivada|forward difference]]:"
+                  en: "The derivative is the limit of the incremental quotient; for small $h$, that quotient approximates it. This gives the first-order [[diferenciacion-primera-derivada|forward difference]]:"
                 },
                 formula: "y'(t)=\\lim_{h\\to 0}\\frac{y(t+h)-y(t)}{h}\\;\\Rightarrow\\; y'(t)\\approx\\frac{y(t+h)-y(t)}{h}"
               },
@@ -972,9 +972,9 @@ export const edoUnpasoDerivations: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "Aproximamos el integrando por su valor en el extremo izquierdo — es decir, lo [[interpolacion-fundamentos|interpolamos]] con el polinomio constante $p_0(\\tau)=f(t_k,y(t_k))$ — e integramos ese rectángulo de base $h$:",
-                  eu: "Integrakizuna ezkerreko muturreko balioaz hurbiltzen dugu — hau da, $p_0(\\tau)=f(t_k,y(t_k))$ polinomio konstantearekin [[interpolacion-fundamentos|interpolatzen]] dugu — eta $h$ oinarriko laukizuzen hori integratzen dugu:",
-                  en: "Approximate the integrand by its value at the left endpoint — that is, [[interpolacion-fundamentos|interpolate]] it with the constant polynomial $p_0(\\tau)=f(t_k,y(t_k))$ — and integrate that rectangle of base $h$:"
+                  es: "Aproximamos el integrando por su valor en el extremo izquierdo. Es decir, lo [[interpolacion-fundamentos|interpolamos]] con el polinomio constante $p_0(\\tau)=f(t_k,y(t_k))$ e integramos ese rectángulo de base $h$:",
+                  eu: "Integrakizuna ezkerreko muturreko balioaz hurbiltzen dugu. Hau da, $p_0(\\tau)=f(t_k,y(t_k))$ polinomio konstantearekin [[interpolacion-fundamentos|interpolatzen]] dugu eta $h$ oinarriko laukizuzen hori integratzen dugu:",
+                  en: "Approximate the integrand by its value at the left endpoint. In other words, [[interpolacion-fundamentos|interpolate]] it with the constant polynomial $p_0(\\tau)=f(t_k,y(t_k))$ and integrate that rectangle of base $h$:"
                 },
                 formula: "\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau\\;\\approx\\;(t_{k+1}-t_k)\\,f(t_k,y(t_k))=h\\,f(t_k,y(t_k))"
               },
@@ -1001,9 +1001,9 @@ export const edoUnpasoDerivations: ContentEntry[] = [
             steps: [
               {
                 text: {
-                  es: "El error local de un paso es exactamente el resto de Taylor descartado en el Camino 1 ($\\xi_k\\in\\,]t_k,t_{k+1}[$):",
+                  es: "El error local de un paso es el resto de Taylor descartado en el Camino 1 ($\\xi_k\\in\\,]t_k,t_{k+1}[$):",
                   eu: "Pauso baten errore lokala 1. bidean baztertutako Taylor-en hondarra da, hain zuzen ($\\xi_k\\in\\,]t_k,t_{k+1}[$):",
-                  en: "The local error of one step is exactly the Taylor remainder discarded in Route 1 ($\\xi_k\\in\\,]t_k,t_{k+1}[$):"
+                  en: "The local error of one step is the Taylor remainder discarded in Route 1 ($\\xi_k\\in\\,]t_k,t_{k+1}[$):"
                 },
                 formula: "e_{k+1}=y(t_{k+1})-\\bigl(y(t_k)+h\\,y'(t_k)\\bigr)=\\frac{h^2}{2}y''(\\xi_k)=\\mathcal{O}(h^2)"
               },
@@ -1204,9 +1204,9 @@ export const edoUnpasoDerivations: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "Sustituyendo la predicción en el trapecio se obtiene exactamente la misma fórmula que por Taylor: Heun es un par predictor-corrector de un solo paso.",
+                  es: "Sustituyendo la predicción en el trapecio se obtiene la misma fórmula que por Taylor: Heun es un par predictor-corrector de un solo paso.",
                   eu: "Iragarpena trapezioan ordezkatuz Taylor bidez lortutako formula bera ateratzen da: Heun urrats bakarreko iragarle-zuzentzaile bikote bat da.",
-                  en: "Substituting the prediction into the trapezoid gives exactly the same formula as via Taylor: Heun is a one-step predictor-corrector pair."
+                  en: "Substituting the prediction into the trapezoid gives the same formula as via Taylor: Heun is a one-step predictor-corrector pair."
                 },
                 formula: "y_{k+1}=y_k+\\frac{h}{2}\\Bigl(f(t_k,y_k)+f(t_{k+1},\\bar y_{k+1})\\Bigr)"
               }
@@ -1382,7 +1382,7 @@ export const edoUnpasoExercises: ContentEntry[] = [
               text: {
                 es: "Euler con $h=1$ da $y(3)\\approx 0$. El paso es demasiado grande: el primer salto lleva la solución a $y=0$, un punto donde $f$ se anula y del que el método ya no sale.",
                 eu: "Euler-ek $h=1$ hartuta $y(3)\\approx 0$ ematen du. Pausoa handiegia da: lehen jauziak soluzioa $y=0$-ra darama, non $f$ anulatzen den, eta metodoa ez da handik ateratzen.",
-                en: "Euler with $h=1$ gives $y(3)\\approx 0$. The step is too large: the first jump takes the solution to $y=0$, a point where $f$ vanishes and from which the method never escapes."
+                en: "Euler with $h=1$ gives $y(3)\\approx 0$. The step is too large: the first jump takes the solution to $y=0$, a point where $f$ vanishes and the method stays."
               }
             }
           }
@@ -1676,7 +1676,7 @@ export const edoUnpasoExercises: ContentEntry[] = [
               en: ["N", "Maximum error $E_N$", "$\\log_2(E_{N/2}/E_N)$"]
             },
             rows: [
-              ["2", "2.7167", "—"],
+              ["2", "2.7167", "n/a"],
               ["4", "2.7167", "0.0000"],
               ["8", "1.0659", "1.3497"],
               ["16", "0.4878", "1.1277"],
@@ -1728,7 +1728,7 @@ export const edoUnpasoExercises: ContentEntry[] = [
               en: ["N", "$\\varepsilon_N$", "$\\log_2(\\varepsilon_{N/2}/\\varepsilon_N)$"]
             },
             rows: [
-              ["4", "18.2934", "—"],
+              ["4", "18.2934", "n/a"],
               ["8", "1.9319", "3.2432"],
               ["16", "0.3288", "2.5549"],
               ["32", "0.0686", "2.2603"],
@@ -1750,7 +1750,7 @@ export const edoUnpasoExercises: ContentEntry[] = [
             },
             text: {
               es: "La estimación tiende a 2, el orden de Heun, sin haber usado la solución exacta en ningún momento. Esta es la técnica disponible en problemas reales.",
-              eu: "Estimazioa 2rantz doa, Heun-en ordena, soluzio zehatza inoiz erabili gabe. Hau da benetako problemetan eskuragarri dagoen teknika.",
+              eu: "Estimazioa 2rantz doa, Heun-en ordena, soluzio zehatza erabili gabe. Hau da benetako problemetan eskuragarri dagoen teknika.",
               en: "The estimate tends to 2, Heun's order, without ever using the exact solution. This is the technique available in real problems."
             }
           }
@@ -1771,7 +1771,7 @@ export const edoUnpasoExercises: ContentEntry[] = [
               en: ["N", "Maximum error $E_N$", "$\\log_2(E_{N/2}/E_N)$"]
             },
             rows: [
-              ["2", "4.7316", "—"],
+              ["2", "4.7316", "n/a"],
               ["4", "0.1442", "5.0362"],
               ["8", "6.531·10⁻³", "4.4646"],
               ["16", "3.469·10⁻⁴", "4.2347"],
@@ -1793,9 +1793,9 @@ export const edoUnpasoExercises: ContentEntry[] = [
               en: "Conclusion"
             },
             text: {
-              es: "Los tres métodos confirman numéricamente sus órdenes teóricos: 1, 2 y 4. Obsérvese la escala: con $N=64$, Euler tiene un error de $0.1164$ y RK4 de $1.2\\cdot 10^{-6}$ — cinco órdenes de magnitud de diferencia con el mismo paso.",
-              eu: "Hiru metodoek numerikoki baieztatzen dituzte beren ordena teorikoak: 1, 2 eta 4. Erreparatu eskalari: $N=64$-rekin, Euler-en errorea $0.1164$ da eta RK4-rena $1.2\\cdot 10^{-6}$ — bost magnitude-ordenako aldea pauso berarekin.",
-              en: "All three methods numerically confirm their theoretical orders: 1, 2 and 4. Note the scale: with $N=64$, Euler's error is $0.1164$ and RK4's is $1.2\\cdot 10^{-6}$ — five orders of magnitude apart at the same step."
+              es: "Los tres métodos confirman numéricamente sus órdenes teóricos: 1, 2 y 4. Con $N=64$, Euler tiene un error de $0.1164$ y RK4 de $1.2\\cdot 10^{-6}$, cinco órdenes de magnitud de diferencia con el mismo paso.",
+              eu: "Hiru metodoek numerikoki baieztatzen dituzte beren ordena teorikoak: 1, 2 eta 4. $N=64$-rekin, Euler-en errorea $0.1164$ da eta RK4-rena $1.2\\cdot 10^{-6}$, bost magnitude-ordenako aldea pauso berarekin.",
+              en: "All three methods numerically confirm their theoretical orders: 1, 2 and 4. With $N=64$, Euler's error is $0.1164$ and RK4's is $1.2\\cdot 10^{-6}$, five orders of magnitude apart at the same step."
             }
           }
         ]
@@ -1856,17 +1856,17 @@ export const edoUnpasoExercises: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "Euler implícito, en cambio, se puede despejar exactamente en este problema lineal:",
-                  eu: "Euler inplizitua, aldiz, zehazki askatu daiteke problema lineal honetan:",
-                  en: "Implicit Euler, by contrast, can be solved exactly in this linear problem:"
+                  es: "Euler implícito admite despeje cerrado en este problema lineal:",
+                  eu: "Euler inplizituak askapen itxia du problema lineal honetan:",
+                  en: "Implicit Euler has a closed-form solve in this linear problem:"
                 },
                 formula: "y_{k+1}=y_k+h\\lambda y_{k+1}\\;\\Rightarrow\\; y_{k+1}=\\frac{y_k}{1-h\\lambda}"
               },
               {
                 text: {
-                  es: "Como $\\lambda<0$, el denominador $1-h\\lambda=1+h|\\lambda|$ es mayor que 1 para todo $h>0$: el factor de amplificación es siempre menor que 1 y el método es incondicionalmente estable.",
-                  eu: "$\\lambda<0$ denez, $1-h\\lambda=1+h|\\lambda|$ izendatzailea 1 baino handiagoa da $h>0$ guztietarako: anplifikazio-faktorea beti da 1 baino txikiagoa eta metodoa baldintzarik gabe egonkorra da.",
-                  en: "Since $\\lambda<0$, the denominator $1-h\\lambda=1+h|\\lambda|$ exceeds 1 for every $h>0$: the amplification factor is always below 1 and the method is unconditionally stable."
+                  es: "Como $\\lambda<0$, el denominador $1-h\\lambda=1+h|\\lambda|$ es mayor que 1 para todo $h>0$: el factor de amplificación queda por debajo de 1 y el método es incondicionalmente estable.",
+                  eu: "$\\lambda<0$ denez, $1-h\\lambda=1+h|\\lambda|$ izendatzailea 1 baino handiagoa da $h>0$ guztietarako: anplifikazio-faktorea 1etik behera geratzen da eta metodoa baldintzarik gabe egonkorra da.",
+                  en: "Since $\\lambda<0$, the denominator $1-h\\lambda=1+h|\\lambda|$ exceeds 1 for every $h>0$: the amplification factor stays below 1 and the method is unconditionally stable."
                 }
               }
             ]

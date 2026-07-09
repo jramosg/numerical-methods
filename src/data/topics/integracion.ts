@@ -380,7 +380,7 @@ export const integracionArticles: ContentEntry[] = [
             text: {
               es: "El punto medio simple cubre un intervalo usando un nodo central. En la versión compuesta se toman bloques que no se solapan; por eso se evalúan los nodos pares en la notación del capítulo y el número de subintervalos debe ser par.",
               eu: "Erdiko puntu sinpleak tarte bat nodo zentral batekin estaltzen du. Bertsio konposatuan gainjartzen ez diren blokeak hartzen dira; horregatik ebaluatzen dira nodo bikoitiak kapituluaren notazioan, eta azpitarten kopuruak bikoitia izan behar du.",
-              en: "The simple midpoint rule covers one interval with one central node. In the composite version, non-overlapping blocks are used; that is why even nodes are evaluated in the chapter notation and the number of subintervals must be even."
+              en: "The simple midpoint rule covers one interval with one central node. The composite version uses non-overlapping blocks, so the chapter notation evaluates even nodes and requires an even number of subintervals."
             }
           },
           {
@@ -407,7 +407,7 @@ export const integracionArticles: ContentEntry[] = [
             text: {
               es: "En tablas, el punto medio puede requerir construir nodos auxiliares para que los datos medidos queden justo en los centros de los rectángulos.",
               eu: "Tauletan, erdiko puntuak nodo laguntzaileak eraikitzea eska dezake, neurtutako datuak laukizuzenen erdian gera daitezen.",
-              en: "With tabulated data, midpoint may require auxiliary nodes so that the measured data lie exactly at the centres of the rectangles."
+              en: "With tabulated data, midpoint may require auxiliary nodes so that the measured data lie at the centres of the rectangles."
             }
           }
         ]

@@ -36,9 +36,9 @@ export const interpolacionArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Partimos de una tabla de datos: conocemos el valor de una función en unos pocos puntos, pero no su expresión. Interpolar consiste en construir una función sencilla —normalmente un polinomio— que pase exactamente por esos puntos, para poder estimar valores intermedios que no medimos.",
-              eu: "Datu-taula batetik abiatzen gara: funtzio baten balioa puntu gutxi batzuetan ezagutzen dugu, baina ez haren adierazpena. Interpolatzea funtzio sinple bat —normalean polinomio bat— eraikitzea da, puntu horietatik zehatz-mehatz pasatzen dena, neurtu ez ditugun tarteko balioak estimatzeko.",
-              en: "We start from a table of data: we know the value of a function at a few points, but not its formula. Interpolation builds a simple function —usually a polynomial— that passes exactly through those points, so we can estimate intermediate values we did not measure."
+              es: "Partimos de una tabla de datos: conocemos el valor de una función en unos pocos puntos, pero no su expresión. Interpolar consiste en construir una función sencilla, a menudo un polinomio, que pase por esos puntos para estimar valores intermedios que no medimos.",
+              eu: "Datu-taula batetik abiatzen gara: funtzio baten balioa puntu gutxi batzuetan ezagutzen dugu, baina ez haren adierazpena. Interpolatzea funtzio sinple bat, askotan polinomio bat, eraikitzea da, puntu horietatik pasatu eta neurtu ez ditugun tarteko balioak estimatzeko.",
+              en: "We start from a data table: we know the value of a function at a few points, but not its formula. Interpolation builds a simple function, often a polynomial, through those points to estimate intermediate values we did not measure."
             }
           },
           {
@@ -46,7 +46,7 @@ export const interpolacionArticles: ContentEntry[] = [
             text: {
               es: "Si el punto que queremos estimar cae dentro del intervalo de los datos, hablamos de interpolación. Si cae fuera, hablamos de extrapolación, que es mucho menos fiable porque el polinomio no está controlado ahí.",
               eu: "Estimatu nahi dugun puntua datuen tartearen barruan badago, interpolazioaz ari gara. Kanpoan badago, estrapolazioaz ari gara, askoz fidagarritasun txikiagokoa, polinomioa han kontrolatu gabe dagoelako.",
-              en: "If the point we want to estimate lies inside the data interval, we call it interpolation. If it lies outside, we call it extrapolation, which is far less reliable because the polynomial is not controlled there."
+              en: "If the point we want to estimate lies inside the data interval, we call it interpolation. If it lies outside, we call it extrapolation; the polynomial is less controlled there, so the estimate carries more risk."
             }
           },
           {
@@ -87,8 +87,8 @@ export const interpolacionArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Para la interpolación es clave un hecho más fuerte: dados $n+1$ puntos con abscisas distintas, existe un único polinomio de grado menor o igual que $n$ que pasa por todos ellos. Newton, Lagrange y Hermite no dan polinomios distintos: dan el mismo polinomio escrito de forma diferente, cada una cómoda para un propósito.",
-              eu: "Interpolaziorako funtsezkoa da gertaera indartsuago bat: abzisa desberdineko $n+1$ puntu emanik, badago $n$ baino gradu txikiago edo berdineko polinomio bakar bat guztietatik pasatzen dena. Newtonek, Lagrangek eta Hermitek ez dituzte polinomio desberdinak ematen: polinomio bera ematen dute modu desberdinean idatzita, bakoitza helburu baterako erosoa.",
+              es: "La interpolación usa un hecho más fuerte: dados $n+1$ puntos con abscisas distintas, existe un único polinomio de grado menor o igual que $n$ que pasa por todos ellos. Newton, Lagrange y Hermite no dan polinomios distintos: dan el mismo polinomio escrito de forma diferente, cada una cómoda para un propósito.",
+              eu: "Interpolazioak gertaera indartsuago bat erabiltzen du: abzisa desberdineko $n+1$ puntu emanik, badago $n$ baino gradu txikiago edo berdineko polinomio bakar bat guztietatik pasatzen dena. Newtonek, Lagrangek eta Hermitek ez dituzte polinomio desberdinak ematen: polinomio bera ematen dute modu desberdinean idatzita, bakoitza helburu baterako erosoa.",
               en: "For interpolation a stronger fact is key: given $n+1$ points with distinct abscissas, there is a unique polynomial of degree at most $n$ through all of them. Newton, Lagrange and Hermite do not give different polynomials: they give the same polynomial written differently, each convenient for a purpose."
             }
           }
@@ -256,9 +256,9 @@ export const interpolacionArticles: ContentEntry[] = [
             kind: "example",
             title: { es: "Censo de población (grado 4)", eu: "Biztanleria-errolda (4. gradua)", en: "Population census (degree 4)" },
             statement: {
-              es: "Con los datos de población de España (millones) en 1971, 1981, 1991, 2001 y 2011 —33.956, 37.743, 39.434, 40.847 y 46.816— estima la población en 2005 con el polinomio de Newton de mayor grado posible.",
-              eu: "Espainiako biztanleriaren datuekin (milioika) 1971, 1981, 1991, 2001 eta 2011 urteetan —33.956, 37.743, 39.434, 40.847 eta 46.816— estimatu 2005eko biztanleria ahalik eta gradu handieneko Newtonen polinomioarekin.",
-              en: "With Spain's population data (millions) in 1971, 1981, 1991, 2001 and 2011 —33.956, 37.743, 39.434, 40.847 and 46.816— estimate the 2005 population with the highest-degree Newton polynomial."
+              es: "Con los datos de población de España (millones) en 1971, 1981, 1991, 2001 y 2011 (33.956, 37.743, 39.434, 40.847 y 46.816), estima la población en 2005 con el polinomio de Newton de mayor grado posible.",
+              eu: "Espainiako biztanleriaren datuekin (milioika) 1971, 1981, 1991, 2001 eta 2011 urteetan (33.956, 37.743, 39.434, 40.847 eta 46.816), estimatu 2005eko biztanleria ahalik eta gradu handieneko Newtonen polinomioarekin.",
+              en: "With Spain's population data (millions) in 1971, 1981, 1991, 2001 and 2011 (33.956, 37.743, 39.434, 40.847 and 46.816), estimate the 2005 population with the highest-degree Newton polynomial."
             },
             steps: [
               {
@@ -330,9 +330,9 @@ export const interpolacionArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Lagrange construye el mismo polinomio único, pero de forma directa y simétrica. La clave son las funciones $L_i(x)$, diseñadas para valer 1 en su nodo y 0 en los demás:",
+              es: "Lagrange construye el mismo polinomio único en forma directa y simétrica. Las funciones $L_i(x)$ valen 1 en su nodo y 0 en los demás:",
               eu: "Lagrangek polinomio bakar bera eraikitzen du, baina modu zuzen eta simetrikoan. Gakoa $L_i(x)$ funtzioak dira, beren nodoan 1 eta gainerakoetan 0 balio dutenak:",
-              en: "Lagrange builds the same unique polynomial, but directly and symmetrically. The key are the functions $L_i(x)$, designed to equal 1 at their node and 0 at the others:"
+              en: "Lagrange builds the same unique polynomial in direct, symmetric form. The functions $L_i(x)$ equal 1 at their node and 0 at the others:"
             }
           },
           {
@@ -371,15 +371,15 @@ export const interpolacionArticles: ContentEntry[] = [
                 text: {
                   es: "La propiedad cardinal anula todas las bases salvo la que corresponde al propio nodo $x_k$:",
                   eu: "Propietate kardinalak oinarri guztiak anulatzen ditu, $x_k$ nodoari dagokiona izan ezik:",
-                  en: "The cardinal property kills every basis function except the one attached to the node $x_k$ itself:"
+                  en: "The cardinal property cancels all basis functions except the one attached to the node $x_k$:"
                 },
                 formula: "L_i(x_k)=\\begin{cases}0,& i\\ne k\\\\[2pt]1,& i=k\\end{cases}"
               },
               {
                 text: {
-                  es: "Así solo sobrevive el término $i=k$, y el interpolante reproduce exactamente el dato de ese nodo:",
-                  eu: "Horrela $i=k$ terminoa bakarrik geratzen da, eta interpolatzaileak nodo horretako datua zehazki berreskuratzen du:",
-                  en: "Thus only the term $i=k$ survives, and the interpolant exactly reproduces the datum at that node:"
+                  es: "Así solo sobrevive el término $i=k$, y el interpolante reproduce el dato de ese nodo:",
+                  eu: "Horrela $i=k$ terminoa bakarrik geratzen da, eta interpolatzaileak nodo horretako datua berreskuratzen du:",
+                  en: "Only the term $i=k$ remains, and the interpolant reproduces the datum at that node:"
                 },
                 formula: "p_n(x_k)=L_k(x_k)\\,f(x_k)=f(x_k)"
               }
@@ -400,7 +400,7 @@ export const interpolacionArticles: ContentEntry[] = [
               es: [
                 "Lagrange es directo y simétrico: ideal para pocos nodos y para deducir reglas (cuadratura, diferenciación).",
                 "Newton es incremental: añadir un nodo cuesta un término, no rehacer todo.",
-                "Ambos dan el mismo polinomio y comparten exactamente la misma cota de error."
+                "Ambos dan el mismo polinomio y comparten la misma cota de error."
               ],
               eu: [
                 "Lagrange zuzena eta simetrikoa da: nodo gutxirako eta erregelak deduzitzeko egokia (kuadratura, deribazioa).",
@@ -410,7 +410,7 @@ export const interpolacionArticles: ContentEntry[] = [
               en: [
                 "Lagrange is direct and symmetric: ideal for few nodes and for deriving rules (quadrature, differentiation).",
                 "Newton is incremental: adding a node costs one term, not a full rebuild.",
-                "Both give the same polynomial and share exactly the same error bound."
+                "Both give the same polynomial and share the same error bound."
               ]
             }
           },
@@ -518,7 +518,7 @@ export const interpolacionArticles: ContentEntry[] = [
             text: {
               es: "Hasta ahora forzábamos que el polinomio pasara por los puntos. Si además conocemos la derivada de $f$ en esos puntos, podemos imponerla también: eso controla la pendiente y suele mejorar mucho la aproximación.",
               eu: "Orain arte polinomioa puntuetatik pasatzera behartzen genuen. Gainera puntu horietan $f$-ren deribatua ezagutzen badugu, hura ere inposa dezakegu: horrek malda kontrolatzen du eta hurbilketa asko hobetu ohi du.",
-              en: "So far we forced the polynomial through the points. If we also know $f$'s derivative at those points, we can impose it too: this controls the slope and usually improves the approximation a lot."
+              en: "So far we forced the polynomial through the points. If we also know $f$'s derivative at those points, we can impose it too: this controls the slope and often improves the approximation."
             }
           },
           {

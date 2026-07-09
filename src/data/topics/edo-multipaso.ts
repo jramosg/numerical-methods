@@ -57,9 +57,9 @@ export const edoMultipasoArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "La integral no se puede calcular porque el integrando depende de la solución desconocida. La idea de Adams-Bashforth: sustituir $f$ por el [[interpolacion-lagrange|polinomio que la interpola]] en los nodos anteriores $t_k, t_{k-1},\\dots$, donde sus valores ya se conocen, e integrar ese polinomio exactamente. Como solo usa valores ya calculados, el método resultante es explícito.",
-              eu: "Integrala ezin da kalkulatu, integrakizuna soluzio ezezagunaren araberakoa delako. Adams-Bashforth-en ideia: $f$ ordezkatu aurreko nodoetan ($t_k, t_{k-1},\\dots$) [[interpolacion-lagrange|interpolatzen duen polinomioaz]], non bere balioak dagoeneko ezagunak diren, eta polinomio hori zehazki integratu. Kalkulatutako balioak soilik erabiltzen dituenez, lortutako metodoa esplizitua da.",
-              en: "The integral cannot be computed because the integrand depends on the unknown solution. The Adams-Bashforth idea: replace $f$ by the [[interpolacion-lagrange|polynomial that interpolates it]] at the previous nodes $t_k, t_{k-1},\\dots$, where its values are already known, and integrate that polynomial exactly. Since it only uses already-computed values, the resulting method is explicit."
+              es: "La integral no se puede calcular porque el integrando depende de la solución desconocida. Adams-Bashforth sustituye $f$ por el [[interpolacion-lagrange|polinomio que la interpola]] en los nodos anteriores $t_k, t_{k-1},\\dots$, donde sus valores ya se conocen, e integra ese polinomio. Como solo usa valores ya calculados, el método resultante es explícito.",
+              eu: "Integrala ezin da kalkulatu, integrakizuna soluzio ezezagunaren araberakoa delako. Adams-Bashforth-ek $f$ ordezkatzen du aurreko nodoetan ($t_k, t_{k-1},\\dots$) [[interpolacion-lagrange|interpolatzen duen polinomioaz]], non bere balioak dagoeneko ezagunak diren, eta polinomio hori integratzen du. Kalkulatutako balioak soilik erabiltzen dituenez, lortutako metodoa esplizitua da.",
+              en: "The integral cannot be computed because the integrand depends on the unknown solution. Adams-Bashforth replaces $f$ by the [[interpolacion-lagrange|polynomial that interpolates it]] at the previous nodes $t_k, t_{k-1},\\dots$, where its values are known, and integrates that polynomial. Since it uses already-computed values, the resulting method is explicit."
             }
           }
         ]
@@ -117,9 +117,9 @@ export const edoMultipasoArticles: ContentEntry[] = [
             variant: "note",
             title: { es: "Regularidades útiles", eu: "Erregulartasun erabilgarriak", en: "Useful regularities" },
             text: {
-              es: "En todo Adams-Bashforth los coeficientes suman el denominador ($3-1=2$, $23-16+5=12$, $55-59+37-9=24$): la fórmula reproduce exactamente el caso $f$ constante. Un AB de $m$ pasos tiene orden $m$, y los signos alternan a partir del primer coeficiente.",
-              eu: "Adams-Bashforth guztietan koefizienteek izendatzailea batzen dute ($3-1=2$, $23-16+5=12$, $55-59+37-9=24$): formulak $f$ konstantearen kasua zehazki erreproduzitzen du. $m$ pausoko AB batek $m$ ordena du, eta zeinuak txandakatu egiten dira lehen koefizientetik aurrera.",
-              en: "In every Adams-Bashforth the coefficients sum to the denominator ($3-1=2$, $23-16+5=12$, $55-59+37-9=24$): the formula reproduces the constant-$f$ case exactly. An $m$-step AB has order $m$, and the signs alternate from the first coefficient on."
+              es: "En cada fórmula de Adams-Bashforth los coeficientes suman el denominador ($3-1=2$, $23-16+5=12$, $55-59+37-9=24$): la fórmula reproduce el caso $f$ constante. Un AB de $m$ pasos tiene orden $m$, y los signos alternan a partir del primer coeficiente.",
+              eu: "Adams-Bashforth formula bakoitzean koefizienteek izendatzailea batzen dute ($3-1=2$, $23-16+5=12$, $55-59+37-9=24$): formulak $f$ konstantearen kasua erreproduzitzen du. $m$ pausoko AB batek $m$ ordena du, eta zeinuak txandakatu egiten dira lehen koefizientetik aurrera.",
+              en: "In each Adams-Bashforth formula the coefficients sum to the denominator ($3-1=2$, $23-16+5=12$, $55-59+37-9=24$): the formula reproduces the constant-$f$ case. An $m$-step AB has order $m$, and the signs alternate from the first coefficient on."
             }
           }
         ]
@@ -213,9 +213,9 @@ export const edoMultipasoArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Como $y_{k+1}$ aparece en los dos lados, cada paso exige resolver una ecuación no lineal, normalmente con el [[no-lineales-newton-raphson|método de Newton-Raphson]]:",
-              eu: "$y_{k+1}$ bi aldeetan agertzen denez, pauso bakoitzak ekuazio ez-lineal bat ebaztea eskatzen du, normalean [[no-lineales-newton-raphson|Newton-Raphson metodoarekin]]:",
-              en: "Since $y_{k+1}$ appears on both sides, each step requires solving a nonlinear equation, usually with the [[no-lineales-newton-raphson|Newton-Raphson method]]:"
+              es: "Como $y_{k+1}$ aparece en los dos lados, cada paso exige resolver una ecuación no lineal, a menudo con el [[no-lineales-newton-raphson|método de Newton-Raphson]]:",
+              eu: "$y_{k+1}$ bi aldeetan agertzen denez, pauso bakoitzak ekuazio ez-lineal bat ebaztea eskatzen du, askotan [[no-lineales-newton-raphson|Newton-Raphson metodoarekin]]:",
+              en: "Since $y_{k+1}$ appears on both sides, each step requires solving a nonlinear equation, often with the [[no-lineales-newton-raphson|Newton-Raphson method]]:"
             }
           },
           {
@@ -229,7 +229,7 @@ export const edoMultipasoArticles: ContentEntry[] = [
             text: {
               es: "Un Adams-Moulton de $m$ pasos tiene orden $m+1$: con los mismos nodos, un orden más que Adams-Bashforth y con constante de error menor. Además es mucho más estable, lo que resulta decisivo en [[edo-problemas-rigidos|problemas rígidos]]. También necesita arranque con un método de un paso. Para evitar el coste de Newton en cada paso se usan los pares [[edo-predictor-corrector|predictor-corrector]].",
               eu: "$m$ pausoko Adams-Moulton batek $m+1$ ordena du: nodo berberekin, Adams-Bashforth baino ordena bat gehiago eta errore-konstante txikiagoarekin. Gainera askoz egonkorragoa da, [[edo-problemas-rigidos|problema zurrunetan]] erabakigarria dena. Urrats bakarreko metodo batekin abiarazi behar da hau ere. Pauso bakoitzean Newton-en kostua saihesteko [[edo-predictor-corrector|iragarle-zuzentzaile]] bikoteak erabiltzen dira.",
-              en: "An $m$-step Adams-Moulton has order $m+1$: with the same nodes, one order more than Adams-Bashforth and with a smaller error constant. It is also far more stable, which is decisive in [[edo-problemas-rigidos|stiff problems]]. It too needs startup with a one-step method. To avoid Newton's cost at every step one uses the [[edo-predictor-corrector|predictor-corrector]] pairs."
+              en: "An $m$-step Adams-Moulton has order $m+1$: with the same nodes, one order more than Adams-Bashforth and with a smaller error constant. Its larger stability region matters in [[edo-problemas-rigidos|stiff problems]]. It too needs startup with a one-step method. [[edo-predictor-corrector|Predictor-corrector]] pairs avoid Newton's cost at each step."
             }
           }
         ]
@@ -338,7 +338,7 @@ export const edoMultipasoArticles: ContentEntry[] = [
             text: {
               es: "En problemas rígidos, los métodos implícitos superan a los explícitos y los de orden bajo suelen comportarse mejor. En la práctica se usan métodos de paso adaptativo, que concentran puntos donde la solución cambia deprisa; las bibliotecas numéricas ofrecen integradores específicos para problemas rígidos basados en fórmulas implícitas.",
               eu: "Problema zurrunetan, metodo inplizituek esplizituak gainditzen dituzte eta ordena baxukoek hobeto jokatu ohi dute. Praktikan pausu moldakorreko metodoak erabiltzen dira, soluzioa azkar aldatzen den lekuan puntuak pilatzen dituztenak; liburutegi numerikoek formula inplizituetan oinarritutako integratzaile bereziak eskaintzen dituzte problema zurrunetarako.",
-              en: "In stiff problems, implicit methods beat explicit ones and low-order ones usually behave better. In practice, adaptive-step methods are used, concentrating points where the solution changes quickly; numerical libraries provide dedicated stiff integrators based on implicit formulas."
+              en: "In stiff problems, implicit methods beat explicit ones and low-order ones often behave better. In practice, adaptive-step methods concentrate points where the solution changes fast; numerical libraries provide dedicated stiff integrators based on implicit formulas."
             }
           }
         ]
@@ -379,9 +379,9 @@ export const edoMultipasoDerivations: ContentEntry[] = [
             steps: [
               {
                 text: {
-                  es: "Por el Teorema Fundamental del Cálculo, integrar $y'=f(t,y)$ entre $t_k$ y $t_{k+1}$ da una igualdad exacta — todavía no hay ninguna aproximación:",
-                  eu: "Kalkuluaren Oinarrizko Teoremagatik, $y'=f(t,y)$ integratzea $t_k$ eta $t_{k+1}$ artean berdintza zehatza da — oraindik ez dago inolako hurbilketarik:",
-                  en: "By the Fundamental Theorem of Calculus, integrating $y'=f(t,y)$ between $t_k$ and $t_{k+1}$ gives an exact identity — there is no approximation yet:"
+                  es: "Por el Teorema Fundamental del Cálculo, integrar $y'=f(t,y)$ entre $t_k$ y $t_{k+1}$ da una igualdad exacta. Todavía no hay ninguna aproximación:",
+                  eu: "Kalkuluaren Oinarrizko Teoremagatik, $y'=f(t,y)$ integratzea $t_k$ eta $t_{k+1}$ artean berdintza zehatza da. Oraindik ez dago inolako hurbilketarik:",
+                  en: "By the Fundamental Theorem of Calculus, integrating $y'=f(t,y)$ between $t_k$ and $t_{k+1}$ gives an exact identity. There is no approximation yet:"
                 },
                 formula: "y(t_{k+1})=y(t_k)+\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau"
               },
@@ -424,9 +424,9 @@ export const edoMultipasoDerivations: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "Atención al detalle clave: los nodos de interpolación son $t_{k-1}$ y $t_k$, pero el intervalo de integración es $[t_k,\\,t_{k+1}]$. Estamos extrapolando el polinomio fuera de sus nodos — por eso el método es explícito.",
-                  eu: "Erreparatu funtsezko xehetasunari: interpolazio-nodoak $t_{k-1}$ eta $t_k$ dira, baina integrazio-tartea $[t_k,\\,t_{k+1}]$ da. Polinomioa bere nodoetatik kanpo estrapolatzen ari gara — horregatik da metodoa esplizitua.",
-                  en: "Note the key detail: the interpolation nodes are $t_{k-1}$ and $t_k$, but the integration interval is $[t_k,\\,t_{k+1}]$. We are extrapolating the polynomial beyond its nodes — that is why the method is explicit."
+                  es: "Los nodos de interpolación son $t_{k-1}$ y $t_k$, pero el intervalo de integración es $[t_k,\\,t_{k+1}]$. Al extrapolar el polinomio fuera de sus nodos, el método queda explícito.",
+                  eu: "Interpolazio-nodoak $t_{k-1}$ eta $t_k$ dira, baina integrazio-tartea $[t_k,\\,t_{k+1}]$ da. Polinomioa bere nodoetatik kanpo estrapolatzean, metodoa esplizitua da.",
+                  en: "The interpolation nodes are $t_{k-1}$ and $t_k$, but the integration interval is $[t_k,\\,t_{k+1}]$. Extrapolating the polynomial beyond its nodes makes the method explicit."
                 }
               }
             ]
@@ -491,9 +491,9 @@ export const edoMultipasoDerivations: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "Como siempre, el error global pierde una potencia al acumular $N\\propto 1/h$ pasos: AB2 es de orden 2, igual que [[edo-metodo-heun|Heun]], pero con una sola evaluación nueva de $f$ por paso. La [[ejercicio-ab2-verhulst|estimación numérica del orden]] lo confirma.",
+                  es: "El error global pierde una potencia al acumular $N\\propto 1/h$ pasos: AB2 es de orden 2, igual que [[edo-metodo-heun|Heun]], pero con una sola evaluación nueva de $f$ por paso. La [[ejercicio-ab2-verhulst|estimación numérica del orden]] lo confirma.",
                   eu: "Beti bezala, errore globalak potentzia bat galtzen du $N\\propto 1/h$ pauso metatzean: AB2 2. ordenakoa da, [[edo-metodo-heun|Heun]] bezala, baina pauso bakoitzeko $f$-ren ebaluazio berri bakarrarekin. [[ejercicio-ab2-verhulst|Ordenaren estimazio numerikoak]] baieztatzen du.",
-                  en: "As always, the global error loses one power when accumulating $N\\propto 1/h$ steps: AB2 is order 2, like [[edo-metodo-heun|Heun]], but with a single new evaluation of $f$ per step. The [[ejercicio-ab2-verhulst|numerical order estimation]] confirms it."
+                  en: "The global error loses one power when accumulating $N\\propto 1/h$ steps: AB2 is order 2, like [[edo-metodo-heun|Heun]], but with a single new evaluation of $f$ per step. The [[ejercicio-ab2-verhulst|numerical order estimation]] confirms it."
                 }
               }
             ]
@@ -574,9 +574,9 @@ export const edoMultipasoDerivations: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "Multiplicando por $h$ queda AM2, que es exactamente la [[deduccion-integracion-trapecio|regla del trapecio]] aplicada a la integral de la pendiente:",
+                  es: "Multiplicando por $h$ queda AM2, la [[deduccion-integracion-trapecio|regla del trapecio]] aplicada a la integral de la pendiente:",
                   eu: "$h$-z biderkatuz AM2 geratzen da, malda-integralari aplikatutako [[deduccion-integracion-trapecio|trapezio-erregela]] dena, hain zuzen:",
-                  en: "Multiplying by $h$ gives AM2, which is exactly the [[deduccion-integracion-trapecio|trapezoidal rule]] applied to the slope integral:"
+                  en: "Multiplying by $h$ gives AM2, the [[deduccion-integracion-trapecio|trapezoidal rule]] applied to the slope integral:"
                 },
                 formula: "y_{k+1}=y_k+\\frac{h}{2}\\bigl(f_{k+1}+f_k\\bigr)"
               },
@@ -634,7 +634,7 @@ export const edoMultipasoExercises: ContentEntry[] = [
               en: ["N", "Maximum error $E_N$", "$\\log_2(E_{N/2}/E_N)$"]
             },
             rows: [
-              ["2", "10.1480", "—"],
+              ["2", "10.1480", "n/a"],
               ["4", "4.5230", "1.1658"],
               ["8", "0.6324", "2.8384"],
               ["16", "0.1938", "1.7064"],
@@ -649,7 +649,7 @@ export const edoMultipasoExercises: ContentEntry[] = [
             text: {
               es: "La columna del orden tiende a 2 al aumentar $N$, confirmando que AB2 es de orden 2, tal y como predice el término de error $\\frac{5}{12}h^3y'''$ de la [[deduccion-ab2|deducción]].",
               eu: "Ordenaren zutabea 2ra hurbiltzen da $N$ handitzean, AB2 2. ordenakoa dela baieztatuz, [[deduccion-ab2|dedukzioko]] $\\frac{5}{12}h^3y'''$ errore-gaiak aurreikusten duen bezala.",
-              en: "The order column tends to 2 as $N$ increases, confirming AB2 is order 2, just as the error term $\\frac{5}{12}h^3y'''$ from the [[deduccion-ab2|derivation]] predicts."
+              en: "The order column tends to 2 as $N$ increases, confirming AB2 is order 2, as the error term $\\frac{5}{12}h^3y'''$ from the [[deduccion-ab2|derivation]] predicts."
             }
           }
         ]
