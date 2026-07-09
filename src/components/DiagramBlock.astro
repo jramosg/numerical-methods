@@ -1,0 +1,289 @@
+---
+import RichText from "./RichText.astro";
+import type { Lang } from "@/data/site";
+
+interface Props {
+  variant:
+    | "trapezoid-interpolant"
+    | "lagrange-basis-areas"
+    | "trapezoid-geometry"
+    | "composite-trapezoid"
+    | "midpoint-simple"
+    | "composite-midpoint";
+  caption: Record<Lang, string>;
+  lang: Lang;
+}
+
+const { variant, caption, lang } = Astro.props;
+
+const labels = {
+  functionF: {
+    es: "función f",
+    eu: "f funtzioa",
+    en: "function f"
+  },
+  interpolant: {
+    es: "recta interpolante",
+    eu: "zuzen interpolatzailea",
+    en: "interpolating line"
+  },
+  approximateArea: {
+    es: "área aproximada",
+    eu: "hurbildutako azalera",
+    en: "approximate area"
+  },
+  basisArea: {
+    es: "área h/2",
+    eu: "h/2 azalera",
+    en: "area h/2"
+  },
+  base: {
+    es: "base h=b-a",
+    eu: "oinarria h=b-a",
+    en: "base h=b-a"
+  },
+  width: {
+    es: "anchura h",
+    eu: "zabalera h",
+    en: "width h"
+  },
+  repeatedNode: {
+    es: "nodos interiores: peso 2",
+    eu: "barruko nodoak: 2 pisua",
+    en: "interior nodes: weight 2"
+  },
+  midpoint: {
+    es: "punto medio",
+    eu: "erdiko puntua",
+    en: "midpoint"
+  },
+  midpointHeights: {
+    es: "alturas f(m_i)",
+    eu: "altuerak f(m_i)",
+    en: "heights f(m_i)"
+  }
+};
+---
+
+<figure class="diagram-figure">
+  {
+    variant === "trapezoid-interpolant" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="54" y1="256" x2="590" y2="256" />
+        <line class="diagram-axis" x1="78" y1="278" x2="78" y2="38" />
+        <polygon
+          class="diagram-fill"
+          points="130,256 130,168 520,105 520,256"
+        />
+        <path
+          class="diagram-curve"
+          d="M92 238 C140 154, 180 122, 226 128 S322 204, 382 158 S474 74, 552 70"
+        />
+        <line class="diagram-line" x1="130" y1="168" x2="520" y2="105" />
+        <line class="diagram-guide" x1="130" y1="256" x2="130" y2="168" />
+        <line class="diagram-guide" x1="520" y1="256" x2="520" y2="105" />
+        <circle class="diagram-point" cx="130" cy="168" r="5" />
+        <circle class="diagram-point" cx="520" cy="105" r="5" />
+        <text class="diagram-label" x="119" y="282">a</text>
+        <text class="diagram-label" x="511" y="282">b</text>
+        <text class="diagram-label" x="84" y="168">f(a)</text>
+        <text class="diagram-label" x="528" y="109">f(b)</text>
+        <text class="diagram-label accent" x="360" y="87">
+          {labels.interpolant[lang]}
+        </text>
+        <text class="diagram-label muted" x="410" y="62">
+          {labels.functionF[lang]}
+        </text>
+        <text class="diagram-label accent" x="244" y="230">
+          {labels.approximateArea[lang]}
+        </text>
+      </svg>
+    )
+  }
+  {
+    variant === "lagrange-basis-areas" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <g transform="translate(44 36)">
+          <line class="diagram-axis" x1="22" y1="218" x2="266" y2="218" />
+          <line class="diagram-axis" x1="44" y1="236" x2="44" y2="22" />
+          <polygon class="diagram-fill" points="44,42 234,218 44,218" />
+          <line class="diagram-line" x1="44" y1="42" x2="234" y2="218" />
+          <line class="diagram-guide" x1="234" y1="218" x2="234" y2="42" />
+          <text class="diagram-label" x="33" y="247">a</text>
+          <text class="diagram-label" x="223" y="247">b</text>
+          <text class="diagram-label" x="24" y="47">1</text>
+          <text class="diagram-label accent" x="88" y="135">L₀(x)</text>
+          <text class="diagram-label accent" x="86" y="198">
+            {labels.basisArea[lang]}
+          </text>
+        </g>
+        <g transform="translate(344 36)">
+          <line class="diagram-axis" x1="22" y1="218" x2="266" y2="218" />
+          <line class="diagram-axis" x1="44" y1="236" x2="44" y2="22" />
+          <polygon class="diagram-fill" points="44,218 234,42 234,218" />
+          <line class="diagram-line" x1="44" y1="218" x2="234" y2="42" />
+          <line class="diagram-guide" x1="234" y1="218" x2="234" y2="42" />
+          <text class="diagram-label" x="33" y="247">a</text>
+          <text class="diagram-label" x="223" y="247">b</text>
+          <text class="diagram-label" x="238" y="47">1</text>
+          <text class="diagram-label accent" x="122" y="135">L₁(x)</text>
+          <text class="diagram-label accent" x="118" y="198">
+            {labels.basisArea[lang]}
+          </text>
+        </g>
+      </svg>
+    )
+  }
+  {
+    variant === "trapezoid-geometry" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="58" y1="252" x2="586" y2="252" />
+        <polygon
+          class="diagram-fill"
+          points="148,252 148,174 498,92 498,252"
+        />
+        <line class="diagram-line" x1="148" y1="174" x2="498" y2="92" />
+        <line class="diagram-side" x1="148" y1="252" x2="148" y2="174" />
+        <line class="diagram-side" x1="498" y1="252" x2="498" y2="92" />
+        <line class="diagram-guide" x1="148" y1="276" x2="498" y2="276" />
+        <circle class="diagram-point" cx="148" cy="174" r="5" />
+        <circle class="diagram-point" cx="498" cy="92" r="5" />
+        <text class="diagram-label" x="138" y="301">a</text>
+        <text class="diagram-label" x="489" y="301">b</text>
+        <text class="diagram-label accent" x="269" y="301">
+          {labels.base[lang]}
+        </text>
+        <text class="diagram-label" x="88" y="212">f(a)</text>
+        <text class="diagram-label" x="508" y="174">f(b)</text>
+        <text class="diagram-label accent" x="214" y="160">
+          A = h(f(a)+f(b))/2
+        </text>
+      </svg>
+    )
+  }
+  {
+    variant === "composite-trapezoid" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="58" y1="254" x2="590" y2="254" />
+        <line class="diagram-axis" x1="78" y1="276" x2="78" y2="44" />
+        <path
+          class="diagram-curve"
+          d="M94 226 C150 168, 186 146, 234 154 S326 230, 386 172 S482 76, 552 82"
+        />
+        <polygon class="diagram-fill" points="120,254 120,190 220,158 220,254" />
+        <polygon class="diagram-fill" points="220,254 220,158 320,198 320,254" />
+        <polygon class="diagram-fill" points="320,254 320,198 420,138 420,254" />
+        <polygon class="diagram-fill" points="420,254 420,138 520,96 520,254" />
+        <polyline
+          class="diagram-line"
+          points="120,190 220,158 320,198 420,138 520,96"
+        />
+        <g class="diagram-thin">
+          <line x1="120" y1="254" x2="120" y2="190" />
+          <line x1="220" y1="254" x2="220" y2="158" />
+          <line x1="320" y1="254" x2="320" y2="198" />
+          <line x1="420" y1="254" x2="420" y2="138" />
+          <line x1="520" y1="254" x2="520" y2="96" />
+        </g>
+        <circle class="diagram-point" cx="120" cy="190" r="5" />
+        <circle class="diagram-point" cx="220" cy="158" r="5" />
+        <circle class="diagram-point" cx="320" cy="198" r="5" />
+        <circle class="diagram-point" cx="420" cy="138" r="5" />
+        <circle class="diagram-point" cx="520" cy="96" r="5" />
+        <line class="diagram-guide" x1="120" y1="280" x2="220" y2="280" />
+        <text class="diagram-label accent" x="147" y="304">
+          {labels.width[lang]}
+        </text>
+        <text class="diagram-label" x="108" y="280">x₀</text>
+        <text class="diagram-label" x="209" y="280">x₁</text>
+        <text class="diagram-label" x="309" y="280">x₂</text>
+        <text class="diagram-label" x="409" y="280">x₃</text>
+        <text class="diagram-label" x="505" y="280">xₙ</text>
+        <text class="diagram-label accent" x="276" y="82">
+          {labels.repeatedNode[lang]}
+        </text>
+      </svg>
+    )
+  }
+  {
+    variant === "midpoint-simple" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="58" y1="254" x2="590" y2="254" />
+        <line class="diagram-axis" x1="78" y1="276" x2="78" y2="42" />
+        <path
+          class="diagram-curve"
+          d="M96 222 C164 144, 232 116, 322 148 S478 122, 554 70"
+        />
+        <rect class="diagram-fill" x="146" y="138" width="348" height="116" />
+        <line class="diagram-line" x1="146" y1="138" x2="494" y2="138" />
+        <line class="diagram-side" x1="146" y1="254" x2="146" y2="138" />
+        <line class="diagram-side" x1="494" y1="254" x2="494" y2="138" />
+        <line class="diagram-guide" x1="320" y1="254" x2="320" y2="138" />
+        <circle class="diagram-point" cx="320" cy="138" r="5" />
+        <text class="diagram-label" x="137" y="282">a</text>
+        <text class="diagram-label" x="486" y="282">b</text>
+        <text class="diagram-label" x="313" y="282">m</text>
+        <text class="diagram-label accent" x="246" y="122">f(m)</text>
+        <text class="diagram-label accent" x="220" y="222">
+          (b-a) f(m)
+        </text>
+        <text class="diagram-label muted" x="392" y="72">
+          {labels.functionF[lang]}
+        </text>
+        <text class="diagram-label accent" x="274" y="304">
+          {labels.midpoint[lang]}
+        </text>
+      </svg>
+    )
+  }
+  {
+    variant === "composite-midpoint" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="58" y1="254" x2="590" y2="254" />
+        <line class="diagram-axis" x1="78" y1="276" x2="78" y2="42" />
+        <path
+          class="diagram-curve"
+          d="M96 228 C154 150, 218 122, 278 164 S376 222, 430 146 S502 76, 554 82"
+        />
+        <rect class="diagram-fill" x="120" y="166" width="100" height="88" />
+        <rect class="diagram-fill" x="220" y="150" width="100" height="104" />
+        <rect class="diagram-fill" x="320" y="186" width="100" height="68" />
+        <rect class="diagram-fill" x="420" y="112" width="100" height="142" />
+        <g class="diagram-thin">
+          <line x1="120" y1="254" x2="120" y2="166" />
+          <line x1="220" y1="254" x2="220" y2="150" />
+          <line x1="320" y1="254" x2="320" y2="186" />
+          <line x1="420" y1="254" x2="420" y2="112" />
+          <line x1="520" y1="254" x2="520" y2="112" />
+        </g>
+        <circle class="diagram-point" cx="170" cy="166" r="5" />
+        <circle class="diagram-point" cx="270" cy="150" r="5" />
+        <circle class="diagram-point" cx="370" cy="186" r="5" />
+        <circle class="diagram-point" cx="470" cy="112" r="5" />
+        <line class="diagram-guide" x1="120" y1="280" x2="220" y2="280" />
+        <text class="diagram-label accent" x="147" y="304">
+          {labels.width[lang]}
+        </text>
+        <text class="diagram-label" x="108" y="280">x₀</text>
+        <text class="diagram-label" x="209" y="280">x₁</text>
+        <text class="diagram-label" x="309" y="280">x₂</text>
+        <text class="diagram-label" x="409" y="280">x₃</text>
+        <text class="diagram-label" x="508" y="280">xₙ</text>
+        <text class="diagram-label accent" x="140" y="130">m₀</text>
+        <text class="diagram-label accent" x="242" y="114">m₁</text>
+        <text class="diagram-label accent" x="340" y="150">m₂</text>
+        <text class="diagram-label accent" x="442" y="76">mᵢ</text>
+        <text class="diagram-label accent" x="332" y="56">
+          {labels.midpointHeights[lang]}
+        </text>
+      </svg>
+    )
+  }
+  <figcaption><RichText text={caption[lang]} lang={lang} /></figcaption>
+</figure>

@@ -1,4 +1,5 @@
 ---
+import DiagramBlock from "./DiagramBlock.astro";
 import FormulaBlock from "./FormulaBlock.astro";
 import RichText from "./RichText.astro";
 import { derivations, type Block } from "@/data/content";
@@ -35,6 +36,10 @@ const derivationEntry =
     <FormulaBlock formula={block.tex} />
     {block.caption && <figcaption><RichText text={block.caption[lang]} lang={lang} /></figcaption>}
   </figure>
+)}
+
+{block.kind === "diagram" && (
+  <DiagramBlock variant={block.variant} caption={block.caption} lang={lang} />
 )}
 
 {block.kind === "list" && (
