@@ -61,6 +61,17 @@ export type Step = {
 export type Block =
   | { kind: "paragraph"; text: LocalizedText }
   | { kind: "formula"; tex: string; caption?: LocalizedText }
+  | {
+      kind: "diagram";
+      variant:
+        | "trapezoid-interpolant"
+        | "lagrange-basis-areas"
+        | "trapezoid-geometry"
+        | "composite-trapezoid"
+        | "midpoint-simple"
+        | "composite-midpoint";
+      caption: LocalizedText;
+    }
   | { kind: "steps"; title?: LocalizedText; steps: Step[] }
   | {
       kind: "example";
@@ -199,8 +210,9 @@ export const formulaGroups = [
       en: "Integration"
     },
     formulas: [
-      "M_n=h\\sum_{i=0}^{n-1}f\\left(\\frac{x_i+x_{i+1}}{2}\\right)",
-      "T_n=\\frac{h}{2}\\left(f_0+2\\sum_{i=1}^{n-1}f_i+f_n\\right)",
+      "M_1=(b-a)f\\left(\\frac{a+b}{2}\\right),\\qquad E_M=\\frac{(b-a)^3}{24}f''(\\xi)",
+      "M_n=h\\sum_{i=0}^{n-1}f\\left(a+\\left(i+\\frac12\\right)h\\right),\\qquad E_M=\\frac{b-a}{24}h^2f''(\\xi)",
+      "T_n=\\frac{h}{2}\\left(f_0+2\\sum_{i=1}^{n-1}f_i+f_n\\right),\\qquad E_T=-\\frac{b-a}{12}h^2f''(\\xi)",
       "S_n=\\frac{h}{3}\\left(f_0+f_n+4\\sum_{i\\ odd}f_i+2\\sum_{i\\ even}f_i\\right)",
       "\\int_a^b f(x)dx=\\frac{b-a}{2}\\int_{-1}^{1}f\\left(\\frac{a+b}{2}+\\frac{b-a}{2}t\\right)dt"
     ]

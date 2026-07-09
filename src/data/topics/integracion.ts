@@ -178,6 +178,7 @@ export const integracionArticles: ContentEntry[] = [
     prerequisites: ["integracion-cuadratura-lagrange"],
     related: [
       "deduccion-integracion-trapecio",
+      "deduccion-integracion-trapecio-compuesto",
       "deduccion-integracion-simpson",
       "ejercicio-integracion-trapecio-simpson"
     ],
@@ -248,6 +249,57 @@ export const integracionArticles: ContentEntry[] = [
             }
           },
           {
+            kind: "diagram",
+            variant: "composite-trapezoid",
+            caption: {
+              es: "El trapecio compuesto suma trapecios simples. Cada nodo interior es extremo derecho de un subintervalo y extremo izquierdo del siguiente.",
+              eu: "Trapezio konposatuak trapezio sinpleak batzen ditu. Barruko nodo bakoitza azpitarte baten eskuineko muturra eta hurrengoaren ezkerreko muturra da.",
+              en: "The composite trapezoid rule sums simple trapezoids. Each interior node is the right endpoint of one subinterval and the left endpoint of the next."
+            }
+          },
+          {
+            kind: "steps",
+            title: {
+              es: "Deducción para n subintervalos",
+              eu: "n azpitartetarako dedukzioa",
+              en: "Derivation for n subintervals"
+            },
+            steps: [
+              {
+                text: {
+                  es: "Dividimos el intervalo con $x_i=a+ih$ y $h=(b-a)/n$.",
+                  eu: "Tartea $x_i=a+ih$ eta $h=(b-a)/n$ erabiliz banatzen dugu.",
+                  en: "Split the interval with $x_i=a+ih$ and $h=(b-a)/n$."
+                },
+                formula: "a=x_0<x_1<\\cdots<x_n=b"
+              },
+              {
+                text: {
+                  es: "En cada subintervalo $[x_i,x_{i+1}]$ aplicamos el trapecio simple:",
+                  eu: "$[x_i,x_{i+1}]$ azpitarte bakoitzean trapezio sinplea aplikatzen dugu:",
+                  en: "Apply the simple trapezoid rule on each subinterval $[x_i,x_{i+1}]$:"
+                },
+                formula: "T_i=\\frac{h}{2}\\left[f(x_i)+f(x_{i+1})\\right]"
+              },
+              {
+                text: {
+                  es: "Sumamos todos los trapecios. Al expandir la suma, los nodos interiores aparecen dos veces:",
+                  eu: "Trapezio guztiak batzen ditugu. Batura zabaltzean, barruko nodoak bi aldiz agertzen dira:",
+                  en: "Sum all trapezoids. After expanding the sum, interior nodes appear twice:"
+                },
+                formula: "\\begin{aligned}T_n&=\\sum_{i=0}^{n-1}\\frac{h}{2}\\left[f(x_i)+f(x_{i+1})\\right]\\\\&=\\frac{h}{2}\\left[f(x_0)+2\\sum_{i=1}^{n-1}f(x_i)+f(x_n)\\right]\\end{aligned}"
+              },
+              {
+                text: {
+                  es: "El error global sale de sumar los errores locales $-h^3 f''(\\xi_i)/12$ y aplicar el teorema del valor medio:",
+                  eu: "Errore globala $-h^3 f''(\\xi_i)/12$ errore lokalak batu eta batez besteko balioaren teorema aplikatuz lortzen da:",
+                  en: "The global error comes from summing the local errors $-h^3 f''(\\xi_i)/12$ and applying the mean value theorem:"
+                },
+                formula: "E_T=-\\frac{h^3}{12}\\sum_{i=0}^{n-1}f''(\\xi_i)=-\\frac{b-a}{12}h^2 f''(\\xi)"
+              }
+            ]
+          },
+          {
             kind: "formula",
             tex: "I\\approx\\frac{h}{2}\\left[f(x_0)+2\\sum_{i=1}^{n-1}f(x_i)+f(x_n)\\right],\\qquad h=\\frac{b-a}{n}"
           },
@@ -314,6 +366,7 @@ export const integracionArticles: ContentEntry[] = [
         },
         blocks: [
           { kind: "derivation", slug: "deduccion-integracion-trapecio" },
+          { kind: "derivation", slug: "deduccion-integracion-trapecio-compuesto" },
           { kind: "derivation", slug: "deduccion-integracion-simpson" }
         ]
       }
@@ -336,7 +389,12 @@ export const integracionArticles: ContentEntry[] = [
     },
     keywords: ["Newton-Cotes abiertas", "punto medio", "nodos interiores"],
     prerequisites: ["integracion-cuadratura-lagrange"],
-    related: ["ejercicio-integracion-punto-medio", "integracion-newton-cotes-cerradas"],
+    related: [
+      "deduccion-integracion-punto-medio-simple",
+      "deduccion-integracion-punto-medio-compuesto",
+      "ejercicio-integracion-punto-medio",
+      "integracion-newton-cotes-cerradas"
+    ],
     sections: [
       {
         heading: {
@@ -361,9 +419,77 @@ export const integracionArticles: ContentEntry[] = [
               en: ["Open rule", "Simple approximation", "Leading error"]
             },
             rows: [
-              ["Punto medio", "(b-a) f((a+b)/2)", "-h^3 f''(xi)/3, h=(b-a)/2"],
+              ["Punto medio", "(b-a) f((a+b)/2)", "(b-a)^3 f''(xi)/24"],
               ["Dos nodos interiores", "(b-a)/2 [f((2a+b)/3)+f((a+2b)/3)]", "3h^3 f''(xi)/4, h=(b-a)/3"],
               ["Tres nodos interiores", "(b-a)/3 [2f((3a+b)/4)-f((a+b)/2)+2f((a+3b)/4)]", "14h^5 f^(4)(xi)/45, h=(b-a)/4"]
+            ]
+          }
+        ]
+      },
+      {
+        heading: {
+          es: "Punto medio simple",
+          eu: "Erdiko puntu sinplea",
+          en: "Simple midpoint"
+        },
+        blocks: [
+          {
+            kind: "paragraph",
+            text: {
+              es: "El punto medio simple sustituye la curva por un rectángulo cuya altura se mide en el centro del intervalo. Usa un solo valor de la función, no los extremos.",
+              eu: "Erdiko puntu sinpleak kurba laukizuzen batez ordezkatzen du, eta altuera tartearen erdian neurtzen da. Funtzioaren balio bakarra erabiltzen du, ez muturrak.",
+              en: "The simple midpoint rule replaces the curve by a rectangle whose height is measured at the centre of the interval. It uses one function value, not the endpoints."
+            }
+          },
+          {
+            kind: "diagram",
+            variant: "midpoint-simple",
+            caption: {
+              es: "La aproximación es el área del rectángulo de base $b-a$ y altura $f(m)$, con $m=(a+b)/2$.",
+              eu: "Hurbilketa $b-a$ oinarriko eta $f(m)$ altuerako laukizuzenaren azalera da, $m=(a+b)/2$ izanik.",
+              en: "The approximation is the area of the rectangle with base $b-a$ and height $f(m)$, where $m=(a+b)/2$."
+            }
+          },
+          {
+            kind: "steps",
+            title: {
+              es: "Deducción directa",
+              eu: "Dedukzio zuzena",
+              en: "Direct derivation"
+            },
+            steps: [
+              {
+                text: {
+                  es: "Definimos el punto medio del intervalo:",
+                  eu: "Tartearen erdiko puntua definitzen dugu:",
+                  en: "Define the midpoint of the interval:"
+                },
+                formula: "m=\\frac{a+b}{2}"
+              },
+              {
+                text: {
+                  es: "Aproximamos $f(x)$ por la constante $f(m)$ en todo $[a,b]$:",
+                  eu: "$f(x)$ konstante batez hurbiltzen dugu $[a,b]$ osoan: $f(m)$.",
+                  en: "Approximate $f(x)$ by the constant $f(m)$ on all of $[a,b]$:"
+                },
+                formula: "\\int_a^b f(x)\\,dx\\approx\\int_a^b f(m)\\,dx"
+              },
+              {
+                text: {
+                  es: "Como $f(m)$ no depende de $x$, sale fuera de la integral y queda el área del rectángulo:",
+                  eu: "$f(m)$ ez denez $x$-ren araberakoa, integraletik kanpora ateratzen da eta laukizuzenaren azalera geratzen da:",
+                  en: "Since $f(m)$ does not depend on $x$, it factors out and leaves the rectangle area:"
+                },
+                formula: "M_1=(b-a)f\\!\\left(\\frac{a+b}{2}\\right)"
+              },
+              {
+                text: {
+                  es: "Si $f\\in\\mathcal{C}^2[a,b]$, el error exacto tiene signo positivo en la convención $E=I-M_1$:",
+                  eu: "$f\\in\\mathcal{C}^2[a,b]$ bada, errore zehatzak zeinu positiboa du $E=I-M_1$ konbentzioan:",
+                  en: "If $f\\in\\mathcal{C}^2[a,b]$, the exact error has positive sign under the convention $E=I-M_1$:"
+                },
+                formula: "E_M=\\int_a^b f(x)\\,dx-M_1=\\frac{(b-a)^3}{24}f''(\\xi)"
+              }
             ]
           }
         ]
@@ -378,23 +504,61 @@ export const integracionArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "El punto medio simple cubre un intervalo usando un nodo central. En la versión compuesta se toman bloques que no se solapan; por eso se evalúan los nodos pares en la notación del capítulo y el número de subintervalos debe ser par.",
-              eu: "Erdiko puntu sinpleak tarte bat nodo zentral batekin estaltzen du. Bertsio konposatuan gainjartzen ez diren blokeak hartzen dira; horregatik ebaluatzen dira nodo bikoitiak kapituluaren notazioan, eta azpitarten kopuruak bikoitia izan behar du.",
-              en: "The simple midpoint rule covers one interval with one central node. The composite version uses non-overlapping blocks, so the chapter notation evaluates even nodes and requires an even number of subintervals."
+              es: "Para usar punto medio en n subintervalos, se parte [a,b] con paso $h=(b-a)/n$ y se evalúa la función en el centro de cada subintervalo. Esta notación no obliga a que n sea par.",
+              eu: "Erdiko puntua n azpitartetan erabiltzeko, [a,b] tartea $h=(b-a)/n$ pausoz banatzen da eta funtzioa azpitarte bakoitzaren erdian ebaluatzen da. Notazio honek ez du n bikoitia izatea eskatzen.",
+              en: "To use midpoint on n subintervals, split [a,b] with step $h=(b-a)/n$ and evaluate the function at the centre of each subinterval. This notation does not require n to be even."
             }
           },
           {
-            kind: "formula",
-            tex: "I\\approx 2h\\left[f(x_0)+f(x_2)+\\cdots+f(x_{n-2})+f(x_n)\\right]"
-          },
-          {
-            kind: "formula",
-            tex: "E_M=\\frac{b-a}{6}h^2 f''(\\xi)",
+            kind: "diagram",
+            variant: "composite-midpoint",
             caption: {
-              es: "Error global del punto medio compuesto con la convención de h de la regla abierta.",
-              eu: "Erdiko puntu konposatuaren errore globala, erregela irekiaren h konbentzioarekin.",
-              en: "Global error of the composite midpoint rule under the open-rule convention for h."
+              es: "El punto medio compuesto suma rectángulos de anchura $h$. Cada altura es $f(m_i)$, con $m_i$ en el centro de su subintervalo.",
+              eu: "Erdiko puntu konposatuak $h$ zabalerako laukizuzenak batzen ditu. Altuera bakoitza $f(m_i)$ da, $m_i$ bere azpitartearen erdian dagoela.",
+              en: "Composite midpoint sums rectangles of width $h$. Each height is $f(m_i)$, with $m_i$ at the centre of its subinterval."
             }
+          },
+          {
+            kind: "steps",
+            title: {
+              es: "Deducción para n subintervalos",
+              eu: "n azpitartetarako dedukzioa",
+              en: "Derivation for n subintervals"
+            },
+            steps: [
+              {
+                text: {
+                  es: "Tomamos los nodos de la partición y el centro de cada subintervalo:",
+                  eu: "Partizioaren nodoak eta azpitarte bakoitzaren erdigunea hartzen ditugu:",
+                  en: "Take the partition nodes and the centre of each subinterval:"
+                },
+                formula: "x_i=a+ih,\\qquad m_i=\\frac{x_i+x_{i+1}}{2}=a+\\left(i+\\frac12\\right)h"
+              },
+              {
+                text: {
+                  es: "En el subintervalo $[x_i,x_{i+1}]$ usamos punto medio simple:",
+                  eu: "$[x_i,x_{i+1}]$ azpitartean erdiko puntu sinplea erabiltzen dugu:",
+                  en: "On the subinterval $[x_i,x_{i+1}]$, use the simple midpoint rule:"
+                },
+                formula: "M_i=h f(m_i)"
+              },
+              {
+                text: {
+                  es: "La regla compuesta es la suma de todos los rectángulos:",
+                  eu: "Erregela konposatua laukizuzen guztien batura da:",
+                  en: "The composite rule is the sum of all rectangles:"
+                },
+                formula: "M_n=h\\sum_{i=0}^{n-1}f(m_i)=h\\sum_{i=0}^{n-1}f\\!\\left(a+\\left(i+\\frac12\\right)h\\right)"
+              },
+              {
+                text: {
+                  es: "Sumando los errores locales $h^3 f''(\\xi_i)/24$ se obtiene el error global:",
+                  eu: "$h^3 f''(\\xi_i)/24$ errore lokalak batuz errore globala lortzen da:",
+                  en: "Summing the local errors $h^3 f''(\\xi_i)/24$ gives the global error:"
+                },
+                formula: "E_M=\\frac{h^3}{24}\\sum_{i=0}^{n-1}f''(\\xi_i)=\\frac{b-a}{24}h^2f''(\\xi)"
+              }
+            ]
           },
           {
             kind: "callout",
@@ -405,11 +569,22 @@ export const integracionArticles: ContentEntry[] = [
               en: "Do not mix nodes"
             },
             text: {
-              es: "En tablas, el punto medio puede requerir construir nodos auxiliares para que los datos medidos queden justo en los centros de los rectángulos.",
-              eu: "Tauletan, erdiko puntuak nodo laguntzaileak eraikitzea eska dezake, neurtutako datuak laukizuzenen erdian gera daitezen.",
-              en: "With tabulated data, midpoint may require auxiliary nodes so that the measured data lie at the centres of the rectangles."
+              es: "En tablas, los valores de punto medio deben estar en los centros $m_i$, no en los extremos $x_i$. Si la tabla solo da extremos, trapecio o Simpson suelen encajar mejor.",
+              eu: "Tauletan, erdiko puntuko balioek $m_i$ zentroetan egon behar dute, ez $x_i$ muturretan. Taulak muturrak bakarrik ematen baditu, trapezioa edo Simpson hobeto egokitzen dira normalean.",
+              en: "With tabulated data, midpoint values must be at the centres $m_i$, not at the endpoints $x_i$. If the table only gives endpoints, trapezoid or Simpson usually fits better."
             }
           }
+        ]
+      },
+      {
+        heading: {
+          es: "Deducciones",
+          eu: "Dedukzioak",
+          en: "Derivations"
+        },
+        blocks: [
+          { kind: "derivation", slug: "deduccion-integracion-punto-medio-simple" },
+          { kind: "derivation", slug: "deduccion-integracion-punto-medio-compuesto" }
         ]
       }
     ]
@@ -731,39 +906,432 @@ export const integracionDerivations: ContentEntry[] = [
         },
         blocks: [
           {
+            kind: "paragraph",
+            text: {
+              es: "Queremos aproximar $\\int_a^b f(x)\\,dx$ usando solo los valores de la función en los extremos. La idea consiste en sustituir la curva por la recta que pasa por $(a,f(a))$ y $(b,f(b))$, e integrar esa recta.",
+              eu: "$\\int_a^b f(x)\\,dx$ hurbildu nahi dugu funtzioaren muturretako balioak bakarrik erabiliz. Ideia kurba $(a,f(a))$ eta $(b,f(b))$ puntuetatik pasatzen den zuzenaz ordezkatzea da, eta zuzen hori integratzea.",
+              en: "We want to approximate $\\int_a^b f(x)\\,dx$ using only the values of the function at the endpoints. Replace the curve by the line through $(a,f(a))$ and $(b,f(b))$, then integrate that line."
+            }
+          },
+          {
+            kind: "diagram",
+            variant: "trapezoid-interpolant",
+            caption: {
+              es: "La curva se sustituye por la recta interpolante. El área bajo esa recta es la aproximación por trapecio.",
+              eu: "Kurba zuzen interpolatzaileaz ordezkatzen da. Zuzen horren azpiko azalera da trapezio bidezko hurbilketa.",
+              en: "The curve is replaced by the interpolating line. The area under that line is the trapezoid approximation."
+            }
+          },
+          {
             kind: "steps",
+            title: {
+              es: "Deducción con Lagrange",
+              eu: "Dedukzioa Lagrangerekin",
+              en: "Derivation with Lagrange"
+            },
             steps: [
               {
                 text: {
-                  es: "Tomamos los nodos extremos x_0=a y x_1=b, con h=b-a. Las bases de Lagrange son:",
-                  eu: "x_0=a eta x_1=b muturreko nodoak hartzen ditugu, h=b-a izanik. Lagrangeren oinarriak hauek dira:",
-                  en: "Take the endpoint nodes x_0=a and x_1=b, with h=b-a. The Lagrange bases are:"
+                  es: "Tomamos los nodos extremos $x_0=a$ y $x_1=b$, con $h=b-a$. Las bases lineales de Lagrange valen 1 en su nodo y 0 en el otro:",
+                  eu: "$x_0=a$ eta $x_1=b$ muturreko nodoak hartzen ditugu, $h=b-a$ izanik. Lagrangeren oinarri linealak 1 balio du bere nodoan eta 0 bestean:",
+                  en: "Take the endpoint nodes $x_0=a$ and $x_1=b$, with $h=b-a$. The linear Lagrange bases equal 1 at their node and 0 at the other one:"
                 },
                 formula: "L_0(x)=\\frac{x-b}{a-b},\\qquad L_1(x)=\\frac{x-a}{b-a}"
               },
               {
                 text: {
-                  es: "Sustituimos en la fórmula general de cuadratura e integramos cada base:",
-                  eu: "Koadraturaren formula orokorrean ordezkatu eta oinarri bakoitza integratzen dugu:",
-                  en: "Substitute into the general quadrature formula and integrate each basis:"
+                  es: "El interpolante lineal queda como combinación de los valores conocidos:",
+                  eu: "Interpolatzaile lineala balio ezagunen konbinazio gisa geratzen da:",
+                  en: "The linear interpolant is the combination of the known values:"
+                },
+                formula: "p_1(x)=f(a)L_0(x)+f(b)L_1(x)"
+              },
+              {
+                text: {
+                  es: "Aproximamos la integral de $f$ por la integral de $p_1$. Los pesos de la fórmula son las integrales de las bases:",
+                  eu: "$f$-ren integrala $p_1$-en integralaz hurbiltzen dugu. Formularen pisuak oinarrien integralak dira:",
+                  en: "Approximate the integral of $f$ by the integral of $p_1$. The weights of the formula are the integrals of the bases:"
                 },
                 formula: "I\\approx f(a)\\int_a^b L_0(x)\\,dx+f(b)\\int_a^b L_1(x)\\,dx"
               },
               {
                 text: {
-                  es: "Ambas integrales valen h/2, porque la recta reparte el intervalo simétricamente entre los dos extremos:",
-                  eu: "Bi integralek h/2 balio dute, zuzenak tartea bi muturren artean simetrikoki banatzen duelako:",
-                  en: "Both integrals are h/2, because the line splits the interval symmetrically between the endpoints:"
+                  es: "Calculamos el primer peso con el cambio $s=x-a$. Entonces $x-b=s-h$, $a-b=-h$, $dx=ds$ y los límites pasan de $x=a,b$ a $s=0,h$:",
+                  eu: "Lehen pisua kalkulatzeko $s=x-a$ aldaketa egiten dugu. Orduan $x-b=s-h$, $a-b=-h$, $dx=ds$ eta mugak $x=a,b$-tik $s=0,h$-ra pasatzen dira:",
+                  en: "Compute the first weight with the change $s=x-a$. Then $x-b=s-h$, $a-b=-h$, $dx=ds$, and the limits $x=a,b$ become $s=0,h$:"
                 },
-                formula: "\\int_a^b L_0(x)\\,dx=\\int_a^b L_1(x)\\,dx=\\frac{h}{2}"
+                formula: "\\begin{aligned}\\int_a^b L_0(x)\\,dx&=\\int_a^b\\frac{x-b}{a-b}\\,dx\\\\&=\\int_0^h\\frac{h-s}{h}\\,ds\\\\&=\\frac{1}{h}\\left[hs-\\frac{s^2}{2}\\right]_0^h=\\frac{h}{2}\\end{aligned}"
               },
               {
                 text: {
-                  es: "Queda la fórmula del área del trapecio:",
-                  eu: "Trapezioaren azaleraren formula geratzen da:",
-                  en: "The area formula of the trapezoid remains:"
+                  es: "Calculamos el segundo peso con el mismo cambio. Ahora $x-a=s$ y $b-a=h$:",
+                  eu: "Bigarren pisua aldaketa berarekin kalkulatzen dugu. Orain $x-a=s$ eta $b-a=h$ dira:",
+                  en: "Compute the second weight with the same change. Now $x-a=s$ and $b-a=h$:"
+                },
+                formula: "\\begin{aligned}\\int_a^b L_1(x)\\,dx&=\\int_a^b\\frac{x-a}{b-a}\\,dx\\\\&=\\int_0^h\\frac{s}{h}\\,ds=\\frac{1}{h}\\left[\\frac{s^2}{2}\\right]_0^h=\\frac{h}{2}\\end{aligned}"
+              },
+              {
+                text: {
+                  es: "Los dos pesos son $h/2$. Al sustituirlos en la fórmula de cuadratura aparece la regla del trapecio simple:",
+                  eu: "Bi pisuak $h/2$ dira. Koadratura-formulan ordezkatzean trapezio sinplearen erregela agertzen da:",
+                  en: "Both weights are $h/2$. Substituting them in the quadrature formula gives the simple trapezoid rule:"
                 },
                 formula: "\\int_a^b f(x)\\,dx\\approx\\frac{h}{2}\\left[f(a)+f(b)\\right]"
+              }
+            ]
+          },
+          {
+            kind: "diagram",
+            variant: "lagrange-basis-areas",
+            caption: {
+              es: "Cada base de Lagrange tiene área $h/2$ en $[a,b]$. Por eso los dos extremos reciben el mismo peso.",
+              eu: "Lagrangeren oinarri bakoitzak $h/2$ azalera du $[a,b]$ tartean. Horregatik bi muturrek pisu bera jasotzen dute.",
+              en: "Each Lagrange basis has area $h/2$ on $[a,b]$. That gives the two endpoints the same weight."
+            }
+          },
+          {
+            kind: "steps",
+            title: {
+              es: "Lectura geométrica",
+              eu: "Irakurketa geometrikoa",
+              en: "Geometric reading"
+            },
+            steps: [
+              {
+                text: {
+                  es: "La integral de $p_1$ es el área bajo una recta. Esa región es un trapecio de base $h=b-a$ y alturas paralelas $f(a)$ y $f(b)$.",
+                  eu: "$p_1$-en integrala zuzen baten azpiko azalera da. Eskualde hori $h=b-a$ oinarriko trapezioa da, eta altuera paraleloak $f(a)$ eta $f(b)$ dira.",
+                  en: "The integral of $p_1$ is the area under a line. That region is a trapezoid with base $h=b-a$ and parallel heights $f(a)$ and $f(b)$."
+                },
+                formula: "A_{\\text{trapecio}}=\\frac{\\text{base}}{2}\\left(\\text{altura}_1+\\text{altura}_2\\right)"
+              },
+              {
+                text: {
+                  es: "Al identificar base y alturas se obtiene la misma expresión que por Lagrange:",
+                  eu: "Oinarria eta altuerak identifikatzean Lagrangerekin lortutako adierazpen bera ateratzen da:",
+                  en: "Identifying the base and heights gives the same expression as the Lagrange derivation:"
+                },
+                formula: "A_{\\text{trapecio}}=\\frac{b-a}{2}\\left[f(a)+f(b)\\right]"
+              }
+            ]
+          },
+          {
+            kind: "diagram",
+            variant: "trapezoid-geometry",
+            caption: {
+              es: "La fórmula coincide con el área de un trapecio: base por la media de las dos alturas.",
+              eu: "Formula trapezio baten azalerarekin bat dator: oinarria bider bi altueren batezbestekoa.",
+              en: "The formula is the area of a trapezoid: base times the average of the two heights."
+            }
+          },
+          {
+            kind: "steps",
+            title: {
+              es: "Término de error",
+              eu: "Errore-gaia",
+              en: "Error term"
+            },
+            steps: [
+              {
+                text: {
+                  es: "Si $f\\in\\mathcal{C}^2[a,b]$, el error de interpolación lineal en cada punto tiene esta forma:",
+                  eu: "$f\\in\\mathcal{C}^2[a,b]$ bada, puntu bakoitzeko interpolazio linealaren erroreak forma hau du:",
+                  en: "If $f\\in\\mathcal{C}^2[a,b]$, the linear interpolation error at each point has this form:"
+                },
+                formula: "f(x)-p_1(x)=\\frac{f''(\\xi_x)}{2}(x-a)(x-b)"
+              },
+              {
+                text: {
+                  es: "Integramos el producto que acompaña a $f''$. Con $s=x-a$ queda $(x-a)(x-b)=s(s-h)$:",
+                  eu: "$f''$ biderkatzen duen produktua integratzen dugu. $s=x-a$ hartuta, $(x-a)(x-b)=s(s-h)$ geratzen da:",
+                  en: "Integrate the product multiplying $f''$. With $s=x-a$, $(x-a)(x-b)=s(s-h)$:"
+                },
+                formula: "\\int_a^b(x-a)(x-b)\\,dx=\\int_0^h s(s-h)\\,ds=-\\frac{h^3}{6}"
+              },
+              {
+                text: {
+                  es: "Por el teorema del valor medio para integrales, existe $\\xi\\in(a,b)$ tal que:",
+                  eu: "Integraletarako batez besteko balioaren teoremaren arabera, badago $\\xi\\in(a,b)$ non:",
+                  en: "By the mean value theorem for integrals, there is $\\xi\\in(a,b)$ such that:"
+                },
+                formula: "\\int_a^b f(x)\\,dx-\\frac{h}{2}\\left[f(a)+f(b)\\right]=-\\frac{h^3}{12}f''(\\xi)"
+              },
+              {
+                text: {
+                  es: "La regla es de orden 2 local: el error depende de la curvatura de $f$ y crece como $(b-a)^3$ en un solo intervalo.",
+                  eu: "Erregelak 2. ordena lokala du: errorea $f$-ren kurbaduraren araberakoa da eta tarte bakarrean $(b-a)^3$ bezala hazten da.",
+                  en: "The rule has local order 2: the error depends on the curvature of $f$ and grows like $(b-a)^3$ on a single interval."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    slug: "deduccion-integracion-trapecio-compuesto",
+    category,
+    level: "medio",
+    searchIntent: "deduccion trapecio compuesto n subintervalos error",
+    title: {
+      es: "Deducción: trapecio compuesto",
+      eu: "Frogapena: trapezio konposatua",
+      en: "Derivation: composite trapezoid"
+    },
+    description: {
+      es: "De sumar trapecios simples en n subintervalos a los pesos 1,2,...,2,1 y al error global.",
+      eu: "n azpitartetan trapezio sinpleak batuz 1,2,...,2,1 pisuetara eta errore globalera iristea.",
+      en: "From summing simple trapezoids on n subintervals to the weights 1,2,...,2,1 and the global error."
+    },
+    keywords: ["trapecio compuesto", "deducción", "error"],
+    prerequisites: ["deduccion-integracion-trapecio"],
+    related: ["integracion-newton-cotes-cerradas", "ejercicio-integracion-punto-medio"],
+    sections: [
+      {
+        heading: {
+          es: "Sumar trapecios simples",
+          eu: "Trapezio sinpleak batu",
+          en: "Summing simple trapezoids"
+        },
+        blocks: [
+          {
+            kind: "diagram",
+            variant: "composite-trapezoid",
+            caption: {
+              es: "Cada subintervalo aporta un trapecio. Los nodos interiores cuentan dos veces.",
+              eu: "Azpitarte bakoitzak trapezio bat ematen du. Barruko nodoak bi aldiz zenbatzen dira.",
+              en: "Each subinterval contributes one trapezoid. Interior nodes are counted twice."
+            }
+          },
+          {
+            kind: "steps",
+            title: {
+              es: "Fórmula para n subintervalos",
+              eu: "n azpitartetarako formula",
+              en: "Formula for n subintervals"
+            },
+            steps: [
+              {
+                text: {
+                  es: "Partimos $[a,b]$ en n subintervalos iguales:",
+                  eu: "$[a,b]$ n azpitarte berdinetan zatitzen dugu:",
+                  en: "Split $[a,b]$ into n equal subintervals:"
+                },
+                formula: "x_i=a+ih,\\qquad h=\\frac{b-a}{n},\\qquad i=0,\\ldots,n"
+              },
+              {
+                text: {
+                  es: "En $[x_i,x_{i+1}]$ aplicamos el trapecio simple:",
+                  eu: "$[x_i,x_{i+1}]$ tartean trapezio sinplea aplikatzen dugu:",
+                  en: "On $[x_i,x_{i+1}]$, apply the simple trapezoid rule:"
+                },
+                formula: "T_i=\\frac{h}{2}\\left[f(x_i)+f(x_{i+1})\\right]"
+              },
+              {
+                text: {
+                  es: "La aproximación total es la suma de los n trapecios:",
+                  eu: "Hurbilketa osoa n trapezioen batura da:",
+                  en: "The total approximation is the sum of the n trapezoids:"
+                },
+                formula: "\\begin{aligned}T_n&=\\sum_{i=0}^{n-1}T_i\\\\&=\\frac{h}{2}\\sum_{i=0}^{n-1}\\left[f(x_i)+f(x_{i+1})\\right]\\end{aligned}"
+              },
+              {
+                text: {
+                  es: "Al escribir la suma completa, $f(x_0)$ y $f(x_n)$ aparecen una vez. Cada valor interior aparece dos veces:",
+                  eu: "Batura osoa idaztean, $f(x_0)$ eta $f(x_n)$ behin agertzen dira. Barruko balio bakoitza bi aldiz agertzen da:",
+                  en: "When the full sum is written out, $f(x_0)$ and $f(x_n)$ appear once. Every interior value appears twice:"
+                },
+                formula: "T_n=\\frac{h}{2}\\left[f(x_0)+2\\sum_{i=1}^{n-1}f(x_i)+f(x_n)\\right]"
+              },
+              {
+                text: {
+                  es: "El error global se obtiene sumando los errores locales del trapecio simple:",
+                  eu: "Errore globala trapezio sinplearen errore lokalak batuz lortzen da:",
+                  en: "The global error is obtained by summing the local errors of the simple trapezoid rule:"
+                },
+                formula: "\\begin{aligned}E_T&=-\\frac{h^3}{12}\\sum_{i=0}^{n-1}f''(\\xi_i)\\\\&=-\\frac{b-a}{12}h^2f''(\\xi)\\end{aligned}"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    slug: "deduccion-integracion-punto-medio-simple",
+    category,
+    level: "medio",
+    searchIntent: "deduccion punto medio simple integracion error",
+    title: {
+      es: "Deducción: punto medio simple",
+      eu: "Frogapena: erdiko puntu sinplea",
+      en: "Derivation: simple midpoint"
+    },
+    description: {
+      es: "Sustituir la función por una altura central y obtener la regla del rectángulo centrado con su error.",
+      eu: "Funtzioa erdiko altuera batez ordezkatzea eta laukizuzen zentratuaren erregela eta errorea lortzea.",
+      en: "Replacing the function by a central height to obtain the centred rectangle rule and its error."
+    },
+    keywords: ["punto medio", "deducción", "Newton-Cotes abiertas"],
+    prerequisites: ["integracion-newton-cotes-abiertas"],
+    related: [
+      "deduccion-integracion-punto-medio-compuesto",
+      "ejercicio-integracion-punto-medio"
+    ],
+    sections: [
+      {
+        heading: {
+          es: "Rectángulo centrado",
+          eu: "Laukizuzen zentratua",
+          en: "Centred rectangle"
+        },
+        blocks: [
+          {
+            kind: "diagram",
+            variant: "midpoint-simple",
+            caption: {
+              es: "La base es $b-a$ y la altura se toma en $m=(a+b)/2$.",
+              eu: "Oinarria $b-a$ da eta altuera $m=(a+b)/2$ puntuan hartzen da.",
+              en: "The base is $b-a$ and the height is taken at $m=(a+b)/2$."
+            }
+          },
+          {
+            kind: "steps",
+            title: {
+              es: "Regla y error",
+              eu: "Erregela eta errorea",
+              en: "Rule and error"
+            },
+            steps: [
+              {
+                text: {
+                  es: "Definimos el centro del intervalo:",
+                  eu: "Tartearen zentroa definitzen dugu:",
+                  en: "Define the centre of the interval:"
+                },
+                formula: "m=\\frac{a+b}{2}"
+              },
+              {
+                text: {
+                  es: "Aproximamos la función por la constante $f(m)$:",
+                  eu: "Funtzioa $f(m)$ konstanteaz hurbiltzen dugu:",
+                  en: "Approximate the function by the constant $f(m)$:"
+                },
+                formula: "\\int_a^b f(x)\\,dx\\approx\\int_a^b f(m)\\,dx"
+              },
+              {
+                text: {
+                  es: "Como $f(m)$ es constante respecto de $x$, la integral es base por altura:",
+                  eu: "$f(m)$ konstantea denez $x$-rekiko, integrala oinarria bider altuera da:",
+                  en: "Since $f(m)$ is constant with respect to $x$, the integral is base times height:"
+                },
+                formula: "M_1=(b-a)f(m)=(b-a)f\\!\\left(\\frac{a+b}{2}\\right)"
+              },
+              {
+                text: {
+                  es: "El término lineal de Taylor alrededor de $m$ no aporta área neta por simetría. El primer término que queda depende de $f''$:",
+                  eu: "$m$ inguruko Taylorren gai linealak ez du azalera garbirik ematen simetriagatik. Geratzen den lehen gaia $f''$-ren araberakoa da:",
+                  en: "The linear Taylor term around $m$ contributes no net area by symmetry. The first remaining term depends on $f''$:"
+                },
+                formula: "\\int_a^b f(x)\\,dx-M_1=\\frac{(b-a)^3}{24}f''(\\xi)"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    slug: "deduccion-integracion-punto-medio-compuesto",
+    category,
+    level: "medio",
+    searchIntent: "deduccion punto medio compuesto n subintervalos error",
+    title: {
+      es: "Deducción: punto medio compuesto",
+      eu: "Frogapena: erdiko puntu konposatua",
+      en: "Derivation: composite midpoint"
+    },
+    description: {
+      es: "Generalizar el punto medio a n subintervalos usando los centros de cada bloque y sumar sus errores locales.",
+      eu: "Erdiko puntua n azpitartetara orokortzea, bloke bakoitzaren zentroak erabiliz eta errore lokalak batuz.",
+      en: "Generalising midpoint to n subintervals by using the centre of each block and summing local errors."
+    },
+    keywords: ["punto medio compuesto", "deducción", "error"],
+    prerequisites: ["deduccion-integracion-punto-medio-simple"],
+    related: ["integracion-newton-cotes-abiertas", "ejercicio-integracion-punto-medio"],
+    sections: [
+      {
+        heading: {
+          es: "Sumar rectángulos centrados",
+          eu: "Laukizuzen zentratuak batu",
+          en: "Summing centred rectangles"
+        },
+        blocks: [
+          {
+            kind: "diagram",
+            variant: "composite-midpoint",
+            caption: {
+              es: "Cada rectángulo tiene anchura $h$ y altura $f(m_i)$.",
+              eu: "Laukizuzen bakoitzak $h$ zabalera eta $f(m_i)$ altuera ditu.",
+              en: "Each rectangle has width $h$ and height $f(m_i)$."
+            }
+          },
+          {
+            kind: "steps",
+            title: {
+              es: "Fórmula para n subintervalos",
+              eu: "n azpitartetarako formula",
+              en: "Formula for n subintervals"
+            },
+            steps: [
+              {
+                text: {
+                  es: "Dividimos $[a,b]$ con paso $h$:",
+                  eu: "$[a,b]$ tartea $h$ pausoz zatitzen dugu:",
+                  en: "Split $[a,b]$ with step $h$:"
+                },
+                formula: "x_i=a+ih,\\qquad h=\\frac{b-a}{n}"
+              },
+              {
+                text: {
+                  es: "El centro del subintervalo $[x_i,x_{i+1}]$ es:",
+                  eu: "$[x_i,x_{i+1}]$ azpitartearen zentroa hau da:",
+                  en: "The centre of the subinterval $[x_i,x_{i+1}]$ is:"
+                },
+                formula: "m_i=\\frac{x_i+x_{i+1}}{2}=a+\\left(i+\\frac12\\right)h"
+              },
+              {
+                text: {
+                  es: "Aplicamos punto medio simple en cada subintervalo:",
+                  eu: "Azpitarte bakoitzean erdiko puntu sinplea aplikatzen dugu:",
+                  en: "Apply simple midpoint on each subinterval:"
+                },
+                formula: "M_i=h f(m_i)"
+              },
+              {
+                text: {
+                  es: "Sumamos todos los rectángulos:",
+                  eu: "Laukizuzen guztiak batzen ditugu:",
+                  en: "Sum all rectangles:"
+                },
+                formula: "M_n=h\\sum_{i=0}^{n-1}f(m_i)"
+              },
+              {
+                text: {
+                  es: "Sustituyendo la expresión de $m_i$ queda la forma computable:",
+                  eu: "$m_i$-ren adierazpena ordezkatuz forma konputagarria geratzen da:",
+                  en: "Substituting the expression for $m_i$ gives the computable form:"
+                },
+                formula: "M_n=h\\sum_{i=0}^{n-1}f\\!\\left(a+\\left(i+\\frac12\\right)h\\right)"
+              },
+              {
+                text: {
+                  es: "El error global se obtiene sumando los errores locales del punto medio simple:",
+                  eu: "Errore globala erdiko puntu sinplearen errore lokalak batuz lortzen da:",
+                  en: "The global error is obtained by summing the local errors of the simple midpoint rule:"
+                },
+                formula: "\\begin{aligned}E_M&=\\frac{h^3}{24}\\sum_{i=0}^{n-1}f''(\\xi_i)\\\\&=\\frac{b-a}{24}h^2f''(\\xi)\\end{aligned}"
               }
             ]
           }
@@ -925,7 +1493,11 @@ export const integracionExercises: ContentEntry[] = [
     },
     keywords: ["trapecio compuesto", "Simpson compuesto", "error"],
     prerequisites: ["integracion-newton-cotes-cerradas"],
-    related: ["integracion-newton-cotes-cerradas", "deduccion-integracion-simpson"],
+    related: [
+      "integracion-newton-cotes-cerradas",
+      "deduccion-integracion-trapecio-compuesto",
+      "deduccion-integracion-simpson"
+    ],
     sections: [
       {
         heading: {
@@ -996,21 +1568,99 @@ export const integracionExercises: ContentEntry[] = [
     slug: "ejercicio-integracion-punto-medio",
     category,
     level: "medio",
-    searchIntent: "ejercicio punto medio compuesto sin exp menos x",
+    searchIntent: "ejercicio trapecio punto medio compuesto x cubo error",
     title: {
-      es: "Ejercicio: punto medio compuesto",
-      eu: "Ariketa: erdiko puntu konposatua",
-      en: "Exercise: composite midpoint"
+      es: "Ejercicio: trapecio y punto medio",
+      eu: "Ariketa: trapezioa eta erdiko puntua",
+      en: "Exercise: trapezoid and midpoint"
     },
     description: {
-      es: "Aplicación del método de punto medio a la misma integral suave y comparación del error al aumentar subintervalos.",
-      eu: "Erdiko puntuaren metodoa integral leun berari aplikatzea eta azpitartak handitzean errorea alderatzea.",
-      en: "Applying the midpoint method to the same smooth integral and comparing the error as the number of subintervals increases."
+      es: "Comparación de trapecio compuesto, punto medio simple y punto medio compuesto, con errores absolutos y relativos.",
+      eu: "Trapezio konposatua, erdiko puntu sinplea eta erdiko puntu konposatua alderatzea, errore absolutu eta erlatiboekin.",
+      en: "Comparing composite trapezoid, simple midpoint and composite midpoint, with absolute and relative errors."
     },
-    keywords: ["punto medio", "Newton-Cotes abiertas", "error"],
+    keywords: ["punto medio", "trapecio compuesto", "Newton-Cotes abiertas", "error"],
     prerequisites: ["integracion-newton-cotes-abiertas"],
-    related: ["integracion-newton-cotes-abiertas", "ejercicio-integracion-trapecio-simpson"],
+    related: [
+      "integracion-newton-cotes-abiertas",
+      "integracion-newton-cotes-cerradas",
+      "deduccion-integracion-punto-medio-simple",
+      "deduccion-integracion-punto-medio-compuesto",
+      "deduccion-integracion-trapecio-compuesto",
+      "ejercicio-integracion-trapecio-simpson"
+    ],
     sections: [
+      {
+        heading: {
+          es: "Comparación en una integral corta",
+          eu: "Konparazioa integral labur batean",
+          en: "Comparison on a short integral"
+        },
+        blocks: [
+          {
+            kind: "example",
+            title: {
+              es: "Integral de x^3 en [0,1]",
+              eu: "x^3-ren integrala [0,1]-en",
+              en: "Integral of x^3 on [0,1]"
+            },
+            statement: {
+              es: "Calcula $I=\\int_0^1 x^3\\,dx$. Compara trapecio compuesto con $n=2$, punto medio simple y punto medio compuesto con $n=2$.",
+              eu: "Kalkulatu $I=\\int_0^1 x^3\\,dx$. Alderatu $n=2$ duen trapezio konposatua, erdiko puntu sinplea eta $n=2$ duen erdiko puntu konposatua.",
+              en: "Compute $I=\\int_0^1 x^3\\,dx$. Compare composite trapezoid with $n=2$, simple midpoint and composite midpoint with $n=2$."
+            },
+            steps: [
+              {
+                text: {
+                  es: "El valor exacto es:",
+                  eu: "Balio zehatza hau da:",
+                  en: "The exact value is:"
+                },
+                formula: "I=\\int_0^1x^3\\,dx=\\left[\\frac{x^4}{4}\\right]_0^1=\\frac14"
+              },
+              {
+                text: {
+                  es: "Para trapecio compuesto con $n=2$, $h=1/2$ y los nodos son $0,1/2,1$:",
+                  eu: "$n=2$ duen trapezio konposatuan, $h=1/2$ eta nodoak $0,1/2,1$ dira:",
+                  en: "For composite trapezoid with $n=2$, $h=1/2$ and the nodes are $0,1/2,1$:"
+                },
+                formula: "\\begin{aligned}T_2&=\\frac14\\left[f(0)+2f\\!\\left(\\frac12\\right)+f(1)\\right]\\\\&=\\frac14\\left[0+2\\cdot\\frac18+1\\right]=\\frac{5}{16}\\end{aligned}"
+              },
+              {
+                text: {
+                  es: "Para punto medio simple, el centro del intervalo completo es $m=1/2$:",
+                  eu: "Erdiko puntu sinplean, tarte osoaren zentroa $m=1/2$ da:",
+                  en: "For simple midpoint, the centre of the full interval is $m=1/2$:"
+                },
+                formula: "M_1=(1-0)f\\!\\left(\\frac12\\right)=\\frac18"
+              },
+              {
+                text: {
+                  es: "Para punto medio compuesto con $n=2$, los centros son $1/4$ y $3/4$:",
+                  eu: "$n=2$ duen erdiko puntu konposatuan, zentroak $1/4$ eta $3/4$ dira:",
+                  en: "For composite midpoint with $n=2$, the centres are $1/4$ and $3/4$:"
+                },
+                formula: "\\begin{aligned}M_2&=\\frac12\\left[f\\!\\left(\\frac14\\right)+f\\!\\left(\\frac34\\right)\\right]\\\\&=\\frac12\\left(\\frac{1}{64}+\\frac{27}{64}\\right)=\\frac{7}{32}\\end{aligned}"
+              },
+              {
+                text: {
+                  es: "Los errores absolutos y relativos son:",
+                  eu: "Errore absolutu eta erlatiboak hauek dira:",
+                  en: "The absolute and relative errors are:"
+                },
+                formula: "\\begin{array}{c|c|c} \\text{método} & |I-Q| & |I-Q|/I \\\\ \\hline T_2 & 1/16 & 25\\% \\\\ M_1 & 1/8 & 50\\% \\\\ M_2 & 1/32 & 12.5\\% \\end{array}"
+              }
+            ],
+            result: {
+              text: {
+                es: "En este ejemplo, punto medio compuesto con dos subintervalos es el más preciso de los tres. La mejora viene de usar dos centros en lugar de un solo rectángulo para todo [0,1].",
+                eu: "Adibide honetan, bi azpitartetako erdiko puntu konposatua da hiruretatik zehatzena. Hobekuntza bi zentro erabiltzetik dator, [0,1] osorako laukizuzen bakarra erabili beharrean.",
+                en: "In this example, composite midpoint with two subintervals is the most accurate of the three. The improvement comes from using two centres instead of one rectangle for all of [0,1]."
+              }
+            }
+          }
+        ]
+      },
       {
         heading: {
           es: "Usar solo puntos interiores",

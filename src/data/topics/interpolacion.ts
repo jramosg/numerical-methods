@@ -848,9 +848,9 @@ export const interpolacionExercises: ContentEntry[] = [
       en: "Exercise: Hermite with the Bessel function"
     },
     description: {
-      es: "Construcción completa del polinomio de Hermite de grado 5 con tres nodos para aproximar J_0(0.75), paso a paso.",
-      eu: "5. graduko Hermite polinomioaren eraikuntza osoa hiru nodorekin J_0(0.75) hurbiltzeko, urratsez urrats.",
-      en: "Full construction of the degree-5 Hermite polynomial with three nodes to approximate J_0(0.75), step by step."
+      es: "Construcción completa del polinomio de Hermite de grado 5 con tres nodos para aproximar $J_0(0.75)$, paso a paso.",
+      eu: "5. graduko Hermite polinomioaren eraikuntza osoa hiru nodorekin $J_0(0.75)$ hurbiltzeko, urratsez urrats.",
+      en: "Full construction of the degree-5 Hermite polynomial with three nodes to approximate $J_0(0.75)$, step by step."
     },
     keywords: ["Hermite", "Bessel", "ejercicio", "H5"],
     prerequisites: ["interpolacion-hermite"],
@@ -866,17 +866,17 @@ export const interpolacionExercises: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "Las funciones de Bessel de primera especie cumplen J_0'(x)=−J_1(x), así que la tabla nos da a la vez valor y derivada de J_0 en los nodos 0, 0.5 y 1. Con n=2 el polinomio de Hermite tiene grado 5.",
-              eu: "Lehen espeziearen Bessel funtzioek J_0'(x)=−J_1(x) betetzen dute, beraz taulak J_0-ren balioa eta deribatua ematen dizkigu 0, 0.5 eta 1 nodoetan. n=2 izanik, Hermite polinomioak 5 gradua du.",
-              en: "The Bessel functions of the first kind satisfy J_0'(x)=−J_1(x), so the table gives both value and derivative of J_0 at the nodes 0, 0.5 and 1. With n=2 the Hermite polynomial has degree 5."
+              es: "Las funciones de Bessel de primera especie cumplen $J_0'(x)=-J_1(x)$, así que la tabla nos da a la vez valor y derivada de $J_0$ en los nodos $0$, $0.5$ y $1$. Con $n=2$ el polinomio de Hermite tiene grado 5.",
+              eu: "Lehen espeziearen Bessel funtzioek $J_0'(x)=-J_1(x)$ betetzen dute, beraz taulak $J_0$-ren balioa eta deribatua ematen dizkigu $0$, $0.5$ eta $1$ nodoetan. $n=2$ izanik, Hermite polinomioak 5 gradua du.",
+              en: "The Bessel functions of the first kind satisfy $J_0'(x)=-J_1(x)$, so the table gives both value and derivative of $J_0$ at the nodes $0$, $0.5$ and $1$. With $n=2$ the Hermite polynomial has degree 5."
             }
           },
           {
             kind: "table",
             head: {
-              es: ["x", "J_0 (valor)", "J_0' = −J_1 (derivada)"],
-              eu: ["x", "J_0 (balioa)", "J_0' = −J_1 (deribatua)"],
-              en: ["x", "J_0 (value)", "J_0' = −J_1 (derivative)"]
+              es: ["$x$", "$J_0$ (valor)", "$J_0'=-J_1$ (derivada)"],
+              eu: ["$x$", "$J_0$ (balioa)", "$J_0'=-J_1$ (deribatua)"],
+              en: ["$x$", "$J_0$ (value)", "$J_0'=-J_1$ (derivative)"]
             },
             rows: [
               ["0", "1.0000", "0"],
@@ -896,9 +896,9 @@ export const interpolacionExercises: ContentEntry[] = [
           {
             kind: "example",
             statement: {
-              es: "Seguimos los cinco pasos: L_i, L_i', H_i, Ĥ_i y la suma final.",
-              eu: "Bost urratsak jarraitzen ditugu: L_i, L_i', H_i, Ĥ_i eta azken batura.",
-              en: "Follow the five steps: L_i, L_i', H_i, Ĥ_i and the final sum."
+              es: "Seguimos los cinco pasos: $L_i$, $L_i'$, $H_i$, $\\hat H_i$ y la suma final.",
+              eu: "Bost urratsak jarraitzen ditugu: $L_i$, $L_i'$, $H_i$, $\\hat H_i$ eta azken batura.",
+              en: "Follow the five steps: $L_i$, $L_i'$, $H_i$, $\\hat H_i$ and the final sum."
             },
             steps: [
               {
@@ -906,11 +906,11 @@ export const interpolacionExercises: ContentEntry[] = [
                 formula: "\\begin{aligned} L_0&=2x^2-3x+1, & L_0'&=4x-3\\\\ L_1&=-4x^2+4x, & L_1'&=-8x+4\\\\ L_2&=2x^2-x, & L_2'&=4x-1 \\end{aligned}"
               },
               {
-                text: { es: "Bloques H_i y Ĥ_i (grado 5):", eu: "H_i eta Ĥ_i blokeak (5. gradua):", en: "Blocks H_i and Ĥ_i (degree 5):" },
+                text: { es: "Bloques $H_i$ y $\\hat H_i$ (grado 5):", eu: "$H_i$ eta $\\hat H_i$ blokeak (5. gradua):", en: "Blocks $H_i$ and $\\hat H_i$ (degree 5):" },
                 formula: "\\begin{aligned} H_0&=24x^5-68x^4+66x^3-23x^2+1\\\\ H_1&=16x^4-32x^3+16x^2\\\\ H_2&=-24x^5+52x^4-34x^3+7x^2 \\end{aligned}"
               },
               {
-                text: { es: "Y los Ĥ_i:", eu: "Eta Ĥ_i-ak:", en: "And the Ĥ_i:" },
+                text: { es: "Y los $\\hat H_i$:", eu: "Eta $\\hat H_i$-ak:", en: "And the $\\hat H_i$:" },
                 formula: "\\begin{aligned} \\hat H_0&=4x^5-12x^4+13x^3-6x^2+x\\\\ \\hat H_1&=16x^5-40x^4+32x^3-8x^2\\\\ \\hat H_2&=4x^5-8x^4+5x^3-x^2 \\end{aligned}"
               },
               {
