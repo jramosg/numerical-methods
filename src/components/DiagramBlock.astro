@@ -14,12 +14,27 @@ interface Props {
     | "euler-rectangle"
     | "implicit-euler-rectangle"
     | "heun-average"
-    | "rk4-stages";
+    | "rk4-stages"
+    | "ab2-extrapolation"
+    | "am2-implicit";
   caption: Record<Lang, string>;
   lang: Lang;
 }
 
 const { variant, caption, lang } = Astro.props;
+
+const zoomLabels = {
+  open: {
+    es: "Ampliar diagrama",
+    eu: "Handitu diagrama",
+    en: "Expand diagram"
+  },
+  close: {
+    es: "Cerrar",
+    eu: "Itxi",
+    en: "Close"
+  }
+};
 
 const labels = {
   functionF: {
@@ -101,11 +116,54 @@ const labels = {
     es: "pesos 1, 2, 2, 1",
     eu: "pisuak 1, 2, 2, 1",
     en: "weights 1, 2, 2, 1"
+  },
+  extrapolation: {
+    es: "extrapolación",
+    eu: "estrapolazioa",
+    en: "extrapolation"
+  },
+  knownSlopes: {
+    es: "pendientes conocidas",
+    eu: "malda ezagunak",
+    en: "known slopes"
+  },
+  nextIntegral: {
+    es: "integrar aquí",
+    eu: "hemen integratu",
+    en: "integrate here"
+  },
+  interpolation: {
+    es: "interpolación",
+    eu: "interpolazioa",
+    en: "interpolation"
+  },
+  newSlope: {
+    es: "pendiente nueva",
+    eu: "malda berria",
+    en: "new slope"
+  },
+  implicitUnknown: {
+    es: "depende de yₖ₊₁",
+    eu: "yₖ₊₁-en araberakoa",
+    en: "depends on yₖ₊₁"
   }
 };
 ---
 
 <figure class="diagram-figure">
+  <div class="diagram-canvas">
+    <button
+      class="diagram-zoom-button"
+      type="button"
+      aria-label={zoomLabels.open[lang]}
+      title={zoomLabels.open[lang]}
+      data-diagram-zoom
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="11" cy="11" r="6" />
+        <path d="m16 16 5 5" />
+      </svg>
+    </button>
   {
     variant === "trapezoid-interpolant" && (
       <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
@@ -478,5 +536,158 @@ const labels = {
       </svg>
     )
   }
+  {
+    variant === "ab2-extrapolation" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="58" y1="254" x2="590" y2="254" />
+        <line class="diagram-axis" x1="78" y1="276" x2="78" y2="42" />
+        <path
+          class="diagram-curve"
+          d="M92 226 C160 166, 220 150, 288 176 S432 228, 548 92"
+        />
+        <polygon
+          class="diagram-fill"
+          points="304,254 304,158 478,98 478,254"
+        />
+        <line class="diagram-guide" x1="130" y1="254" x2="130" y2="218" />
+        <line class="diagram-guide" x1="304" y1="254" x2="304" y2="158" />
+        <line class="diagram-guide" x1="478" y1="254" x2="478" y2="98" />
+        <line class="diagram-line" x1="130" y1="218" x2="478" y2="98" />
+        <line class="diagram-thin" x1="304" y1="300" x2="478" y2="300" />
+        <line class="diagram-thin" x1="304" y1="292" x2="304" y2="300" />
+        <line class="diagram-thin" x1="478" y1="292" x2="478" y2="300" />
+        <circle class="diagram-point" cx="130" cy="218" r="6" />
+        <circle class="diagram-point" cx="304" cy="158" r="6" />
+        <circle class="diagram-point" cx="478" cy="98" r="5" />
+        <text class="diagram-label" x="94" y="282">tₖ₋₁</text>
+        <text class="diagram-label" x="288" y="282">tₖ</text>
+        <text class="diagram-label" x="448" y="282">tₖ₊₁</text>
+        <text class="diagram-label accent" x="112" y="198">fₖ₋₁</text>
+        <text class="diagram-label accent" x="316" y="154">fₖ</text>
+        <text class="diagram-label accent" x="214" y="104">
+          {labels.knownSlopes[lang]}
+        </text>
+        <text class="diagram-label accent" x="380" y="72">
+          {labels.extrapolation[lang]}
+        </text>
+        <text class="diagram-label accent" x="342" y="238">
+          {labels.nextIntegral[lang]}
+        </text>
+        <text class="diagram-label muted" x="500" y="106">p₁(t)</text>
+      </svg>
+    )
+  }
+  {
+    variant === "am2-implicit" && (
+      <svg viewBox="0 0 640 320" role="img" aria-label={caption[lang]}>
+        <rect class="diagram-bg" x="0" y="0" width="640" height="320" rx="6" />
+        <line class="diagram-axis" x1="58" y1="254" x2="590" y2="254" />
+        <line class="diagram-axis" x1="78" y1="276" x2="78" y2="42" />
+        <path
+          class="diagram-curve"
+          d="M96 220 C156 170, 214 148, 282 166 S424 214, 544 98"
+        />
+        <polygon
+          class="diagram-fill"
+          points="170,254 170,188 500,104 500,254"
+        />
+        <line class="diagram-guide" x1="170" y1="254" x2="170" y2="188" />
+        <line class="diagram-guide" x1="500" y1="254" x2="500" y2="104" />
+        <line class="diagram-line" x1="170" y1="188" x2="500" y2="104" />
+        <line class="diagram-thin" x1="170" y1="300" x2="500" y2="300" />
+        <line class="diagram-thin" x1="170" y1="292" x2="170" y2="300" />
+        <line class="diagram-thin" x1="500" y1="292" x2="500" y2="300" />
+        <circle class="diagram-point" cx="170" cy="188" r="6" />
+        <circle class="diagram-point" cx="500" cy="104" r="6" />
+        <circle class="diagram-point" cx="500" cy="104" r="13" opacity="0.18" />
+        <text class="diagram-label" x="154" y="282">tₖ</text>
+        <text class="diagram-label" x="470" y="282">tₖ₊₁</text>
+        <text class="diagram-label accent" x="142" y="174">fₖ</text>
+        <text class="diagram-label accent" x="510" y="108">fₖ₊₁</text>
+        <text class="diagram-label accent" x="244" y="88">
+          {labels.interpolation[lang]}
+        </text>
+        <text class="diagram-label accent" x="370" y="68">
+          {labels.newSlope[lang]}
+        </text>
+        <text class="diagram-label muted" x="410" y="132">
+          {labels.implicitUnknown[lang]}
+        </text>
+        <text class="diagram-label accent" x="294" y="238">
+          {labels.nextIntegral[lang]}
+        </text>
+        <text class="diagram-label muted" x="228" y="148">p₁(t)</text>
+      </svg>
+    )
+  }
+  </div>
   <figcaption><RichText text={caption[lang]} lang={lang} /></figcaption>
+  <dialog class="diagram-dialog" data-diagram-dialog>
+    <div class="diagram-dialog-panel">
+      <div class="diagram-dialog-head">
+        <strong>{zoomLabels.open[lang]}</strong>
+        <button
+          class="diagram-dialog-close"
+          type="button"
+          aria-label={zoomLabels.close[lang]}
+          title={zoomLabels.close[lang]}
+          data-diagram-close
+        >
+          ×
+        </button>
+      </div>
+      <div class="diagram-dialog-art" data-diagram-dialog-art></div>
+      <p class="diagram-dialog-caption">
+        <RichText text={caption[lang]} lang={lang} />
+      </p>
+    </div>
+  </dialog>
 </figure>
+
+<script>
+  const setupDiagramZoom = () => {
+    const win = window as Window & { __diagramZoomSetup?: boolean };
+
+    if (win.__diagramZoomSetup) return;
+    win.__diagramZoomSetup = true;
+
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const zoomButton = target.closest("[data-diagram-zoom]");
+      if (zoomButton) {
+        const figure = zoomButton.closest(".diagram-figure");
+        const dialog = figure?.querySelector<HTMLDialogElement>(
+          "[data-diagram-dialog]"
+        );
+        const art = figure?.querySelector("[data-diagram-dialog-art]");
+        const svg = figure?.querySelector(".diagram-canvas > svg");
+
+        if (!dialog || !art || !svg) return;
+
+        const expanded = svg.cloneNode(true);
+        art.replaceChildren(expanded);
+        dialog.showModal();
+        return;
+      }
+
+      const closeButton = target.closest("[data-diagram-close]");
+      if (closeButton) {
+        closeButton.closest<HTMLDialogElement>("dialog")?.close();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        event.target instanceof HTMLDialogElement &&
+        event.target.matches("[data-diagram-dialog]")
+      ) {
+        event.target.close();
+      }
+    });
+  };
+
+  setupDiagramZoom();
+</script>

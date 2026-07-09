@@ -79,6 +79,15 @@ export const edoMultipasoArticles: ContentEntry[] = [
               en: "The two-step case concentrates all the mechanics: interpolate $f$ linearly at $t_{k-1}$ and $t_k$, integrate and read off the coefficients.",
             },
           },
+          {
+            kind: "diagram",
+            variant: "ab2-extrapolation",
+            caption: {
+              es: "AB2 interpola las pendientes conocidas $f_{k-1}$ y $f_k$ y extrapola esa recta sobre el intervalo nuevo $[t_k,t_{k+1}]$.",
+              eu: "AB2-k $f_{k-1}$ eta $f_k$ malda ezagunak interpolatzen ditu, eta zuzen hori $[t_k,t_{k+1}]$ tarte berrira estrapolatzen du.",
+              en: "AB2 interpolates the known slopes $f_{k-1}$ and $f_k$ and extrapolates that line over the new interval $[t_k,t_{k+1}]$.",
+            },
+          },
           { kind: "derivation", slug: "deduccion-ab2" },
         ],
       },
@@ -207,6 +216,15 @@ export const edoMultipasoArticles: ContentEntry[] = [
           en: "Derivation of AM2",
         },
         blocks: [
+          {
+            kind: "diagram",
+            variant: "am2-implicit",
+            caption: {
+              es: "AM2 interpola $f$ en $t_k$ y en el nodo nuevo $t_{k+1}$. El área es trapezoidal, pero $f_{k+1}=f(t_{k+1},y_{k+1})$ depende de la incógnita.",
+              eu: "AM2-k $f$ interpolatzen du $t_k$-n eta nodo berrian, $t_{k+1}$-n. Azalera trapezoidala da, baina $f_{k+1}=f(t_{k+1},y_{k+1})$ ezezagunaren araberakoa da.",
+              en: "AM2 interpolates $f$ at $t_k$ and at the new node $t_{k+1}$. The area is trapezoidal, but $f_{k+1}=f(t_{k+1},y_{k+1})$ depends on the unknown.",
+            },
+          },
           { kind: "derivation", slug: "deduccion-am2" },
           {
             kind: "formula",
@@ -236,7 +254,7 @@ export const edoMultipasoArticles: ContentEntry[] = [
           },
           {
             kind: "formula",
-            tex: "g(y_{k+1})=y_{k+1}-y_k-\\frac{h}{2}\\bigl(f(t_{k+1},y_{k+1})+f(t_k,y_k)\\bigr)=0",
+            tex: "R(y_{k+1})=y_{k+1}-y_k-\\frac{h}{2}\\bigl(f(t_{k+1},y_{k+1})+f(t_k,y_k)\\bigr)=0",
           },
           {
             kind: "callout",
@@ -421,22 +439,40 @@ export const edoMultipasoDerivations: ContentEntry[] = [
         },
         blocks: [
           {
+            kind: "diagram",
+            variant: "ab2-extrapolation",
+            caption: {
+              es: "La recta de Lagrange se construye con las pendientes ya calculadas y después se usa fuera de sus nodos: por eso Adams-Bashforth es explícito y extrapolador.",
+              eu: "Lagrange-ren zuzena dagoeneko kalkulatutako maldekin eraikitzen da eta gero nodoetatik kanpo erabiltzen da: horregatik Adams-Bashforth esplizitua eta estrapolatzailea da.",
+              en: "The Lagrange line is built from already-computed slopes and then used beyond its nodes: this is why Adams-Bashforth is explicit and extrapolatory.",
+            },
+          },
+          {
             kind: "steps",
             steps: [
               {
                 text: {
-                  es: "Por el Teorema Fundamental del Cálculo, integrar $y'=f(t,y)$ entre $t_k$ y $t_{k+1}$ da una igualdad exacta. Todavía no hay ninguna aproximación:",
-                  eu: "Kalkuluaren Oinarrizko Teoremagatik, $y'=f(t,y)$ integratzea $t_k$ eta $t_{k+1}$ artean berdintza zehatza da. Oraindik ez dago inolako hurbilketarik:",
-                  en: "By the Fundamental Theorem of Calculus, integrating $y'=f(t,y)$ between $t_k$ and $t_{k+1}$ gives an exact identity. There is no approximation yet:",
+                  es: "Partimos del PVI $y'(t)=f(t,y(t))$. Integramos ambos lados entre $t_k$ y $t_{k+1}$:",
+                  eu: "$y'(t)=f(t,y(t))$ PVI-tik abiatzen gara. Bi aldeak $t_k$ eta $t_{k+1}$ artean integratzen ditugu:",
+                  en: "Start from the IVP $y'(t)=f(t,y(t))$. Integrate both sides between $t_k$ and $t_{k+1}$:",
+                },
+                formula:
+                  "\\int_{t_k}^{t_{k+1}} y'(\\tau)\\,d\\tau=\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau",
+              },
+              {
+                text: {
+                  es: "Aplicando el Teorema Fundamental del Cálculo al lado izquierdo se obtiene la forma integral exacta. Todavía no hay ninguna aproximación:",
+                  eu: "Ezkerreko aldeari Kalkuluaren Oinarrizko Teorema aplikatuz forma integral zehatza lortzen da. Oraindik ez dago hurbilketarik:",
+                  en: "Applying the Fundamental Theorem of Calculus to the left-hand side gives the exact integral form. There is still no approximation:",
                 },
                 formula:
                   "y(t_{k+1})=y(t_k)+\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau",
               },
               {
                 text: {
-                  es: "El integrando es desconocido (depende de la solución), pero sus valores en los nodos anteriores sí se conocen: $f_{k-1}=f(t_{k-1},y_{k-1})$ y $f_k=f(t_k,y_k)$. Todo el método sale de aproximar el integrando con esos dos datos.",
-                  eu: "Integrakizuna ezezaguna da (soluzioaren araberakoa da), baina aurreko nodoetako balioak ezagunak dira: $f_{k-1}=f(t_{k-1},y_{k-1})$ eta $f_k=f(t_k,y_k)$. Metodo osoa bi datu horiekin integrakizuna hurbiltzetik ateratzen da.",
-                  en: "The integrand is unknown (it depends on the solution), but its values at the previous nodes are known: $f_{k-1}=f(t_{k-1},y_{k-1})$ and $f_k=f(t_k,y_k)$. The whole method comes from approximating the integrand with those two data points.",
+                  es: "El integrando completo es desconocido porque depende de la solución exacta, pero sus valores aproximados en los nodos anteriores sí se conocen: $f_{k-1}=f(t_{k-1},y_{k-1})$ y $f_k=f(t_k,y_k)$. AB2 nace de aproximar $f(\\tau,y(\\tau))$ con esos dos datos.",
+                  eu: "Integrakizun osoa ezezaguna da soluzio zehatzaren araberakoa delako, baina aurreko nodoetako balio hurbilduak ezagunak dira: $f_{k-1}=f(t_{k-1},y_{k-1})$ eta $f_k=f(t_k,y_k)$. AB2 $f(\\tau,y(\\tau))$ bi datu horiekin hurbiltzetik sortzen da.",
+                  en: "The full integrand is unknown because it depends on the exact solution, but its approximate values at previous nodes are known: $f_{k-1}=f(t_{k-1},y_{k-1})$ and $f_k=f(t_k,y_k)$. AB2 comes from approximating $f(\\tau,y(\\tau))$ with those two data points.",
                 },
               },
             ],
@@ -455,21 +491,21 @@ export const edoMultipasoDerivations: ContentEntry[] = [
             steps: [
               {
                 text: {
-                  es: "Construimos el polinomio de grado 1 que interpola $f$ en $(t_{k-1},f_{k-1})$ y $(t_k,f_k)$ usando la [[deduccion-lagrange-base|base de Lagrange]]: cada polinomio base vale 1 en su nodo y 0 en el otro. Con nodos separados $h=t_k-t_{k-1}$ y $-h=t_{k-1}-t_k$:",
-                  eu: "$f$ interpolatzen duen 1. graduko polinomioa eraikitzen dugu $(t_{k-1},f_{k-1})$ eta $(t_k,f_k)$ puntuetan, [[deduccion-lagrange-base|Lagrange oinarria]] erabiliz: oinarri-polinomio bakoitzak 1 balio du bere nodoan eta 0 bestean. Nodoak banatuta $h=t_k-t_{k-1}$ eta $-h=t_{k-1}-t_k$:",
-                  en: "Build the degree-1 polynomial interpolating $f$ at $(t_{k-1},f_{k-1})$ and $(t_k,f_k)$ using the [[deduccion-lagrange-base|Lagrange basis]]: each basis polynomial is 1 at its node and 0 at the other. With nodes separated by $h=t_k-t_{k-1}$ and $-h=t_{k-1}-t_k$:",
+                  es: "Construimos el polinomio de grado 1 que interpola los valores $f_{k-1}$ y $f_k$ usando la [[deduccion-lagrange-base|base de Lagrange]]. Como $t_k-t_{k-1}=h$ y $t_{k-1}-t_k=-h$, las bases quedan:",
+                  eu: "$f_{k-1}$ eta $f_k$ balioak interpolatzen dituen 1. graduko polinomioa eraikitzen dugu, [[deduccion-lagrange-base|Lagrange oinarria]] erabiliz. $t_k-t_{k-1}=h$ eta $t_{k-1}-t_k=-h$ direnez, oinarriak honela geratzen dira:",
+                  en: "Build the degree-1 polynomial interpolating the values $f_{k-1}$ and $f_k$ using the [[deduccion-lagrange-base|Lagrange basis]]. Since $t_k-t_{k-1}=h$ and $t_{k-1}-t_k=-h$, the bases are:",
                 },
                 formula:
                   "L_{k-1}(\\tau)=\\frac{\\tau-t_k}{t_{k-1}-t_k}=\\frac{t_k-\\tau}{h},\\qquad L_k(\\tau)=\\frac{\\tau-t_{k-1}}{t_k-t_{k-1}}=\\frac{\\tau-t_{k-1}}{h}",
               },
               {
                 text: {
-                  es: "El interpolante de [[interpolacion-lagrange|Lagrange]] es la combinación de los valores con su base:",
-                  eu: "[[interpolacion-lagrange|Lagrange]] interpolatzailea balioen eta oinarriaren konbinazioa da:",
-                  en: "The [[interpolacion-lagrange|Lagrange]] interpolant is the combination of the values with their basis:",
+                  es: "El interpolante de [[interpolacion-lagrange|Lagrange]] es la combinación de los valores con su base. Es la recta que coincide con las pendientes conocidas en los dos nodos:",
+                  eu: "[[interpolacion-lagrange|Lagrange]] interpolatzailea balioen eta oinarrien konbinazioa da. Bi nodoetan malda ezagunekin bat datorren zuzena da:",
+                  en: "The [[interpolacion-lagrange|Lagrange]] interpolant is the combination of the values with their bases. It is the line that matches the known slopes at the two nodes:",
                 },
                 formula:
-                  "p_1(\\tau)=f_{k-1}\\,\\frac{t_k-\\tau}{h}+f_k\\,\\frac{\\tau-t_{k-1}}{h}",
+                  "p_1(\\tau)=f_{k-1}\\,\\frac{t_k-\\tau}{h}+f_k\\,\\frac{\\tau-t_{k-1}}{h}=f_k\\,\\frac{\\tau-t_{k-1}}{h}-f_{k-1}\\,\\frac{\\tau-t_k}{h}",
               },
               {
                 text: {
@@ -494,30 +530,48 @@ export const edoMultipasoDerivations: ContentEntry[] = [
             steps: [
               {
                 text: {
-                  es: "Para integrar cómodamente normalizamos con $\\tau=t_k+sh$: cuando $\\tau$ recorre $[t_k,t_{k+1}]$, $s$ recorre $[0,1]$, y $d\\tau=h\\,ds$. Los polinomios base se simplifican:",
-                  eu: "Eroso integratzeko $\\tau=t_k+sh$ aldagai-aldaketaz normalizatzen dugu: $\\tau$-k $[t_k,t_{k+1}]$ zeharkatzen duenean, $s$-k $[0,1]$ zeharkatzen du, eta $d\\tau=h\\,ds$. Oinarri-polinomioak sinplifikatu egiten dira:",
-                  en: "To integrate comfortably, normalize with $\\tau=t_k+sh$: as $\\tau$ runs over $[t_k,t_{k+1}]$, $s$ runs over $[0,1]$, and $d\\tau=h\\,ds$. The basis polynomials simplify:",
+                  es: "Para integrar, hacemos el cambio que aparece en los apuntes: $s=\\tau-t_k$, es decir, $\\tau=t_k+s$ y $d\\tau=ds$. Cuando $\\tau=t_k$, $s=0$; cuando $\\tau=t_{k+1}$, $s=h$. Además:",
+                  eu: "Integratzeko, apunteetako aldaketa egiten dugu: $s=\\tau-t_k$, hau da, $\\tau=t_k+s$ eta $d\\tau=ds$. $\\tau=t_k$ denean, $s=0$; $\\tau=t_{k+1}$ denean, $s=h$. Gainera:",
+                  en: "To integrate, use the change of variable from the notes: $s=\\tau-t_k$, that is, $\\tau=t_k+s$ and $d\\tau=ds$. When $\\tau=t_k$, $s=0$; when $\\tau=t_{k+1}$, $s=h$. Also:",
                 },
                 formula:
-                  "\\frac{t_k-\\tau}{h}=-s,\\qquad \\frac{\\tau-t_{k-1}}{h}=s+1\\;\\Rightarrow\\; p_1(s)=f_k\\,(s+1)-f_{k-1}\\,s",
+                  "\\tau-t_{k-1}=s+h,\\qquad \\tau-t_k=s",
               },
               {
                 text: {
-                  es: "Sustituimos $f$ por $p_1$ en la forma integral e integramos cada término por separado:",
-                  eu: "$f$ $p_1$-ez ordezkatzen dugu forma integralean eta gai bakoitza bereiz integratzen dugu:",
-                  en: "Replace $f$ by $p_1$ in the integral form and integrate each term separately:",
+                  es: "Sustituimos $f(\\tau,y(\\tau))$ por el interpolante $p_1$ en la integral. Con el cambio anterior, la recta queda escrita como:",
+                  eu: "Integralean $f(\\tau,y(\\tau))$ interpolatzaileaz, $p_1$-ez, ordezkatzen dugu. Aurreko aldaketarekin, zuzena honela idazten da:",
+                  en: "Replace $f(\\tau,y(\\tau))$ by the interpolant $p_1$ in the integral. With the previous change of variable, the line becomes:",
                 },
                 formula:
-                  "\\int_0^1 (s+1)\\,ds=\\Bigl[\\tfrac{s^2}{2}+s\\Bigr]_0^1=\\tfrac{3}{2},\\qquad \\int_0^1 s\\,ds=\\Bigl[\\tfrac{s^2}{2}\\Bigr]_0^1=\\tfrac{1}{2}",
+                  "p_1(t_k+s)=f_k\\,\\frac{s+h}{h}-f_{k-1}\\,\\frac{s}{h}",
               },
               {
                 text: {
-                  es: "Multiplicando por el factor $h$ del cambio de variable y sustituyendo $y(t_k)\\approx y_k$, aparece la fórmula AB2:",
-                  eu: "Aldagai-aldaketaren $h$ faktoreaz biderkatuz eta $y(t_k)\\approx y_k$ ordezkatuz, AB2 formula agertzen da:",
-                  en: "Multiplying by the factor $h$ from the change of variable and substituting $y(t_k)\\approx y_k$, the AB2 formula appears:",
+                  es: "Integramos las dos partes por separado. La parte de $f_k$ aporta $\\frac{3h}{2}$ y la de $f_{k-1}$ aporta $\\frac{h}{2}$ con signo negativo:",
+                  eu: "Bi zatiak bereiz integratzen ditugu. $f_k$-ren zatiak $\\frac{3h}{2}$ ematen du, eta $f_{k-1}$-ren zatiak $\\frac{h}{2}$, zeinu negatiboarekin:",
+                  en: "Integrate the two parts separately. The $f_k$ part contributes $\\frac{3h}{2}$ and the $f_{k-1}$ part contributes $\\frac{h}{2}$ with a negative sign:",
                 },
                 formula:
-                  "y_{k+1}=y_k+h\\Bigl(\\tfrac{3}{2}f_k-\\tfrac{1}{2}f_{k-1}\\Bigr)=y_k+\\frac{h}{2}\\bigl(3f_k-f_{k-1}\\bigr)",
+                  "\\begin{aligned} \\int_0^h f_k\\frac{s+h}{h}\\,ds&=f_k\\frac{1}{h}\\Bigl[\\frac{s^2}{2}+hs\\Bigr]_0^h=\\frac{3h}{2}f_k\\\\ \\int_0^h f_{k-1}\\frac{s}{h}\\,ds&=f_{k-1}\\frac{1}{h}\\Bigl[\\frac{s^2}{2}\\Bigr]_0^h=\\frac{h}{2}f_{k-1} \\end{aligned}",
+              },
+              {
+                text: {
+                  es: "Por tanto, la integral aproximada sobre el paso nuevo es:",
+                  eu: "Beraz, pauso berriko integral hurbildua hau da:",
+                  en: "Therefore, the approximate integral over the new step is:",
+                },
+                formula:
+                  "\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau\\approx\\int_{t_k}^{t_{k+1}} p_1(\\tau)\\,d\\tau=\\frac{h}{2}\\bigl(3f_k-f_{k-1}\\bigr)",
+              },
+              {
+                text: {
+                  es: "Sustituyendo en la forma integral exacta y usando $y(t_k)\\approx y_k$ aparece la fórmula de Adams-Bashforth de dos pasos:",
+                  eu: "Forma integral zehatzean ordezkatuz eta $y(t_k)\\approx y_k$ erabiliz, bi pausoko Adams-Bashforth formula agertzen da:",
+                  en: "Substituting into the exact integral form and using $y(t_k)\\approx y_k$ gives the two-step Adams-Bashforth formula:",
+                },
+                formula:
+                  "y_{k+1}=y_k+\\frac{h}{2}\\bigl(3f_k-f_{k-1}\\bigr)",
               },
             ],
           },
@@ -604,9 +658,59 @@ export const edoMultipasoDerivations: ContentEntry[] = [
     sections: [
       {
         heading: {
-          es: "Interpolar con el nodo nuevo",
-          eu: "Nodo berriarekin interpolatu",
-          en: "Interpolating with the new node",
+          es: "Paso 1: forma integral",
+          eu: "1. pausoa: forma integrala",
+          en: "Step 1: integral form",
+        },
+        blocks: [
+          {
+            kind: "diagram",
+            variant: "am2-implicit",
+            caption: {
+              es: "AM2 usa el intervalo nuevo completo: interpola la pendiente entre $f_k$ y $f_{k+1}$ y por eso coincide con el trapecio implícito.",
+              eu: "AM2-k tarte berri osoa erabiltzen du: malda $f_k$ eta $f_{k+1}$ artean interpolatzen du, eta horregatik trapezio inplizituarekin bat dator.",
+              en: "AM2 uses the whole new interval: it interpolates the slope between $f_k$ and $f_{k+1}$, so it is the implicit trapezoidal rule.",
+            },
+          },
+          {
+            kind: "steps",
+            steps: [
+              {
+                text: {
+                  es: "Partimos del PVI $y'(t)=f(t,y(t))$. Integramos ambos lados entre $t_k$ y $t_{k+1}$:",
+                  eu: "$y'(t)=f(t,y(t))$ PVI-tik abiatzen gara. Bi aldeak $t_k$ eta $t_{k+1}$ artean integratzen ditugu:",
+                  en: "Start from the IVP $y'(t)=f(t,y(t))$. Integrate both sides between $t_k$ and $t_{k+1}$:",
+                },
+                formula:
+                  "\\int_{t_k}^{t_{k+1}} y'(\\tau)\\,d\\tau=\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau",
+              },
+              {
+                text: {
+                  es: "Por el Teorema Fundamental del Cálculo, el lado izquierdo es exacto. La única parte que habrá que aproximar es la integral de $f$:",
+                  eu: "Kalkuluaren Oinarrizko Teoremaren arabera, ezkerreko aldea zehatza da. Hurbildu beharreko zati bakarra $f$-ren integrala da:",
+                  en: "By the Fundamental Theorem of Calculus, the left-hand side is exact. The only part to approximate is the integral of $f$:",
+                },
+                formula:
+                  "y(t_{k+1})=y(t_k)+\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau",
+              },
+              {
+                text: {
+                  es: "En la fórmula numérica escribimos $y_k\\approx y(t_k)$ y $y_{k+1}\\approx y(t_{k+1})$:",
+                  eu: "Formula numerikoan $y_k\\approx y(t_k)$ eta $y_{k+1}\\approx y(t_{k+1})$ idazten dugu:",
+                  en: "In the numerical formula write $y_k\\approx y(t_k)$ and $y_{k+1}\\approx y(t_{k+1})$:",
+                },
+                formula:
+                  "y_{k+1}=y_k+\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        heading: {
+          es: "Paso 2: interpolar f en el intervalo nuevo",
+          eu: "2. pausoa: f tarte berrian interpolatu",
+          en: "Step 2: interpolate f on the new interval",
         },
         blocks: [
           {
@@ -614,46 +718,192 @@ export const edoMultipasoDerivations: ContentEntry[] = [
             steps: [
               {
                 text: {
-                  es: "Partimos de la misma forma integral que en [[deduccion-ab2|AB2]], pero ahora interpolamos $f$ en $(t_k,f_k)$ y el nodo nuevo $(t_{k+1},f_{k+1})$, con la [[deduccion-lagrange-base|base de Lagrange]]:",
-                  eu: "[[deduccion-ab2|AB2]]-ko forma integral beretik abiatzen gara, baina orain $f$ interpolatzen dugu $(t_k,f_k)$-n eta nodo berrian $(t_{k+1},f_{k+1})$, [[deduccion-lagrange-base|Lagrange oinarriarekin]]:",
-                  en: "Start from the same integral form as in [[deduccion-ab2|AB2]], but now interpolate $f$ at $(t_k,f_k)$ and the new node $(t_{k+1},f_{k+1})$, with the [[deduccion-lagrange-base|Lagrange basis]]:",
+                  es: "A diferencia de [[deduccion-ab2|AB2]], AM2 interpola en $t_k$ y $t_{k+1}$. Por tanto usa $f_k=f(t_k,y_k)$ y $f_{k+1}=f(t_{k+1},y_{k+1})$:",
+                  eu: "[[deduccion-ab2|AB2]] ez bezala, AM2-k $t_k$ eta $t_{k+1}$ puntuetan interpolatzen du. Beraz $f_k=f(t_k,y_k)$ eta $f_{k+1}=f(t_{k+1},y_{k+1})$ erabiltzen ditu:",
+                  en: "Unlike [[deduccion-ab2|AB2]], AM2 interpolates at $t_k$ and $t_{k+1}$. Thus it uses $f_k=f(t_k,y_k)$ and $f_{k+1}=f(t_{k+1},y_{k+1})$:",
                 },
                 formula:
-                  "p_1(\\tau)=f_k\\,\\frac{t_{k+1}-\\tau}{h}+f_{k+1}\\,\\frac{\\tau-t_k}{h}",
+                  "p_1(\\tau)=f_k L_k(\\tau)+f_{k+1}L_{k+1}(\\tau)",
               },
               {
                 text: {
-                  es: "Con el cambio de variable $\\tau=t_k+sh$ ($s\\in[0,1]$, $d\\tau=h\\,ds$) los factores se vuelven $1-s$ y $s$. Ahora el intervalo de integración coincide con los nodos: se interpola, no se extrapola, y por eso la constante de error saldrá menor que en AB2.",
-                  eu: "$\\tau=t_k+sh$ aldagai-aldaketarekin ($s\\in[0,1]$, $d\\tau=h\\,ds$) faktoreak $1-s$ eta $s$ bihurtzen dira. Orain integrazio-tartea nodoekin bat dator: interpolatzen da, ez estrapolatzen, eta horregatik errore-konstantea AB2-koa baino txikiagoa aterako da.",
-                  en: "With the change of variable $\\tau=t_k+sh$ ($s\\in[0,1]$, $d\\tau=h\\,ds$) the factors become $1-s$ and $s$. Now the integration interval coincides with the nodes: we interpolate rather than extrapolate, which is why the error constant will come out smaller than in AB2.",
-                },
-                formula: "p_1(s)=f_k\\,(1-s)+f_{k+1}\\,s",
-              },
-              {
-                text: {
-                  es: "Integramos cada término en $[0,1]$: ambos pesos valen $\\tfrac12$.",
-                  eu: "Gai bakoitza $[0,1]$-en integratzen dugu: bi pisuek $\\tfrac12$ balio dute.",
-                  en: "Integrate each term over $[0,1]$: both weights equal $\\tfrac12$.",
+                  es: "Las funciones base de Lagrange son:",
+                  eu: "Lagrangeren oinarri-funtzioak hauek dira:",
+                  en: "The Lagrange basis functions are:",
                 },
                 formula:
-                  "\\int_0^1 (1-s)\\,ds=\\tfrac{1}{2},\\qquad \\int_0^1 s\\,ds=\\tfrac{1}{2}",
+                  "L_k(\\tau)=\\frac{\\tau-t_{k+1}}{t_k-t_{k+1}}=\\frac{t_{k+1}-\\tau}{h},\\qquad L_{k+1}(\\tau)=\\frac{\\tau-t_k}{t_{k+1}-t_k}=\\frac{\\tau-t_k}{h}",
               },
               {
                 text: {
-                  es: "Multiplicando por $h$ queda AM2, la [[deduccion-integracion-trapecio|regla del trapecio]] aplicada a la integral de la pendiente:",
-                  eu: "$h$-z biderkatuz AM2 geratzen da, malda-integralari aplikatutako [[deduccion-integracion-trapecio|trapezio-erregela]] dena, hain zuzen:",
-                  en: "Multiplying by $h$ gives AM2, the [[deduccion-integracion-trapecio|trapezoidal rule]] applied to the slope integral:",
+                  es: "Sustituyendo queda la recta que aproxima la pendiente dentro del subintervalo:",
+                  eu: "Ordezkatuz, azpitarte barruko malda hurbiltzen duen zuzena geratzen da:",
+                  en: "Substitution gives the line that approximates the slope inside the subinterval:",
                 },
-                formula: "y_{k+1}=y_k+\\frac{h}{2}\\bigl(f_{k+1}+f_k\\bigr)",
-              },
-              {
-                text: {
-                  es: "Como $f_{k+1}=f(t_{k+1},y_{k+1})$ depende de la incógnita, el método es implícito: cada paso se resuelve con [[no-lineales-newton-raphson|Newton]] o mediante un par [[edo-predictor-corrector|predictor-corrector]]. Su error local es $-\\frac{1}{12}h^3y'''(\\xi)$: mismo orden 2 que AB2, pero con constante 5 veces menor.",
-                  eu: "$f_{k+1}=f(t_{k+1},y_{k+1})$ ezezagunaren araberakoa denez, metodoa inplizitua da: pauso bakoitza [[no-lineales-newton-raphson|Newton]]-ekin edo [[edo-predictor-corrector|iragarle-zuzentzaile]] bikote batekin ebazten da. Bere errore lokala $-\\frac{1}{12}h^3y'''(\\xi)$ da: AB2-ren 2. ordena bera, baina konstantea 5 aldiz txikiagoa.",
-                  en: "Since $f_{k+1}=f(t_{k+1},y_{k+1})$ depends on the unknown, the method is implicit: each step is solved with [[no-lineales-newton-raphson|Newton]] or via a [[edo-predictor-corrector|predictor-corrector]] pair. Its local error is $-\\frac{1}{12}h^3y'''(\\xi)$: the same order 2 as AB2, but with a constant 5 times smaller.",
-                },
+                formula:
+                  "p_1(\\tau)=f_k\\,\\frac{t_{k+1}-\\tau}{h}+f_{k+1}\\,\\frac{\\tau-t_k}{h}=f_{k+1}\\frac{\\tau-t_k}{h}-f_k\\frac{\\tau-t_{k+1}}{h}",
               },
             ],
+          },
+        ],
+      },
+      {
+        heading: {
+          es: "Paso 3: cambio de variable e integrales",
+          eu: "3. pausoa: aldagai-aldaketa eta integralak",
+          en: "Step 3: change of variable and integrals",
+        },
+        blocks: [
+          {
+            kind: "steps",
+            steps: [
+              {
+                text: {
+                  es: "Para integrar usamos el mismo cambio que en tus apuntes: $s=\\tau-t_k$. Entonces $\\tau=t_k+s$, $d\\tau=ds$ y los extremos son $s=0$ y $s=h$.",
+                  eu: "Integratzeko zure apunteetako aldaketa bera erabiltzen dugu: $s=\\tau-t_k$. Orduan $\\tau=t_k+s$, $d\\tau=ds$ eta muturrak $s=0$ eta $s=h$ dira.",
+                  en: "To integrate, use the same change as in your notes: $s=\\tau-t_k$. Then $\\tau=t_k+s$, $d\\tau=ds$, and the limits are $s=0$ and $s=h$.",
+                },
+                formula:
+                  "s=\\tau-t_k,\\qquad \\tau=t_k+s,\\qquad \\tau-t_{k+1}=s-h",
+              },
+              {
+                text: {
+                  es: "Con ese cambio, el interpolante se convierte en:",
+                  eu: "Aldaketa horrekin, interpolatzailea honela bihurtzen da:",
+                  en: "With this change, the interpolant becomes:",
+                },
+                formula:
+                  "p_1(t_k+s)=f_{k+1}\\frac{s}{h}-f_k\\frac{s-h}{h}=f_{k+1}\\frac{s}{h}+f_k\\frac{h-s}{h}",
+              },
+              {
+                text: {
+                  es: "Integramos el término de $f_{k+1}$:",
+                  eu: "$f_{k+1}$-ren gaia integratzen dugu:",
+                  en: "Integrate the $f_{k+1}$ term:",
+                },
+                formula:
+                  "\\int_0^h f_{k+1}\\frac{s}{h}\\,ds=f_{k+1}\\frac{1}{h}\\left[\\frac{s^2}{2}\\right]_0^h=\\frac{h}{2}f_{k+1}",
+              },
+              {
+                text: {
+                  es: "Integramos el término de $f_k$:",
+                  eu: "$f_k$-ren gaia integratzen dugu:",
+                  en: "Integrate the $f_k$ term:",
+                },
+                formula:
+                  "\\int_0^h f_k\\frac{h-s}{h}\\,ds=f_k\\frac{1}{h}\\left[hs-\\frac{s^2}{2}\\right]_0^h=\\frac{h}{2}f_k",
+              },
+              {
+                text: {
+                  es: "Por tanto, la integral de la pendiente se aproxima por la suma de esos dos pesos:",
+                  eu: "Beraz, maldaren integrala bi pisu horien baturaz hurbiltzen da:",
+                  en: "Therefore the slope integral is approximated by the sum of those two weights:",
+                },
+                formula:
+                  "\\int_{t_k}^{t_{k+1}} f\\bigl(\\tau,y(\\tau)\\bigr)\\,d\\tau\\approx \\int_{t_k}^{t_{k+1}}p_1(\\tau)\\,d\\tau=\\frac{h}{2}\\bigl(f_{k+1}+f_k\\bigr)",
+              },
+              {
+                text: {
+                  es: "Sustituyendo en la forma integral queda AM2:",
+                  eu: "Forma integralean ordezkatuz AM2 lortzen da:",
+                  en: "Substituting into the integral form gives AM2:",
+                },
+                formula:
+                  "y_{k+1}=y_k+\\frac{h}{2}\\bigl(f_{k+1}+f_k\\bigr)",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        heading: {
+          es: "Paso 4: por qué es implícito",
+          eu: "4. pausoa: zergatik den inplizitua",
+          en: "Step 4: why it is implicit",
+        },
+        blocks: [
+          {
+            kind: "steps",
+            steps: [
+              {
+                text: {
+                  es: "El detalle clave es que $f_{k+1}$ no está calculado todavía:",
+                  eu: "Xehetasun gakoa da $f_{k+1}$ oraindik kalkulatu gabe dagoela:",
+                  en: "The key detail is that $f_{k+1}$ has not been computed yet:",
+                },
+                formula: "f_{k+1}=f(t_{k+1},y_{k+1})",
+              },
+              {
+                text: {
+                  es: "Así que la fórmula realmente es una ecuación para la incógnita $y_{k+1}$:",
+                  eu: "Beraz formula, benetan, $y_{k+1}$ ezezagunarentzako ekuazio bat da:",
+                  en: "So the formula is really an equation for the unknown $y_{k+1}$:",
+                },
+                formula:
+                  "y_{k+1}=y_k+\\frac{h}{2}\\Bigl(f(t_{k+1},y_{k+1})+f(t_k,y_k)\\Bigr)",
+              },
+              {
+                text: {
+                  es: "Si se resuelve con Newton, conviene definir un residual $R(z)$, reservando $f$ solo para la función de la EDO:",
+                  eu: "Newton-ekin ebazten bada, komeni da $R(z)$ hondarra definitzea, $f$ EDOaren funtziorako bakarrik utzita:",
+                  en: "If solving with Newton, define a residual $R(z)$, keeping $f$ only for the ODE function:",
+                },
+                formula:
+                  "R(z)=z-y_k-\\frac{h}{2}\\Bigl(f(t_{k+1},z)+f_k\\Bigr)",
+              },
+              {
+                text: {
+                  es: "Newton actualiza la aproximación hasta que $R(z)$ sea prácticamente cero:",
+                  eu: "Newton-ek hurbilketa eguneratzen du $R(z)$ ia zero izan arte:",
+                  en: "Newton updates the approximation until $R(z)$ is essentially zero:",
+                },
+                formula:
+                  "z^{(m+1)}=z^{(m)}-\\frac{R(z^{(m)})}{R'(z^{(m)})},\\qquad R'(z)=1-\\frac{h}{2}\\,f_y(t_{k+1},z)",
+              },
+              {
+                text: {
+                  es: "En un par predictor-corrector se suele predecir $y_{k+1}$ con AB2 y usar esa predicción dentro de AM2:",
+                  eu: "Iragarle-zuzentzaile bikote batean, normalean $y_{k+1}$ AB2-rekin iragartzen da eta iragarpen hori AM2 barruan erabiltzen da:",
+                  en: "In a predictor-corrector pair, one usually predicts $y_{k+1}$ with AB2 and inserts that prediction into AM2:",
+                },
+                formula:
+                  "y_{k+1}^{(p)}=y_k+\\frac{h}{2}(3f_k-f_{k-1}),\\qquad y_{k+1}^{(c)}=y_k+\\frac{h}{2}\\Bigl(f(t_{k+1},y_{k+1}^{(p)})+f_k\\Bigr)",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        heading: {
+          es: "Paso 5: error y relación con el trapecio",
+          eu: "5. pausoa: errorea eta trapezioarekiko lotura",
+          en: "Step 5: error and link with the trapezoid",
+        },
+        blocks: [
+          {
+            kind: "paragraph",
+            text: {
+              es: "La fórmula obtenida es exactamente la [[deduccion-integracion-trapecio|regla del trapecio]] aplicada a la integral de la pendiente $y'(t)$. Como el trapecio tiene error local proporcional a la tercera derivada, se obtiene",
+              eu: "Lortutako formula $y'(t)$ maldaren integralari aplikatutako [[deduccion-integracion-trapecio|trapezio-erregela]] da zehazki. Trapezioaren errore lokala hirugarren deribatuarekiko proportzionala denez, hau lortzen da",
+              en: "The formula obtained is exactly the [[deduccion-integracion-trapecio|trapezoidal rule]] applied to the slope integral $y'(t)$. Since the trapezoid has local error proportional to the third derivative,",
+            },
+          },
+          {
+            kind: "formula",
+            tex: "e_{k+1}=-\\frac{1}{12}h^3y'''(\\xi)=\\mathcal{O}(h^3)",
+            caption: {
+              es: "Error local de AM2; al acumular pasos, el error global es de orden 2.",
+              eu: "AM2-ren errore lokala; pausoak metatzean, errore globala 2. ordenakoa da.",
+              en: "Local error of AM2; after accumulating steps, the global error is order 2.",
+            },
+          },
+          {
+            kind: "paragraph",
+            text: {
+              es: "Por eso AM2 tiene el mismo orden global que AB2, pero una constante de error menor. La mejora se paga resolviendo la ecuación implícita o usando un corrector.",
+              eu: "Horregatik AM2-k AB2-ren ordena global bera du, baina errore-konstante txikiagoa. Hobekuntza ekuazio inplizitua ebatzearen edo zuzentzaile bat erabiltzearen truke lortzen da.",
+              en: "Thus AM2 has the same global order as AB2, but a smaller error constant. The improvement is paid for by solving the implicit equation or using a corrector.",
+            },
           },
         ],
       },

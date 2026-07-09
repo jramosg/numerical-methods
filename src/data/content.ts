@@ -74,7 +74,9 @@ export type Block =
         | "euler-rectangle"
         | "implicit-euler-rectangle"
         | "heun-average"
-        | "rk4-stages";
+        | "rk4-stages"
+        | "ab2-extrapolation"
+        | "am2-implicit";
       caption: LocalizedText;
     }
   | { kind: "steps"; title?: LocalizedText; steps: Step[] }

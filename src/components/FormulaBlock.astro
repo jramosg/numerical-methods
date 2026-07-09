@@ -9,5 +9,7 @@ const html = katex.renderToString(formula, {
 ---
 
 <div class="formula-block">
-  <span set:html={html} />
+  <div class="formula-scroll" tabindex="0">
+    <span set:html={html} />
+  </div>
 </div>
