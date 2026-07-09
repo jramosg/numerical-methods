@@ -1918,9 +1918,9 @@ export const edoUnpasoExercises: ContentEntry[] = [
       en: "Exercise: stability of explicit and implicit Euler"
     },
     description: {
-      es: "Análisis completo de y'=λy: factor de amplificación de cada método, condición de estabilidad h<−2/λ del explícito, estabilidad incondicional del implícito y comprobación numérica con λ=−10.",
-      eu: "y'=λy-ren analisi osoa: metodo bakoitzaren anplifikazio-faktorea, esplizituaren h<−2/λ egonkortasun-baldintza, inplizituaren baldintzarik gabeko egonkortasuna eta λ=−10 balioarekin egiaztapen numerikoa.",
-      en: "Full analysis of y'=λy: the amplification factor of each method, the explicit method's stability condition h<−2/λ, the unconditional stability of the implicit one and a numerical check with λ=−10."
+      es: "Análisis completo de $y'=\\lambda y$: factor de amplificación de cada método, condición de estabilidad $h<-2/\\lambda$ del explícito, estabilidad incondicional del implícito y comprobación numérica con $\\lambda=-10$.",
+      eu: "$y'=\\lambda y$-ren analisi osoa: metodo bakoitzaren anplifikazio-faktorea, esplizituaren $h<-2/\\lambda$ egonkortasun-baldintza, inplizituaren baldintzarik gabeko egonkortasuna eta $\\lambda=-10$ balioarekin egiaztapen numerikoa.",
+      en: "Full analysis of $y'=\\lambda y$: the amplification factor of each method, the explicit method's stability condition $h<-2/\\lambda$, the unconditional stability of the implicit one and a numerical check with $\\lambda=-10$."
     },
     keywords: ["ejercicio", "estabilidad", "Euler implícito", "factor de amplificación", "Malthus"],
     prerequisites: ["edo-metodo-euler", "edo-convergencia-orden"],

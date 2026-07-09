@@ -1487,9 +1487,9 @@ export const integracionExercises: ContentEntry[] = [
       en: "Exercise: trapezoid and Simpson on a smooth integral"
     },
     description: {
-      es: "Aproximación de la integral de sin(x)e^{-x} entre 0 y π/2 con 4 y 8 subintervalos, comparando errores.",
-      eu: "sin(x)e^{-x} funtzioaren integrala 0 eta π/2 artean 4 eta 8 azpitartetan hurbiltzea, erroreak alderatuz.",
-      en: "Approximation of the integral of sin(x)e^{-x} from 0 to π/2 with 4 and 8 subintervals, comparing errors."
+      es: "Aproximación de la integral de $\\sin(x)e^{-x}$ entre 0 y $\\pi/2$ con 4 y 8 subintervalos, comparando errores.",
+      eu: "$\\sin(x)e^{-x}$ funtzioaren integrala 0 eta $\\pi/2$ artean 4 eta 8 azpitartetan hurbiltzea, erroreak alderatuz.",
+      en: "Approximation of the integral of $\\sin(x)e^{-x}$ from 0 to $\\pi/2$ with 4 and 8 subintervals, comparing errors."
     },
     keywords: ["trapecio compuesto", "Simpson compuesto", "error"],
     prerequisites: ["integracion-newton-cotes-cerradas"],

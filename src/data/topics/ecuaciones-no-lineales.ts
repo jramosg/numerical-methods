@@ -20,9 +20,9 @@ export const noLinealesArticles: ContentEntry[] = [
       en: "Nonlinear equations: the problem and iterative methods"
     },
     description: {
-      es: "Qué significa resolver f(x)=0, por qué se recurre a métodos iterativos, cómo se clasifican (memoria, puntos, derivadas) y con qué criterios se detiene la iteración.",
-      eu: "Zer esan nahi duen f(x)=0 ebazteak, zergatik jotzen den metodo iteratiboetara, nola sailkatzen diren (memoria, puntuak, deribatuak) eta zein irizpiderekin gelditzen den iterazioa.",
-      en: "What solving f(x)=0 means, why iterative methods are used, how they are classified (memory, points, derivatives) and which criteria stop the iteration."
+      es: "Qué significa resolver $f(x)=0$, por qué se recurre a métodos iterativos, cómo se clasifican (memoria, puntos, derivadas) y con qué criterios se detiene la iteración.",
+      eu: "$f(x)=0$ ebazteak zer esan nahi duen, zergatik jotzen den metodo iteratiboetara, nola sailkatzen diren (memoria, puntuak, deribatuak) eta zein irizpiderekin gelditzen den iterazioa.",
+      en: "What solving $f(x)=0$ means, why iterative methods are used, how they are classified (memory, points, derivatives) and which criteria stop the iteration."
     },
     keywords: ["ecuación no lineal", "raíz", "método iterativo", "criterio de parada", "tolerancia"],
     related: [
@@ -250,9 +250,9 @@ export const noLinealesArticles: ContentEntry[] = [
       en: "Fixed-point iteration"
     },
     description: {
-      es: "Reescribir f(x)=0 como x=φ(x) e iterar: cuándo converge (|φ'(α)|<1), a qué velocidad, y el teorema que da el orden del método según las derivadas de φ que se anulan en la solución.",
-      eu: "f(x)=0 berridatzi x=φ(x) gisa eta iteratu: noiz konbergitzen duen (|φ'(α)|<1), zein abiaduratan, eta metodoaren ordena φ-ren zein deribatu anulatzen diren soluzioan ematen duen teorema.",
-      en: "Rewrite f(x)=0 as x=φ(x) and iterate: when it converges (|φ'(α)|<1), how fast, and the theorem giving the method's order from which derivatives of φ vanish at the solution."
+      es: "Reescribir $f(x)=0$ como $x=\\phi(x)$ e iterar: cuándo converge ($|\\phi'(\\alpha)|<1$), a qué velocidad, y el teorema que da el orden del método según las derivadas de $\\phi$ que se anulan en la solución.",
+      eu: "$f(x)=0$ berridatzi $x=\\phi(x)$ gisa eta iteratu: noiz konbergitzen duen ($|\\phi'(\\alpha)|<1$), zein abiaduratan, eta metodoaren ordena $\\phi$-ren zein deribatu anulatzen diren soluzioan ematen duen teorema.",
+      en: "Rewrite $f(x)=0$ as $x=\\phi(x)$ and iterate: when it converges ($|\\phi'(\\alpha)|<1$), how fast, and the theorem giving the method's order from which derivatives of $\\phi$ vanish at the solution."
     },
     keywords: ["punto fijo", "convergencia", "orden", "función de iteración"],
     prerequisites: ["no-lineales-introduccion"],
@@ -492,9 +492,9 @@ export const noLinealesArticles: ContentEntry[] = [
       en: "Derivative-free methods: secant and Steffensen"
     },
     description: {
-      es: "Cuando f' no está disponible se sustituye por una diferencia dividida: con dos iterados anteriores (secante, orden ≈1.618) o con una evaluación auxiliar (Steffensen, orden 2).",
-      eu: "f' eskuragarri ez dagoenean diferentzia zatitu batez ordezkatzen da: aurreko bi iteraturekin (sekantea, ordena ≈1.618) edo ebaluazio laguntzaile batekin (Steffensen, 2. ordena).",
-      en: "When f' is unavailable it is replaced by a divided difference: with two previous iterates (secant, order ≈1.618) or with an auxiliary evaluation (Steffensen, order 2)."
+      es: "Cuando $f'$ no está disponible se sustituye por una diferencia dividida: con dos iterados anteriores (secante, orden $\\approx1.618$) o con una evaluación auxiliar (Steffensen, orden 2).",
+      eu: "$f'$ eskuragarri ez dagoenean diferentzia zatitu batez ordezkatzen da: aurreko bi iteraturekin (sekantea, ordena $\\approx1.618$) edo ebaluazio laguntzaile batekin (Steffensen, 2. ordena).",
+      en: "When $f'$ is unavailable it is replaced by a divided difference: with two previous iterates (secant, order $\\approx1.618$) or with an auxiliary evaluation (Steffensen, order 2)."
     },
     keywords: ["secante", "Steffensen", "sin derivadas", "diferencias divididas"],
     prerequisites: ["no-lineales-newton-raphson"],
@@ -1187,9 +1187,9 @@ export const noLinealesDerivations: ContentEntry[] = [
       en: "Derivation: fixed-point convergence and order"
     },
     description: {
-      es: "Desarrollar φ por Taylor alrededor del punto fijo produce la ecuación del error del método y demuestra a la vez el criterio |φ'(α)|<1 y el teorema del orden.",
-      eu: "φ Taylor bidez puntu finkoaren inguruan garatzeak metodoaren errore-ekuazioa sortzen du eta aldi berean |φ'(α)|<1 irizpidea eta ordenaren teorema frogatzen ditu.",
-      en: "Expanding φ by Taylor around the fixed point yields the method's error equation and proves both the |φ'(α)|<1 criterion and the order theorem."
+      es: "Desarrollar $\\phi$ por Taylor alrededor del punto fijo produce la ecuación del error del método y demuestra a la vez el criterio $|\\phi'(\\alpha)|<1$ y el teorema del orden.",
+      eu: "$\\phi$ Taylor bidez puntu finkoaren inguruan garatzeak metodoaren errore-ekuazioa sortzen du eta aldi berean $|\\phi'(\\alpha)|<1$ irizpidea eta ordenaren teorema frogatzen ditu.",
+      en: "Expanding $\\phi$ by Taylor around the fixed point yields the method's error equation and proves both the $|\\phi'(\\alpha)|<1$ criterion and the order theorem."
     },
     keywords: ["deducción", "punto fijo", "convergencia", "orden", "Taylor"],
     prerequisites: ["no-lineales-punto-fijo", "fundamentos-taylor-truncamiento"],
