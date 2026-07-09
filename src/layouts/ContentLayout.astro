@@ -1,0 +1,154 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import AdSlot from "@/components/AdSlot.astro";
+import FormulaBlock from "@/components/FormulaBlock.astro";
+import ContentBlock from "@/components/ContentBlock.astro";
+import RichText from "@/components/RichText.astro";
+import SupportBox from "@/components/SupportBox.astro";
+import { allContent, type ContentEntry, type Section } from "@/data/content";
+import { plainText } from "@/data/richtext";
+import type { Lang } from "@/data/site";
+
+type EntryType = "articulos" | "deducciones" | "ejercicios";
+
+interface Props {
+  entry: ContentEntry;
+  lang: Lang;
+  type: EntryType;
+}
+
+const { entry, lang, type } = Astro.props;
+
+const typeLabels = {
+  articulos: { es: "Guía", eu: "Gida", en: "Guide" },
+  deducciones: { es: "Deducción", eu: "Frogapena", en: "Derivation" },
+  ejercicios: { es: "Ejercicio", eu: "Ariketa", en: "Exercise" }
+};
+
+const uiLabels = {
+  onThisPage: { es: "En esta página", eu: "Orri honetan", en: "On this page" },
+  prerequisites: { es: "Antes de esto", eu: "Aurretik", en: "Before this" },
+  related: { es: "Relacionado", eu: "Lotutakoa", en: "Related" }
+};
+
+const slugify = (text: string) =>
+  text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+const toc = entry.sections.map((section: Section) => ({
+  id: slugify(section.heading[lang]),
+  label: section.heading[lang]
+}));
+
+// Look up prerequisite / related topics anywhere in the content set.
+const index = new Map(allContent().map((item) => [item.slug, item]));
+const resolveLinks = (slugs?: string[]) =>
+  (slugs ?? [])
+    .map((slug) => index.get(slug))
+    .filter((item): item is NonNullable<typeof item> => Boolean(item))
+    .map((item) => ({
+      title: item.title[lang],
+      href: `/${lang}/${item.type}/${item.slug}/`
+    }));
+
+const prerequisites = resolveLinks(entry.prerequisites);
+const related = resolveLinks(entry.related);
+
+const plainDescription = plainText(entry.description[lang], lang);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": type === "ejercicios" ? "LearningResource" : "Article",
+  headline: entry.title[lang as Lang],
+  description: plainDescription,
+  educationalLevel: entry.level,
+  inLanguage: lang,
+  keywords: entry.keywords.join(", ")
+};
+---
+
+<BaseLayout
+  title={`${entry.title[lang]} | Métodos Numéricos`}
+  description={plainDescription}
+  lang={lang}
+  schema={schema}
+>
+  <main class="content-shell">
+    <article class="article-body">
+      <header class="article-header">
+        <div class="entry-meta">
+          <span>{typeLabels[type][lang]}</span>
+          <span>{entry.category}</span>
+          <span>{entry.level}</span>
+        </div>
+        <h1>{entry.title[lang]}</h1>
+        <p><RichText text={entry.description[lang]} lang={lang} /></p>
+      </header>
+
+      {entry.sections.map((section: Section, index: number) => (
+        <section class="article-section" id={slugify(section.heading[lang])}>
+          <h2>{section.heading[lang]}</h2>
+
+          {section.blocks
+            ? section.blocks.map((block) => <ContentBlock block={block} lang={lang} />)
+            : (
+              <>
+                {section.body?.[lang].map((paragraph: string) => <p>{paragraph}</p>)}
+                {section.formula && <FormulaBlock formula={section.formula} />}
+                {section.bullets?.[lang] && (
+                  <ul class="content-list">
+                    {section.bullets[lang].map((item: string) => <li>{item}</li>)}
+                  </ul>
+                )}
+              </>
+            )}
+
+          {index === 0 && entry.sections.length > 2 && <AdSlot lang={lang} />}
+        </section>
+      ))}
+
+      <SupportBox lang={lang} compact />
+    </article>
+
+    <aside class="content-sidebar">
+      {toc.length > 1 && (
+        <nav class="sidebar-panel" aria-label={uiLabels.onThisPage[lang]}>
+          <strong>{uiLabels.onThisPage[lang]}</strong>
+          <ul class="toc-list">
+            {toc.map((item) => (
+              <li><a href={`#${item.id}`}>{item.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      {prerequisites.length > 0 && (
+        <nav class="sidebar-panel" aria-label={uiLabels.prerequisites[lang]}>
+          <strong>{uiLabels.prerequisites[lang]}</strong>
+          <ul class="link-list">
+            {prerequisites.map((item) => (
+              <li><a href={item.href}>{item.title}</a></li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      {related.length > 0 && (
+        <nav class="sidebar-panel" aria-label={uiLabels.related[lang]}>
+          <strong>{uiLabels.related[lang]}</strong>
+          <ul class="link-list">
+            {related.map((item) => (
+              <li><a href={item.href}>{item.title}</a></li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      <SupportBox lang={lang} />
+    </aside>
+  </main>
+</BaseLayout>

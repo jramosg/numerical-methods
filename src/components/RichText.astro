@@ -1,0 +1,12 @@
+---
+import { richText } from "@/data/richtext";
+import type { Lang } from "@/data/site";
+
+interface Props {
+  text: string;
+  lang: Lang;
+}
+
+const { text, lang } = Astro.props;
+---
+<Fragment set:html={richText(text, lang)} />

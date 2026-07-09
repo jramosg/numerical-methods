@@ -1,0 +1,134 @@
+---
+import FormulaBlock from "./FormulaBlock.astro";
+import RichText from "./RichText.astro";
+import { derivations, type Block } from "@/data/content";
+import type { Lang } from "@/data/site";
+
+interface Props {
+  block: Block;
+  lang: Lang;
+  /** True while rendering inside an embedded derivation (prevents nesting). */
+  embedded?: boolean;
+}
+
+const { block, lang, embedded = false } = Astro.props;
+
+const embedLabels = {
+  tag: { es: "Deducción", eu: "Frogapena", en: "Derivation" },
+  open: {
+    es: "Ver como página propia",
+    eu: "Ikusi orri propio gisa",
+    en: "View as its own page"
+  }
+};
+
+const derivationEntry =
+  block.kind === "derivation" && !embedded
+    ? derivations.find((entry) => entry.slug === block.slug)
+    : undefined;
+---
+
+{block.kind === "paragraph" && <p><RichText text={block.text[lang]} lang={lang} /></p>}
+
+{block.kind === "formula" && (
+  <figure class="formula-figure">
+    <FormulaBlock formula={block.tex} />
+    {block.caption && <figcaption><RichText text={block.caption[lang]} lang={lang} /></figcaption>}
+  </figure>
+)}
+
+{block.kind === "list" && (
+  block.ordered ? (
+    <ol class="content-list">
+      {block.items[lang].map((item: string) => <li><RichText text={item} lang={lang} /></li>)}
+    </ol>
+  ) : (
+    <ul class="content-list">
+      {block.items[lang].map((item: string) => <li><RichText text={item} lang={lang} /></li>)}
+    </ul>
+  )
+)}
+
+{block.kind === "callout" && (
+  <aside class:list={["callout", `callout-${block.variant}`]}>
+    {block.title && <strong class="callout-title">{block.title[lang]}</strong>}
+    <p><RichText text={block.text[lang]} lang={lang} /></p>
+    {block.formula && <FormulaBlock formula={block.formula} />}
+  </aside>
+)}
+
+{block.kind === "steps" && (
+  <div class="steps">
+    {block.title && <strong class="steps-title">{block.title[lang]}</strong>}
+    <ol>
+      {block.steps.map((step) => (
+        <li>
+          <p><RichText text={step.text[lang]} lang={lang} /></p>
+          {step.formula && <FormulaBlock formula={step.formula} />}
+        </li>
+      ))}
+    </ol>
+  </div>
+)}
+
+{block.kind === "example" && (
+  <div class="worked-example">
+    <div class="worked-head">
+      <span class="worked-tag">{{ es: "Ejemplo", eu: "Adibidea", en: "Example" }[lang]}</span>
+      {block.title && <strong>{block.title[lang]}</strong>}
+    </div>
+    <p class="worked-statement"><RichText text={block.statement[lang]} lang={lang} /></p>
+    <ol class="worked-steps">
+      {block.steps.map((step) => (
+        <li>
+          <p><RichText text={step.text[lang]} lang={lang} /></p>
+          {step.formula && <FormulaBlock formula={step.formula} />}
+        </li>
+      ))}
+    </ol>
+    {block.result && (
+      <div class="worked-result">
+        <p><RichText text={block.result.text[lang]} lang={lang} /></p>
+        {block.result.formula && <FormulaBlock formula={block.result.formula} />}
+      </div>
+    )}
+  </div>
+)}
+
+{block.kind === "table" && (
+  <figure class="table-figure">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>{block.head[lang].map((cell: string) => <th><RichText text={cell} lang={lang} /></th>)}</tr>
+        </thead>
+        <tbody>
+          {block.rows.map((row: string[]) => (
+            <tr>{row.map((cell: string) => <td><RichText text={cell} lang={lang} /></td>)}</tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {block.caption && <figcaption><RichText text={block.caption[lang]} lang={lang} /></figcaption>}
+  </figure>
+)}
+
+{derivationEntry && (
+  <section class="embedded-derivation">
+    <div class="embedded-derivation-head">
+      <span class="worked-tag">{embedLabels.tag[lang]}</span>
+      <strong>{derivationEntry.title[lang]}</strong>
+      <a href={`/${lang}/deducciones/${derivationEntry.slug}/`}>
+        {embedLabels.open[lang]} →
+      </a>
+    </div>
+    {derivationEntry.sections.map((section) => (
+      <div class="embedded-derivation-section">
+        {derivationEntry.sections.length > 1 && <h3>{section.heading[lang]}</h3>}
+        {(section.blocks ?? [])
+          .filter((inner) => inner.kind !== "derivation")
+          .map((inner) => <Astro.self block={inner} lang={lang} embedded />)}
+      </div>
+    ))}
+  </section>
+)}

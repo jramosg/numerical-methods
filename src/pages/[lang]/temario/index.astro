@@ -1,0 +1,104 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import EntryCard from "@/components/EntryCard.astro";
+import SupportBox from "@/components/SupportBox.astro";
+import { allContent } from "@/data/content";
+import { areas } from "@/data/areas";
+import { languages, type Lang } from "@/data/site";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+
+const copy = {
+  es: {
+    title: "Temario completo de métodos numéricos",
+    description:
+      "Los nueve temas de métodos numéricos con su teoría, deducciones y ejercicios resueltos: errores, interpolación, diferenciación, integración, EDO, sistemas lineales y ecuaciones y sistemas no lineales.",
+    intro:
+      "Cada tema agrupa sus guías, deducciones y ejercicios. Las guías integran la deducción completa de cada método; los ejercicios están resueltos hasta el final.",
+    eyebrow: "Temario"
+  },
+  eu: {
+    title: "Metodo numerikoen gai-zerrenda osoa",
+    description:
+      "Metodo numerikoen bederatzi gaiak, beren teoria, dedukzio eta ariketa ebatziekin: erroreak, interpolazioa, deribazioa, integrazioa, EDOak, sistema linealak eta ekuazio eta sistema ez-linealak.",
+    intro:
+      "Gai bakoitzak bere gidak, dedukzioak eta ariketak biltzen ditu. Gidek metodo bakoitzaren dedukzio osoa integratzen dute; ariketak amaieraraino ebatzita daude.",
+    eyebrow: "Gai-zerrenda"
+  },
+  en: {
+    title: "Complete numerical methods syllabus",
+    description:
+      "The nine numerical methods topics with their theory, derivations and solved exercises: errors, interpolation, differentiation, integration, ODEs, linear systems, and nonlinear equations and systems.",
+    intro:
+      "Each topic groups its guides, derivations and exercises. Guides embed each method's full derivation; exercises are solved to the end.",
+    eyebrow: "Syllabus"
+  }
+}[lang];
+
+// One section per category, in study order (the two EDO areas share a category).
+const seen = new Set<string>();
+const categorySections = areas
+  .filter((area) => (seen.has(area.category) ? false : seen.add(area.category)))
+  .map((area) => {
+    const entries = allContent().filter((entry) => entry.category === area.category);
+    const title =
+      area.category === "EDO"
+        ? { es: "EDO: valor inicial y multipaso", eu: "EDOak: hasierako balioa eta urrats anitzekoak", en: "ODEs: initial value and multistep" }
+        : area.title;
+    return { area, title, entries };
+  });
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: copy.title,
+  description: copy.description,
+  inLanguage: lang,
+  hasPart: allContent().map((entry) => ({
+    "@type": "Article",
+    name: entry.title[lang],
+    url: `/${lang}/${entry.type}/${entry.slug}/`
+  }))
+};
+---
+
+<BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang} schema={schema}>
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">{copy.eyebrow}</span>
+          <h1>{copy.title}</h1>
+        </div>
+        <p>{copy.intro}</p>
+      </div>
+      <div class="topic-grid">
+        {areas.map((area) => (
+          <a class="topic-card" href={`/${lang}/${area.href}/`}>
+            <h3>{area.title[lang]}</h3>
+            <p>{area.text[lang]}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    {categorySections.map(({ title, entries }) => (
+      <section class="section">
+        <div class="section-header"><h2>{title[lang]}</h2></div>
+        <div class="entry-grid">
+          {entries.map((entry) => (
+            <EntryCard entry={entry} type={entry.type as "articulos" | "deducciones" | "ejercicios"} lang={lang} />
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <section class="section">
+      <SupportBox lang={lang} />
+    </section>
+  </main>
+</BaseLayout>

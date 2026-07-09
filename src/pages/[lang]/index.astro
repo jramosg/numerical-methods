@@ -1,0 +1,183 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SupportBox from "@/components/SupportBox.astro";
+import { articles, derivations, exercises } from "@/data/content";
+import { areas } from "@/data/areas";
+import { languages, type Lang } from "@/data/site";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+
+const copy = {
+  es: {
+    eyebrow: "Referencia libre y trilingüe",
+    title: "La biblia de los métodos numéricos",
+    description:
+      "Cada método con su teoría, su deducción completa integrada en el artículo y ejercicios resueltos y verificados. De los errores y Taylor a los sistemas no lineales, en español, euskera e inglés.",
+    primary: "Explorar el temario",
+    secondary: "Formulario",
+    areasTitle: "Los nueve temas",
+    areasText:
+      "Cada tema enlaza teoría, deducciones y ejercicios entre sí, como una wiki: empieza por donde quieras.",
+    collectionsTitle: "Tres formas de entrar",
+    collections: [
+      {
+        href: "articulos",
+        label: "Guías",
+        count: articles.length,
+        text: "Los métodos explicados: motivación, teoremas, fórmulas y su deducción completa en la misma página."
+      },
+      {
+        href: "deducciones",
+        label: "Deducciones",
+        count: derivations.length,
+        text: "Cada fórmula construida paso a paso, sin saltos: de dónde sale, con qué error y por qué funciona."
+      },
+      {
+        href: "ejercicios",
+        label: "Ejercicios resueltos",
+        count: exercises.length,
+        text: "Problemas a mano y con tablas numéricas, resueltos hasta el final y con los números verificados."
+      }
+    ]
+  },
+  eu: {
+    eyebrow: "Erreferentzia libre eta hirueleduna",
+    title: "Metodo numerikoen biblia",
+    description:
+      "Metodo bakoitza bere teoriarekin, artikuluan integratutako dedukzio osoarekin eta ariketa ebatzi eta egiaztatuekin. Erroreetatik eta Taylor-etik sistema ez-linealetara, euskaraz, gaztelaniaz eta ingelesez.",
+    primary: "Gaiak arakatu",
+    secondary: "Formularioa",
+    areasTitle: "Bederatzi gaiak",
+    areasText:
+      "Gai bakoitzak teoria, dedukzioak eta ariketak lotzen ditu elkarrekin, wiki baten moduan: hasi nahi duzun tokitik.",
+    collectionsTitle: "Sartzeko hiru bide",
+    collections: [
+      {
+        href: "articulos",
+        label: "Gidak",
+        count: articles.length,
+        text: "Metodoak azalduta: motibazioa, teoremak, formulak eta haien dedukzio osoa orri berean."
+      },
+      {
+        href: "deducciones",
+        label: "Dedukzioak",
+        count: derivations.length,
+        text: "Formula bakoitza pausoz pauso eraikia, jauzirik gabe: nondik ateratzen den, zein errorerekin eta zergatik funtzionatzen duen."
+      },
+      {
+        href: "ejercicios",
+        label: "Ariketa ebatziak",
+        count: exercises.length,
+        text: "Eskuzko problemak eta taula numerikoak, amaieraraino ebatziak eta zenbaki egiaztatuekin."
+      }
+    ]
+  },
+  en: {
+    eyebrow: "A free, trilingual reference",
+    title: "The numerical methods bible",
+    description:
+      "Every method with its theory, its complete derivation embedded in the article, and solved, verified exercises. From errors and Taylor to nonlinear systems, in Spanish, Basque and English.",
+    primary: "Browse the syllabus",
+    secondary: "Formula sheet",
+    areasTitle: "The nine topics",
+    areasText:
+      "Each topic links theory, derivations and exercises together, wiki-style: start wherever you like.",
+    collectionsTitle: "Three ways in",
+    collections: [
+      {
+        href: "articulos",
+        label: "Guides",
+        count: articles.length,
+        text: "The methods explained: motivation, theorems, formulas and their full derivation on the same page."
+      },
+      {
+        href: "deducciones",
+        label: "Derivations",
+        count: derivations.length,
+        text: "Every formula built step by step, no gaps: where it comes from, with what error and why it works."
+      },
+      {
+        href: "ejercicios",
+        label: "Solved exercises",
+        count: exercises.length,
+        text: "Hand computations and numerical tables, solved to the end with verified numbers."
+      }
+    ]
+  }
+}[lang];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Métodos Numéricos",
+  description: copy.description,
+  inLanguage: lang
+};
+---
+
+<BaseLayout
+  title={`${copy.title} | Métodos Numéricos`}
+  description={copy.description}
+  lang={lang}
+  schema={schema}
+>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">{copy.eyebrow}</span>
+        <h1>{copy.title}</h1>
+        <p>{copy.description}</p>
+        <div class="hero-actions">
+          <a class="button" href={`/${lang}/temario/`}>{copy.primary}</a>
+          <a class="secondary-button" href={`/${lang}/formularios/`}>{copy.secondary}</a>
+        </div>
+      </div>
+      <figure class="hero-visual">
+        <img
+          src="/numerical-methods-hero.png"
+          alt="Numerical analysis notebook with formulas, interpolation nodes and finite difference sketches"
+          width="1536"
+          height="1024"
+        />
+      </figure>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>{copy.areasTitle}</h2>
+        <p>{copy.areasText}</p>
+      </div>
+      <div class="topic-grid">
+        {areas.map((area) => (
+          <a class="topic-card" href={`/${lang}/${area.href}/`}>
+            <h3>{area.title[lang]}</h3>
+            <p>{area.text[lang]}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>{copy.collectionsTitle}</h2>
+      </div>
+      <div class="topic-grid collections-grid">
+        {copy.collections.map((col) => (
+          <a class="topic-card collection-card" href={`/${lang}/${col.href}/`}>
+            <span class="collection-count">{col.count}</span>
+            <h3>{col.label}</h3>
+            <p>{col.text}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <SupportBox lang={lang} />
+    </section>
+  </main>
+</BaseLayout>

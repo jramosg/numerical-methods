@@ -1,0 +1,83 @@
+---
+import "katex/dist/katex.min.css";
+import "@/styles/global.css";
+import { getAlternateLinks, languages, navLabels, siteName, type Lang } from "@/data/site";
+
+type Props = {
+  title: string;
+  description: string;
+  lang: Lang;
+  canonicalPath?: string;
+  schema?: Record<string, unknown>;
+};
+
+const { title, description, lang, canonicalPath, schema } = Astro.props;
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") || "https://metodosnumericos.dev";
+const path = canonicalPath || Astro.url.pathname;
+const canonicalUrl = `${siteUrl}${path}`;
+const alternateLinks = getAlternateLinks(path);
+const labels = navLabels[lang];
+
+const footerTagline: Record<Lang, string> = {
+  es: "Referencia de métodos numéricos: teoría, deducciones y ejercicios resueltos, explicados con rigor.",
+  eu: "Metodo numerikoen erreferentzia: teoria, frogapenak eta ariketa ebatziak, zorroztasunez azalduta.",
+  en: "A numerical methods reference: theory, derivations and worked exercises, explained with rigor."
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {alternateLinks.map((link) => (
+      <link rel="alternate" hreflang={link.lang} href={`${siteUrl}${link.href}/`} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/es/`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#f7f3ea" />
+    {
+      schema && (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+      )
+    }
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={`/${lang}/`} aria-label={siteName}>
+        <span class="brand-mark">∫</span>
+        <span>{siteName}</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href={`/${lang}/temario/`}>{labels.syllabus}</a>
+        <a href={`/${lang}/articulos/`}>{labels.articles}</a>
+        <a href={`/${lang}/deducciones/`}>{labels.derivations}</a>
+        <a href={`/${lang}/ejercicios/`}>{labels.exercises}</a>
+        <a href={`/${lang}/formularios/`}>{labels.formulas}</a>
+        <a class="support-link" href={`/${lang}/apoyar/`}>{labels.support}</a>
+      </nav>
+      <div class="language-switcher" aria-label="Language selector">
+        {languages.map((code) => <a class:list={{ active: code === lang }} href={`/${code}/`}>{code}</a>)}
+      </div>
+    </header>
+    <slot />
+    <footer class="site-footer">
+      <div>
+        <strong>{siteName}</strong>
+        <p>{footerTagline[lang]}</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href={`/${lang}/sobre/`}>About</a>
+        <a href={`/${lang}/apoyar/`}>Monetization</a>
+        <a href={`/${lang}/formularios/`}>Formula sheet</a>
+      </nav>
+    </footer>
+  </body>
+</html>

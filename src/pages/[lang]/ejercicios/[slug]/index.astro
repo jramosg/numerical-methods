@@ -1,0 +1,19 @@
+---
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import { exercises } from "@/data/content";
+import { languages, type Lang } from "@/data/site";
+
+export function getStaticPaths() {
+  return languages.flatMap((lang) =>
+    exercises.map((entry) => ({
+      params: { lang, slug: entry.slug },
+      props: { entry }
+    }))
+  );
+}
+
+const { entry } = Astro.props;
+const lang = Astro.params.lang as Lang;
+---
+
+<ContentLayout entry={entry} lang={lang} type="ejercicios" />

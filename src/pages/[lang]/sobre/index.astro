@@ -1,0 +1,49 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { languages, type Lang } from "@/data/site";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+
+const copy = {
+  es: {
+    title: "Sobre Métodos Numéricos",
+    description:
+      "Proyecto editorial para aprender métodos numéricos con teoría clara, deducciones propias y ejercicios resueltos.",
+    body:
+      "Esta web nace para estudiar métodos numéricos de forma ordenada y convertir ese proceso en una referencia pública. Las fotos de apuntes se usan como referencia editorial para adaptar el estilo de deducción, pero no se publican directamente."
+  },
+  eu: {
+    title: "Metodo Numerikoei buruz",
+    description:
+      "Metodo numerikoak teoria argiarekin, frogapenekin eta ariketa ebatziekin ikasteko proiektua.",
+    body:
+      "Webgune hau metodo numerikoak modu ordenatuan ikasteko eta erreferentzia publiko bihurtzeko sortu da."
+  },
+  en: {
+    title: "About Numerical Methods",
+    description:
+      "Editorial project for learning numerical methods with clear theory, original derivations and solved exercises.",
+    body:
+      "This site exists to study numerical methods systematically and turn that process into a public reference. Handwritten notes are used as editorial reference for style, but are not published directly."
+  }
+}[lang];
+---
+
+<BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang}>
+  <main class="content-shell">
+    <article class="article-body">
+      <header class="article-header">
+        <span class="eyebrow">About</span>
+        <h1>{copy.title}</h1>
+        <p>{copy.description}</p>
+      </header>
+      <section class="article-section">
+        <p>{copy.body}</p>
+      </section>
+    </article>
+  </main>
+</BaseLayout>

@@ -1,0 +1,62 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import FormulaBlock from "@/components/FormulaBlock.astro";
+import SupportBox from "@/components/SupportBox.astro";
+import { formulaGroups } from "@/data/content";
+import { languages, type Lang } from "@/data/site";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+
+const copy = {
+  es: {
+    title: "Formulario de métodos numéricos",
+    description:
+      "Formulario rápido con las fórmulas esenciales de error, interpolación, diferenciación, integración, EDO y sistemas lineales.",
+    intro:
+      "Pensado para repasar antes de resolver problemas. Cada fórmula enlaza conceptualmente con guías largas y ejercicios resueltos del sitio."
+  },
+  eu: {
+    title: "Metodo numerikoen formularioa",
+    description:
+      "Errorea, interpolazioa, deribazioa, integrazioa, ODEak eta sistema linealetako formula nagusiak.",
+    intro:
+      "Ariketak ebatzi aurretik errepasatzeko prestatua."
+  },
+  en: {
+    title: "Numerical methods formula sheet",
+    description:
+      "Quick formula sheet for errors, interpolation, differentiation, integration, ODEs and linear systems.",
+    intro:
+      "Designed for quick review before solving problems. Each formula connects to long-form guides and solved exercises."
+  }
+}[lang];
+---
+
+<BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang}>
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Reference</span>
+          <h1>{copy.title}</h1>
+        </div>
+        <p>{copy.intro}</p>
+      </div>
+      <div class="formula-grid">
+        {formulaGroups.map((group) => (
+          <article class="topic-card">
+            <h2>{group.title[lang]}</h2>
+            {group.formulas.map((formula) => <FormulaBlock formula={formula} />)}
+          </article>
+        ))}
+      </div>
+    </section>
+    <section class="section">
+      <SupportBox lang={lang} />
+    </section>
+  </main>
+</BaseLayout>

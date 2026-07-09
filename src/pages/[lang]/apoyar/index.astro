@@ -1,0 +1,102 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SupportBox from "@/components/SupportBox.astro";
+import AdSlot from "@/components/AdSlot.astro";
+import { languages, monetization, type Lang } from "@/data/site";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+
+const copy = {
+  es: {
+    title: "Apoyar y monetizar Métodos Numéricos",
+    description:
+      "Página de apoyo y estrategia de monetización: donaciones, afiliación, patrocinios, productos digitales y anuncios.",
+    intro:
+      "El objetivo principal es convertir contenido educativo evergreen en un activo que pueda monetizar sin destruir la confianza. La prioridad es audiencia cualificada primero; ingresos después.",
+    direct: "Apoyo directo",
+    strategy: "Estrategia de monetización",
+    notes: [
+      "Fase 1: Buy Me a Coffee o Ko-fi en páginas con alta intención de estudio.",
+      "Fase 2: afiliación ética a calculadoras, libros, tabletas gráficas, cursos o herramientas que realmente encajen.",
+      "Fase 3: producto propio: formulario PDF premium, banco de ejercicios, simulacros de examen y soluciones paso a paso.",
+      "Fase 4: AdSense o una red publicitaria solo cuando haya tráfico suficiente; antes puede empeorar UX sin aportar gran ingreso.",
+      "Fase 5: patrocinios de academias, software matemático o edtech en bloques claramente señalados."
+    ],
+    setup:
+      "Para activar Buy Me a Coffee crea una cuenta, copia tu usuario y añade PUBLIC_BMC_USERNAME=tu_usuario en .env."
+  },
+  eu: {
+    title: "Lagundu eta monetizatu Metodo Numerikoak",
+    description:
+      "Laguntza eta monetizazio estrategia: dohaintzak, afiliazioa, babesletzak, produktu digitalak eta iragarkiak.",
+    intro:
+      "Helburua eduki evergreen hezitzailea monetizagarria den aktibo bihurtzea da, konfiantza galdu gabe.",
+    direct: "Laguntza zuzena",
+    strategy: "Monetizazio estrategia",
+    notes: [
+      "1. fasea: Buy Me a Coffee edo Ko-fi ikasketa intentzio handiko orrietan.",
+      "2. fasea: afiliazio etikoa liburu, tresna edo ikastaro egokiekin.",
+      "3. fasea: produktu propioak: PDF formularioak, ariketa bankua eta simulakroak.",
+      "4. fasea: AdSense trafikoa dagoenean bakarrik.",
+      "5. fasea: babesletzak argi markatutako blokeetan."
+    ],
+    setup:
+      "Buy Me a Coffee aktibatzeko sortu kontua eta gehitu PUBLIC_BMC_USERNAME=zure_erabiltzailea .env fitxategian."
+  },
+  en: {
+    title: "Support and monetize Numerical Methods",
+    description:
+      "Support page and monetization strategy: donations, affiliate revenue, sponsorships, digital products and ads.",
+    intro:
+      "The main goal is to turn evergreen educational content into a monetizable asset without harming trust.",
+    direct: "Direct support",
+    strategy: "Monetization strategy",
+    notes: [
+      "Phase 1: Buy Me a Coffee or Ko-fi on high-intent study pages.",
+      "Phase 2: ethical affiliate links to books, calculators, tablets, courses or tools that truly fit.",
+      "Phase 3: owned products: premium PDF formula sheet, exercise bank, mock exams and step-by-step solutions.",
+      "Phase 4: AdSense or display ads only after meaningful traffic.",
+      "Phase 5: sponsorships from education, math software or edtech brands in clearly labeled slots."
+    ],
+    setup:
+      "To enable Buy Me a Coffee, create an account, copy your username and add PUBLIC_BMC_USERNAME=your_user to .env."
+  }
+}[lang];
+---
+
+<BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang}>
+  <main class="content-shell">
+    <article class="article-body">
+      <header class="article-header">
+        <span class="eyebrow">Revenue</span>
+        <h1>{copy.title}</h1>
+        <p>{copy.intro}</p>
+      </header>
+
+      <section class="article-section">
+        <h2>{copy.direct}</h2>
+        <p>{copy.setup}</p>
+        <SupportBox lang={lang} />
+        {monetization.koFiUrl && <p><a class="secondary-button" href={monetization.koFiUrl}>Ko-fi</a></p>}
+      </section>
+
+      <section class="article-section">
+        <h2>{copy.strategy}</h2>
+        <ul>
+          {copy.notes.map((note) => <li>{note}</li>)}
+        </ul>
+      </section>
+    </article>
+    <aside class="content-sidebar">
+      <AdSlot lang={lang} label="Sponsor placement" />
+      <div class="sidebar-panel">
+        <strong>Next revenue assets</strong>
+        <p>Premium PDF, printable exercises, newsletter capture and affiliate disclosure.</p>
+      </div>
+    </aside>
+  </main>
+</BaseLayout>

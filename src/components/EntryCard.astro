@@ -1,0 +1,33 @@
+---
+import RichText from "./RichText.astro";
+import type { ContentEntry } from "@/data/content";
+import type { Lang } from "@/data/site";
+
+type EntryType = "articulos" | "deducciones" | "ejercicios";
+
+interface Props {
+  entry: ContentEntry;
+  lang: Lang;
+  type: EntryType;
+}
+
+const { entry, lang, type } = Astro.props;
+
+const typeLabels = {
+  articulos: { es: "Guía", eu: "Gida", en: "Guide" },
+  deducciones: { es: "Deducción", eu: "Frogapena", en: "Derivation" },
+  ejercicios: { es: "Ejercicio", eu: "Ariketa", en: "Exercise" }
+};
+---
+
+<article class="entry-card">
+  <div class="entry-meta">
+    <span>{typeLabels[type][lang]}</span>
+    <span>{entry.category}</span>
+    <span>{entry.level}</span>
+  </div>
+  <h3>
+    <a href={`/${lang}/${type}/${entry.slug}/`}>{entry.title[lang]}</a>
+  </h3>
+  <p><RichText text={entry.description[lang]} lang={lang} /></p>
+</article>

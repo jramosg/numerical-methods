@@ -1,0 +1,73 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import EntryCard from "@/components/EntryCard.astro";
+import SupportBox from "@/components/SupportBox.astro";
+import { getCollection } from "@/data/content";
+import type { Lang } from "@/data/site";
+
+type EntryType = "articulos" | "deducciones" | "ejercicios";
+
+interface Props {
+  type: EntryType;
+  lang: Lang;
+}
+
+const { type, lang } = Astro.props;
+
+const copy: Record<EntryType, Record<Lang, { title: string; intro: string }>> = {
+  articulos: {
+    es: { title: "Guías de teoría", intro: "Explicaciones con definiciones, teoremas, deducciones y ejemplos resueltos, tema por tema." },
+    eu: { title: "Teoria gidak", intro: "Definizio, teorema, frogapen eta ebatzitako adibideekin egindako azalpenak, gaiz gai." },
+    en: { title: "Theory guides", intro: "Explanations with definitions, theorems, derivations and worked examples, topic by topic." }
+  },
+  deducciones: {
+    es: { title: "Deducciones", intro: "Cómo se obtiene cada fórmula, paso a paso." },
+    eu: { title: "Frogapenak", intro: "Nola lortzen den formula bakoitza, urratsez urrats." },
+    en: { title: "Derivations", intro: "How each formula is obtained, step by step." }
+  },
+  ejercicios: {
+    es: { title: "Ejercicios resueltos", intro: "Problemas trabajados con datos concretos y su solución detallada." },
+    eu: { title: "Ariketa ebatziak", intro: "Datu zehatzekin landutako problemak eta beren soluzio xehatua." },
+    en: { title: "Solved exercises", intro: "Worked problems with concrete data and their detailed solution." }
+  }
+};
+
+const entries = getCollection(type);
+
+// Group by category, preserving first-seen order.
+const groups: { category: string; items: typeof entries }[] = [];
+for (const entry of entries) {
+  let group = groups.find((g) => g.category === entry.category);
+  if (!group) {
+    group = { category: entry.category, items: [] };
+    groups.push(group);
+  }
+  group.items.push(entry);
+}
+
+const { title, intro } = copy[type][lang];
+---
+
+<BaseLayout title={`${title} | Métodos Numéricos`} description={intro} lang={lang}>
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h1>{title}</h1>
+        <p>{intro}</p>
+      </div>
+      {groups.map((group) => (
+        <div class="collection-group">
+          <h2>{group.category}</h2>
+          <div class="entry-grid">
+            {group.items.map((entry) => (
+              <EntryCard entry={entry} type={type} lang={lang} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </section>
+    <section class="section">
+      <SupportBox lang={lang} />
+    </section>
+  </main>
+</BaseLayout>
