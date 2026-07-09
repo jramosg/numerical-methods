@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { languages, type Lang } from "@/data/site";
+import { languages, monetization, navLabels, type Lang } from "@/data/site";
 
 export function getStaticPaths() {
   return languages.map((lang) => ({ params: { lang } }));
@@ -12,38 +12,119 @@ const copy = {
   es: {
     title: "Sobre Métodos Numéricos",
     description:
-      "Proyecto editorial para aprender métodos numéricos con teoría clara, deducciones propias y ejercicios resueltos.",
-    body:
-      "Esta web nace para estudiar métodos numéricos de forma ordenada y convertir ese proceso en una referencia pública. Las fotos de apuntes se usan como referencia editorial para adaptar el estilo de deducción, pero no se publican directamente."
+      "Qué es esta wiki, cómo se escribe su contenido y cómo avisar de una errata. Una referencia libre y trilingüe de métodos numéricos.",
+    intro:
+      "Métodos Numéricos es una referencia libre de análisis numérico: teoría, deducciones completas y ejercicios resueltos, escritos con el mismo cuidado en español, euskera e inglés.",
+    sections: [
+      {
+        heading: "Qué encontrarás aquí",
+        body: [
+          "Cada método se explica entero en su propia página: la motivación, los teoremas que lo sostienen, la fórmula y su deducción completa paso a paso, ejemplos numéricos resueltos hasta el final y el análisis de error y convergencia.",
+          "Las páginas se enlazan entre sí como una wiki: desde una guía puedes saltar a la deducción de cada fórmula, a los ejercicios que la usan, al glosario que fija el vocabulario y a las comparativas que ayudan a elegir método."
+        ]
+      },
+      {
+        heading: "Cómo se escribe el contenido",
+        body: [
+          "El material se redacta a partir de fuentes de nivel de libro de texto y cada resultado numérico se verifica recalculándolo antes de publicarse. Cuando una fuente contiene una errata, se corrige y se publica el valor correcto.",
+          "Las tres lenguas se escriben a la misma profundidad: ninguna es una traducción automática de otra."
+        ]
+      },
+      {
+        heading: "¿Has visto un error?",
+        body: [
+          "Una referencia vale lo que vale su fiabilidad. Si encuentras una errata, un paso que no se entiende o un número que no cuadra, escríbenos y lo revisaremos."
+        ]
+      }
+    ],
+    contactLabel: "Escríbenos"
   },
   eu: {
     title: "Metodo Numerikoei buruz",
     description:
-      "Metodo numerikoak teoria argiarekin, frogapenekin eta ariketa ebatziekin ikasteko proiektua.",
-    body:
-      "Webgune hau metodo numerikoak modu ordenatuan ikasteko eta erreferentzia publiko bihurtzeko sortu da."
+      "Zer den wiki hau, nola idazten den edukia eta nola jakinarazi errata bat. Metodo numerikoen erreferentzia libre eta hirueleduna.",
+    intro:
+      "Metodo Numerikoak analisi numerikoaren erreferentzia librea da: teoria, dedukzio osoak eta ariketa ebatziak, ardura berarekin idatziak gaztelaniaz, euskaraz eta ingelesez.",
+    sections: [
+      {
+        heading: "Zer aurkituko duzun hemen",
+        body: [
+          "Metodo bakoitza osorik azaltzen da bere orrian: motibazioa, hura eusten duten teoremak, formula eta bere dedukzio osoa pausoz pauso, amaieraraino ebatzitako adibide numerikoak eta errore- eta konbergentzia-analisia.",
+          "Orriak elkarri lotuta daude wiki baten moduan: gida batetik formula bakoitzaren dedukziora salta zaitezke, hura erabiltzen duten ariketetara, hiztegia finkatzen duen glosariora eta metodoa aukeratzen laguntzen duten konparatibetara."
+        ]
+      },
+      {
+        heading: "Nola idazten den edukia",
+        body: [
+          "Materiala testuliburu mailako iturrietatik idazten da eta emaitza numeriko bakoitza berriro kalkulatuz egiaztatzen da argitaratu aurretik. Iturri batek errata bat duenean, zuzendu eta balio zuzena argitaratzen da.",
+          "Hiru hizkuntzak sakontasun berarekin idazten dira: bat ere ez da bestearen itzulpen automatikoa."
+        ]
+      },
+      {
+        heading: "Errore bat ikusi duzu?",
+        body: [
+          "Erreferentzia batek bere fidagarritasuna balio du. Errata bat, ulertzen ez den pauso bat edo bat ez datorren zenbaki bat aurkitzen baduzu, idatzi eta berrikusiko dugu."
+        ]
+      }
+    ],
+    contactLabel: "Idatzi"
   },
   en: {
     title: "About Numerical Methods",
     description:
-      "Editorial project for learning numerical methods with clear theory, original derivations and solved exercises.",
-    body:
-      "This site exists to study numerical methods systematically and turn that process into a public reference. Handwritten notes are used as editorial reference for style, but are not published directly."
+      "What this wiki is, how its content is written and how to report a mistake. A free, trilingual numerical methods reference.",
+    intro:
+      "Numerical Methods is a free numerical analysis reference: theory, complete derivations and solved exercises, written with the same care in Spanish, Basque and English.",
+    sections: [
+      {
+        heading: "What you'll find here",
+        body: [
+          "Each method is explained in full on its own page: the motivation, the theorems behind it, the formula and its complete step-by-step derivation, numerical examples solved to the end, and the error and convergence analysis.",
+          "Pages link to each other like a wiki: from a guide you can jump to the derivation of each formula, to the exercises that use it, to the glossary that fixes the vocabulary, and to the comparison tables that help you choose a method."
+        ]
+      },
+      {
+        heading: "How the content is written",
+        body: [
+          "The material is written from textbook-level sources and every numerical result is verified by recomputation before it is published. When a source contains a typo, it is corrected and the right value is published.",
+          "All three languages are written at the same depth: none is a machine translation of another."
+        ]
+      },
+      {
+        heading: "Spotted an error?",
+        body: [
+          "A reference is only as good as its reliability. If you find a typo, a step that isn't clear, or a number that doesn't check out, write to us and we'll review it."
+        ]
+      }
+    ],
+    contactLabel: "Write to us"
   }
 }[lang];
+
+const labels = navLabels[lang];
 ---
 
 <BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang}>
   <main class="content-shell">
     <article class="article-body">
       <header class="article-header">
-        <span class="eyebrow">About</span>
+        <span class="eyebrow">{labels.about}</span>
         <h1>{copy.title}</h1>
-        <p>{copy.description}</p>
+        <p>{copy.intro}</p>
       </header>
-      <section class="article-section">
-        <p>{copy.body}</p>
-      </section>
+      {copy.sections.map((section) => (
+        <section class="article-section">
+          <h2>{section.heading}</h2>
+          {section.body.map((paragraph) => <p>{paragraph}</p>)}
+        </section>
+      ))}
+      {monetization.email && (
+        <p>
+          <a class="secondary-button" href={`mailto:${monetization.email}`}>
+            {copy.contactLabel}: {monetization.email}
+          </a>
+        </p>
+      )}
     </article>
   </main>
 </BaseLayout>

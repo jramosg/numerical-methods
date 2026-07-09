@@ -1,0 +1,134 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const blocks = [
+  {
+    lang: "es",
+    heading: "La sucesión diverge",
+    text: "Esta página no existe o ha cambiado de sitio. Ninguna iteración converge aquí.",
+    home: "Ir al inicio",
+    search: "Buscar en la wiki",
+    homeHref: "/es/",
+    searchHref: "/es/buscar/"
+  },
+  {
+    lang: "eu",
+    heading: "Segidak dibergitzen du",
+    text: "Orri hau ez da existitzen edo lekuz aldatu da. Hemen ez da iteraziorik konbergitzen.",
+    home: "Hasierara joan",
+    search: "Wikian bilatu",
+    homeHref: "/eu/",
+    searchHref: "/eu/buscar/"
+  },
+  {
+    lang: "en",
+    heading: "The sequence diverges",
+    text: "This page doesn't exist or has moved. No iteration converges here.",
+    home: "Go home",
+    search: "Search the wiki",
+    homeHref: "/en/",
+    searchHref: "/en/buscar/"
+  }
+];
+---
+
+<BaseLayout
+  title="404 | Métodos Numéricos"
+  description="Página no encontrada · Orria ez da aurkitu · Page not found"
+  lang="es"
+  canonicalPath="/404"
+  noIndex
+>
+  <main class="not-found">
+    <p class="eyebrow">Error 404</p>
+    <div class="not-found-figure" aria-hidden="true">
+      <svg viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="140" x2="600" y2="140" stroke="#201b16" stroke-width="1.6" stroke-linecap="round" />
+        <path d="M 592 135.5 L 602 140 L 592 144.5" fill="none" stroke="#201b16" stroke-width="1.6" stroke-linecap="round" />
+        <g stroke="#0f766e" stroke-width="2" fill="none">
+          <path d="M 60 140 Q 75 96 90 140" />
+          <path d="M 90 140 Q 117 68 144 140" />
+          <path d="M 144 140 Q 192 40 240 140" />
+          <path d="M 240 140 Q 320 8 400 140" />
+          <path d="M 400 140 Q 520 -40 620 100" stroke-dasharray="6 7" />
+        </g>
+        <g fill="#201b16">
+          <circle cx="60" cy="140" r="4" />
+          <circle cx="90" cy="140" r="4" />
+          <circle cx="144" cy="140" r="4" />
+          <circle cx="240" cy="140" r="4" />
+          <circle cx="400" cy="140" r="4" />
+        </g>
+        <g fill="#665e54" text-anchor="middle" font-size="15" font-style="italic" font-family="KaTeX_Math, 'Times New Roman', Georgia, serif">
+          <text x="60" y="164">x₀</text>
+          <text x="90" y="164">x₁</text>
+          <text x="144" y="164">x₂</text>
+          <text x="240" y="164">x₃</text>
+          <text x="400" y="164">x₄</text>
+          <text x="560" y="164">→ ∞</text>
+        </g>
+      </svg>
+    </div>
+    <div class="not-found-langs">
+      {blocks.map((block) => (
+        <section lang={block.lang}>
+          <h2>{block.heading}</h2>
+          <p>{block.text}</p>
+          <p class="not-found-links">
+            <a class="button" href={block.homeHref}>{block.home}</a>
+            <a class="secondary-button" href={block.searchHref}>{block.search}</a>
+          </p>
+        </section>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 7vw, 5rem) clamp(1rem, 4vw, 3rem);
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .not-found-figure svg {
+    display: block;
+    width: min(40rem, 100%);
+    height: auto;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .not-found-langs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.5rem;
+  }
+
+  .not-found-langs section {
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+  }
+
+  .not-found-langs h2 {
+    font-size: 1.35rem;
+  }
+
+  .not-found-langs p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .not-found-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+</style>
