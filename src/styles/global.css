@@ -343,11 +343,38 @@ h3 {
 }
 
 .formula-block {
-  overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin: 1rem 0;
   padding: 1rem;
   border-left: 5px solid var(--accent);
   background: #fff;
+  box-sizing: border-box;
+}
+
+.formula-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.25rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: rgba(102, 94, 84, 0.45) transparent;
+}
+
+.formula-scroll > span {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+}
+
+.formula-scroll .katex-display {
+  margin: 0;
+}
+
+.formula-scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 .content-sidebar {
@@ -508,6 +535,13 @@ h3 {
   max-width: 72ch;
 }
 
+.article-section :where(li),
+.steps,
+.worked-example,
+.callout {
+  min-width: 0;
+}
+
 .article-section h2 {
   scroll-margin-top: 100px;
 }
@@ -523,6 +557,7 @@ h3 {
 .table-figure,
 .diagram-figure {
   max-width: 100%;
+  min-width: 0;
   margin: 1.2rem 0;
 }
 
@@ -541,10 +576,117 @@ h3 {
   padding: 0.75rem;
 }
 
-.diagram-figure svg {
+.diagram-canvas {
+  position: relative;
+}
+
+.diagram-canvas > svg,
+.diagram-dialog-art > svg {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.diagram-zoom-button {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 1;
+  display: inline-grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border: 1px solid rgba(214, 199, 174, 0.95);
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.92);
+  color: var(--accent-strong);
+  box-shadow: 0 8px 24px rgba(58, 45, 24, 0.14);
+  cursor: pointer;
+}
+
+.diagram-zoom-button svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.diagram-zoom-button:hover {
+  background: #fff;
+  border-color: var(--accent);
+}
+
+.diagram-zoom-button:focus-visible,
+.diagram-dialog-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.diagram-dialog {
+  width: min(94vw, 1120px);
+  max-width: 94vw;
+  max-height: 90vh;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 28px 80px rgba(32, 27, 22, 0.32);
+}
+
+.diagram-dialog::backdrop {
+  background: rgba(32, 27, 22, 0.45);
+}
+
+.diagram-dialog-panel {
+  display: grid;
+  gap: 0.75rem;
+  max-height: 90vh;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.diagram-dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.diagram-dialog-close {
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.diagram-dialog-art {
+  width: 860px;
+  max-width: none;
+}
+
+.diagram-dialog-caption {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 960px) {
+  .diagram-dialog-art {
+    width: 100%;
+  }
 }
 
 .diagram-bg {
@@ -663,6 +805,12 @@ h3 {
 .steps > ol > li p,
 .worked-steps > li p {
   margin-bottom: 0.4rem;
+}
+
+.steps > ol > li,
+.worked-steps > li {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .steps-title {
