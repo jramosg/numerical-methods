@@ -13,36 +13,31 @@ const copy = {
   es: {
     title: "Apoya esta biblia de métodos numéricos",
     text: "Si una deducción o ejercicio te ahorra tiempo de estudio, puedes ayudar a mantener el proyecto y acelerar nuevos contenidos.",
-    button: "Invítame a un café",
-    fallback: "Configura PUBLIC_BMC_USERNAME en .env para activar el botón real."
+    button: "Invítame a un café"
   },
   eu: {
     title: "Lagundu metodo numerikoen gida hau mantentzen",
     text: "Frogapen edo ariketa batek ikasten laguntzen badizu, proiektua mantentzen lagun dezakezu.",
-    button: "Kafe bat gonbidatu",
-    fallback: "Ezarri PUBLIC_BMC_USERNAME .env fitxategian botoia aktibatzeko."
+    button: "Kafe batera gonbidatu"
   },
   en: {
     title: "Support this numerical methods bible",
     text: "If a derivation or solved exercise saves you study time, you can help keep the project growing.",
-    button: "Buy me a coffee",
-    fallback: "Set PUBLIC_BMC_USERNAME in .env to enable the real button."
+    button: "Buy me a coffee"
   }
 }[lang];
 ---
 
-<aside class:list={["support-box", { compact }]}>
-  <div>
-    <strong>{copy.title}</strong>
-    {!compact && <p>{copy.text}</p>}
-  </div>
-  {
-    monetization.buyMeACoffeeUrl ? (
+{
+  monetization.buyMeACoffeeUrl && (
+    <aside class:list={["support-box", { compact }]}>
+      <div>
+        <strong>{copy.title}</strong>
+        {!compact && <p>{copy.text}</p>}
+      </div>
       <a class="button" href={monetization.buyMeACoffeeUrl} rel="noopener" target="_blank">
         {copy.button}
       </a>
-    ) : (
-      <span class="setup-note">{copy.fallback}</span>
-    )
-  }
-</aside>
+    </aside>
+  )
+}
