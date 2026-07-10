@@ -1,7 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="31" fill="#201b16"/>
-  <path d="M 41 13 C 42 8.5, 34.5 7, 33.2 13 L 26 51 C 24.8 57, 17.5 55.5, 18.5 51"
-        fill="none" stroke="#f7f3ea" stroke-width="4.6" stroke-linecap="round"/>
-  <circle cx="44" cy="21" r="2.6" fill="#0f766e"/>
-  <circle cx="15.5" cy="43" r="2.6" fill="#9f2f2f"/>
+  <defs>
+    <radialGradient id="surface" cx="30%" cy="24%" r="82%">
+      <stop offset="0" stop-color="#38312a"/>
+      <stop offset=".58" stop-color="#201b16"/>
+      <stop offset="1" stop-color="#15110e"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="31" fill="url(#surface)"/>
+  <circle cx="32" cy="32" r="30.25" fill="none" stroke="#fff"
+          stroke-opacity=".12" stroke-width="1.5"/>
+  <path d="M41 13c1-4.5-6.5-6-7.8 0L26 51c-1.2 6-8.5 4.5-7.5 0"
+        fill="none" stroke="#f7f3ea" stroke-width="4.6"
+        stroke-linecap="round"/>
+  <circle cx="44" cy="21" r="3.1" fill="#69c8bc"/>
+  <circle cx="44" cy="21" r="1.25" fill="#d9fff9"/>
+  <circle cx="15.5" cy="43" r="3.1" fill="#e0786f"/>
+  <circle cx="15.5" cy="43" r="1.25" fill="#ffe5df"/>
 </svg>
