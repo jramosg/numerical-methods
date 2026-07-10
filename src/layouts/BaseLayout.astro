@@ -28,6 +28,17 @@ const alternateLinks = getAlternateLinks(path);
 const defaultHref = alternateLinks.find((link) => link.lang === "es")?.href || "/es";
 const labels = navLabels[lang];
 const ui = uiStrings[lang];
+const navItems = [
+  ["temario", labels.syllabus],
+  ["articulos", labels.articles],
+  ["deducciones", labels.derivations],
+  ["ejercicios", labels.exercises],
+  ["mapa", labels.map],
+  ["comparativas", labels.comparisons],
+  ["glosario", labels.glossary],
+  ["formularios", labels.formulas]
+] as const;
+const isCurrent = (slug: string) => path.startsWith(`/${lang}/${slug}`);
 
 const footerTagline: Record<Lang, string> = {
   es: "Referencia de métodos numéricos: teoría, deducciones y ejercicios resueltos, explicados con rigor.",
@@ -78,17 +89,24 @@ const footerTagline: Record<Lang, string> = {
         <span class="brand-mark">∫</span>
         <span>{siteName}</span>
       </a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label={ui.openMenu}
+      >
+        <span class="menu-toggle-label">{ui.menu}</span>
+        <span class="menu-toggle-icon" aria-hidden="true">
+          <i></i><i></i>
+        </span>
+      </button>
       <div class="main-nav-wrap">
         <nav class="main-nav" aria-label={ui.mainNav}>
           <a class="search-link" href={`/${lang}/buscar/`}>{labels.search}</a>
-          <a href={`/${lang}/temario/`}>{labels.syllabus}</a>
-          <a href={`/${lang}/articulos/`}>{labels.articles}</a>
-          <a href={`/${lang}/deducciones/`}>{labels.derivations}</a>
-          <a href={`/${lang}/ejercicios/`}>{labels.exercises}</a>
-          <a href={`/${lang}/mapa/`}>{labels.map}</a>
-          <a href={`/${lang}/comparativas/`}>{labels.comparisons}</a>
-          <a href={`/${lang}/glosario/`}>{labels.glossary}</a>
-          <a href={`/${lang}/formularios/`}>{labels.formulas}</a>
+          {navItems.map(([slug, label]) => (
+            <a href={`/${lang}/${slug}/`}>{label}</a>
+          ))}
           <a class="support-link" href={`/${lang}/apoyar/`}>{labels.support}</a>
         </nav>
         <span class="nav-scroll-hint" aria-hidden="true">›</span>
@@ -104,6 +122,51 @@ const footerTagline: Record<Lang, string> = {
         ))}
       </div>
     </header>
+    <div class="mobile-menu-backdrop" data-menu-close></div>
+    <aside id="mobile-menu" class="mobile-menu" aria-hidden="true">
+      <div class="mobile-menu-head">
+        <span class="mobile-menu-kicker">{ui.explore}</span>
+        <button class="menu-close" type="button" aria-label={ui.closeMenu} data-menu-close>
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <a class="mobile-search" href={`/${lang}/buscar/`}>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5"></circle>
+          <path d="m16 16 4 4"></path>
+        </svg>
+        <span>{labels.search}</span>
+        <kbd>/</kbd>
+      </a>
+      <nav class="mobile-nav" aria-label={ui.mainNav}>
+        {navItems.map(([slug, label], index) => (
+          <a
+            class:list={{ current: isCurrent(slug) }}
+            href={`/${lang}/${slug}/`}
+            aria-current={isCurrent(slug) ? "page" : undefined}
+          >
+            <span class="mobile-nav-index">{String(index + 1).padStart(2, "0")}</span>
+            <span>{label}</span>
+            <span class="mobile-nav-arrow" aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </nav>
+      <div class="mobile-menu-foot">
+        <div class="mobile-languages" aria-label={ui.langSelector}>
+          {alternateLinks.map((link) => (
+            <a
+              class:list={{ active: link.lang === lang }}
+              href={noIndex ? `/${link.lang}/` : `${link.href}/`}
+              lang={link.lang}
+              aria-current={link.lang === lang ? "true" : undefined}
+            >
+              {link.lang}
+            </a>
+          ))}
+        </div>
+        <a class="mobile-support" href={`/${lang}/apoyar/`}>{labels.support} <span>→</span></a>
+      </div>
+    </aside>
     <div id="main-content" tabindex="-1">
       <slot />
     </div>
@@ -124,7 +187,50 @@ const footerTagline: Record<Lang, string> = {
       </nav>
     </footer>
     <script is:inline define:vars={{ searchPath: `/${lang}/buscar/` }}>
+      const menu = document.querySelector("#mobile-menu");
+      const menuToggle = document.querySelector(".menu-toggle");
+      const menuCloseControls = document.querySelectorAll("[data-menu-close]");
+      let previousFocus;
+
+      const setMenuOpen = (open) => {
+        if (!(menu instanceof HTMLElement) || !(menuToggle instanceof HTMLElement)) return;
+        document.body.classList.toggle("menu-open", open);
+        menu.classList.toggle("open", open);
+        menu.setAttribute("aria-hidden", String(!open));
+        menuToggle.setAttribute("aria-expanded", String(open));
+        menuToggle.setAttribute("aria-label", open ? menuToggle.dataset.closeLabel : menuToggle.dataset.openLabel);
+        if (open) {
+          previousFocus = document.activeElement;
+          menu.querySelector("a, button")?.focus();
+        } else if (previousFocus instanceof HTMLElement) {
+          previousFocus.focus();
+        }
+      };
+
+      if (menuToggle instanceof HTMLElement) {
+        menuToggle.dataset.openLabel = menuToggle.getAttribute("aria-label") || "";
+        menuToggle.dataset.closeLabel = menu.querySelector(".menu-close")?.getAttribute("aria-label") || "";
+        menuToggle.addEventListener("click", () => setMenuOpen(true));
+      }
+      menuCloseControls.forEach((control) => control.addEventListener("click", () => setMenuOpen(false)));
+
       document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && document.body.classList.contains("menu-open")) {
+          setMenuOpen(false);
+          return;
+        }
+        if (event.key === "Tab" && document.body.classList.contains("menu-open") && menu) {
+          const focusable = [...menu.querySelectorAll("a, button")];
+          const first = focusable[0];
+          const last = focusable.at(-1);
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
+          }
+        }
         const target = event.target;
         const isTextEntry = target instanceof HTMLElement && (
           target.matches("input, textarea, select") || target.isContentEditable
