@@ -19,6 +19,7 @@ const copy = {
     title: "La biblia de los métodos numéricos",
     description:
       "Cada método con su teoría, su deducción completa integrada en el artículo y ejercicios resueltos y verificados. De los errores y Taylor a los sistemas no lineales, en español, euskera e inglés.",
+    proof: `${articles.length + derivations.length + exercises.length} contenidos desarrollados · 3 idiomas · cálculos verificados`,
     primary: "Explorar el temario",
     secondary: "Formulario",
     areasTitle: "Los nueve temas",
@@ -51,6 +52,7 @@ const copy = {
     title: "Metodo numerikoen biblia",
     description:
       "Metodo bakoitza bere teoriarekin, artikuluan integratutako dedukzio osoarekin eta ariketa ebatzi eta egiaztatuekin. Erroreetatik eta Taylor-etik sistema ez-linealetara, euskaraz, gaztelaniaz eta ingelesez.",
+    proof: `${articles.length + derivations.length + exercises.length} eduki garatu · 3 hizkuntza · kalkulu egiaztatuak`,
     primary: "Gaiak arakatu",
     secondary: "Formularioa",
     areasTitle: "Bederatzi gaiak",
@@ -83,6 +85,7 @@ const copy = {
     title: "The numerical methods bible",
     description:
       "Every method with its theory, its complete derivation embedded in the article, and solved, verified exercises. From errors and Taylor to nonlinear systems, in Spanish, Basque and English.",
+    proof: `${articles.length + derivations.length + exercises.length} developed resources · 3 languages · verified calculations`,
     primary: "Browse the syllabus",
     secondary: "Formula sheet",
     areasTitle: "The nine topics",
@@ -133,6 +136,7 @@ const schema = {
         <span class="eyebrow">{copy.eyebrow}</span>
         <h1>{copy.title}</h1>
         <p>{copy.description}</p>
+        <p class="hero-proof">{copy.proof}</p>
         <div class="hero-actions">
           <a class="button" href={`/${lang}/temario/`}>{copy.primary}</a>
           <a class="secondary-button" href={`/${lang}/formularios/`}>{copy.secondary}</a>

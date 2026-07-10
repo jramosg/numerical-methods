@@ -29,16 +29,19 @@ const alternateLinks = getAlternateLinks(path);
 const defaultHref = alternateLinks.find((link) => link.lang === "es")?.href || "/es";
 const labels = navLabels[lang];
 const ui = uiStrings[lang];
-const navItems = [
+const primaryNavItems = [
   ["temario", labels.syllabus],
   ["articulos", labels.articles],
-  ["deducciones", labels.derivations],
   ["ejercicios", labels.exercises],
-  ["mapa", labels.map],
-  ["comparativas", labels.comparisons],
-  ["glosario", labels.glossary],
   ["formularios", labels.formulas]
 ] as const;
+const secondaryNavItems = [
+  ["deducciones", labels.derivations],
+  ["mapa", labels.map],
+  ["comparativas", labels.comparisons],
+  ["glosario", labels.glossary]
+] as const;
+const navItems = [...primaryNavItems, ...secondaryNavItems] as const;
 const isCurrent = (slug: string) => path.startsWith(`/${lang}/${slug}`);
 
 const footerTagline: Record<Lang, string> = {
@@ -104,10 +107,23 @@ const footerTagline: Record<Lang, string> = {
       </button>
       <div class="main-nav-wrap">
         <nav class="main-nav" aria-label={ui.mainNav}>
-          <a class="search-link" href={`/${lang}/buscar/`}>{labels.search}</a>
-          {navItems.map(([slug, label]) => (
+          {primaryNavItems.map(([slug, label]) => (
             <a href={`/${lang}/${slug}/`}>{label}</a>
           ))}
+          <details class="more-nav">
+            <summary>
+              <span>{labels.more}</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path d="m3.5 6 4.5 4 4.5-4"></path>
+              </svg>
+            </summary>
+            <div class="more-nav-menu">
+              {secondaryNavItems.map(([slug, label]) => (
+                <a href={`/${lang}/${slug}/`}>{label}</a>
+              ))}
+            </div>
+          </details>
+          <a class="search-link" href={`/${lang}/buscar/`}>{labels.search}</a>
           <a class="support-link" href={`/${lang}/apoyar/`}>{labels.support}</a>
         </nav>
         <span class="nav-scroll-hint" aria-hidden="true">›</span>
