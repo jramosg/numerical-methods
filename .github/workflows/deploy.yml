@@ -1,0 +1,104 @@
+name: Build and deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+env:
+  DEPLOY_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+  IMAGE: ghcr.io/${{ github.repository }}:sha-${{ github.event.workflow_run.head_sha || github.sha }}
+
+jobs:
+  build:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'master')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Check out the tested revision
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ env.DEPLOY_SHA }}
+          persist-credentials: false
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push immutable image
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
+        with:
+          context: .
+          push: true
+          tags: ${{ env.IMAGE }}
+          build-args: PUBLIC_SITE_URL=${{ vars.PUBLIC_SITE_URL || 'https://metodosnumericos.dev' }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: mode=max
+          sbom: true
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+    steps:
+      - name: Check out deployment files
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ env.DEPLOY_SHA }}
+          persist-credentials: false
+
+      - name: Copy deployment files
+        uses: appleboy/scp-action@917f8b81dfc1ccd331fef9e2d61bdc6c8be94634 # v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_SSH_PORT || 22 }}
+          fingerprint: ${{ secrets.VPS_HOST_FINGERPRINT }}
+          source: docker-compose.prod.yml,scripts/deploy.sh
+          target: /tmp/numerical-methods-deploy
+          overwrite: true
+
+      - name: Deploy and verify
+        uses: appleboy/ssh-action@7eaf76671a0d7eec5d98ee897acda4f968735a17 # v1.2.0
+        env:
+          IMAGE: ${{ env.IMAGE }}
+          APP_PORT: ${{ vars.APP_PORT || '4321' }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_SSH_PORT || 22 }}
+          fingerprint: ${{ secrets.VPS_HOST_FINGERPRINT }}
+          envs: IMAGE,APP_PORT
+          script: |
+            set -eu
+            install -d -m 700 "$HOME/apps/numerical-methods"
+            install -m 600 /tmp/numerical-methods-deploy/docker-compose.prod.yml \
+              "$HOME/apps/numerical-methods/docker-compose.prod.yml"
+            install -m 700 /tmp/numerical-methods-deploy/scripts/deploy.sh \
+              "$HOME/apps/numerical-methods/deploy.sh"
+            rm -rf /tmp/numerical-methods-deploy
+            cd "$HOME/apps/numerical-methods"
+            ./deploy.sh
+

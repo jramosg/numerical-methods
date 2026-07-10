@@ -25,6 +25,12 @@ npm run build
 
 The site builds static pages into `dist/`.
 
+## Deployment
+
+Production uses an immutable, health-checked container deployment to a VPS.
+See [the secure VPS deployment guide](docs/deployment.md) for the one-time
+GitHub and server setup.
+
 ## Monetization Setup
 
 Create `.env` from `.env.example` and set:
