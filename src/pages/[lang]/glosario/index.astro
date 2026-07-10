@@ -17,26 +17,30 @@ const copy = {
     description:
       "Definiciones breves y conectadas de consistencia, estabilidad, convergencia, orden, condicionamiento, residuo y error de truncamiento.",
     intro:
-      "Términos que aparecen en varios temas. Cada entrada enlaza con los métodos donde el concepto se usa de forma concreta."
+      "Términos que aparecen en varios temas. Cada entrada enlaza con los métodos donde el concepto se usa de forma concreta.",
   },
   eu: {
     title: "Metodo numerikoen glosarioa",
     description:
       "Konsistentzia, egonkortasuna, konbergentzia, ordena, baldintzapena, hondarra eta trunkatze-errorea modu labur eta konektatuan definituta.",
     intro:
-      "Gai askotan agertzen diren terminoak. Sarrera bakoitzak kontzeptua modu zehatzean erabiltzen duten metodoekin lotzen du."
+      "Gai askotan agertzen diren terminoak. Sarrera bakoitzak kontzeptua modu zehatzean erabiltzen duten metodoekin lotzen du.",
   },
   en: {
     title: "Numerical methods glossary",
     description:
       "Short, connected definitions of consistency, stability, convergence, order, conditioning, residual and truncation error.",
     intro:
-      "Terms that appear across several topics. Each entry links to the methods where the concept is used concretely."
-  }
+      "Terms that appear across several topics. Each entry links to the methods where the concept is used concretely.",
+  },
 }[lang];
 ---
 
-<BaseLayout title={`${copy.title} | Métodos Numéricos`} description={copy.description} lang={lang}>
+<BaseLayout
+  title={`${copy.title} | Métodos Numéricos`}
+  description={copy.description}
+  lang={lang}
+>
   <main>
     <section class="section">
       <div class="section-header">
@@ -48,13 +52,21 @@ const copy = {
       </div>
 
       <div class="entry-grid glossary-grid">
-        {glossaryTerms.map((term) => (
-          <article class="entry-card glossary-card">
-            <div class="entry-meta"><span>{copy.title}</span></div>
-            <h3><a href={`/${lang}/glosario/${term.slug}/`}>{term.term[lang]}</a></h3>
-            <p><RichText text={term.shortDefinition[lang]} lang={lang} /></p>
-          </article>
-        ))}
+        {
+          glossaryTerms.map((term) => (
+            <a href={`/${lang}/glosario/${term.slug}/`}>
+              <article class="entry-card glossary-card">
+                <div class="entry-meta">
+                  <span>{copy.title}</span>
+                </div>
+                <h3>{term.term[lang]}</h3>
+                <p>
+                  <RichText text={term.shortDefinition[lang]} lang={lang} />
+                </p>
+              </article>
+            </a>
+          ))
+        }
       </div>
     </section>
 
