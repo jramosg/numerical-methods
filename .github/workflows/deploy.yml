@@ -48,7 +48,7 @@ jobs:
           context: .
           push: true
           tags: ${{ env.IMAGE }}
-          build-args: PUBLIC_SITE_URL=${{ vars.PUBLIC_SITE_URL || 'https://metodosnumericos.dev' }}
+          build-args: PUBLIC_SITE_URL=${{ vars.PUBLIC_SITE_URL || 'https://metodosnumericos.jonramos.dev' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           provenance: mode=max
