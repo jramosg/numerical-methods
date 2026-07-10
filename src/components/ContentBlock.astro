@@ -13,6 +13,11 @@ interface Props {
 }
 
 const { block, lang, embedded = false } = Astro.props;
+const tableScrollLabel = {
+  es: "Tabla desplazable horizontalmente",
+  eu: "Horizontalki korritzeko taula",
+  en: "Horizontally scrollable table"
+}[lang];
 
 const embedLabels = {
   tag: { es: "Deducción", eu: "Frogapena", en: "Derivation" },
@@ -102,7 +107,7 @@ const derivationEntry =
 
 {block.kind === "table" && (
   <figure class="table-figure">
-    <div class="table-scroll">
+    <div class="table-scroll" tabindex="0" role="region" aria-label={tableScrollLabel}>
       <table>
         <thead>
           <tr>{block.head[lang].map((cell: string) => <th><RichText text={cell} lang={lang} /></th>)}</tr>

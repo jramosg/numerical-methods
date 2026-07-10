@@ -65,25 +65,46 @@ export const navLabels: Record<Lang, Record<string, string>> = {
 
 export const uiStrings: Record<
   Lang,
-  { skip: string; mainNav: string; langSelector: string; footerNav: string }
+  {
+    skip: string;
+    mainNav: string;
+    langSelector: string;
+    footerNav: string;
+    menu: string;
+    openMenu: string;
+    closeMenu: string;
+    explore: string;
+  }
 > = {
   es: {
     skip: "Saltar al contenido",
     mainNav: "Navegación principal",
     langSelector: "Idioma",
-    footerNav: "Navegación del pie de página"
+    footerNav: "Navegación del pie de página",
+    menu: "Menú",
+    openMenu: "Abrir menú",
+    closeMenu: "Cerrar menú",
+    explore: "Explorar"
   },
   eu: {
     skip: "Joan edukira",
     mainNav: "Nabigazio nagusia",
     langSelector: "Hizkuntza",
-    footerNav: "Oineko nabigazioa"
+    footerNav: "Oineko nabigazioa",
+    menu: "Menua",
+    openMenu: "Ireki menua",
+    closeMenu: "Itxi menua",
+    explore: "Arakatu"
   },
   en: {
     skip: "Skip to content",
     mainNav: "Main navigation",
     langSelector: "Language",
-    footerNav: "Footer navigation"
+    footerNav: "Footer navigation",
+    menu: "Menu",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    explore: "Explore"
   }
 };
 
