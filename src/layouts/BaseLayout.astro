@@ -1,6 +1,7 @@
 ---
 import "katex/dist/katex.min.css";
 import "@/styles/global.css";
+import BrandMark from "@/components/BrandMark.astro";
 import {
   getAlternateLinks,
   navLabels,
@@ -86,7 +87,7 @@ const footerTagline: Record<Lang, string> = {
     <a class="skip-link" href="#main-content">{ui.skip}</a>
     <header class="site-header">
       <a class="brand" href={`/${lang}/`} aria-label={siteName}>
-        <span class="brand-mark">∫</span>
+        <BrandMark />
         <span>{siteName}</span>
       </a>
       <button
