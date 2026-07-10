@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import HeroFigure from "@/components/HeroFigure.astro";
+import MethodChooser from "@/components/MethodChooser.astro";
 import SupportBox from "@/components/SupportBox.astro";
 import { articles, derivations, exercises } from "@/data/content";
 import { areas } from "@/data/areas";
@@ -141,6 +142,8 @@ const schema = {
         <HeroFigure lang={lang} />
       </figure>
     </section>
+
+    <MethodChooser lang={lang} />
 
     <section class="section">
       <div class="section-header">

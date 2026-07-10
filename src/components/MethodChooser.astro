@@ -1,0 +1,372 @@
+---
+import type { Lang } from "@/data/site";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const copy = {
+  es: {
+    eyebrow: "Selector interactivo",
+    title: "¿Qué método numérico deberías usar?",
+    intro:
+      "Describe tu problema en dos decisiones. Te damos un punto de partida, sus límites y la guía exacta para aplicarlo.",
+    step1: "1 · Elige el problema",
+    step2: "2 · ¿Qué importa más?",
+    result: "Nuestra recomendación",
+    reset: "Cambiar problema",
+    open: "Abrir la guía",
+    compare: "Ver la comparativa",
+    problems: {
+      root: ["Hallar una raíz", "Resolver f(x) = 0"],
+      ode: ["Resolver una EDO", "Avanzar desde un valor inicial"],
+      integral: ["Calcular una integral", "Aproximar el área o una integral"],
+      linear: ["Resolver Ax = b", "Un sistema lineal grande o pequeño"],
+      interpolation: ["Interpolar datos", "Construir una función entre puntos"]
+    },
+    priorities: {
+      safe: ["Garantía y robustez", "Prefiero converger aunque sea más lento"],
+      fast: ["Velocidad y precisión", "Puedo calcular más información"],
+      simple: ["Cálculo sencillo", "Quiero hacerlo a mano o entender cada paso"]
+    }
+  },
+  eu: {
+    eyebrow: "Hautatzaile interaktiboa",
+    title: "Zein metodo numeriko erabili beharko zenuke?",
+    intro:
+      "Deskribatu problema bi erabakitan. Abiapuntua, bere mugak eta aplikatzeko gida zehatza emango dizkizugu.",
+    step1: "1 · Aukeratu problema",
+    step2: "2 · Zer da garrantzitsuena?",
+    result: "Gure gomendioa",
+    reset: "Problema aldatu",
+    open: "Gida ireki",
+    compare: "Konparaketa ikusi",
+    problems: {
+      root: ["Erro bat aurkitu", "f(x) = 0 ebatzi"],
+      ode: ["ODE bat ebatzi", "Hasierako balio batetik aurrera egin"],
+      integral: ["Integral bat kalkulatu", "Azalera edo integral bat hurbildu"],
+      linear: ["Ax = b ebatzi", "Sistema lineal handi edo txiki bat"],
+      interpolation: ["Datuak interpolatu", "Puntuen arteko funtzioa eraiki"]
+    },
+    priorities: {
+      safe: ["Bermea eta sendotasuna", "Nahiago dut motelago baina ziur konbergitzea"],
+      fast: ["Abiadura eta zehaztasuna", "Informazio gehiago kalkula dezaket"],
+      simple: ["Kalkulu erraza", "Eskuz egin edo pauso bakoitza ulertu nahi dut"]
+    }
+  },
+  en: {
+    eyebrow: "Interactive selector",
+    title: "Which numerical method should you use?",
+    intro:
+      "Describe your problem in two decisions. We give you a starting point, its limits, and the exact guide to apply it.",
+    step1: "1 · Choose the problem",
+    step2: "2 · What matters most?",
+    result: "Our recommendation",
+    reset: "Change problem",
+    open: "Open the guide",
+    compare: "See the comparison",
+    problems: {
+      root: ["Find a root", "Solve f(x) = 0"],
+      ode: ["Solve an ODE", "Advance from an initial value"],
+      integral: ["Calculate an integral", "Approximate an area or integral"],
+      linear: ["Solve Ax = b", "A large or small linear system"],
+      interpolation: ["Interpolate data", "Build a function between points"]
+    },
+    priorities: {
+      safe: ["Guarantee and robustness", "I prefer convergence even if it is slower"],
+      fast: ["Speed and accuracy", "I can calculate more information"],
+      simple: ["Simple computation", "I want to work by hand or see every step"]
+    }
+  }
+}[lang];
+
+const recommendations = {
+  es: {
+    root: {
+      safe: ["Bisección", "Converge si partes de un intervalo con cambio de signo. Es lenta, pero su error queda acotado en cada iteración.", "articulos/no-lineales-biseccion"],
+      fast: ["Newton–Raphson", "La mejor primera opción cerca de una raíz simple cuando puedes calcular la derivada. Es muy rápido, pero depende del punto inicial.", "articulos/no-lineales-newton-raphson"],
+      simple: ["Método de la secante", "Evita la derivada y suele ser bastante más rápido que bisección. Necesita dos aproximaciones iniciales.", "articulos/no-lineales-secante-steffensen"]
+    },
+    ode: {
+      safe: ["Euler implícito", "Una base robusta cuando sospechas rigidez. Requiere resolver una ecuación en cada paso, pero mejora la estabilidad.", "articulos/edo-problemas-rigidos"],
+      fast: ["Runge–Kutta de orden 4", "Gran precisión por paso para problemas no rígidos y suaves. Es el método general de referencia cuando no necesitas adaptación automática.", "articulos/edo-metodo-runge-kutta"],
+      simple: ["Euler explícito", "El esquema más claro para aprender y calcular a mano. Úsalo con pasos pequeños y no esperes alta precisión.", "articulos/edo-metodo-euler"]
+    },
+    integral: {
+      safe: ["Trapecio compuesto", "Funciona con datos tabulados y particiones flexibles. Es fácil de auditar y ofrece una aproximación estable.", "articulos/integracion-newton-cotes-cerradas"],
+      fast: ["Gauss–Legendre", "Obtiene mucha precisión con pocas evaluaciones cuando puedes elegir los nodos y el integrando es suave.", "articulos/integracion-gauss"],
+      simple: ["Regla de Simpson", "Excelente equilibrio entre cálculo manual y precisión para datos equiespaciados con un número par de subintervalos.", "articulos/integracion-newton-cotes-cerradas"]
+    },
+    linear: {
+      safe: ["Gauss–Seidel", "Una elección iterativa sólida para matrices dispersas y diagonalmente dominantes. Comprueba siempre la convergencia.", "articulos/sistemas-lineales-gauss-seidel"],
+      fast: ["SOR", "Puede acelerar mucho Gauss–Seidel si eliges bien el parámetro de relajación. Su rendimiento depende de esa elección.", "articulos/sistemas-lineales-sor"],
+      simple: ["Jacobi", "El iterativo más transparente y fácil de paralelizar. Suele necesitar más iteraciones que Gauss–Seidel.", "articulos/sistemas-lineales-jacobi"]
+    },
+    interpolation: {
+      safe: ["Splines cúbicos", "Evitan grandes oscilaciones globales y se comportan bien con muchos nodos. Son la opción práctica para una curva suave.", "articulos/interpolacion-splines"],
+      fast: ["Newton con diferencias divididas", "Permite añadir nodos sin reconstruir todo el polinomio y se evalúa eficientemente en forma anidada.", "articulos/interpolacion-newton"],
+      simple: ["Lagrange", "La fórmula más directa cuando tienes pocos puntos y quieres ver explícitamente el polinomio interpolador.", "articulos/interpolacion-lagrange"]
+    }
+  },
+  eu: {
+    root: {
+      safe: ["Bisekzioa", "Konbergitu egiten du zeinu-aldaketa duen tarte batetik abiatuta. Motela da, baina errorea iterazio bakoitzean mugatuta dago.", "articulos/no-lineales-biseccion"],
+      fast: ["Newton–Raphson", "Erro bakun baten inguruko lehen aukera onena deribatua kalkula dezakezunean. Oso azkarra da, baina hasierako puntuaren mende dago.", "articulos/no-lineales-newton-raphson"],
+      simple: ["Sekantearen metodoa", "Deribatua saihesten du eta bisekzioa baino azkarragoa izan ohi da. Hasierako bi hurbilketa behar ditu.", "articulos/no-lineales-secante-steffensen"]
+    },
+    ode: {
+      safe: ["Euler inplizitua", "Oinarri sendoa zurruntasuna susmatzen duzunean. Pauso bakoitzean ekuazio bat ebatzi behar da, baina egonkortasuna hobetzen du.", "articulos/edo-problemas-rigidos"],
+      fast: ["Laugarren ordenako Runge–Kutta", "Zehaztasun handia pauso bakoitzeko problema ez-zurrun eta leunetan. Erreferentziazko metodo orokorra da.", "articulos/edo-metodo-runge-kutta"],
+      simple: ["Euler esplizitua", "Ikasteko eta eskuz kalkulatzeko eskema argiena. Erabili pauso txikiekin eta ez espero zehaztasun handirik.", "articulos/edo-metodo-euler"]
+    },
+    integral: {
+      safe: ["Trapezio konposatua", "Datu taulekin eta zatiketa malguekin funtzionatzen du. Egiaztatzeko erraza eta egonkorra da.", "articulos/integracion-newton-cotes-cerradas"],
+      fast: ["Gauss–Legendre", "Zehaztasun handia ematen du ebaluazio gutxirekin nodoak aukera ditzakezunean eta integrakizuna leuna denean.", "articulos/integracion-gauss"],
+      simple: ["Simpson-en erregela", "Eskuzko kalkuluaren eta zehaztasunaren arteko oreka bikaina, tarte-kopuru bikoitia duten datu ekidistanteetarako.", "articulos/integracion-newton-cotes-cerradas"]
+    },
+    linear: {
+      safe: ["Gauss–Seidel", "Aukera iteratibo sendoa matrize sakabanatu eta diagonalki nagusientzat. Egiaztatu beti konbergentzia.", "articulos/sistemas-lineales-gauss-seidel"],
+      fast: ["SOR", "Gauss–Seidel asko azkartu dezake erlaxazio-parametro egokia aukeratuta. Errendimendua aukera horren mende dago.", "articulos/sistemas-lineales-sor"],
+      simple: ["Jacobi", "Iteratibo gardenena eta paralelizatzeko errazena. Gauss–Seidelek baino iterazio gehiago behar izaten ditu.", "articulos/sistemas-lineales-jacobi"]
+    },
+    interpolation: {
+      safe: ["Spline kubikoak", "Oszilazio global handiak saihesten dituzte eta nodo askorekin ondo jokatzen dute. Kurba leun baterako aukera praktikoa.", "articulos/interpolacion-splines"],
+      fast: ["Newton diferentzia zatituekin", "Nodoak gehitzeko aukera ematen du polinomio osoa berreraiki gabe, eta modu habiaratuan eraginkorra da.", "articulos/interpolacion-newton"],
+      simple: ["Lagrange", "Puntu gutxi dituzunean eta polinomio interpolatzailea esplizituki ikusi nahi duzunean formularik zuzenena.", "articulos/interpolacion-lagrange"]
+    }
+  },
+  en: {
+    root: {
+      safe: ["Bisection", "It converges from an interval with a sign change. It is slow, but its error is bounded at every iteration.", "articulos/no-lineales-biseccion"],
+      fast: ["Newton–Raphson", "The best first choice near a simple root when you can compute the derivative. It is very fast, but depends on the initial guess.", "articulos/no-lineales-newton-raphson"],
+      simple: ["Secant method", "It avoids derivatives and is usually much faster than bisection. It needs two initial approximations.", "articulos/no-lineales-secante-steffensen"]
+    },
+    ode: {
+      safe: ["Implicit Euler", "A robust baseline when you suspect stiffness. It requires solving an equation at each step, but improves stability.", "articulos/edo-problemas-rigidos"],
+      fast: ["Fourth-order Runge–Kutta", "High accuracy per step for smooth, non-stiff problems. It is the general reference method when automatic adaptation is not required.", "articulos/edo-metodo-runge-kutta"],
+      simple: ["Explicit Euler", "The clearest scheme for learning and hand calculation. Use small steps and do not expect high accuracy.", "articulos/edo-metodo-euler"]
+    },
+    integral: {
+      safe: ["Composite trapezoidal rule", "It works with tabulated data and flexible partitions. It is easy to audit and provides a stable approximation.", "articulos/integracion-newton-cotes-cerradas"],
+      fast: ["Gauss–Legendre", "It obtains high accuracy with few evaluations when you can choose the nodes and the integrand is smooth.", "articulos/integracion-gauss"],
+      simple: ["Simpson's rule", "An excellent balance of hand computation and accuracy for equally spaced data with an even number of subintervals.", "articulos/integracion-newton-cotes-cerradas"]
+    },
+    linear: {
+      safe: ["Gauss–Seidel", "A solid iterative choice for sparse, diagonally dominant matrices. Always verify its convergence condition.", "articulos/sistemas-lineales-gauss-seidel"],
+      fast: ["SOR", "It can accelerate Gauss–Seidel substantially with a good relaxation parameter. Performance depends on that choice.", "articulos/sistemas-lineales-sor"],
+      simple: ["Jacobi", "The most transparent iterative method and easy to parallelize. It usually needs more iterations than Gauss–Seidel.", "articulos/sistemas-lineales-jacobi"]
+    },
+    interpolation: {
+      safe: ["Cubic splines", "They avoid large global oscillations and behave well with many nodes. They are the practical choice for a smooth curve.", "articulos/interpolacion-splines"],
+      fast: ["Newton divided differences", "It lets you add nodes without rebuilding the entire polynomial and evaluates efficiently in nested form.", "articulos/interpolacion-newton"],
+      simple: ["Lagrange", "The most direct formula when you have few points and want to see the interpolating polynomial explicitly.", "articulos/interpolacion-lagrange"]
+    }
+  }
+}[lang];
+
+const icons: Record<string, string> = {
+  root: "ƒ",
+  ode: "ẏ",
+  integral: "∫",
+  linear: "A",
+  interpolation: "⌁"
+};
+const config = { recommendations, lang, compare: copy.compare, open: copy.open };
+---
+
+<section class="chooser" data-method-chooser>
+  <header class="chooser-head">
+    <div>
+      <span class="eyebrow">{copy.eyebrow}</span>
+      <h2>{copy.title}</h2>
+    </div>
+    <p>{copy.intro}</p>
+  </header>
+
+  <div class="chooser-workbench">
+    <div class="chooser-questions">
+      <fieldset>
+        <legend>{copy.step1}</legend>
+        <div class="problem-grid">
+          {Object.entries(copy.problems).map(([key, labels]) => (
+            <button type="button" class="choice problem-choice" data-problem={key} aria-pressed="false">
+              <span class="choice-icon" aria-hidden="true">{icons[key]}</span>
+              <span><strong>{labels[0]}</strong><small>{labels[1]}</small></span>
+            </button>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset class="priority-step" data-priority-step disabled>
+        <legend>{copy.step2}</legend>
+        <div class="priority-grid">
+          {Object.entries(copy.priorities).map(([key, labels]) => (
+            <button type="button" class="choice priority-choice" data-priority={key} aria-pressed="false">
+              <span><strong>{labels[0]}</strong><small>{labels[1]}</small></span>
+            </button>
+          ))}
+        </div>
+      </fieldset>
+    </div>
+
+    <aside class="chooser-result" data-chooser-result aria-live="polite" aria-atomic="true">
+      <span class="result-kicker">{copy.result}</span>
+      <div class="result-placeholder" aria-hidden="true">
+        <span>01</span><i></i><span>02</span><i></i><span>✓</span>
+      </div>
+      <div class="result-content" hidden>
+        <span class="result-symbol" data-result-symbol></span>
+        <h3 data-result-title></h3>
+        <p data-result-text></p>
+        <div class="result-actions">
+          <a class="button" data-result-link>{copy.open}</a>
+          <a class="result-compare" href={`/${lang}/comparativas/`}>{copy.compare} →</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<script is:inline define:vars={{ config }}>
+  const chooser = document.querySelector("[data-method-chooser]");
+  if (chooser) {
+    const problemButtons = chooser.querySelectorAll("[data-problem]");
+    const priorityButtons = chooser.querySelectorAll("[data-priority]");
+    const priorityStep = chooser.querySelector("[data-priority-step]");
+    const placeholder = chooser.querySelector(".result-placeholder");
+    const resultContent = chooser.querySelector(".result-content");
+    let problem = "";
+
+    const setPressed = (buttons, current) => {
+      buttons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button === current));
+      });
+    };
+
+    problemButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        problem = button.dataset.problem;
+        setPressed(problemButtons, button);
+        setPressed(priorityButtons, null);
+        priorityStep.disabled = false;
+        resultContent.hidden = true;
+        placeholder.hidden = false;
+        priorityStep.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    });
+
+    priorityButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!problem) return;
+        setPressed(priorityButtons, button);
+        const recommendation = config.recommendations[problem][button.dataset.priority];
+        chooser.querySelector("[data-result-symbol]").textContent =
+          chooser.querySelector(`[data-problem="${problem}"] .choice-icon`).textContent;
+        chooser.querySelector("[data-result-title]").textContent = recommendation[0];
+        chooser.querySelector("[data-result-text]").textContent = recommendation[1];
+        chooser.querySelector("[data-result-link]").href =
+          `/${config.lang}/${recommendation[2]}/`;
+        placeholder.hidden = true;
+        resultContent.hidden = false;
+      });
+    });
+  }
+</script>
+
+<style>
+  .chooser {
+    margin: 0 clamp(1rem, 4vw, 3rem) clamp(3rem, 7vw, 6rem);
+    border: 1px solid var(--ink);
+    background: rgba(255, 250, 240, 0.94);
+    box-shadow: 10px 10px 0 var(--surface-strong);
+  }
+
+  .chooser-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.65fr);
+    gap: 2rem;
+    align-items: end;
+    padding: clamp(1.4rem, 3vw, 2.5rem);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .chooser-head h2 { margin-top: 0.35rem; max-width: 18ch; }
+  .chooser-head p { margin: 0; color: var(--muted); max-width: 55ch; }
+
+  .chooser-workbench {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.55fr);
+  }
+
+  .chooser-questions { padding: clamp(1.2rem, 3vw, 2rem); }
+  fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+  fieldset + fieldset { margin-top: 1.8rem; }
+  legend { margin-bottom: 0.8rem; font-weight: 800; color: var(--red); }
+
+  .problem-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.6rem; }
+  .priority-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; }
+
+  .choice {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    min-width: 0;
+    padding: 0.9rem;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+    transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+  }
+
+  .choice:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .choice:focus-visible { outline: 3px solid rgba(15, 118, 110, 0.3); outline-offset: 2px; }
+  .choice[aria-pressed="true"] { border-color: var(--accent); background: rgba(15, 118, 110, 0.1); }
+  .choice strong, .choice small { display: block; }
+  .choice strong { line-height: 1.2; }
+  .choice small { margin-top: 0.25rem; color: var(--muted); line-height: 1.35; }
+  .choice-icon { flex: 0 0 auto; font-family: Georgia, serif; font-size: 1.8rem; color: var(--accent-strong); }
+  fieldset:disabled { opacity: 0.38; }
+  fieldset:disabled .choice { cursor: not-allowed; }
+
+  .chooser-result {
+    position: relative;
+    min-height: 22rem;
+    padding: clamp(1.4rem, 3vw, 2.2rem);
+    border-left: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+  }
+
+  .result-kicker { color: #d9c6a6; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+  .result-placeholder { display: flex; align-items: center; gap: 0.7rem; margin-top: 7rem; color: #d9c6a6; font-family: Georgia, serif; font-size: 1.3rem; }
+  .result-placeholder i { height: 1px; flex: 1; background: rgba(217, 198, 166, 0.35); }
+  .result-content { margin-top: 2rem; }
+  .result-symbol { display: block; color: #62c7bd; font-family: Georgia, serif; font-size: 3rem; line-height: 1; }
+  .result-content h3 { margin-top: 0.8rem; color: white; font-size: clamp(1.7rem, 3vw, 2.4rem); }
+  .result-content p { margin-top: 1rem; color: rgba(255,255,255,0.72); }
+  .result-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.5rem; }
+  .result-compare { color: #8edbd4; font-weight: 700; }
+
+  @media (max-width: 1050px) {
+    .problem-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 760px) {
+    .chooser { box-shadow: 5px 5px 0 var(--surface-strong); }
+    .chooser-head, .chooser-workbench { grid-template-columns: 1fr; }
+    .chooser-head { gap: 1rem; }
+    .priority-grid { grid-template-columns: 1fr; }
+    .chooser-result { min-height: 17rem; border-top: 1px solid var(--ink); border-left: 0; }
+    .result-placeholder { margin-top: 4rem; }
+  }
+
+  @media (max-width: 430px) {
+    .problem-grid { grid-template-columns: 1fr; }
+  }
+</style>
