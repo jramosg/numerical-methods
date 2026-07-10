@@ -67,31 +67,63 @@ jobs:
           ref: ${{ env.DEPLOY_SHA }}
           persist-credentials: false
 
+      - name: Configure verified SSH access
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PORT: ${{ secrets.VPS_SSH_PORT || '22' }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST_FINGERPRINT: ${{ secrets.VPS_HOST_FINGERPRINT }}
+        run: |
+            set -eu
+            install -d -m 700 "$HOME/.ssh"
+            printf '%s\n' "$VPS_SSH_KEY" > "$HOME/.ssh/numerical-methods"
+            chmod 600 "$HOME/.ssh/numerical-methods"
+
+            ssh-keyscan -T 10 -p "$VPS_PORT" -t ed25519 "$VPS_HOST" \
+              2>/dev/null > "$HOME/.ssh/known_hosts.candidate"
+            actual_fingerprint=$(ssh-keygen -lf \
+              "$HOME/.ssh/known_hosts.candidate" -E sha256 \
+              | awk 'NR == 1 { print $2 }')
+            [ "$actual_fingerprint" = "$VPS_HOST_FINGERPRINT" ] || {
+              echo "The VPS host key did not match VPS_HOST_FINGERPRINT." >&2
+              exit 1
+            }
+            mv "$HOME/.ssh/known_hosts.candidate" "$HOME/.ssh/known_hosts"
+
       - name: Copy deployment files
-        uses: appleboy/scp-action@917f8b81dfc1ccd331fef9e2d61bdc6c8be94634 # v0.1.7
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_SSH_PORT || 22 }}
-          fingerprint: ${{ secrets.VPS_HOST_FINGERPRINT }}
-          source: docker-compose.prod.yml,scripts/deploy.sh
-          target: /tmp/numerical-methods-deploy
-          overwrite: true
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PORT: ${{ secrets.VPS_SSH_PORT || '22' }}
+        run: |
+          set -eu
+          ssh -i "$HOME/.ssh/numerical-methods" \
+            -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" \
+            'rm -rf /tmp/numerical-methods-deploy && \
+             install -d -m 700 /tmp/numerical-methods-deploy'
+          scp -r -i "$HOME/.ssh/numerical-methods" \
+            -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            -P "$VPS_PORT" docker-compose.prod.yml scripts \
+            "$VPS_USER@$VPS_HOST:/tmp/numerical-methods-deploy/"
 
       - name: Deploy and verify
-        uses: appleboy/ssh-action@7eaf76671a0d7eec5d98ee897acda4f968735a17 # v1.2.0
         env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PORT: ${{ secrets.VPS_SSH_PORT || '22' }}
           IMAGE: ${{ env.IMAGE }}
           APP_PORT: ${{ vars.APP_PORT || '4321' }}
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_SSH_PORT || 22 }}
-          fingerprint: ${{ secrets.VPS_HOST_FINGERPRINT }}
-          envs: IMAGE,APP_PORT
-          script: |
+        run: |
+          set -eu
+          ssh -i "$HOME/.ssh/numerical-methods" \
+            -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" \
+            "IMAGE='$IMAGE' APP_PORT='$APP_PORT' sh -s" <<'EOF'
             set -eu
             install -d -m 700 "$HOME/apps/numerical-methods"
             install -m 600 /tmp/numerical-methods-deploy/docker-compose.prod.yml \
@@ -101,4 +133,4 @@ jobs:
             rm -rf /tmp/numerical-methods-deploy
             cd "$HOME/apps/numerical-methods"
             ./deploy.sh
-
+          EOF
