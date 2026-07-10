@@ -18,7 +18,8 @@ const copy = {
       "Tablas de decisión para comparar bisección, Newton y secante; Euler, Heun y RK4; Jacobi, Gauss-Seidel y SOR.",
     intro:
       "Estas tablas no sustituyen a las guías: son una vista rápida para elegir método según hipótesis, coste y comportamiento esperado.",
-    related: "Métodos relacionados"
+    related: "Métodos relacionados",
+    scrollTable: "Desliza horizontalmente para ver la tabla completa"
   },
   eu: {
     title: "Metodo numerikoen konparatibak",
@@ -26,7 +27,8 @@ const copy = {
       "Erabaki-taulak bisekzioa, Newton eta sekantea; Euler, Heun eta RK4; Jacobi, Gauss-Seidel eta SOR alderatzeko.",
     intro:
       "Taula hauek ez dituzte gidak ordezkatzen: metodoa hipotesien, kostuaren eta espero den portaeraren arabera aukeratzeko ikuspegi azkarra dira.",
-    related: "Lotutako metodoak"
+    related: "Lotutako metodoak",
+    scrollTable: "Irristatu horizontalki taula osoa ikusteko"
   },
   en: {
     title: "Numerical method comparisons",
@@ -34,7 +36,8 @@ const copy = {
       "Decision tables comparing bisection, Newton and secant; Euler, Heun and RK4; Jacobi, Gauss-Seidel and SOR.",
     intro:
       "These tables do not replace the guides: they are a quick view for choosing a method by assumptions, cost and expected behaviour.",
-    related: "Related methods"
+    related: "Related methods",
+    scrollTable: "Scroll horizontally to see the complete table"
   }
 }[lang];
 
@@ -66,8 +69,13 @@ const schema = {
             <h2>{table.title[lang]}</h2>
             <p><RichText text={table.description[lang]} lang={lang} /></p>
           </div>
-          <figure class="table-figure">
-            <div class="table-scroll">
+          <figure class="table-figure comparison-table">
+            <div
+              class="table-scroll"
+              tabindex="0"
+              role="region"
+              aria-label={`${table.title[lang]}. ${copy.scrollTable}`}
+            >
               <table>
                 <thead>
                   <tr>
@@ -87,6 +95,7 @@ const schema = {
                 </tbody>
               </table>
             </div>
+            <figcaption class="table-scroll-note">{copy.scrollTable} →</figcaption>
           </figure>
         </article>
       ))}
