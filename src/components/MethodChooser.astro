@@ -16,6 +16,7 @@ const copy = {
     step1: "1 · Elige el problema",
     step2: "2 · ¿Qué importa más?",
     result: "Nuestra recomendación",
+    progress: "Progreso de selección",
     reset: "Cambiar problema",
     open: "Abrir la guía",
     compare: "Ver la comparativa",
@@ -40,6 +41,7 @@ const copy = {
     step1: "1 · Aukeratu problema",
     step2: "2 · Zer da garrantzitsuena?",
     result: "Gure gomendioa",
+    progress: "Hautaketaren aurrerapena",
     reset: "Problema aldatu",
     open: "Gida ireki",
     compare: "Konparaketa ikusi",
@@ -64,6 +66,7 @@ const copy = {
     step1: "1 · Choose the problem",
     step2: "2 · What matters most?",
     result: "Our recommendation",
+    progress: "Selection progress",
     reset: "Change problem",
     open: "Open the guide",
     compare: "See the comparison",
@@ -213,8 +216,22 @@ const config = { recommendations, lang, compare: copy.compare, open: copy.open }
 
     <aside class="chooser-result" data-chooser-result aria-live="polite" aria-atomic="true">
       <span class="result-kicker">{copy.result}</span>
-      <div class="result-placeholder" aria-hidden="true">
-        <span>01</span><i></i><span>02</span><i></i><span>✓</span>
+      <div class="result-progress" data-result-progress data-step="0">
+        <div class="progress-milestones" aria-hidden="true">
+          <span class="progress-milestone" data-milestone="1">01</span>
+          <span class="progress-milestone" data-milestone="2">02</span>
+          <span class="progress-milestone progress-complete" data-milestone="3">
+            <svg viewBox="0 0 24 24" role="img">
+              <path d="m5 12.5 4.25 4.25L19 7" />
+            </svg>
+          </span>
+        </div>
+        <progress
+          class="result-progress-meter"
+          aria-label={copy.progress}
+          max="2"
+          value="0"
+        >0 / 2</progress>
       </div>
       <div class="result-content" hidden>
         <span class="result-symbol" data-result-symbol></span>
@@ -235,7 +252,8 @@ const config = { recommendations, lang, compare: copy.compare, open: copy.open }
     const problemButtons = chooser.querySelectorAll("[data-problem]");
     const priorityButtons = chooser.querySelectorAll("[data-priority]");
     const priorityStep = chooser.querySelector("[data-priority-step]");
-    const placeholder = chooser.querySelector(".result-placeholder");
+    const resultProgress = chooser.querySelector("[data-result-progress]");
+    const progressMeter = chooser.querySelector(".result-progress-meter");
     const resultContent = chooser.querySelector(".result-content");
     let problem = "";
 
@@ -252,7 +270,8 @@ const config = { recommendations, lang, compare: copy.compare, open: copy.open }
         setPressed(priorityButtons, null);
         priorityStep.disabled = false;
         resultContent.hidden = true;
-        placeholder.hidden = false;
+        resultProgress.dataset.step = "1";
+        progressMeter.value = 1;
         priorityStep.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
     });
@@ -268,7 +287,8 @@ const config = { recommendations, lang, compare: copy.compare, open: copy.open }
         chooser.querySelector("[data-result-text]").textContent = recommendation[1];
         chooser.querySelector("[data-result-link]").href =
           `/${config.lang}/${recommendation[2]}/`;
-        placeholder.hidden = true;
+        resultProgress.dataset.step = "2";
+        progressMeter.value = 2;
         resultContent.hidden = false;
       });
     });
@@ -344,8 +364,97 @@ const config = { recommendations, lang, compare: copy.compare, open: copy.open }
   }
 
   .result-kicker { color: #d9c6a6; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
-  .result-placeholder { display: flex; align-items: center; gap: 0.7rem; margin-top: 7rem; color: #d9c6a6; font-family: Georgia, serif; font-size: 1.3rem; }
-  .result-placeholder i { height: 1px; flex: 1; background: rgba(217, 198, 166, 0.35); }
+  .result-progress {
+    --progress: 0%;
+    position: relative;
+    margin-top: clamp(3rem, 8vw, 7rem);
+    padding-top: 2.65rem;
+  }
+
+  .result-progress[data-step="1"] { --progress: 50%; }
+  .result-progress[data-step="2"] { --progress: 100%; }
+
+  .progress-milestones {
+    position: absolute;
+    inset: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+  }
+
+  .progress-milestone {
+    display: grid;
+    width: 2.15rem;
+    height: 2.15rem;
+    place-items: center;
+    border: 1px solid rgba(217, 198, 166, 0.42);
+    border-radius: 50%;
+    background: var(--ink);
+    color: rgba(217, 198, 166, 0.62);
+    font-family: Georgia, serif;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    transition: border-color 220ms ease, background 220ms ease,
+      color 220ms ease, box-shadow 220ms ease;
+  }
+
+  .progress-milestone:nth-child(2) { justify-self: center; }
+  .progress-milestone:last-child { justify-self: end; }
+
+  .progress-complete svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .result-progress[data-step="0"] [data-milestone="1"],
+  .result-progress[data-step="1"] [data-milestone="2"] {
+    border-color: #8edbd4;
+    color: #8edbd4;
+    box-shadow: 0 0 0 4px rgba(98, 199, 189, 0.12);
+  }
+
+  .result-progress[data-step="1"] [data-milestone="1"],
+  .result-progress[data-step="2"] .progress-milestone {
+    border-color: #62c7bd;
+    background: #62c7bd;
+    color: var(--ink);
+  }
+
+  .result-progress-meter {
+    display: block;
+    width: 100%;
+    height: 2px;
+    overflow: hidden;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(217, 198, 166, 0.25);
+    color: #62c7bd;
+    appearance: none;
+  }
+
+  .result-progress-meter::-webkit-progress-bar {
+    border-radius: 999px;
+    background: rgba(217, 198, 166, 0.25);
+  }
+
+  .result-progress-meter::-webkit-progress-value {
+    border-radius: 999px;
+    background: #62c7bd;
+    transition: width 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .result-progress-meter::-moz-progress-bar {
+    border-radius: 999px;
+    background: #62c7bd;
+    transition: width 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
   .result-content { margin-top: 2rem; }
   .result-symbol { display: block; color: #62c7bd; font-family: Georgia, serif; font-size: 3rem; line-height: 1; }
   .result-content h3 { margin-top: 0.8rem; color: white; font-size: clamp(1.7rem, 3vw, 2.4rem); }
@@ -363,7 +472,7 @@ const config = { recommendations, lang, compare: copy.compare, open: copy.open }
     .chooser-head { gap: 1rem; }
     .priority-grid { grid-template-columns: 1fr; }
     .chooser-result { min-height: 17rem; border-top: 1px solid var(--ink); border-left: 0; }
-    .result-placeholder { margin-top: 4rem; }
+    .result-progress { margin-top: 3.5rem; }
   }
 
   @media (max-width: 430px) {
