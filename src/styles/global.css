@@ -431,6 +431,12 @@ h3 {
   gap: 1rem;
 }
 
+.support-box > .button {
+  justify-self: start;
+  width: fit-content;
+  max-width: 100%;
+}
+
 .support-box.compact {
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -505,6 +511,9 @@ h3 {
     flex-wrap: nowrap;
     overflow-x: auto;
     padding-bottom: 0.15rem;
+    /* Leave room for the fade hint so the last item can scroll fully into
+       view instead of sitting underneath the overlay. */
+    padding-inline-end: 2.5rem;
     scrollbar-width: none;
   }
 
