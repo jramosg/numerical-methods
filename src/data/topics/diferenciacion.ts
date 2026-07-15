@@ -310,25 +310,25 @@ export const diferenciacionDerivations: ContentEntry[] = [
             steps: [
               {
                 text: {
-                  es: "Desarrollamos Taylor en $x_{i+1}$ y $x_{i+2}$ alrededor de $x_i$:",
-                  eu: "Taylor garatzen dugu $x_{i+1}$ eta $x_{i+2}$-n $x_i$-ren inguruan:",
-                  en: "Expand Taylor at $x_{i+1}$ and $x_{i+2}$ around $x_i$:"
+                  es: "Usamos tres puntos de la malla: $x_i$, $x_{i+1}=x_i+h$ y $x_{i+2}=x_i+2h$. Los dos últimos se desarrollan alrededor de $x_i$ y restamos $f_i=f(x_i)$ en ambos casos:",
+                  eu: "Sareko hiru puntu erabiltzen ditugu: $x_i$, $x_{i+1}=x_i+h$ eta $x_{i+2}=x_i+2h$. Azken biak $x_i$-ren inguruan garatzen ditugu, eta bietan $f_i=f(x_i)$ kentzen dugu:",
+                  en: "We use three grid points: $x_i$, $x_{i+1}=x_i+h$, and $x_{i+2}=x_i+2h$. Expand the last two around $x_i$ and subtract $f_i=f(x_i)$ in both cases:"
                 },
-                formula: "\\begin{aligned} f(x_{i+1})&=f(x_i)+hf'(x_i)+\\tfrac{h^2}{2}f''(x_i)+R_2\\\\ f(x_{i+2})&=f(x_i)+2hf'(x_i)+2h^2 f''(x_i)+R_2 \\end{aligned}"
+                formula: "\\begin{aligned} (1)\\quad f_{i+1}-f_i&=hf'(x_i)+\\tfrac{h^2}{2}f''(x_i)+\\mathcal{O}(h^3),\\\\ (2)\\quad f_{i+2}-f_i&=2hf'(x_i)+2h^2f''(x_i)+\\mathcal{O}(h^3). \\end{aligned}"
                 },
               {
                 text: {
-                  es: "Hacemos $(\\text{segunda})-2\\cdot(\\text{primera})$ para cancelar $f'$; despejando $f''$ obtenemos una fórmula $\\mathcal{O}(h)$ de la segunda derivada:",
-                  eu: "$(\\text{bigarrena})-2\\cdot(\\text{lehena})$ egiten dugu $f'$ ezabatzeko; $f''$ askatuz bigarren deribatuaren $\\mathcal{O}(h)$ formula lortzen dugu:",
-                  en: "Compute $(\\text{second})-2\\cdot(\\text{first})$ to cancel $f'$; solving for $f''$ gives an $\\mathcal{O}(h)$ formula for the second derivative:"
+                  es: "Ahora calculamos $4\\cdot(1)-(2)$. Así se cancela directamente la segunda derivada, porque $4(h^2/2)-2h^2=0$:",
+                  eu: "Orain $4\\cdot(1)-(2)$ kalkulatzen dugu. Horrela, bigarren deribatua zuzenean ezabatzen da, $4(h^2/2)-2h^2=0$ delako:",
+                  en: "Now compute $4\\cdot(1)-(2)$. This cancels the second derivative directly because $4(h^2/2)-2h^2=0$:"
                 },
-                formula: "f''(x_i)=\\frac{f_{i+2}-2f_{i+1}+f_i}{h^2}+\\mathcal{O}(h)"
+                formula: "4(f_{i+1}-f_i)-(f_{i+2}-f_i)=2hf'(x_i)+\\mathcal{O}(h^3)"
               },
               {
                 text: {
-                  es: "Sustituyendo esta $f''$ en el primer desarrollo y despejando $f'$ se cancela el término de orden $h$ y queda:",
-                  eu: "$f''$ hau lehen garapenean ordezkatuz eta $f'$ askatuz $h$ ordenako terminoa ezabatzen da eta hau geratzen da:",
-                  en: "Substituting this $f''$ into the first expansion and solving for $f'$ cancels the order-$h$ term and leaves:"
+                  es: "Reordenamos los tres valores y dividimos entre $2h$. Al dividir el resto $\\mathcal{O}(h^3)$ entre $h$, el error final es $\\mathcal{O}(h^2)$:",
+                  eu: "Hiru balioak berrantolatu eta $2h$-z zatitzen dugu. $\\mathcal{O}(h^3)$ hondarra $h$-z zatitzean, azken errorea $\\mathcal{O}(h^2)$ da:",
+                  en: "Rearrange the three values and divide by $2h$. Dividing the $\\mathcal{O}(h^3)$ remainder by $h$ gives a final error of $\\mathcal{O}(h^2)$:"
                 },
                 formula: "f'(x_i)=\\frac{-f_{i+2}+4f_{i+1}-3f_i}{2h}+\\mathcal{O}(h^2)"
               }
