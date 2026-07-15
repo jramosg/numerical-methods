@@ -161,22 +161,22 @@ export const diferenciacionArticles: ContentEntry[] = [
             kind: "list",
             items: {
               es: [
-                "Progresiva O(h): (f_{i+2}−2f_{i+1}+f_i)/h²",
-                "Progresiva O(h²): (−f_{i+3}+4f_{i+2}−5f_{i+1}+2f_i)/h²",
-                "Regresiva O(h): (f_i−2f_{i−1}+f_{i−2})/h²",
-                "Regresiva O(h²): (2f_i−5f_{i−1}+4f_{i−2}−f_{i−3})/h²"
+                "Progresiva $\\mathcal{O}(h)$: $f''(x_i)\\approx\\frac{f_{i+2}-2f_{i+1}+f_i}{h^2}$.",
+                "Progresiva $\\mathcal{O}(h^2)$: $f''(x_i)\\approx\\frac{-f_{i+3}+4f_{i+2}-5f_{i+1}+2f_i}{h^2}$.",
+                "Regresiva $\\mathcal{O}(h)$: $f''(x_i)\\approx\\frac{f_i-2f_{i-1}+f_{i-2}}{h^2}$.",
+                "Regresiva $\\mathcal{O}(h^2)$: $f''(x_i)\\approx\\frac{2f_i-5f_{i-1}+4f_{i-2}-f_{i-3}}{h^2}$."
               ],
               eu: [
-                "Progresiboa O(h): (f_{i+2}−2f_{i+1}+f_i)/h²",
-                "Progresiboa O(h²): (−f_{i+3}+4f_{i+2}−5f_{i+1}+2f_i)/h²",
-                "Erregresiboa O(h): (f_i−2f_{i−1}+f_{i−2})/h²",
-                "Erregresiboa O(h²): (2f_i−5f_{i−1}+4f_{i−2}−f_{i−3})/h²"
+                "Progresiboa $\\mathcal{O}(h)$: $f''(x_i)\\approx\\frac{f_{i+2}-2f_{i+1}+f_i}{h^2}$.",
+                "Progresiboa $\\mathcal{O}(h^2)$: $f''(x_i)\\approx\\frac{-f_{i+3}+4f_{i+2}-5f_{i+1}+2f_i}{h^2}$.",
+                "Erregresiboa $\\mathcal{O}(h)$: $f''(x_i)\\approx\\frac{f_i-2f_{i-1}+f_{i-2}}{h^2}$.",
+                "Erregresiboa $\\mathcal{O}(h^2)$: $f''(x_i)\\approx\\frac{2f_i-5f_{i-1}+4f_{i-2}-f_{i-3}}{h^2}$."
               ],
               en: [
-                "Forward O(h): (f_{i+2}−2f_{i+1}+f_i)/h²",
-                "Forward O(h²): (−f_{i+3}+4f_{i+2}−5f_{i+1}+2f_i)/h²",
-                "Backward O(h): (f_i−2f_{i−1}+f_{i−2})/h²",
-                "Backward O(h²): (2f_i−5f_{i−1}+4f_{i−2}−f_{i−3})/h²"
+                "Forward $\\mathcal{O}(h)$: $f''(x_i)\\approx\\frac{f_{i+2}-2f_{i+1}+f_i}{h^2}$.",
+                "Forward $\\mathcal{O}(h^2)$: $f''(x_i)\\approx\\frac{-f_{i+3}+4f_{i+2}-5f_{i+1}+2f_i}{h^2}$.",
+                "Backward $\\mathcal{O}(h)$: $f''(x_i)\\approx\\frac{f_i-2f_{i-1}+f_{i-2}}{h^2}$.",
+                "Backward $\\mathcal{O}(h^2)$: $f''(x_i)\\approx\\frac{2f_i-5f_{i-1}+4f_{i-2}-f_{i-3}}{h^2}."
               ]
             }
           },
@@ -185,9 +185,9 @@ export const diferenciacionArticles: ContentEntry[] = [
             variant: "note",
             title: { es: "Tercera derivada", eu: "Hirugarren deribatua", en: "Third derivative" },
             text: {
-              es: "El mismo esquema da la tercera derivada; la central de orden 2 es (f_{i+2}−2f_{i+1}+2f_{i−1}−f_{i−2})/(2h³).",
-              eu: "Eskema berak hirugarren deribatua ematen du; 2. ordenako zentrala (f_{i+2}−2f_{i+1}+2f_{i−1}−f_{i−2})/(2h³) da.",
-              en: "The same scheme gives the third derivative; the order-2 central one is (f_{i+2}−2f_{i+1}+2f_{i−1}−f_{i−2})/(2h³)."
+              es: "El mismo esquema da la tercera derivada; la central de orden 2 es $f'''(x_i)\\approx\\frac{f_{i+2}-2f_{i+1}+2f_{i-1}-f_{i-2}}{2h^3}$.",
+              eu: "Eskema berak hirugarren deribatua ematen du; 2. ordenako zentrala $f'''(x_i)\\approx\\frac{f_{i+2}-2f_{i+1}+2f_{i-1}-f_{i-2}}{2h^3}$ da.",
+              en: "The same scheme gives the third derivative; the order-2 central one is $f'''(x_i)\\approx\\frac{f_{i+2}-2f_{i+1}+2f_{i-1}-f_{i-2}}{2h^3}$."
             }
           }
         ]
