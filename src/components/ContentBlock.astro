@@ -61,7 +61,7 @@ const derivationEntry =
 
 {block.kind === "callout" && (
   <aside class:list={["callout", `callout-${block.variant}`]}>
-    {block.title && <strong class="callout-title">{block.title[lang]}</strong>}
+    {block.title && <strong class="callout-title"><RichText text={block.title[lang]} lang={lang} /></strong>}
     <p><RichText text={block.text[lang]} lang={lang} /></p>
     {block.formula && <FormulaBlock formula={block.formula} />}
   </aside>
@@ -69,7 +69,7 @@ const derivationEntry =
 
 {block.kind === "steps" && (
   <div class="steps">
-    {block.title && <strong class="steps-title">{block.title[lang]}</strong>}
+    {block.title && <strong class="steps-title"><RichText text={block.title[lang]} lang={lang} /></strong>}
     <ol>
       {block.steps.map((step) => (
         <li>
@@ -85,7 +85,7 @@ const derivationEntry =
   <div class="worked-example">
     <div class="worked-head">
       <span class="worked-tag">{{ es: "Ejemplo", eu: "Adibidea", en: "Example" }[lang]}</span>
-      {block.title && <strong>{block.title[lang]}</strong>}
+      {block.title && <strong><RichText text={block.title[lang]} lang={lang} /></strong>}
     </div>
     <p class="worked-statement"><RichText text={block.statement[lang]} lang={lang} /></p>
     <ol class="worked-steps">
@@ -127,7 +127,7 @@ const derivationEntry =
   <section class="embedded-derivation">
     <div class="embedded-derivation-head">
       <span class="worked-tag">{embedLabels.tag[lang]}</span>
-      <strong>{derivationEntry.title[lang]}</strong>
+      <strong><RichText text={derivationEntry.title[lang]} lang={lang} /></strong>
       <a href={`/${lang}/deducciones/${derivationEntry.slug}/`}>
         {embedLabels.open[lang]} →
       </a>

@@ -59,7 +59,7 @@ const copy = {
         <div class="entry-meta">
           <span>{copy.glossary}</span>
         </div>
-        <h1>{term.term[lang]}</h1>
+        <h1><RichText text={term.term[lang]} lang={lang} /></h1>
         <p><RichText text={term.shortDefinition[lang]} lang={lang} /></p>
       </header>
 

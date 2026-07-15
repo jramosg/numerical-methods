@@ -18,6 +18,7 @@ interface Props {
 }
 
 const { entry, lang, type } = Astro.props;
+const plainTitle = plainText(entry.title[lang], lang);
 
 const typeLabels = {
   articulos: { es: "Guía", eu: "Gida", en: "Guide" },
@@ -45,7 +46,7 @@ const slugify = (text: string) =>
     .replace(/(^-|-$)/g, "");
 
 const toc = entry.sections.map((section: Section) => ({
-  id: slugify(section.heading[lang]),
+  id: slugify(plainText(section.heading[lang], lang)),
   label: section.heading[lang]
 }));
 
@@ -81,7 +82,7 @@ const schema = {
   "@graph": [
     {
       "@type": type === "ejercicios" ? "LearningResource" : "Article",
-      headline: entry.title[lang as Lang],
+      headline: plainTitle,
       description: plainDescription,
       educationalLevel: levelLabel(entry.level, lang),
       inLanguage: lang,
@@ -108,7 +109,7 @@ const schema = {
         {
           "@type": "ListItem",
           position: 3,
-          name: entry.title[lang],
+          name: plainTitle,
           item: pageUrl
         }
       ]
@@ -118,7 +119,7 @@ const schema = {
 ---
 
 <BaseLayout
-  title={`${entry.title[lang]} | Métodos Numéricos`}
+  title={`${plainTitle} | Métodos Numéricos`}
   description={plainDescription}
   lang={lang}
   schema={schema}
@@ -131,13 +132,16 @@ const schema = {
           <span>{categoryLabel(entry.category, lang)}</span>
           <span>{levelLabel(entry.level, lang)}</span>
         </div>
-        <h1>{entry.title[lang]}</h1>
+        <h1><RichText text={entry.title[lang]} lang={lang} /></h1>
         <p><RichText text={entry.description[lang]} lang={lang} /></p>
       </header>
 
       {entry.sections.map((section: Section) => (
-        <section class="article-section" id={slugify(section.heading[lang])}>
-          <h2>{section.heading[lang]}</h2>
+        <section
+          class="article-section"
+          id={slugify(plainText(section.heading[lang], lang))}
+        >
+          <h2><RichText text={section.heading[lang]} lang={lang} /></h2>
 
           {section.blocks
             ? section.blocks.map((block) => <ContentBlock block={block} lang={lang} />)
@@ -176,7 +180,7 @@ const schema = {
           <strong>{uiLabels.prerequisites[lang]}</strong>
           <ul class="link-list">
             {prerequisites.map((item) => (
-              <li><a href={item.href}>{item.title}</a></li>
+              <li><a href={item.href}><RichText text={item.title} lang={lang} /></a></li>
             ))}
           </ul>
         </nav>
@@ -187,7 +191,7 @@ const schema = {
           <strong>{uiLabels.related[lang]}</strong>
           <ul class="link-list">
             {related.map((item) => (
-              <li><a href={item.href}>{item.title}</a></li>
+              <li><a href={item.href}><RichText text={item.title} lang={lang} /></a></li>
             ))}
           </ul>
         </nav>
@@ -198,7 +202,7 @@ const schema = {
           <strong>{uiLabels.backlinks[lang]}</strong>
           <ul class="link-list">
             {backlinks.map((item) => (
-              <li><a href={item.href}>{item.title}</a></li>
+              <li><a href={item.href}><RichText text={item.title} lang={lang} /></a></li>
             ))}
           </ul>
         </nav>

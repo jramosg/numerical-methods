@@ -1514,9 +1514,9 @@ export const integracionExercises: ContentEntry[] = [
               en: "Integral of sin(x)e^{-x}"
             },
             statement: {
-              es: "Calcula I=∫_0^{π/2} sin(x)e^{-x} dx con trapecio y Simpson compuestos usando n=4 y n=8. El valor exacto es (1-e^{-π/2})/2.",
-              eu: "Kalkulatu I=∫_0^{π/2} sin(x)e^{-x} dx trapezio eta Simpson konposatuekin, n=4 eta n=8 erabiliz. Balio zehatza (1-e^{-π/2})/2 da.",
-              en: "Compute I=∫_0^{π/2} sin(x)e^{-x} dx with composite trapezoid and Simpson using n=4 and n=8. The exact value is (1-e^{-π/2})/2."
+              es: "Calcula $I=\\int_0^{\\pi/2}\\sin(x)e^{-x}\\,dx$ con trapecio y Simpson compuestos usando $n=4$ y $n=8$. El valor exacto es $I=(1-e^{-\\pi/2})/2$.",
+              eu: "Kalkulatu $I=\\int_0^{\\pi/2}\\sin(x)e^{-x}\\,dx$ trapezio eta Simpson konposatuekin, $n=4$ eta $n=8$ erabiliz. Balio zehatza $I=(1-e^{-\\pi/2})/2$ da.",
+              en: "Compute $I=\\int_0^{\\pi/2}\\sin(x)e^{-x}\\,dx$ with composite trapezoid and Simpson using $n=4$ and $n=8$. The exact value is $I=(1-e^{-\\pi/2})/2$."
             },
             steps: [
               {
@@ -1529,25 +1529,41 @@ export const integracionExercises: ContentEntry[] = [
               },
               {
                 text: {
-                  es: "Con trapecio compuesto se obtienen estas aproximaciones:",
-                  eu: "Trapezio konposatuarekin hurbilketa hauek lortzen dira:",
-                  en: "Composite trapezoid gives these approximations:"
+                  es: "Para $n=4$, el paso es $h=\\pi/8$. Aplicamos las dos reglas compuestas:",
+                  eu: "$n=4$ denean, pausoa $h=\\pi/8$ da. Bi erregela konposatuak aplikatzen ditugu:",
+                  en: "For $n=4$, the spacing is $h=\\pi/8$. Apply the two composite rules:"
                 },
-                formula: "T_4=0.380590604382816,\\qquad T_8=0.392182862002726"
+                formula: "T_4=h\\left[\\frac{f(x_0)+f(x_4)}{2}+\\sum_{i=1}^{3}f(x_i)\\right]=0.380590604382816"
               },
               {
                 text: {
-                  es: "Con Simpson compuesto se obtienen:",
-                  eu: "Simpson konposatuarekin hauek lortzen dira:",
-                  en: "Composite Simpson gives:"
+                  es: "Simpson usa los mismos nodos y los pesos $1,4,2,4,1$:",
+                  eu: "Simpsonek nodo berak eta $1,4,2,4,1$ pisuak erabiltzen ditu:",
+                  en: "Simpson uses the same nodes and the weights $1,4,2,4,1$:"
                 },
-                formula: "S_4=0.395839444235324,\\qquad S_8=0.396046947876029"
+                formula: "S_4=\\frac{h}{3}\\left[f(x_0)+4f(x_1)+2f(x_2)+4f(x_3)+f(x_4)\\right]=0.395839444235324"
               },
               {
                 text: {
-                  es: "Los errores absolutos son:",
-                  eu: "Errore absolutuak hauek dira:",
-                  en: "The absolute errors are:"
+                  es: "Para $n=8$, el paso se reduce a $h=\\pi/16$:",
+                  eu: "$n=8$ denean, pausoa $h=\\pi/16$-ra murrizten da:",
+                  en: "For $n=8$, the spacing decreases to $h=\\pi/16$:"
+                },
+                formula: "T_8=h\\left[\\frac{f(x_0)+f(x_8)}{2}+\\sum_{i=1}^{7}f(x_i)\\right]=0.392182862002726"
+              },
+              {
+                text: {
+                  es: "En Simpson, los nodos interiores impares tienen peso $4$ y los pares, peso $2$:",
+                  eu: "Simpson-en, barruko nodo bakoitiek $4$ pisua dute eta bikoitiek, $2$:",
+                  en: "In Simpson, odd interior nodes have weight $4$ and even ones have weight $2$:"
+                },
+                formula: "S_8=\\frac{h}{3}\\left[f(x_0)+4\\sum_{\\substack{i=1\\\\i\\text{ odd}}}^{7}f(x_i)+2\\sum_{\\substack{i=2\\\\i\\text{ even}}}^{6}f(x_i)+f(x_8)\\right]=0.396046947876029"
+              },
+              {
+                text: {
+                  es: "Los errores absolutos, en el orden $T_4$, $T_8$, $S_4$, $S_8$, son:",
+                  eu: "Errore absolutuak, $T_4$, $T_8$, $S_4$, $S_8$ ordenan, hauek dira:",
+                  en: "The absolute errors, in the order $T_4$, $T_8$, $S_4$, $S_8$, are:"
                 },
                 formula: "|E|=(0.015469607441803,\\ 0.003877349821893,\\ 0.000220767589295,\\ 0.000013263948590)"
               }

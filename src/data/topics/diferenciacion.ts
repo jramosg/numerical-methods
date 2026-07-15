@@ -285,9 +285,9 @@ export const diferenciacionDerivations: ContentEntry[] = [
     level: "avanzado",
     searchIntent: "deducir diferencia progresiva tres puntos Taylor orden dos primera derivada",
     title: {
-      es: "Deducción: progresiva de tres puntos O(h²)",
-      eu: "Frogapena: hiru puntuko progresiboa O(h²)",
-      en: "Derivation: three-point forward O(h²)"
+      es: "Deducción: progresiva de tres puntos $O(h^2)$",
+      eu: "Frogapena: hiru puntuko progresiboa $O(h^2)$",
+      en: "Derivation: three-point forward $O(h^2)$"
     },
     description: {
       es: "Cómo combinar dos desarrollos de Taylor para eliminar la segunda derivada y obtener una diferencia progresiva de orden 2 para la primera derivada.",

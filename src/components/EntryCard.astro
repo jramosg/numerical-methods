@@ -27,7 +27,9 @@ const typeLabels = {
     <span>{levelLabel(entry.level, lang)}</span>
   </div>
   <h3>
-    <a href={`/${lang}/${type}/${entry.slug}/`}>{entry.title[lang]}</a>
+    <a href={`/${lang}/${type}/${entry.slug}/`}>
+      <RichText text={entry.title[lang]} lang={lang} />
+    </a>
   </h3>
   <p><RichText text={entry.description[lang]} lang={lang} /></p>
 </article>

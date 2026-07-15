@@ -3,6 +3,7 @@ dist/
 .astro/
 .env
 .DS_Store
+.lsp/
 
 AGENTS.md
 CLAUDE.md
