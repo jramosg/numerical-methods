@@ -564,6 +564,276 @@ h3 {
   align-items: center;
 }
 
+.affiliate-books {
+  position: relative;
+  isolation: isolate;
+  margin: 2rem 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  overflow: hidden;
+  border: 1px solid rgba(15, 118, 110, 0.28);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 95% 0%, rgba(15, 118, 110, 0.17), transparent 32%),
+    linear-gradient(135deg, rgba(241, 231, 211, 0.88), rgba(255, 250, 240, 0.94));
+  box-shadow: 0 18px 48px rgba(58, 45, 24, 0.1);
+}
+
+.affiliate-books::after {
+  position: absolute;
+  inset: auto -8rem -9rem auto;
+  z-index: -1;
+  width: 20rem;
+  height: 20rem;
+  border: 1px solid rgba(15, 118, 110, 0.14);
+  border-radius: 50%;
+  content: "";
+}
+
+.affiliate-books-header {
+  position: relative;
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.affiliate-books-header > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.affiliate-books-header .eyebrow {
+  color: var(--accent-strong);
+}
+
+.affiliate-books-mark {
+  color: rgba(32, 27, 22, 0.44);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.affiliate-books-header h2 {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+.affiliate-books-header p,
+.affiliate-books-disclosure {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.affiliate-featured {
+  display: grid;
+  grid-template-columns: minmax(145px, 0.42fr) minmax(0, 1fr);
+  min-height: 245px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 118, 110, 0.24);
+  border-radius: 16px;
+  background: rgba(255, 250, 240, 0.9);
+  box-shadow: 0 10px 30px rgba(58, 45, 24, 0.09);
+}
+
+.affiliate-featured-cover,
+.affiliate-secondary-cover {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  overflow: hidden;
+  background: #fff;
+}
+
+.affiliate-featured-cover {
+  padding: 0.8rem;
+  background:
+    linear-gradient(145deg, rgba(32, 27, 22, 0.06), transparent 46%),
+    #fff;
+}
+
+.affiliate-featured-cover img,
+.affiliate-secondary-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.affiliate-featured-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.affiliate-badge {
+  padding: 0.24rem 0.58rem;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--accent-strong);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.affiliate-featured-body h3 {
+  max-width: 22ch;
+  font-size: clamp(1.3rem, 3vw, 1.85rem);
+  line-height: 1.08;
+}
+
+.affiliate-featured-body p,
+.affiliate-secondary-body p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.affiliate-fit {
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.affiliate-book-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  color: var(--accent-strong);
+  font-weight: 800;
+}
+
+.affiliate-book-link-featured {
+  padding: 0.62rem 0.88rem;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--accent-strong);
+  box-shadow: 0 6px 16px rgba(11, 79, 74, 0.2);
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.affiliate-book-link-featured:hover {
+  color: #fff;
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+
+.affiliate-book-link:not(.affiliate-book-link-featured):hover {
+  text-decoration: underline;
+}
+
+.affiliate-secondary-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1.3rem 0 0.7rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.affiliate-secondary-heading::after {
+  height: 1px;
+  flex: 1;
+  background: var(--line);
+  content: "";
+}
+
+.affiliate-secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.affiliate-secondary-card {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 250, 240, 0.9);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.affiliate-secondary-card:hover {
+  border-color: rgba(15, 118, 110, 0.4);
+  box-shadow: 0 12px 28px rgba(58, 45, 24, 0.1);
+  transform: translateY(-2px);
+}
+
+.affiliate-secondary-cover {
+  min-height: 190px;
+  padding: 0.4rem;
+}
+
+.affiliate-secondary-cover-python {
+  padding: 0;
+}
+
+.affiliate-python-cover {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.7rem 0.55rem;
+  color: #f5efe1;
+  background:
+    linear-gradient(145deg, rgba(245, 239, 225, 0.08) 0 1px, transparent 1px 100%),
+    linear-gradient(160deg, #172f36, #0c191d 72%);
+  background-size: 18px 18px, auto;
+}
+
+.affiliate-python-cover span {
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.affiliate-python-cover strong {
+  max-width: 6ch;
+  color: #e7bf63;
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  line-height: 0.92;
+}
+
+.affiliate-python-cover b {
+  color: #f5efe1;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.affiliate-secondary-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 0.85rem;
+}
+
+.affiliate-secondary-body h3 {
+  font-size: 1rem;
+}
+
+.affiliate-book-paid {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.affiliate-books-disclosure {
+  margin-top: 1rem;
+  font-size: 0.78rem;
+}
+
 
 .site-footer {
   display: flex;
@@ -599,7 +869,8 @@ h3 {
 
   .entry-grid,
   .topic-grid,
-  .formula-grid {
+  .formula-grid,
+  .affiliate-secondary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -611,6 +882,18 @@ h3 {
 @media (max-width: 640px) {
   h1 {
     font-size: 2.45rem;
+  }
+
+  .affiliate-featured {
+    grid-template-columns: 1fr;
+  }
+
+  .affiliate-featured-cover {
+    min-height: 190px;
+  }
+
+  .affiliate-secondary-grid {
+    grid-template-columns: 1fr;
   }
 
   .site-header {

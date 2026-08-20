@@ -1,0 +1,134 @@
+---
+import RichText from "./RichText.astro";
+import { affiliateBooks } from "@/data/affiliate";
+import type { Lang } from "@/data/site";
+
+interface Props {
+  lang: Lang;
+  category: string;
+}
+
+const { lang, category } = Astro.props;
+
+const featuredKey =
+  category === "EDO" || category.toLowerCase().includes("sistemas")
+    ? "Numerical Methods for Engineers, 7th ed."
+    : "Análisis numérico — Burden y Faires";
+
+const featuredBook = affiliateBooks.find(
+  (book) => book.title.es === featuredKey
+)!;
+const supportingBooks = affiliateBooks.filter((book) => book !== featuredBook);
+
+const copy = {
+  es: {
+    eyebrow: "Selección editorial",
+    title: "Lleva este método más lejos",
+    intro: "Tres referencias escogidas para pasar de la fórmula a la práctica.",
+    featured: "Mejor encaje para esta guía",
+    also: "También te pueden servir",
+    button: "Ver en Amazon",
+    paid: "Enlace remunerado",
+    disclosure:
+      "En calidad de Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables. El precio para ti no cambia."
+  },
+  eu: {
+    eyebrow: "Erredakzioaren hautaketa",
+    title: "Egin urrats bat gehiago metodo honekin",
+    intro: "Hiru erreferentzia, formula praktikarekin lotzeko aukeratuak.",
+    featured: "Gida honetarako egokiena",
+    also: "Beste aukera erabilgarri batzuk",
+    button: "Ikusi Amazonen",
+    paid: "Ordaindutako esteka",
+    disclosure:
+      "Amazonen afiliatu gisa, baldintzak betetzen dituzten erosketengatik diru-sarrerak jasotzen ditut. Zuretzat prezioa ez da aldatzen."
+  },
+  en: {
+    eyebrow: "Editorial selection",
+    title: "Take this method further",
+    intro: "Three carefully chosen references to connect formula and practice.",
+    featured: "Best match for this guide",
+    also: "Also worth considering",
+    button: "View on Amazon",
+    paid: "Paid link",
+    disclosure:
+      "As an Amazon Associate, I earn from qualifying purchases. The price for you does not change."
+  }
+}[lang];
+---
+
+<aside class="affiliate-books" aria-labelledby="affiliate-books-title">
+  <header class="affiliate-books-header">
+    <div>
+      <span class="eyebrow">{copy.eyebrow}</span>
+      <span class="affiliate-books-mark" aria-hidden="true">03 / 03</span>
+    </div>
+    <h2 id="affiliate-books-title">{copy.title}</h2>
+    <p>{copy.intro}</p>
+  </header>
+  <div class="affiliate-featured">
+    <div class="affiliate-featured-cover">
+      {featuredBook.image && (
+        <img
+          src={featuredBook.image}
+          alt={featuredBook.imageAlt[lang]}
+          width="342"
+          height="430"
+          loading="lazy"
+        />
+      )}
+    </div>
+    <div class="affiliate-featured-body">
+      <span class="affiliate-badge">{copy.featured}</span>
+      <h3><RichText text={featuredBook.title[lang]} lang={lang} /></h3>
+      <p><RichText text={featuredBook.description[lang]} lang={lang} /></p>
+      <span class="affiliate-fit">{featuredBook.fit[lang]}</span>
+      <a
+        class="affiliate-book-link affiliate-book-link-featured"
+        href={featuredBook.href}
+        rel="sponsored noopener"
+        target="_blank"
+      >
+        {copy.button} <span aria-hidden="true">↗</span>
+      </a>
+      <span class="affiliate-book-paid">{copy.paid}</span>
+    </div>
+  </div>
+
+  <div class="affiliate-secondary-heading">
+    <span>{copy.also}</span>
+  </div>
+  <div class="affiliate-secondary-grid">
+    {supportingBooks.map((book) => (
+      <article class="affiliate-secondary-card">
+        <div class:list={["affiliate-secondary-cover", { "affiliate-secondary-cover-python": book.cover === "python" }]}>
+          {book.image ? (
+            <img
+              src={book.image}
+              alt={book.imageAlt[lang]}
+              width="342"
+              height="430"
+              loading="lazy"
+            />
+          ) : (
+            <div class="affiliate-python-cover" role="img" aria-label={book.imageAlt[lang]}>
+              <span>NUMERICAL METHODS</span>
+              <strong>ENGINEERING</strong>
+              <b>PYTHON 3</b>
+            </div>
+          )}
+        </div>
+        <div class="affiliate-secondary-body">
+          <h3><RichText text={book.title[lang]} lang={lang} /></h3>
+          <p><RichText text={book.description[lang]} lang={lang} /></p>
+          <span class="affiliate-fit">{book.fit[lang]}</span>
+          <a class="affiliate-book-link" href={book.href} rel="sponsored noopener" target="_blank">
+            {copy.button} <span aria-hidden="true">↗</span>
+          </a>
+          <span class="affiliate-book-paid">{copy.paid}</span>
+        </div>
+      </article>
+    ))}
+  </div>
+  <p class="affiliate-books-disclosure">{copy.disclosure}</p>
+</aside>
