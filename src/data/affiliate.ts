@@ -7,6 +7,8 @@ export type AffiliateBook = {
   description: LocalizedText;
   href: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   cover?: "python";
   imageAlt: LocalizedText;
   fit: LocalizedText;
@@ -27,6 +29,8 @@ export const affiliateBooks: AffiliateBook[] = [
     },
     href: "https://link.amazon/B077ZHZAc",
     image: "/affiliate-books/analisis-numerico.png",
+    imageWidth: 342,
+    imageHeight: 430,
     imageAlt: {
       es: "Portada de Análisis numérico, de Burden y Faires",
       eu: "Burden eta Faireren Análisis numerikoa liburuaren azala",
@@ -51,6 +55,8 @@ export const affiliateBooks: AffiliateBook[] = [
     },
     href: "https://link.amazon/B0jfzGEXr",
     image: "/affiliate-books/numerical-methods-engineers.png",
+    imageWidth: 454,
+    imageHeight: 522,
     imageAlt: {
       es: "Portada de Numerical Methods for Engineers, séptima edición",
       eu: "Numerical Methods for Engineers zazpigarren edizioaren azala",

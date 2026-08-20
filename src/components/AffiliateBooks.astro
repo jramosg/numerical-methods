@@ -66,14 +66,20 @@ const copy = {
     <h2 id="affiliate-books-title">{copy.title}</h2>
     <p>{copy.intro}</p>
   </header>
-  <div class="affiliate-featured">
+  <a
+    class="affiliate-featured affiliate-book-card"
+    href={featuredBook.href}
+    rel="sponsored noopener"
+    target="_blank"
+    aria-label={`${featuredBook.title[lang]} — ${copy.button}`}
+  >
     <div class="affiliate-featured-cover">
       {featuredBook.image && (
         <img
           src={featuredBook.image}
           alt={featuredBook.imageAlt[lang]}
-          width="342"
-          height="430"
+          width={featuredBook.imageWidth}
+          height={featuredBook.imageHeight}
           loading="lazy"
         />
       )}
@@ -83,31 +89,32 @@ const copy = {
       <h3><RichText text={featuredBook.title[lang]} lang={lang} /></h3>
       <p><RichText text={featuredBook.description[lang]} lang={lang} /></p>
       <span class="affiliate-fit">{featuredBook.fit[lang]}</span>
-      <a
-        class="affiliate-book-link affiliate-book-link-featured"
-        href={featuredBook.href}
-        rel="sponsored noopener"
-        target="_blank"
-      >
+      <span class="affiliate-book-link affiliate-book-link-featured">
         {copy.button} <span aria-hidden="true">↗</span>
-      </a>
+      </span>
       <span class="affiliate-book-paid">{copy.paid}</span>
     </div>
-  </div>
+  </a>
 
   <div class="affiliate-secondary-heading">
     <span>{copy.also}</span>
   </div>
   <div class="affiliate-secondary-grid">
     {supportingBooks.map((book) => (
-      <article class="affiliate-secondary-card">
+      <a
+        class="affiliate-secondary-card affiliate-book-card"
+        href={book.href}
+        rel="sponsored noopener"
+        target="_blank"
+        aria-label={`${book.title[lang]} — ${copy.button}`}
+      >
         <div class:list={["affiliate-secondary-cover", { "affiliate-secondary-cover-python": book.cover === "python" }]}>
           {book.image ? (
             <img
               src={book.image}
               alt={book.imageAlt[lang]}
-              width="342"
-              height="430"
+              width={book.imageWidth}
+              height={book.imageHeight}
               loading="lazy"
             />
           ) : (
@@ -122,12 +129,12 @@ const copy = {
           <h3><RichText text={book.title[lang]} lang={lang} /></h3>
           <p><RichText text={book.description[lang]} lang={lang} /></p>
           <span class="affiliate-fit">{book.fit[lang]}</span>
-          <a class="affiliate-book-link" href={book.href} rel="sponsored noopener" target="_blank">
+          <span class="affiliate-book-link">
             {copy.button} <span aria-hidden="true">↗</span>
-          </a>
+          </span>
           <span class="affiliate-book-paid">{copy.paid}</span>
         </div>
-      </article>
+      </a>
     ))}
   </div>
   <p class="affiliate-books-disclosure">{copy.disclosure}</p>

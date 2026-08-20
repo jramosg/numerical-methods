@@ -636,6 +636,27 @@ h3 {
   box-shadow: 0 10px 30px rgba(58, 45, 24, 0.09);
 }
 
+.affiliate-book-card {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.affiliate-book-card:hover {
+  border-color: rgba(15, 118, 110, 0.48);
+  box-shadow: 0 16px 34px rgba(58, 45, 24, 0.14);
+  transform: translateY(-2px);
+}
+
+.affiliate-book-card:focus-visible {
+  outline: 3px solid rgba(15, 118, 110, 0.52);
+  outline-offset: 4px;
+}
+
 .affiliate-featured-cover,
 .affiliate-secondary-cover {
   display: grid;
@@ -658,6 +679,12 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center;
+  transition: transform 220ms ease;
+}
+
+.affiliate-book-card:hover img {
+  transform: scale(1.035);
 }
 
 .affiliate-featured-body {
@@ -717,13 +744,13 @@ h3 {
   transition: transform 180ms ease, background 180ms ease;
 }
 
-.affiliate-book-link-featured:hover {
+.affiliate-book-link-featured:hover,
+.affiliate-book-card:hover .affiliate-book-link-featured {
   color: #fff;
   background: var(--accent);
-  transform: translateY(-1px);
 }
 
-.affiliate-book-link:not(.affiliate-book-link-featured):hover {
+.affiliate-book-card:hover .affiliate-book-link:not(.affiliate-book-link-featured) {
   text-decoration: underline;
 }
 
@@ -754,24 +781,20 @@ h3 {
 
 .affiliate-secondary-card {
   display: grid;
-  grid-template-columns: 100px minmax(0, 1fr);
+  grid-template-columns: minmax(135px, 0.42fr) minmax(0, 1fr);
   min-width: 0;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: rgba(255, 250, 240, 0.9);
-  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
-}
-
-.affiliate-secondary-card:hover {
-  border-color: rgba(15, 118, 110, 0.4);
-  box-shadow: 0 12px 28px rgba(58, 45, 24, 0.1);
-  transform: translateY(-2px);
 }
 
 .affiliate-secondary-cover {
-  min-height: 190px;
-  padding: 0.4rem;
+  min-height: 230px;
+  padding: 0.7rem;
+  background:
+    linear-gradient(145deg, rgba(32, 27, 22, 0.06), transparent 46%),
+    #fff;
 }
 
 .affiliate-secondary-cover-python {
@@ -799,10 +822,10 @@ h3 {
 }
 
 .affiliate-python-cover strong {
-  max-width: 6ch;
+  max-width: 7ch;
   color: #e7bf63;
   font-family: Georgia, serif;
-  font-size: 1.2rem;
+  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
   line-height: 0.92;
 }
 
@@ -889,7 +912,7 @@ h3 {
   }
 
   .affiliate-featured-cover {
-    min-height: 190px;
+    min-height: 230px;
   }
 
   .affiliate-secondary-grid {
