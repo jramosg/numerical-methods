@@ -1,6 +1,7 @@
 ---
 import DiagramBlock from "./DiagramBlock.astro";
 import FormulaBlock from "./FormulaBlock.astro";
+import PlotBlock from "./PlotBlock.astro";
 import RichText from "./RichText.astro";
 import { derivations, type Block } from "@/data/content";
 import type { Lang } from "@/data/site";
@@ -45,6 +46,21 @@ const derivationEntry =
 
 {block.kind === "diagram" && (
   <DiagramBlock variant={block.variant} caption={block.caption} lang={lang} />
+)}
+
+{block.kind === "plot" && (
+  <PlotBlock
+    caption={block.caption}
+    xLabel={block.xLabel}
+    yLabel={block.yLabel}
+    xDomain={block.xDomain}
+    yDomain={block.yDomain}
+    logX={block.logX}
+    logY={block.logY}
+    series={block.series}
+    markers={block.markers}
+    lang={lang}
+  />
 )}
 
 {block.kind === "list" && (

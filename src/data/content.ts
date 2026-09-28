@@ -44,6 +44,8 @@ import {
   sistemasNoLinealesDerivations,
   sistemasNoLinealesExercises
 } from "./topics/sistemas-no-lineales";
+import { fronteraArticles, fronteraDerivations } from "./topics/problemas-frontera";
+import { fronteraExercises } from "./topics/problemas-frontera-ejercicios";
 
 type LocalizedText = Record<Lang, string>;
 type LocalizedList = Record<Lang, string[]>;
@@ -53,6 +55,19 @@ export type Step = {
   text: LocalizedText;
   formula?: string;
 };
+
+export type PlotTone = "accent" | "red" | "blue" | "gold" | "ink" | "muted";
+
+/** One curve (or set of dots) of a data plot; labels support rich text. */
+export type PlotSeries = {
+  label: LocalizedText;
+  points: [number, number][];
+  style?: "line" | "dashed" | "points" | "line-points";
+  tone?: PlotTone;
+};
+
+/** A highlighted point, e.g. a boundary condition or an iterate. */
+export type PlotMarker = { x: number; y: number; label?: string; tone?: PlotTone };
 
 /**
  * Rich content blocks. Prose fields support inline math ($...$) and wiki
@@ -78,6 +93,22 @@ export type Block =
         | "ab2-extrapolation"
         | "am2-implicit";
       caption: LocalizedText;
+    }
+  /**
+   * Data plot rendered as static SVG. Points are usually computed at build
+   * time (see src/data/numerics/), so figures match the verified numbers.
+   */
+  | {
+      kind: "plot";
+      caption: LocalizedText;
+      xLabel: string;
+      yLabel: string;
+      xDomain?: [number, number];
+      yDomain?: [number, number];
+      logX?: boolean;
+      logY?: boolean;
+      series: PlotSeries[];
+      markers?: PlotMarker[];
     }
   | { kind: "steps"; title?: LocalizedText; steps: Step[] }
   | {
@@ -135,7 +166,7 @@ export type ContentEntry = {
 // Areas in study order: fundamentos (t2) → interpolación (t3) →
 // diferenciación (t4) → integración (t5) → EDO un paso (t6) →
 // EDO multipaso (t7) → sistemas lineales (t8) → ecuaciones no lineales (t9)
-// → sistemas no lineales (t10).
+// → sistemas no lineales (t10) → problemas de frontera.
 export const articles: ContentEntry[] = [
   ...fundamentosArticles,
   ...interpolacionArticles,
@@ -145,7 +176,8 @@ export const articles: ContentEntry[] = [
   ...edoMultipasoArticles,
   ...sistemasLinealesArticles,
   ...noLinealesArticles,
-  ...sistemasNoLinealesArticles
+  ...sistemasNoLinealesArticles,
+  ...fronteraArticles
 ];
 
 export const derivations: ContentEntry[] = [
@@ -157,7 +189,8 @@ export const derivations: ContentEntry[] = [
   ...edoMultipasoDerivations,
   ...sistemasLinealesDerivations,
   ...noLinealesDerivations,
-  ...sistemasNoLinealesDerivations
+  ...sistemasNoLinealesDerivations,
+  ...fronteraDerivations
 ];
 
 export const exercises: ContentEntry[] = [
@@ -169,7 +202,8 @@ export const exercises: ContentEntry[] = [
   ...edoMultipasoExercises,
   ...sistemasLinealesExercises,
   ...noLinealesExercises,
-  ...sistemasNoLinealesExercises
+  ...sistemasNoLinealesExercises,
+  ...fronteraExercises
 ];
 
 /** Formula sheet, one group per area, in study order. */
@@ -281,6 +315,19 @@ export const formulaGroups = [
     formulas: [
       "x^{(k+1)}=x^{(k)}-[F'(x^{(k)})]^{-1}F(x^{(k)})",
       "F'(x^{(k)})\\,u=F(x^{(k)}),\\qquad x^{(k+1)}=x^{(k)}-u"
+    ]
+  },
+  {
+    title: {
+      es: "Problemas de frontera",
+      eu: "Muga-problemak",
+      en: "Boundary value problems"
+    },
+    formulas: [
+      "y=y_1+\\frac{\\beta-y_1(b)}{y_2(b)}\\,y_2,\\qquad y_1(a)=\\alpha,\\ y_1'(a)=0;\\quad y_2(a)=0,\\ y_2'(a)=1",
+      "F(t)=y(t,b)-\\beta,\\qquad t_{k+1}=t_k-\\frac{F(t_k)(t_k-t_{k-1})}{F(t_k)-F(t_{k-1})}",
+      "z''=f_y\\,z+f_{y'}\\,z',\\quad z(a)=0,\\ z'(a)=1,\\qquad t_{k+1}=t_k-\\frac{y(t_k,b)-\\beta}{z(t_k,b)}",
+      "|y_i-y(x_i)|\\le K\\,h^p\\left(1+\\left|\\frac{v_{1i}}{v_{1N}}\\right|\\right)"
     ]
   }
 ] as const;

@@ -2030,3 +2030,108 @@ h3 {
     transform: none;
   }
 }
+
+/* Data plots (PlotBlock) share the diagram frame and zoom dialog. */
+.plot-grid {
+  stroke: rgba(74, 68, 58, 0.12);
+  stroke-width: 1;
+}
+
+.plot-zero {
+  stroke: rgba(74, 68, 58, 0.5);
+  stroke-width: 1.5;
+}
+
+.plot-frame {
+  fill: none;
+  stroke: rgba(74, 68, 58, 0.45);
+  stroke-width: 1.5;
+}
+
+.plot-tick {
+  fill: var(--muted);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.plot-axis-label {
+  fill: var(--ink);
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.plot-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.plot-dashed {
+  stroke-dasharray: 8 7;
+  stroke-width: 2.5;
+}
+
+.plot-dot {
+  fill: currentColor;
+  stroke: #fffaf0;
+  stroke-width: 1.5;
+}
+
+.plot-marker {
+  fill: #fffaf0;
+  stroke: currentColor;
+  stroke-width: 3;
+}
+
+.plot-marker-label {
+  fill: var(--ink);
+  font-size: 14px;
+  font-weight: 650;
+  paint-order: stroke;
+  stroke: #fffaf0;
+  stroke-width: 4px;
+}
+
+.plot-tone-accent { color: var(--accent); }
+.plot-tone-red { color: var(--red); }
+.plot-tone-blue { color: var(--blue); }
+.plot-tone-gold { color: #a86b12; }
+.plot-tone-ink { color: var(--ink); }
+.plot-tone-muted { color: #8a8174; }
+
+.plot-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.92rem;
+}
+
+.plot-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.plot-swatch {
+  display: inline-block;
+  width: 1.6rem;
+  height: 0;
+  border-top: 3px solid currentColor;
+}
+
+.plot-swatch-dashed {
+  border-top-style: dashed;
+}
+
+.plot-swatch-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 0;
+  border-radius: 50%;
+  background: currentColor;
+}

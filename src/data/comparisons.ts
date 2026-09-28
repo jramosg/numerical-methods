@@ -617,5 +617,100 @@ export const comparisonTables: ComparisonTable[] = [
       "edo-predictor-corrector",
       "ejercicio-predictor-corrector-comparativa"
     ]
+  },
+  {
+    slug: "disparo-lineal-secante-newton",
+    title: {
+      es: "Disparo lineal vs secante vs Newton",
+      eu: "Jaurtiketa lineala vs sekantea vs Newton",
+      en: "Linear shooting vs secant vs Newton"
+    },
+    description: {
+      es: "Tres formas de encontrar la pendiente inicial en un problema de frontera: coste, requisitos y cuándo usar cada una.",
+      eu: "Muga-problema batean hasierako malda aurkitzeko hiru modu: kostua, baldintzak eta noiz erabili bakoitza.",
+      en: "Three ways to find the initial slope of a boundary value problem: cost, requirements and when to use each."
+    },
+    head: {
+      es: ["Método", "Ecuación", "PVI resueltos", "Necesita", "Cuándo usarlo"],
+      eu: ["Metodoa", "Ekuazioa", "Ebatzitako HBPak", "Behar du", "Noiz erabili"],
+      en: ["Method", "Equation", "IVPs solved", "Needs", "When to use it"]
+    },
+    rows: {
+      es: [
+        [
+          "[[frontera-disparo-lineal|Disparo lineal]]",
+          "Lineal: $y''=py'+qy+r$",
+          "2 (3 con condiciones acopladas), sin iterar",
+          "$p$, $q$, $r$ y $y_2(b)\\ne0$",
+          "Siempre que la ecuación sea lineal"
+        ],
+        [
+          "[[frontera-disparo-no-lineal|Disparo con secante]]",
+          "Cualquiera: $y''=f(x,y,y')$",
+          "Uno por iteración (orden $\\approx1.618$)",
+          "Solo $f$ y dos pendientes iniciales",
+          "Cuando $f_y$, $f_{y'}$ son engorrosas"
+        ],
+        [
+          "[[frontera-disparo-newton|Disparo con Newton]]",
+          "Cualquiera: $y''=f(x,y,y')$",
+          "Un sistema de 4 EDO por iteración (orden 2)",
+          "$f$, $f_y$, $f_{y'}$ y una pendiente inicial cercana",
+          "Cuando se quiere convergencia rápida y las derivadas son sencillas"
+        ]
+      ],
+      eu: [
+        [
+          "[[frontera-disparo-lineal|Jaurtiketa lineala]]",
+          "Lineala: $y''=py'+qy+r$",
+          "2 (3 baldintza akoplatuekin), iteratu gabe",
+          "$p$, $q$, $r$ eta $y_2(b)\\ne0$",
+          "Ekuazioa lineala den guztietan"
+        ],
+        [
+          "[[frontera-disparo-no-lineal|Jaurtiketa sekantearekin]]",
+          "Edozein: $y''=f(x,y,y')$",
+          "Bat iterazioko (ordena $\\approx1.618$)",
+          "$f$ bakarrik eta hasierako bi malda",
+          "$f_y$, $f_{y'}$ astunak direnean"
+        ],
+        [
+          "[[frontera-disparo-newton|Jaurtiketa Newtonekin]]",
+          "Edozein: $y''=f(x,y,y')$",
+          "4 EDOko sistema bat iterazioko (2. ordena)",
+          "$f$, $f_y$, $f_{y'}$ eta hasierako malda hurbil bat",
+          "Konbergentzia azkarra nahi denean eta deribatuak errazak direnean"
+        ]
+      ],
+      en: [
+        [
+          "[[frontera-disparo-lineal|Linear shooting]]",
+          "Linear: $y''=py'+qy+r$",
+          "2 (3 with coupled conditions), no iteration",
+          "$p$, $q$, $r$ and $y_2(b)\\ne0$",
+          "Whenever the equation is linear"
+        ],
+        [
+          "[[frontera-disparo-no-lineal|Secant shooting]]",
+          "Any: $y''=f(x,y,y')$",
+          "One per iteration (order $\\approx1.618$)",
+          "Only $f$ and two starting slopes",
+          "When $f_y$, $f_{y'}$ are messy"
+        ],
+        [
+          "[[frontera-disparo-newton|Newton shooting]]",
+          "Any: $y''=f(x,y,y')$",
+          "One 4-ODE system per iteration (order 2)",
+          "$f$, $f_y$, $f_{y'}$ and a nearby starting slope",
+          "When fast convergence is wanted and the derivatives are simple"
+        ]
+      ]
+    },
+    related: [
+      "frontera-disparo-lineal",
+      "frontera-disparo-no-lineal",
+      "frontera-disparo-newton",
+      "ejercicio-disparo-newton"
+    ]
   }
 ];

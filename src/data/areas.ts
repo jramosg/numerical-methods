@@ -11,7 +11,7 @@ export type Area = {
   text: LocalizedText;
 };
 
-/** The nine content areas, in study order. Shared by the home and temario pages. */
+/** The ten content areas, in study order. Shared by the home and temario pages. */
 export const areas: Area[] = [
   {
     href: "articulos/fundamentos-errores",
@@ -129,6 +129,20 @@ export const areas: Area[] = [
       es: "Jacobiano, Newton para sistemas, coste por iteración y esquemas de alto orden.",
       eu: "Jacobiarra, Newton sistemetarako, iterazio-kostua eta ordena altuko eskemak.",
       en: "Jacobian, Newton for systems, cost per iteration and high-order schemes."
+    }
+  },
+  {
+    href: "articulos/frontera-introduccion",
+    category: "Problemas de frontera",
+    title: {
+      es: "Problemas de frontera",
+      eu: "Muga-problemak",
+      en: "Boundary value problems"
+    },
+    text: {
+      es: "Condiciones de contorno, disparo lineal, disparo no lineal con secante y Newton, ecuación variacional y orden superior.",
+      eu: "Muga-baldintzak, jaurtiketa lineala, jaurtiketa ez-lineala sekantearekin eta Newtonekin, ekuazio bariazionala eta ordena altuagoa.",
+      en: "Boundary conditions, linear shooting, nonlinear shooting with secant and Newton, the variational equation and higher order."
     }
   }
 ];

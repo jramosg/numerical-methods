@@ -711,5 +711,53 @@ export const glossaryTerms: GlossaryTerm[] = [
       en: "Fix the norm before comparing errors or tolerances: the same vector can pass a criterion in $\\|\\cdot\\|_\\infty$ and fail it in $\\|\\cdot\\|_2$."
     },
     related: ["sistemas-lineales-conceptos", "sistemas-lineales-convergencia"]
+  },
+  {
+    slug: "problema-de-frontera",
+    term: {
+      es: "Problema de frontera",
+      eu: "Muga-problema",
+      en: "Boundary value problem"
+    },
+    shortDefinition: {
+      es: "Ecuación diferencial con sus condiciones repartidas entre los extremos del intervalo.",
+      eu: "Baldintzak tartearen muturren artean banatuta dituen ekuazio diferentziala.",
+      en: "A differential equation whose conditions are split between the endpoints of the interval."
+    },
+    definition: {
+      es: "Un problema de frontera (o de contorno) fija la solución de una ecuación diferencial mediante condiciones en $x=a$ y $x=b$, por ejemplo $y(a)=\\alpha$, $y(b)=\\beta$. Hay tantas condiciones como el orden de la ecuación. A diferencia de un problema de valor inicial, puede no tener solución o tener infinitas.",
+      eu: "Muga-problema batek ekuazio diferentzial baten soluzioa finkatzen du $x=a$ eta $x=b$ puntuetako baldintzen bidez, adibidez $y(a)=\\alpha$, $y(b)=\\beta$. Ekuazioaren ordena adina baldintza daude. Hasierako balioko problema batek ez bezala, baliteke soluziorik ez izatea edo infinitu izatea.",
+      en: "A boundary value problem fixes the solution of a differential equation through conditions at $x=a$ and $x=b$, for instance $y(a)=\\alpha$, $y(b)=\\beta$. There are as many conditions as the order of the equation. Unlike an initial value problem, it may have no solution or infinitely many."
+    },
+    usage: {
+      es: "Aparece en potenciales eléctricos, deformación de vigas o distribución de temperatura en régimen estacionario. Se resuelve con métodos de disparo o de diferencias finitas.",
+      eu: "Potentzial elektrikoetan, habeen deformazioan edo egoera egonkorreko tenperatura-banaketan agertzen da. Jaurtiketa-metodoekin edo diferentzia finituekin ebazten da.",
+      en: "It appears in electric potentials, beam deflection or steady-state temperature distributions. It is solved with shooting or finite-difference methods."
+    },
+    related: ["frontera-introduccion", "frontera-disparo-lineal"]
+  },
+  {
+    slug: "metodo-de-disparo",
+    term: {
+      es: "Método de disparo",
+      eu: "Jaurtiketa-metodoa",
+      en: "Shooting method"
+    },
+    shortDefinition: {
+      es: "Resuelve un problema de frontera como uno o varios problemas de valor inicial, ajustando la pendiente inicial.",
+      eu: "Muga-problema bat hasierako balioko problema bat edo gehiago bezala ebazten du, hasierako malda doituz.",
+      en: "Solves a boundary value problem as one or several initial value problems by adjusting the initial slope."
+    },
+    definition: {
+      es: "Se sustituye la condición desconocida en $x=a$ por un parámetro $t=y'(a)$, se resuelve el PVI y se ajusta $t$ hasta que la solución cumpla la condición en $x=b$: $F(t)=y(t,b)-\\beta=0$. Para ecuaciones lineales bastan dos PVI; para no lineales se itera con secante o Newton.",
+      eu: "$x=a$-ko baldintza ezezaguna $t=y'(a)$ parametro batez ordezkatzen da, HBPa ebazten da eta $t$ doitzen da soluzioak $x=b$-ko baldintza bete arte: $F(t)=y(t,b)-\\beta=0$. Ekuazio linealetarako bi HBP nahikoak dira; ez-linealetarako sekantearekin edo Newtonekin iteratzen da.",
+      en: "The unknown condition at $x=a$ is replaced by a parameter $t=y'(a)$, the IVP is solved and $t$ is adjusted until the solution satisfies the condition at $x=b$: $F(t)=y(t,b)-\\beta=0$. For linear equations two IVPs suffice; for nonlinear ones we iterate with the secant or Newton."
+    },
+    usage: {
+      es: "Su precisión es la del método de valor inicial usado (orden 4 con RK4). Falla si las trayectorias son muy sensibles a $t$; entonces conviene el disparo múltiple.",
+      eu: "Bere zehaztasuna erabilitako hasierako balioko metodoarena da (4. ordena RK4rekin). Ibilbideak $t$-rekiko oso sentikorrak badira huts egiten du; orduan jaurtiketa anizkoitza komeni da.",
+      en: "Its accuracy is that of the initial value method used (order 4 with RK4). It fails when trajectories are very sensitive to $t$; multiple shooting is then preferable."
+    },
+    related: ["frontera-disparo-lineal", "frontera-disparo-no-lineal", "frontera-disparo-newton"]
   }
 ];

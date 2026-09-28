@@ -83,6 +83,12 @@ function linksFromBlock(block: Block): string[] {
   if (block.kind === "diagram") {
     return localizedValues(block.caption).flatMap(linksFromText);
   }
+  if (block.kind === "plot") {
+    return [
+      ...localizedValues(block.caption).flatMap(linksFromText),
+      ...block.series.flatMap((series) => localizedValues(series.label).flatMap(linksFromText))
+    ];
+  }
   if (block.kind === "steps") {
     return [
       ...localizedValues(block.title).flatMap(linksFromText),

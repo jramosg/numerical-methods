@@ -137,6 +137,11 @@ const categoryLabels: Record<string, Record<Lang, string>> = {
     es: "Sistemas no lineales",
     eu: "Sistema ez-linealak",
     en: "Nonlinear systems"
+  },
+  "Problemas de frontera": {
+    es: "Problemas de frontera",
+    eu: "Muga-problemak",
+    en: "Boundary value problems"
   }
 };
 

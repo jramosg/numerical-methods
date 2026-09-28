@@ -32,6 +32,7 @@ const escapeHtml = (raw: string) =>
  */
 export function plainText(text: string, lang: Lang): string {
   return text
+    .replace(/\*\*/g, "")
     .replace(/\$([^$]+)\$/g, "$1")
     .replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_m, slug: string, label?: string) => {
       if (label) return label;
@@ -47,6 +48,7 @@ export function plainText(text: string, lang: Lang): string {
  * - `[[slug]]` / `[[slug|label]]` renders as an internal link to the content
  *   entry with that slug. Without a label, the target's localized title is
  *   used. Unknown slugs degrade to plain text so a typo never breaks a page.
+ * - `**...**` renders as bold (may wrap math or links).
  *
  * Everything else is HTML-escaped.
  */
@@ -69,5 +71,5 @@ export function richText(text: string, lang: Lang): string {
     }
   }
   html += escapeHtml(text.slice(last));
-  return html;
+  return html.replace(/\*\*([\s\S]+?)\*\*/g, "<strong>$1</strong>");
 }
