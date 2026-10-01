@@ -1,4 +1,4 @@
-import type { ContentEntry } from "../content";
+import type { CodeLink, ContentEntry } from "../content";
 import {
   beamDeflection,
   convergenceHistory,
@@ -27,6 +27,44 @@ import {
  */
 
 const shootingColors = ["blue", "gold", "accent", "red"] as const;
+
+const shootingRepo = "https://github.com/jramosg/shooting-methods-python";
+const shootingNotebook = (name: string) =>
+  `${shootingRepo}/blob/main/notebooks/${name}.ipynb`;
+
+/** Python companion code, listed in the sidebar of the shooting articles. */
+const repoLink: CodeLink = {
+  href: shootingRepo,
+  label: {
+    es: "Repositorio: métodos de disparo en Python",
+    eu: "Biltegia: jaurtiketa-metodoak Python-en",
+    en: "Repository: shooting methods in Python"
+  }
+};
+const linearNotebook: CodeLink = {
+  href: shootingNotebook("01_disparo_lineal"),
+  label: {
+    es: "Cuaderno: disparo lineal",
+    eu: "Koadernoa: jaurtiketa lineala (gaztelaniaz)",
+    en: "Notebook: linear shooting (in Spanish)"
+  }
+};
+const nonlinearNotebook: CodeLink = {
+  href: shootingNotebook("02_disparo_no_lineal"),
+  label: {
+    es: "Cuaderno: disparo con secante y Newton",
+    eu: "Koadernoa: jaurtiketa sekantearekin eta Newtonekin (gaztelaniaz)",
+    en: "Notebook: secant and Newton shooting (in Spanish)"
+  }
+};
+const convergenceNotebook: CodeLink = {
+  href: shootingNotebook("03_convergencia"),
+  label: {
+    es: "Cuaderno: convergencia y comparación con solve_bvp",
+    eu: "Koadernoa: konbergentzia eta solve_bvp-rekin alderaketa (gaztelaniaz)",
+    en: "Notebook: convergence and comparison with solve_bvp (in Spanish)"
+  }
+};
 
 export const fronteraArticles: ContentEntry[] = [
   {
@@ -59,6 +97,7 @@ export const fronteraArticles: ContentEntry[] = [
       "frontera-disparo-newton",
       "frontera-disparo-orden-superior"
     ],
+    code: [repoLink],
     sections: [
       {
         heading: {
@@ -447,6 +486,7 @@ export const fronteraArticles: ContentEntry[] = [
       "ejercicio-disparo-lineal-a-mano",
       "ejercicio-disparo-lineal-rk4"
     ],
+    code: [linearNotebook, repoLink],
     sections: [
       {
         heading: {
@@ -898,6 +938,7 @@ export const fronteraArticles: ContentEntry[] = [
       "ejercicio-disparo-robin-lineal",
       "ejercicio-disparo-condiciones-acopladas"
     ],
+    code: [linearNotebook, repoLink],
     sections: [
       {
         heading: {
@@ -1074,6 +1115,7 @@ export const fronteraArticles: ContentEntry[] = [
     keywords: ["disparo no lineal", "nonlinear shooting", "secante", "problema de frontera no lineal"],
     prerequisites: ["frontera-disparo-lineal", "no-lineales-secante-steffensen"],
     related: ["frontera-disparo-newton", "ejercicio-disparo-secante", "ejercicio-disparo-no-lineal-tres-problemas"],
+    code: [nonlinearNotebook, convergenceNotebook, repoLink],
     sections: [
       {
         heading: {
@@ -1376,6 +1418,7 @@ export const fronteraArticles: ContentEntry[] = [
     keywords: ["disparo Newton", "ecuación variacional", "sensibilidad", "shooting Newton", "problema de frontera"],
     prerequisites: ["frontera-disparo-no-lineal", "no-lineales-newton-raphson"],
     related: ["ejercicio-disparo-newton", "ejercicio-disparo-newton-robin", "frontera-disparo-orden-superior"],
+    code: [nonlinearNotebook, convergenceNotebook, repoLink],
     sections: [
       {
         heading: {

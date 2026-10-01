@@ -149,6 +149,8 @@ export type Section = {
   bullets?: LocalizedList;
 };
 
+export type CodeLink = { href: string; label: LocalizedText };
+
 export type ContentEntry = {
   slug: string;
   category: string;
@@ -160,6 +162,8 @@ export type ContentEntry = {
   /** Slugs of prerequisite / related topics, surfaced in the sidebar. */
   prerequisites?: string[];
   related?: string[];
+  /** External code companions (e.g. notebooks), shown in the sidebar. */
+  code?: CodeLink[];
   sections: Section[];
 };
 

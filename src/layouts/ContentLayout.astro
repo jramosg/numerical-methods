@@ -31,6 +31,7 @@ const uiLabels = {
   onThisPage: { es: "En esta página", eu: "Orri honetan", en: "On this page" },
   prerequisites: { es: "Antes de esto", eu: "Aurretik", en: "Before this" },
   related: { es: "Relacionado", eu: "Lotutakoa", en: "Related" },
+  code: { es: "Código en Python", eu: "Python kodea", en: "Python code" },
   backlinks: {
     es: "Páginas que referencian esto",
     eu: "Hau erreferentziatzen duten orriak",
@@ -197,6 +198,17 @@ const schema = {
           <ul class="link-list">
             {related.map((item) => (
               <li><a href={item.href}><RichText text={item.title} lang={lang} /></a></li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      {entry.code && entry.code.length > 0 && (
+        <nav class="sidebar-panel" aria-label={uiLabels.code[lang]}>
+          <strong>{uiLabels.code[lang]}</strong>
+          <ul class="link-list">
+            {entry.code.map((item) => (
+              <li><a href={item.href} rel="noopener">{item.label[lang]}</a></li>
             ))}
           </ul>
         </nav>
