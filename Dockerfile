@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-FROM node:22.22.2-alpine AS build
+FROM node:22.23.4-alpine AS build
 
 WORKDIR /app
 ENV ASTRO_TELEMETRY_DISABLED=1
