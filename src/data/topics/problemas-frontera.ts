@@ -28,7 +28,7 @@ import {
 
 const shootingColors = ["blue", "gold", "accent", "red"] as const;
 
-const shootingRepo = "https://github.com/jramosg/shooting-methods-python";
+const shootingRepo = "https://github.com/jramosg/boundary-value-methods-python";
 const shootingNotebook = (name: string) =>
   `${shootingRepo}/blob/main/notebooks/${name}.ipynb`;
 
@@ -36,9 +36,9 @@ const shootingNotebook = (name: string) =>
 const repoLink: CodeLink = {
   href: shootingRepo,
   label: {
-    es: "Repositorio: métodos de disparo en Python",
-    eu: "Biltegia: jaurtiketa-metodoak Python-en",
-    en: "Repository: shooting methods in Python"
+    es: "Repositorio: problemas de frontera en Python",
+    eu: "Biltegia: muga-problemak Python-en",
+    en: "Repository: boundary value methods in Python"
   }
 };
 const linearNotebook: CodeLink = {
@@ -95,7 +95,9 @@ export const fronteraArticles: ContentEntry[] = [
       "frontera-disparo-lineal",
       "frontera-disparo-no-lineal",
       "frontera-disparo-newton",
-      "frontera-disparo-orden-superior"
+      "frontera-disparo-orden-superior",
+      "frontera-diferencias-finitas",
+      "frontera-diferencias-finitas-newton"
     ],
     code: [repoLink],
     sections: [
@@ -419,9 +421,9 @@ export const fronteraArticles: ContentEntry[] = [
           {
             kind: "paragraph",
             text: {
-              es: "La otra gran familia, las **diferencias finitas**, sustituye las derivadas por [[diferenciacion-derivadas-superiores|cocientes de diferencias]] en todos los nodos a la vez y convierte el problema en un sistema de ecuaciones ([[sistemas-lineales-conceptos|lineal]] o [[sistemas-no-lineales-newton|no lineal]]). Esta área se centra en el disparo.",
-              eu: "Beste familia handiak, **diferentzia finituek**, deribatuak [[diferenciacion-derivadas-superiores|diferentzia-zatidurekin]] ordezkatzen ditu nodo guztietan aldi berean, eta problema ekuazio-sistema bihurtzen du ([[sistemas-lineales-conceptos|lineala]] edo [[sistemas-no-lineales-newton|ez-lineala]]). Arlo hau jaurtiketan zentratzen da.",
-              en: "The other big family, **finite differences**, replaces derivatives with [[diferenciacion-derivadas-superiores|difference quotients]] at all nodes at once and turns the problem into a system of equations ([[sistemas-lineales-conceptos|linear]] or [[sistemas-no-lineales-newton|nonlinear]]). This area focuses on shooting."
+              es: "La otra gran familia, las **diferencias finitas**, sustituye las derivadas por [[diferenciacion-derivadas-superiores|cocientes de diferencias]] en todos los nodos a la vez y convierte el problema en un sistema de ecuaciones ([[sistemas-lineales-conceptos|lineal]] o [[sistemas-no-lineales-newton|no lineal]]). Continúa con [[frontera-diferencias-finitas|diferencias finitas]] y [[frontera-diferencias-finitas-newton|Newton para la discretización no lineal]].",
+              eu: "Beste familia handiak, **diferentzia finituek**, deribatuak [[diferenciacion-derivadas-superiores|diferentzia-zatidurekin]] ordezkatzen ditu nodo guztietan aldi berean, eta problema ekuazio-sistema bihurtzen du ([[sistemas-lineales-conceptos|lineala]] edo [[sistemas-no-lineales-newton|ez-lineala]]). Jarraitu [[frontera-diferencias-finitas|diferentzia finituekin]] eta [[frontera-diferencias-finitas-newton|diskretizazio ez-linealeko Newtonekin]].",
+              en: "The other big family, **finite differences**, replaces derivatives with [[diferenciacion-derivadas-superiores|difference quotients]] at all nodes at once and turns the problem into a system of equations ([[sistemas-lineales-conceptos|linear]] or [[sistemas-no-lineales-newton|nonlinear]]). Continue with [[frontera-diferencias-finitas|finite differences]] and [[frontera-diferencias-finitas-newton|Newton for nonlinear discretization]]."
             }
           }
         ]
