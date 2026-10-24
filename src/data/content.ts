@@ -51,6 +51,8 @@ type LocalizedText = Record<Lang, string>;
 type LocalizedList = Record<Lang, string[]>;
 
 /** A single labelled step inside a derivation or worked example. */
+import { finiteDifferenceArticles, finiteDifferenceDerivations } from "./topics/frontera-diferencias-finitas";
+
 export type Step = {
   text: LocalizedText;
   formula?: string;
@@ -181,7 +183,8 @@ export const articles: ContentEntry[] = [
   ...sistemasLinealesArticles,
   ...noLinealesArticles,
   ...sistemasNoLinealesArticles,
-  ...fronteraArticles
+  ...fronteraArticles,
+  ...finiteDifferenceArticles
 ];
 
 export const derivations: ContentEntry[] = [
@@ -194,7 +197,8 @@ export const derivations: ContentEntry[] = [
   ...sistemasLinealesDerivations,
   ...noLinealesDerivations,
   ...sistemasNoLinealesDerivations,
-  ...fronteraDerivations
+  ...fronteraDerivations,
+  ...finiteDifferenceDerivations
 ];
 
 export const exercises: ContentEntry[] = [

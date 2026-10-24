@@ -140,9 +140,9 @@ export const areas: Area[] = [
       en: "Boundary value problems"
     },
     text: {
-      es: "Condiciones de contorno, disparo lineal, disparo no lineal con secante y Newton, ecuación variacional y orden superior.",
-      eu: "Muga-baldintzak, jaurtiketa lineala, jaurtiketa ez-lineala sekantearekin eta Newtonekin, ekuazio bariazionala eta ordena altuagoa.",
-      en: "Boundary conditions, linear shooting, nonlinear shooting with secant and Newton, the variational equation and higher order."
+      es: "Condiciones de contorno, disparo lineal, disparo no lineal con secante y Newton, ecuación variacional, diferencias finitas, Crout y condiciones Robin.",
+      eu: "Muga-baldintzak, jaurtiketa lineala, jaurtiketa ez-lineala sekantearekin eta Newtonekin, ekuazio bariazionala, diferentzia finituak, Crout eta Robin baldintzak.",
+      en: "Boundary conditions, linear shooting, nonlinear shooting with secant and Newton, the variational equation, finite differences, Crout and Robin conditions."
     }
   }
 ];
