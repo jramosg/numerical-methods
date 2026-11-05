@@ -61,76 +61,25 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Check out deployment files
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
-          ref: ${{ env.DEPLOY_SHA }}
-          persist-credentials: false
-
-      - name: Configure verified SSH access
+      - name: Deploy through the restricted CI gate
+        # The key can only run `deploy numerical-methods <sha>` on the
+        # server, which pulls the sha-tagged image with health-checked
+        # rollback. Compose there is admin-managed (see vps-ops/ci-deploy).
         env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
           VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PORT: ${{ secrets.VPS_SSH_PORT || '22' }}
-          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
-          VPS_HOST_FINGERPRINT: ${{ secrets.VPS_HOST_FINGERPRINT }}
-        run: |
-            set -eu
-            install -d -m 700 "$HOME/.ssh"
-            printf '%s\n' "$VPS_SSH_KEY" > "$HOME/.ssh/numerical-methods"
-            chmod 600 "$HOME/.ssh/numerical-methods"
-
-            ssh-keyscan -T 10 -p "$VPS_PORT" -t ed25519 "$VPS_HOST" \
-              2>/dev/null > "$HOME/.ssh/known_hosts.candidate"
-            actual_fingerprint=$(ssh-keygen -lf \
-              "$HOME/.ssh/known_hosts.candidate" -E sha256 \
-              | awk 'NR == 1 { print $2 }')
-            [ "$actual_fingerprint" = "$VPS_HOST_FINGERPRINT" ] || {
-              echo "The VPS host key did not match VPS_HOST_FINGERPRINT." >&2
-              exit 1
-            }
-            mv "$HOME/.ssh/known_hosts.candidate" "$HOME/.ssh/known_hosts"
-
-      - name: Copy deployment files
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PORT: ${{ secrets.VPS_SSH_PORT || '22' }}
+          HOST_KEY: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmoaMAZ9yKpppVl6J2NPsXsirLII1K5/FR47keXM215
         run: |
           set -eu
-          ssh -i "$HOME/.ssh/numerical-methods" \
-            -o StrictHostKeyChecking=yes \
-            -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
-            -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" \
-            'rm -rf /tmp/numerical-methods-deploy && \
-             install -d -m 700 /tmp/numerical-methods-deploy'
-          scp -r -i "$HOME/.ssh/numerical-methods" \
-            -o StrictHostKeyChecking=yes \
-            -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
-            -P "$VPS_PORT" docker-compose.prod.yml scripts \
-            "$VPS_USER@$VPS_HOST:/tmp/numerical-methods-deploy/"
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy
+          chmod 600 ~/.ssh/deploy
+          echo "vps $HOST_KEY" > ~/.ssh/known_hosts
+          ssh -i ~/.ssh/deploy -o HostKeyAlias=vps \
+            -o StrictHostKeyChecking=yes "ci@$VPS_HOST" \
+            deploy numerical-methods "$DEPLOY_SHA" < /dev/null
 
-      - name: Deploy and verify
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PORT: ${{ secrets.VPS_SSH_PORT || '22' }}
-          IMAGE: ${{ env.IMAGE }}
-          APP_PORT: ${{ vars.APP_PORT || '4321' }}
-        run: |
-          set -eu
-          ssh -i "$HOME/.ssh/numerical-methods" \
-            -o StrictHostKeyChecking=yes \
-            -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
-            -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" \
-            "IMAGE='$IMAGE' APP_PORT='$APP_PORT' sh -s" <<'EOF'
-            set -eu
-            install -d -m 700 "$HOME/apps/numerical-methods"
-            install -m 600 /tmp/numerical-methods-deploy/docker-compose.prod.yml \
-              "$HOME/apps/numerical-methods/docker-compose.prod.yml"
-            install -m 700 /tmp/numerical-methods-deploy/scripts/deploy.sh \
-              "$HOME/apps/numerical-methods/deploy.sh"
-            rm -rf /tmp/numerical-methods-deploy
-            cd "$HOME/apps/numerical-methods"
-            ./deploy.sh
-          EOF
+      - name: Verify site
+        run: >-
+          curl -fsS --retry 5 --retry-delay 3 -o /dev/null
+          https://metodosnumericos.jonramos.dev/
