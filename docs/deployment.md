@@ -55,6 +55,24 @@ reverse proxy in front of `127.0.0.1:4321`; expose only ports 22, 80, and 443
 through the firewall. Do not change the Compose binding to `0.0.0.0` unless the
 application should intentionally bypass the TLS proxy.
 
+## Image retention
+
+After a healthy deployment, `deploy.sh` removes old `sha-*` tags from that
+site's exact image repository. This also clears the backlog from earlier
+deployments. It keeps the current image and the previous deployment's image
+for rollback, recorded in `.rollback-image`. Redeploying the same commit
+preserves that rollback image.
+
+Images referenced by running or stopped containers are kept. Cleanup never
+forces removal, touches other repositories, or runs after a failed deployment.
+Cleanup errors produce warnings without failing a healthy deployment.
+
+The former `docker image prune -f` only removed dangling images, so immutable
+SHA-tagged releases accumulated indefinitely. Host-wide pruning is no longer
+part of deployment.
+
+Run the deployment regression tests with `npm run test:deploy`.
+
 ## Recovery
 
 Each deployment records its image in

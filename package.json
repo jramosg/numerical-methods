@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "test:deploy": "node --test scripts/deploy.test.mjs",
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",

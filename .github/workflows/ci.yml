@@ -24,5 +24,7 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      - name: Test deployment image retention
+        run: npm run test:deploy
       - run: npm run build
       - run: npm run check:links
